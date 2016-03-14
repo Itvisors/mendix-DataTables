@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="DataTables.widget.DataTables" needsEntityContext="true" xmlns="http://www.mendix.com/widget/1.0/">
+    <name>DataTables</name>
+    <description>DataTables widget.</description>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAb1JREFUeNqck8tKw1AQhv/E1LTe0KWISlNqS1vFCyK4bXXnSnwE8QXcFt/EF3Enoqh47YViaUVUXBU3oq3NSZyZNullJR045D8n55/55iRH2zs62gEwjcHiA7vZ7IE7YLDXcJTSXEq1fQPQmj8cx5Hh8rN73n5/lZ4Ee3WllM4bOLYimjwzVkenSafDrr/uafaw11C2rSlJoOGk4sIy6tTZt1TOhKjihwON3rN2fE1mdwLsNWzb7iFw3n5wmJiS+fXTE9YXFkSfFwrYTCZFnz48EMEc2NtFACFIm8BdtSr9jgaDuCyVpOexUAhnuZxoDvb4BIo2dwiA1Py8zO8rFaxGoy0aSrSRSIi+yOfBHiGQBH0E+ZcXIQiZJm7LZak6wjTFYg9BK0Gz6bfgEcRnZ2Wef37GUiQi+o7OYy0eb9FQIklA3p5D9AhKr69CYA4P45Ha4KpBorlpn4f3GdmrUxZd9f0H0ZkZxIii8fuLZDiMlGWh3mhgmb7ISizWaYG8RqNeH+onKL+/CwFHgdrwqt5TG90E7DU+azUzEAjgOPbVvh/mv+4We9irjS8u7lM1a5CrqOt6VfOQBo0/AQYADu2BHPVXcUgAAAAASUVORK5CYII=   
+    </icon>
+
+    <properties>
+        <property key="backgroundColor" type="attribute">
+            <caption>Background Color</caption>
+            <category>Appearance</category>
+            <description>The background color of the widget.</description>
+            <attributeTypes>
+                <attributeType name="String" />
+            </attributeTypes>
+        </property>
+        <property key="messageString" type="string" required="true" defaultValue="">
+            <caption>Message</caption>
+            <category>Appearance</category>
+            <description>The message visible within the widget.</description>
+        </property>
+        <property key="mfToExecute" type="microflow" required="false" defaultValue="">
+            <caption>Microflow</caption>
+            <category>Behavior</category>
+            <description>The microflow to execute on click.</description>
+            <returnType type="Boolean" />
+        </property>
+    </properties>
+</widget>
+
