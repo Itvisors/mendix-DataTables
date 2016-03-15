@@ -41,7 +41,8 @@
 
 	if ( typeof define === 'function' && define.amd ) {
 		// AMD
-		define( ['jquery'], function ( $ ) {
+        /* Marcel Groeneweg change module ID to use the jquery distributed with the Mendix widget */
+		define( ['DataTables/lib/jquery'], function ( $ ) {
 			return factory( $, window, document );
 		} );
 	}
