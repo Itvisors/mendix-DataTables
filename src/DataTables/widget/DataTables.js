@@ -37,9 +37,9 @@ define([
     "dojo/_base/event",
 
     "DataTables/lib/jquery",
-    "dojo/text!DataTables/widget/template/DataTables.html",
-    "DataTables/lib/datatables"
-], function (declare, _WidgetBase, _TemplatedMixin, dom, dojoDom, dojoProp, dojoGeometry, dojoClass, dojoStyle, dojoConstruct, dojoArray, dojoLang, dojoText, dojoHtml, dojoEvent, _jQuery, widgetTemplate) {
+    "DataTables/lib/jquery.datatables",
+    "dojo/text!DataTables/widget/template/DataTables.html"
+], function (declare, _WidgetBase, _TemplatedMixin, dom, dojoDom, dojoProp, dojoGeometry, dojoClass, dojoStyle, dojoConstruct, dojoArray, dojoLang, dojoText, dojoHtml, dojoEvent, _jQuery, dt, widgetTemplate) {
     "use strict";
 
     var $ = _jQuery.noConflict(true);
@@ -71,7 +71,6 @@ define([
             //logger.level(logger.DEBUG);
             logger.debug(this.id + ".constructor");
             this._handles = [];
-            $("#example").DataTable();
         },
 
         // dijit._WidgetBase.postCreate is called after constructing the widget. Implement to do extra setup work.
@@ -79,6 +78,7 @@ define([
             logger.debug(this.id + ".postCreate");
             this._updateRendering();
             this._setupEvents();
+            $("#example").DataTable();
         },
 
         // mxui.widget._WidgetBase.update is called when context is changed or initialized. Implement to re-render and / or fetch data.
