@@ -6,24 +6,13 @@
     </icon>
 
     <properties>
-        <property key="backgroundColor" type="attribute">
-            <caption>Background Color</caption>
-            <category>Appearance</category>
+        <property key="dummy" type="attribute" required="false">
+            <caption>Dummy</caption>
+            <category>Common</category>
             <description>The background color of the widget.</description>
             <attributeTypes>
                 <attributeType name="String" />
             </attributeTypes>
-        </property>
-        <property key="messageString" type="string" required="true" defaultValue="">
-            <caption>Message</caption>
-            <category>Appearance</category>
-            <description>The message visible within the widget.</description>
-        </property>
-        <property key="mfToExecute" type="microflow" required="false" defaultValue="">
-            <caption>Microflow</caption>
-            <category>Behavior</category>
-            <description>The microflow to execute on click.</description>
-            <returnType type="Boolean" />
         </property>
     </properties>
 </widget>
