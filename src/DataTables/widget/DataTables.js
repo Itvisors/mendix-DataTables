@@ -38,8 +38,10 @@ define([
 
     "DataTables/lib/jquery",
     "dojo/text!DataTables/widget/template/DataTables.html",
-    "DataTables/lib/jquery.datatables",
-    "DataTables/lib/dataTables.bootstrap"
+    
+    // DataTables modules. When updating to a new version, do not forget to update the module names in the DataTables module sources because the default does not work in a custom widget.
+    "DataTables/lib/jquery.datatables"/*,
+    "DataTables/lib/dataTables.bootstrap" */
 ], function (declare, _WidgetBase, _TemplatedMixin, dom, dojoDom, dojoProp, dojoGeometry, dojoClass, dojoStyle, dojoConstruct, dojoArray, dojoLang, dojoText, dojoHtml, dojoEvent, _jQuery, widgetTemplate) {
     "use strict";
 
@@ -78,6 +80,8 @@ define([
             logger.debug(this.id + ".postCreate");
             this._updateRendering();
             this._setupEvents();
+            
+            // Classes: display table table-striped table-bordered dataTable
             $("#example").DataTable();
         },
 
