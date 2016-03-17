@@ -24,16 +24,10 @@ define([
     "dijit/_TemplatedMixin",
 
     "mxui/dom",
-    "dojo/dom",
-    "dojo/dom-prop",
-    "dojo/dom-geometry",
-    "dojo/dom-class",
+
     "dojo/dom-style",
-    "dojo/dom-construct",
     "dojo/_base/array",
     "dojo/_base/lang",
-    "dojo/text",
-    "dojo/html",
     "dojo/_base/event",
 
     "DataTables/lib/jquery",
@@ -42,7 +36,7 @@ define([
     // DataTables modules. When updating to a new version, do not forget to update the module names in the DataTables module sources because the default does not work in a custom widget.
     "DataTables/lib/jquery.datatables"/*,
     "DataTables/lib/dataTables.bootstrap" */
-], function (declare, _WidgetBase, _TemplatedMixin, dom, dojoDom, dojoProp, dojoGeometry, dojoClass, dojoStyle, dojoConstruct, dojoArray, dojoLang, dojoText, dojoHtml, dojoEvent, _jQuery, widgetTemplate) {
+], function (declare, _WidgetBase, _TemplatedMixin, dom, dojoStyle, dojoArray, dojoLang, dojoEvent, _jQuery, widgetTemplate) {
     "use strict";
 
     var $ = _jQuery.noConflict(true);
@@ -81,8 +75,8 @@ define([
             this._updateRendering();
             this._setupEvents();
             
-            // Classes: display table table-striped table-bordered dataTable
             $("#example").DataTable();
+            $("#example").addClass("display table table-striped table-bordered dataTable");
         },
 
         // mxui.widget._WidgetBase.update is called when context is changed or initialized. Implement to re-render and / or fetch data.
@@ -173,20 +167,6 @@ define([
 
         },
 
-
-        // Show an error message.
-        _showError: function (message) {
-            logger.debug(this.id + "._showError");
-            if (this._alertDiv !== null) {
-                dojoHtml.set(this._alertDiv, message);
-                return true;
-            }
-            this._alertDiv = dojoConstruct.create("div", {
-                "class": "alert alert-danger",
-                "innerHTML": message
-            });
-            dojoConstruct.place(this.domNode, this._alertDiv);
-        },
 
         // Reset subscriptions.
         _resetSubscriptions: function () {
