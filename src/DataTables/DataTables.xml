@@ -6,14 +6,45 @@
     </icon>
 
     <properties>
-        <property key="dummy" type="attribute" required="false">
-            <caption>Dummy</caption>
-            <category>Common</category>
-            <description>The background color of the widget.</description>
-            <attributeTypes>
-                <attributeType name="String" />
-            </attributeTypes>
+        <property key="entity" type="entity">
+            <caption>Entity</caption>
+            <category>Configuration</category>
+            <description>The entity to display in the grid</description>
         </property>
+        <property key="columnList" type="object" isList="true" required="false">
+            <caption>Columns</caption>
+            <category>Configuration</category>
+            <description>The columns to display in the grid</description>
+            <properties>
+                <property key="attr" type="attribute" entityProperty="entity">
+                    <caption>Attribute</caption>
+                    <category>Configuration</category>
+                    <description>The attribute to display</description>
+                    <attributeTypes>
+                        <attributeType name="AutoNumber"/>
+                        <attributeType name="Boolean"/>
+                        <attributeType name="Currency"/>
+                        <attributeType name="Decimal"/>
+                        <attributeType name="DateTime"/>
+                        <attributeType name="Integer"/>
+                        <attributeType name="Long"/>
+                        <attributeType name="Enum"/>
+                        <attributeType name="String"/>
+                    </attributeTypes>
+                </property>
+                <property key="name" type="string">
+                    <caption>Caption</caption>
+                    <category>Configuration</category>
+                    <description>Column caption</description>
+                </property>
+                <property key="responsivePriority" type="integer">
+                    <caption>Responsive priority</caption>
+                    <category>Configuration</category>
+                    <description>Responsive priority, 0 is the highest, columns with higher numbers will be hidden first when the grid does not fit in the current display size.</description>
+                </property>
+            </properties>
+        </property>
+        
     </properties>
 </widget>
 

@@ -53,9 +53,8 @@ define([
         infoTextNode: null,
 
         // Parameters configured in the Modeler.
-        mfToExecute: "",
-        messageString: "",
-        backgroundColor: "",
+        entity: "",
+        columnList: "",
 
         // Internal variables. Non-primitives created in the prototype are shared between all widget instances.
         _handles: null,
@@ -76,7 +75,8 @@ define([
             logger.debug(this.id + ".postCreate");
             
             this._tableNodelist = $("#" + this.domNode.id + " #tableToConvert");
-            
+
+            // searching is handled in the widget and XPath, not in DataTables because the search field triggers a search with every key press.
             this._table = this._tableNodelist.DataTable({
                 serverSide: true,
                 searching: false,
