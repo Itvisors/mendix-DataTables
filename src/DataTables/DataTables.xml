@@ -48,11 +48,12 @@
                     <category>Configuration</category>
                     <description>Column caption, translatable</description>
                 </property>
-                <property key="dateTimeType" type="enumeration" defaultValue="date">
+                <property key="dateTimeType" type="enumeration" defaultValue="na">
                     <caption>Date/time type</caption>
                     <category>Configuration</category>
                     <description>Display date as date, date/time or time.</description>
                     <enumerationValues>
+                        <enumerationValue key="na">Not applicable</enumerationValue>
                         <enumerationValue key="date">Date</enumerationValue>
                         <enumerationValue key="dateTime">Date/Time</enumerationValue>
                         <enumerationValue key="time">Time</enumerationValue>

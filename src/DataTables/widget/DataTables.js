@@ -75,40 +75,7 @@ define([
         // dijit._WidgetBase.postCreate is called after constructing the widget. Implement to do extra setup work.
         postCreate: function () {
             logger.debug(this.id + ".postCreate");
-
-            var dataTablesOptions,
-                dataTablesColumns = [],
-                dataTablesColumn,
-                thisObj = this;
-            
-            this._tableNodelist = $("#" + this.domNode.id + " #tableToConvert");
-
-            dojoArray.forEach(this.columnList, function (column) {
-                dataTablesColumn = {
-                    title: column.caption,
-                    data: column.attrName
-                };
-                if (thisObj.isResponsive) {
-                    dataTablesColumn.responsivePriority = column.responsivePriority;
-                }
-                dataTablesColumns.push(dataTablesColumn);
-            });
-            // searching is handled in the widget and XPath, not in DataTables because the search field triggers a search with every key press.
-            dataTablesOptions = {
-                serverSide: true,
-                searching: false,
-                ajax: dojoLang.hitch(this, this._getData),
-//                scrollY: 200,
-//                scroller: {
-//                    loadingIndicator: true
-//                },
-                columns: dataTablesColumns
-            };
-            if (this.isResponsive) {
-                dataTablesOptions.responsive = true;
-            }
-            this._table = this._tableNodelist.DataTable(dataTablesOptions);
-            
+            this._entityMetaData = mx.meta.getEntity(this.tableEntity);
             this._updateRendering();
             this._setupEvents();
         },
@@ -189,8 +156,48 @@ define([
 //            });
         },
         
+        // Create the DataTables object
+        _createTableObject: function () {
+            logger.debug(this.id + "._createTableObject");
+
+            var dataTablesOptions,
+                dataTablesColumns = [],
+                dataTablesColumn,
+                thisObj = this;
+
+            this._tableNodelist = $("#" + this.domNode.id + " #tableToConvert");
+
+            dojoArray.forEach(this.columnList, function (column) {
+                dataTablesColumn = {
+                    title: column.caption,
+                    data: column.attrName
+                };
+                if (thisObj.isResponsive) {
+                    dataTablesColumn.responsivePriority = column.responsivePriority;
+                }
+                dataTablesColumns.push(dataTablesColumn);
+            });
+            // searching is handled in the widget and XPath, not in DataTables because the search field triggers a search with every key press.
+            dataTablesOptions = {
+                serverSide: true,
+                searching: false,
+                ajax: dojoLang.hitch(this, this._getData),
+//                scrollY: 200,
+//                scroller: {
+//                    loadingIndicator: true
+//                },
+                columns: dataTablesColumns
+            };
+            if (this.isResponsive) {
+                dataTablesOptions.responsive = true;
+            }
+            this._table = this._tableNodelist.DataTable(dataTablesOptions);
+            
+        },
+        
         // Get data 
         _getData: function (data, datTablesCallback, settings) {
+            logger.debug(this.id + "._getData");
             
             var sortColumnIndex = data.order[0].column,
                 sortColumn = data.columns[sortColumnIndex],
@@ -217,6 +224,7 @@ define([
         },
         
         _convertMendixObjectArrayToDataArray: function (objs) {
+            logger.debug(this.id + "._convertMendixObjectArrayToDataArray");
             var attrName,
                 dataArray = [],
                 dataObj,
@@ -279,23 +287,24 @@ define([
 //            this.colorSelectNode.disabled = this.readOnly;
 
             if (this._contextObj !== null) {
-                this._entityMetaData = mx.meta.getEntity(this.tableEntity);
                 //this._tableNodelist.addClass("display table table-striped table-bordered dataTable");
+                if (!this._table) {
+                    this._createTableObject();
+                }
                 dojoStyle.set(this.domNode, "display", "block");
 
             } else {
                 dojoStyle.set(this.domNode, "display", "none");
-                this._clearTableData();
             }
 
         },
 
         // Clear table and related objects.
         _clearTableData: function () {
+            logger.debug(this.id + "._clearTableData");
             if (this._table) {
                 this._table.clear();
             }
-            this._entityMetaData = null;
         },
 
         // Reset subscriptions.
