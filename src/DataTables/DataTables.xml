@@ -48,6 +48,43 @@
                     <category>Configuration</category>
                     <description>Column caption, translatable</description>
                 </property>
+                <property key="dateTimeType" type="enumeration" defaultValue="date">
+                    <caption>Date/time type</caption>
+                    <category>Configuration</category>
+                    <description>Display date as date, date/time or time.</description>
+                    <enumerationValues>
+                        <enumerationValue key="date">Date</enumerationValue>
+                        <enumerationValue key="dateTime">Date/Time</enumerationValue>
+                        <enumerationValue key="time">Time</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="dateFormat" type="translatableString">
+                    <caption>Default date format</caption>
+                    <category>Configuration</category>
+                    <description>Default date format, translatable</description>
+                    <translations>
+                        <translation lang="en_US">MM/dd/yyyy</translation>
+                        <translation lang="nl_NL">dd-MM-yyyy</translation>
+                    </translations>
+                </property>
+                <property key="dateTimeFormat" type="translatableString">
+                    <caption>Default date/time format</caption>
+                    <category>Configuration</category>
+                    <description>Default date format, translatable</description>
+                    <translations>
+                        <translation lang="en_US">MM/dd/yyyy KK:mm a</translation>
+                        <translation lang="nl_NL">dd-MM-yyyy HH:mm</translation>
+                    </translations>
+                </property>
+                <property key="timeFormat" type="translatableString">
+                    <caption>Default time format</caption>
+                    <category>Configuration</category>
+                    <description>Default time format, translatable</description>
+                    <translations>
+                        <translation lang="en_US">KK:mm a</translation>
+                        <translation lang="nl_NL">HH:mm</translation>
+                    </translations>
+                </property>
                 <property key="responsivePriority" type="integer" defaultValue="0">
                     <caption>Responsive priority</caption>
                     <category>Configuration</category>

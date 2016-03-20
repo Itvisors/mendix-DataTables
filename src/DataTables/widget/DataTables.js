@@ -60,6 +60,7 @@ define([
         // Internal variables. Non-primitives created in the prototype are shared between all widget instances.
         _handles: null,
         _contextObj: null,
+        _entityMetaData: null,
         _tableNodelist: null,
         _table: null,
 
@@ -82,18 +83,16 @@ define([
             
             this._tableNodelist = $("#" + this.domNode.id + " #tableToConvert");
 
-            if (this.columnList) {
-                dojoArray.forEach(this.columnList, function (column) {
-                    dataTablesColumn = {
-                        title: column.caption,
-                        data: column.attrName
-                    };
-                    if (thisObj.isResponsive) {
-                        dataTablesColumn.responsivePriority = column.responsivePriority;
-                    }
-                    dataTablesColumns.push(dataTablesColumn);
-                });
-            }
+            dojoArray.forEach(this.columnList, function (column) {
+                dataTablesColumn = {
+                    title: column.caption,
+                    data: column.attrName
+                };
+                if (thisObj.isResponsive) {
+                    dataTablesColumn.responsivePriority = column.responsivePriority;
+                }
+                dataTablesColumns.push(dataTablesColumn);
+            });
             // searching is handled in the widget and XPath, not in DataTables because the search field triggers a search with every key press.
             dataTablesOptions = {
                 serverSide: true,
@@ -191,149 +190,96 @@ define([
         },
         
         // Get data 
-        _getData: function (data, callback, settings) {
-            var dataSet = [
-                {
-                    "Number": 1,
-                    "gender": "Male",
-                    "firstName": "Eric",
-                    "lastName": "Olson",
-                    "email": "eolson0@techcrunch.com",
-                    "postalCode": "85025",
-                    "address": "2690 Gulseth Hill",
-                    "city": "Phoenix",
-                    "countryCode": "US",
-                    "phone": "1-(480)325-6097",
-                    "salary": "130529.32"
+        _getData: function (data, datTablesCallback, settings) {
+            
+            var sortColumnIndex = data.order[0].column,
+                sortColumn = data.columns[sortColumnIndex],
+                thisObj = this;
+            
+            mx.data.get({
+                xpath: "//" + this.tableEntity,
+                count: true,
+                filter: {
+                    sort: [[sortColumn.data, data.order[0].dir]],
+                    offset: data.start,
+                    amount: data.length
                 },
-                {
-                    "Number": 2,
-                    "gender": "Male",
-                    "firstName": "Ralph",
-                    "lastName": "Greene",
-                    "email": "rgreene1@theglobeandmail.com",
-                    "address": "84 Buhler Pass",
-                    "city": "Obigarm",
-                    "countryCode": "TJ",
-                    "phone": "992-(789)290-1225",
-                    "salary": "675336.79"
-                },
-                {
-                    "Number": 3,
-                    "gender": "Female",
-                    "firstName": "Nancy",
-                    "lastName": "Lane",
-                    "email": "nlane2@creativecommons.org",
-                    "address": "5 Arrowood Circle",
-                    "city": "Al Manqaf",
-                    "countryCode": "KW",
-                    "phone": "965-(625)852-0890",
-                    "salary": "441664.41"
-                },
-                {
-                    "Number": 4,
-                    "gender": "Male",
-                    "firstName": "Joe",
-                    "lastName": "Shaw",
-                    "email": "jshaw3@newsvine.com",
-                    "address": "64857 Raven Parkway",
-                    "city": "Criciúma",
-                    "countryCode": "BR",
-                    "phone": "55-(960)879-6803",
-                    "salary": "717465.89"
-                },
-                {
-                    "Number": 5,
-                    "gender": "Male",
-                    "firstName": "Roger",
-                    "lastName": "Little",
-                    "email": "rlittle4@comcast.net",
-                    "postalCode": "40293",
-                    "address": "22717 Kipling Plaza",
-                    "city": "Louisville",
-                    "countryCode": "US",
-                    "phone": "1-(502)731-6320",
-                    "salary": "314944.35"
-                },
-                {
-                    "Number": 6,
-                    "gender": "Male",
-                    "firstName": "Steven",
-                    "lastName": "Vasquez",
-                    "email": "svasquez5@ftc.gov",
-                    "address": "2 Butternut Avenue",
-                    "city": "Miguel Pereira",
-                    "countryCode": "BR",
-                    "phone": "55-(312)364-5717",
-                    "salary": "847726.43"
-                },
-                {
-                    "Number": 7,
-                    "gender": "Female",
-                    "firstName": "Judy",
-                    "lastName": "Montgomery",
-                    "email": "jmontgomery6@nhs.uk",
-                    "address": "41060 Russell Plaza",
-                    "city": "Baita",
-                    "countryCode": "CN",
-                    "phone": "86-(474)972-0140",
-                    "salary": "830884.74"
-                },
-                {
-                    "Number": 8,
-                    "gender": "Female",
-                    "firstName": "Rebecca",
-                    "lastName": "Jordan",
-                    "email": "rjordan7@flavors.me",
-                    "address": "50099 Dunning Drive",
-                    "city": "Kuala Bhee",
-                    "countryCode": "Number",
-                    "phone": "62-(185)890-6738",
-                    "salary": "623495.77"
-                },
-                {
-                    "Number": 9,
-                    "gender": "Female",
-                    "firstName": "Karen",
-                    "lastName": "Dunn",
-                    "email": "kdunn8@hhs.gov",
-                    "address": "5416 Gateway Street",
-                    "city": "Pacarkeling",
-                    "countryCode": "Number",
-                    "phone": "62-(882)550-5723",
-                    "salary": "370746.59"
-                },
-                {
-                    "Number": 10,
-                    "gender": "Male",
-                    "firstName": "Steve",
-                    "lastName": "Perez",
-                    "email": "sperez9@japanpost.jp",
-                    "address": "4 NorthrNumberge Avenue",
-                    "city": "Knysna",
-                    "countryCode": "ZA",
-                    "phone": "27-(276)146-2632",
-                    "salary": "289746.75"
+                callback: function (objs, extra) {
+                    datTablesCallback({
+                        draw: data.draw,
+                        data: thisObj._convertMendixObjectArrayToDataArray(objs),
+                        recordsTotal: extra.count,
+                        recordsFiltered: extra.count
+                    });
+                    
                 }
-            ];
+            });
+        },
+        
+        _convertMendixObjectArrayToDataArray: function (objs) {
+            var attrName,
+                dataArray = [],
+                dataObj,
+                thisObj = this;
             
-            setTimeout(function () {
-                callback({
-                    draw: data.draw,
-                    data: dataSet,
-                    recordsTotal: 1000,
-                    recordsFiltered: 1000
+            dojoArray.forEach(objs, function (obj) {
+                dataObj = { guid: obj.getGuid()};
+                dojoArray.forEach(thisObj.columnList, function (column) {
+                    attrName = column.attrName;
+                    dataObj[attrName] = thisObj._getDisplayValue(obj, column);
                 });
-            }, 50);
-            
+                dataArray.push(dataObj);
+            });
+            return dataArray;
         },
 
+
+        /**
+         * Get the attribute value for use as display value
+         *
+         * @param obj           The Mendix object to take the value from
+         * @param column        The column name
+         * @returns {string}    The value
+         */
+        _getDisplayValue : function (obj, column) {
+
+            var attrName,
+                attrType,
+                dateFormat,
+                result;
+
+            attrName = column.attrName;
+            attrType = this._entityMetaData.getAttributeType(attrName);
+
+            switch (attrType) {
+            case "DateTime":
+                switch (column.dateTimeType) {
+                case "dateTime":
+                    dateFormat = column.dateTimeFormat;
+                    break;
+                case "time":
+                    dateFormat = column.timeFormat;
+                    break;
+                default:
+                    dateFormat = column.dateFormat;
+                }
+                result = mx.parser.formatAttribute(obj, attrName, { datePattern: dateFormat });
+                break;
+
+            default:
+                result = mx.parser.formatAttribute(obj, attrName);
+            }
+
+            return result;
+        },
+        
         // Rerender the interface.
         _updateRendering: function () {
             logger.debug(this.id + "._updateRendering");
 //            this.colorSelectNode.disabled = this.readOnly;
 
             if (this._contextObj !== null) {
+                this._entityMetaData = mx.meta.getEntity(this.tableEntity);
                 //this._tableNodelist.addClass("display table table-striped table-bordered dataTable");
                 dojoStyle.set(this.domNode, "display", "block");
 
@@ -349,6 +295,7 @@ define([
             if (this._table) {
                 this._table.clear();
             }
+            this._entityMetaData = null;
         },
 
         // Reset subscriptions.
