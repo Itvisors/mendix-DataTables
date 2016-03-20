@@ -91,6 +91,21 @@
                     <category>Configuration</category>
                     <description>Responsive priority, 0 is the highest, columns with higher numbers will be hidden first when the grid does not fit in the current display size.</description>
                 </property>
+                <property key="columnWidth" type="string" required="false">
+                    <caption>Column width</caption>
+                    <category>Configuration</category>
+                    <description>Optional. Specify width, value is used exactly as you enter it: 20%, 150px, 5em, etc</description>
+                </property>                
+                <property key="headerClass" type="string" required="false">
+                    <caption>Header class</caption>
+                    <category>Configuration</category>
+                    <description>Optional. Specify class(es) to be put on the header</description>
+                </property>                
+                <property key="cellClass" type="string" required="false">
+                    <caption>Cell class</caption>
+                    <category>Configuration</category>
+                    <description>Optional. Specify class(es) to be put on each cell in the column</description>
+                </property>                
             </properties>
         </property>
     </properties>

@@ -34,7 +34,8 @@ define([
     "dojo/text!DataTables/widget/template/DataTables.html",
     
     // DataTables modules. When updating to a new version, do not forget to update the module names in the DataTables module sources because the default does not work in a custom widget.
-    "DataTables/lib/jquery.datatables"/*,
+    "DataTables/lib/jquery.datatables",
+    "DataTables/lib/dataTables.responsive"/*,
     "DataTables/lib/dataTables.bootstrap" */
 ], function (declare, _WidgetBase, _TemplatedMixin, dom, dojoStyle, dojoArray, dojoLang, dojoEvent, _jQuery, widgetTemplate) {
     "use strict";
@@ -175,6 +176,12 @@ define([
                 if (thisObj.isResponsive) {
                     dataTablesColumn.responsivePriority = column.responsivePriority;
                 }
+                if (column.columnWidth) {
+                    dataTablesColumn.width = column.columnWidth;
+                }
+                if (column.cellClass) {
+                    dataTablesColumn.className = column.cellClass;
+                }
                 dataTablesColumns.push(dataTablesColumn);
             });
             // searching is handled in the widget and XPath, not in DataTables because the search field triggers a search with every key press.
@@ -192,6 +199,11 @@ define([
                 dataTablesOptions.responsive = true;
             }
             this._table = this._tableNodelist.DataTable(dataTablesOptions);
+            dojoArray.forEach(this.columnList, function (column, i) {
+                if (column.headerClass) {
+                    $(thisObj._table.column(i).header()).addClass(column.headerClass);
+                }
+            });
             
         },
         
@@ -287,7 +299,6 @@ define([
 //            this.colorSelectNode.disabled = this.readOnly;
 
             if (this._contextObj !== null) {
-                //this._tableNodelist.addClass("display table table-striped table-bordered dataTable");
                 if (!this._table) {
                     this._createTableObject();
                 }
