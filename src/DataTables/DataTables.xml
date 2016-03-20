@@ -6,17 +6,23 @@
     </icon>
 
     <properties>
-        <property key="entity" type="entity">
-            <caption>Entity</caption>
+        <property key="tableEntity" type="entity">
+            <caption>Table entity</caption>
             <category>Configuration</category>
-            <description>The entity to display in the grid</description>
+            <description>The entity to display in the table</description>
         </property>
+        <property key="isResponsive" type="boolean" defaultValue="false">
+            <caption>Is responsive</caption>
+            <category>Configuration</category>
+            <description>When turned on, columns will be hidden on smaller screen sizes depending on their responsive priorities</description>
+        </property>
+        
         <property key="columnList" type="object" isList="true" required="false">
             <caption>Columns</caption>
             <category>Configuration</category>
             <description>The columns to display in the grid</description>
             <properties>
-                <property key="attr" type="attribute" entityProperty="entity">
+                <!--property key="attr" type="attribute" entityProperty="tableEntity" This does not work! Error: entity cannot be resolved>
                     <caption>Attribute</caption>
                     <category>Configuration</category>
                     <description>The attribute to display</description>
@@ -31,20 +37,24 @@
                         <attributeType name="Enum"/>
                         <attributeType name="String"/>
                     </attributeTypes>
+                </property-->
+                <property key="attrName" type="string">
+                    <caption>Attribute name</caption>
+                    <category>Configuration</category>
+                    <description>Attribute name, this is case sensitive.</description>
                 </property>
-                <property key="name" type="string">
+                <property key="caption" type="translatableString">
                     <caption>Caption</caption>
                     <category>Configuration</category>
-                    <description>Column caption</description>
+                    <description>Column caption, translatable</description>
                 </property>
-                <property key="responsivePriority" type="integer">
+                <property key="responsivePriority" type="integer" defaultValue="0">
                     <caption>Responsive priority</caption>
                     <category>Configuration</category>
                     <description>Responsive priority, 0 is the highest, columns with higher numbers will be hidden first when the grid does not fit in the current display size.</description>
                 </property>
             </properties>
         </property>
-        
     </properties>
 </widget>
 

@@ -54,7 +54,8 @@ define([
 
         // Parameters configured in the Modeler.
         entity: "",
-        columnList: "",
+        columnList: null,
+        isResponsive: false,
 
         // Internal variables. Non-primitives created in the prototype are shared between all widget instances.
         _handles: null,
@@ -73,11 +74,28 @@ define([
         // dijit._WidgetBase.postCreate is called after constructing the widget. Implement to do extra setup work.
         postCreate: function () {
             logger.debug(this.id + ".postCreate");
+
+            var dataTablesOptions,
+                dataTablesColumns = [],
+                dataTablesColumn,
+                thisObj = this;
             
             this._tableNodelist = $("#" + this.domNode.id + " #tableToConvert");
 
+            if (this.columnList) {
+                dojoArray.forEach(this.columnList, function (column) {
+                    dataTablesColumn = {
+                        title: column.caption,
+                        data: column.attrName
+                    };
+                    if (thisObj.isResponsive) {
+                        dataTablesColumn.responsivePriority = column.responsivePriority;
+                    }
+                    dataTablesColumns.push(dataTablesColumn);
+                });
+            }
             // searching is handled in the widget and XPath, not in DataTables because the search field triggers a search with every key press.
-            this._table = this._tableNodelist.DataTable({
+            dataTablesOptions = {
                 serverSide: true,
                 searching: false,
                 ajax: dojoLang.hitch(this, this._getData),
@@ -85,15 +103,12 @@ define([
 //                scroller: {
 //                    loadingIndicator: true
 //                },
-                columns: [
-                    { title: "Name" },
-                    { title: "Position" },
-                    { title: "Office" },
-                    { title: "Extn." },
-                    { title: "Start date" },
-                    { title: "Salary" }
-                ]
-            });
+                columns: dataTablesColumns
+            };
+            if (this.isResponsive) {
+                dataTablesOptions.responsive = true;
+            }
+            this._table = this._tableNodelist.DataTable(dataTablesOptions);
             
             this._updateRendering();
             this._setupEvents();
@@ -178,16 +193,128 @@ define([
         // Get data 
         _getData: function (data, callback, settings) {
             var dataSet = [
-                [ "Jennifer Chang", "Regional Director", "Singapore", "9239", "2010/11/14", "page: " + data.start ],
-                [ "Brenden Wagner", "Software Engineer", "San Francisco", "1314", "2011/06/07", "$206,850" ],
-                [ "Fiona Green", "Chief Operating Officer (COO)", "San Francisco", "2947", "2010/03/11", "$850,000" ],
-                [ "Shou Itou", "Regional Marketing", "Tokyo", "8899", "2011/08/14", "$163,000" ],
-                [ "Michelle House", "Integration Specialist", "Sidney", "2769", "2011/06/02", "$95,400" ],
-                [ "Suki Burks", "Developer", "London", "6832", "2009/10/22", "$114,500" ],
-                [ "Prescott Bartlett", "Technical Author", "London", "3606", "2011/05/07", "$145,000" ],
-                [ "Gavin Cortez", "Team Leader", "San Francisco", "2860", "2008/10/26", "$235,500" ],
-                [ "Martena Mccray", "Post-Sales support", "Edinburgh", "8240", "2011/03/09", "$324,050" ],
-                [ "Unity Butler", "Marketing Designer", "San Francisco", "5384", "2009/12/09", "$85,675" ]
+                {
+                    "Number": 1,
+                    "gender": "Male",
+                    "firstName": "Eric",
+                    "lastName": "Olson",
+                    "email": "eolson0@techcrunch.com",
+                    "postalCode": "85025",
+                    "address": "2690 Gulseth Hill",
+                    "city": "Phoenix",
+                    "countryCode": "US",
+                    "phone": "1-(480)325-6097",
+                    "salary": "130529.32"
+                },
+                {
+                    "Number": 2,
+                    "gender": "Male",
+                    "firstName": "Ralph",
+                    "lastName": "Greene",
+                    "email": "rgreene1@theglobeandmail.com",
+                    "address": "84 Buhler Pass",
+                    "city": "Obigarm",
+                    "countryCode": "TJ",
+                    "phone": "992-(789)290-1225",
+                    "salary": "675336.79"
+                },
+                {
+                    "Number": 3,
+                    "gender": "Female",
+                    "firstName": "Nancy",
+                    "lastName": "Lane",
+                    "email": "nlane2@creativecommons.org",
+                    "address": "5 Arrowood Circle",
+                    "city": "Al Manqaf",
+                    "countryCode": "KW",
+                    "phone": "965-(625)852-0890",
+                    "salary": "441664.41"
+                },
+                {
+                    "Number": 4,
+                    "gender": "Male",
+                    "firstName": "Joe",
+                    "lastName": "Shaw",
+                    "email": "jshaw3@newsvine.com",
+                    "address": "64857 Raven Parkway",
+                    "city": "Criciúma",
+                    "countryCode": "BR",
+                    "phone": "55-(960)879-6803",
+                    "salary": "717465.89"
+                },
+                {
+                    "Number": 5,
+                    "gender": "Male",
+                    "firstName": "Roger",
+                    "lastName": "Little",
+                    "email": "rlittle4@comcast.net",
+                    "postalCode": "40293",
+                    "address": "22717 Kipling Plaza",
+                    "city": "Louisville",
+                    "countryCode": "US",
+                    "phone": "1-(502)731-6320",
+                    "salary": "314944.35"
+                },
+                {
+                    "Number": 6,
+                    "gender": "Male",
+                    "firstName": "Steven",
+                    "lastName": "Vasquez",
+                    "email": "svasquez5@ftc.gov",
+                    "address": "2 Butternut Avenue",
+                    "city": "Miguel Pereira",
+                    "countryCode": "BR",
+                    "phone": "55-(312)364-5717",
+                    "salary": "847726.43"
+                },
+                {
+                    "Number": 7,
+                    "gender": "Female",
+                    "firstName": "Judy",
+                    "lastName": "Montgomery",
+                    "email": "jmontgomery6@nhs.uk",
+                    "address": "41060 Russell Plaza",
+                    "city": "Baita",
+                    "countryCode": "CN",
+                    "phone": "86-(474)972-0140",
+                    "salary": "830884.74"
+                },
+                {
+                    "Number": 8,
+                    "gender": "Female",
+                    "firstName": "Rebecca",
+                    "lastName": "Jordan",
+                    "email": "rjordan7@flavors.me",
+                    "address": "50099 Dunning Drive",
+                    "city": "Kuala Bhee",
+                    "countryCode": "Number",
+                    "phone": "62-(185)890-6738",
+                    "salary": "623495.77"
+                },
+                {
+                    "Number": 9,
+                    "gender": "Female",
+                    "firstName": "Karen",
+                    "lastName": "Dunn",
+                    "email": "kdunn8@hhs.gov",
+                    "address": "5416 Gateway Street",
+                    "city": "Pacarkeling",
+                    "countryCode": "Number",
+                    "phone": "62-(882)550-5723",
+                    "salary": "370746.59"
+                },
+                {
+                    "Number": 10,
+                    "gender": "Male",
+                    "firstName": "Steve",
+                    "lastName": "Perez",
+                    "email": "sperez9@japanpost.jp",
+                    "address": "4 NorthrNumberge Avenue",
+                    "city": "Knysna",
+                    "countryCode": "ZA",
+                    "phone": "27-(276)146-2632",
+                    "salary": "289746.75"
+                }
             ];
             
             setTimeout(function () {
