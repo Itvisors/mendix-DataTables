@@ -34,8 +34,7 @@ define([
     "dojo/text!DataTables/widget/template/DataTables.html",
     
     // DataTables modules. When updating to a new version, do not forget to update the module names in the DataTables module sources because the default does not work in a custom widget.
-    "DataTables/lib/jquery.datatables",
-    "DataTables/lib/dataTables.responsive"/*,
+    "DataTables/lib/jquery.datatables"/*,
     "DataTables/lib/dataTables.bootstrap" */
 ], function (declare, _WidgetBase, _TemplatedMixin, dom, dojoStyle, dojoArray, dojoLang, dojoEvent, _jQuery, widgetTemplate) {
     "use strict";
@@ -54,10 +53,14 @@ define([
         infoTextNode: null,
 
         // Parameters configured in the Modeler.
-        entity: "",
-        columnList: null,
+        tableEntity: null,
         isResponsive: false,
-
+        autoColumnWidth: true,
+        allowColumnReorder: true,
+        allowColumnVisibility: false,
+        tableClass: "",
+        columnList: null,
+        
         // Internal variables. Non-primitives created in the prototype are shared between all widget instances.
         _handles: null,
         _contextObj: null,
@@ -76,9 +79,36 @@ define([
         // dijit._WidgetBase.postCreate is called after constructing the widget. Implement to do extra setup work.
         postCreate: function () {
             logger.debug(this.id + ".postCreate");
+            
+            var moduleList = [],
+                thisObj = this;
+            
             this._entityMetaData = mx.meta.getEntity(this.tableEntity);
             this._updateRendering();
             this._setupEvents();
+            
+            // Optional DataTables modules.
+            // When updating to a new version, do not forget to update the module names in the DataTables module sources because the default does not work in a custom widget.  
+            if (this.isResponsive) {
+                moduleList.push("DataTables/lib/dataTables.responsive");
+            }
+            if (this.allowColumnReorder) {
+                moduleList.push("DataTables/lib/dataTables.colReorder");
+            }
+            // The buttons extension consists of multiple modules. First include the common module then the necessary specific ones.
+            if (this.allowColumnVisibility) {
+                moduleList.push("DataTables/lib/datatables.buttons");
+            }
+            if (this.allowColumnVisibility) {
+                moduleList.push("DataTables/lib/buttons.colVis");
+            }
+            
+            // Require all necessary modules
+            if (moduleList.length) {
+                require(moduleList, function () {
+                    logger.debug(thisObj.id + ".postCreate require additional modules done.");
+                });
+            }
         },
             
         // mxui.widget._WidgetBase.update is called when context is changed or initialized. Implement to re-render and / or fetch data.
@@ -171,7 +201,8 @@ define([
             dojoArray.forEach(this.columnList, function (column) {
                 dataTablesColumn = {
                     title: column.caption,
-                    data: column.attrName
+                    data: column.attrName,
+                    visible: column.initiallyVisible
                 };
                 if (thisObj.isResponsive) {
                     dataTablesColumn.responsivePriority = column.responsivePriority;
@@ -189,14 +220,31 @@ define([
                 serverSide: true,
                 searching: false,
                 ajax: dojoLang.hitch(this, this._getData),
-//                scrollY: 200,
-//                scroller: {
-//                    loadingIndicator: true
-//                },
                 columns: dataTablesColumns
             };
+            
+            dataTablesOptions.autoWidth = this.autoColumnWidth;
+            
             if (this.isResponsive) {
                 dataTablesOptions.responsive = true;
+            }
+            
+            if (this.allowColumnReorder) {
+                dataTablesOptions.colReorder = true;
+            }
+            
+            // The buttons extension consists of multiple modules. First include the common option then configure it.
+            if (this.allowColumnVisibility) {
+                // This option needs to be set too for the button to appear.
+                dataTablesOptions.dom = "Blfrtip";
+                dataTablesOptions.buttons = [];
+            }
+            if (this.allowColumnVisibility) {
+                dataTablesOptions.buttons.push("colvis");
+            }
+            
+            if (this.tableClass) {
+                this._tableNodelist.addClass(this.tableClass);
             }
             this._table = this._tableNodelist.DataTable(dataTablesOptions);
             dojoArray.forEach(this.columnList, function (column, i) {

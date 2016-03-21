@@ -16,6 +16,26 @@
             <category>Configuration</category>
             <description>When turned on, columns will be hidden on smaller screen sizes depending on their responsive priorities</description>
         </property>
+        <property key="autoColumnWidth" type="boolean" defaultValue="true">
+            <caption>Auto column width</caption>
+            <category>Configuration</category>
+            <description>Control the auto column width feature. Turn off when specifying widths on the columns.</description>
+        </property>
+        <property key="allowColumnReorder" type="boolean" defaultValue="true">
+            <caption>Allow column reorder</caption>
+            <category>Configuration</category>
+            <description>When turned on, the user can drag and drop columns to reorder them</description>
+        </property>
+        <property key="allowColumnVisibility" type="boolean" defaultValue="false">
+            <caption>Allow column visibility</caption>
+            <category>Configuration</category>
+            <description>When turned on, the user can choose which columns to display</description>
+        </property>
+        <property key="tableClass" type="string" required="false">
+            <caption>Table class</caption>
+            <category>Configuration</category>
+            <description>Optional. Specify class(es) to be put on the table.</description>
+        </property>                
         
         <property key="columnList" type="object" isList="true" required="false">
             <caption>Columns</caption>
@@ -85,6 +105,11 @@
                         <translation lang="en_US">KK:mm a</translation>
                         <translation lang="nl_NL">HH:mm</translation>
                     </translations>
+                </property>
+                <property key="initiallyVisible" type="boolean" defaultValue="true">
+                    <caption>Visible</caption>
+                    <category>Configuration</category>
+                    <description>By default all columns are visible. Turn this off to hide the column by default. Combine with column visibility</description>
                 </property>
                 <property key="responsivePriority" type="integer" defaultValue="0">
                     <caption>Responsive priority</caption>
