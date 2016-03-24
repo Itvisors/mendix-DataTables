@@ -68,6 +68,8 @@ define([
         _entityMetaData: null,
         _tableNodelist: null,
         _table: null,
+        
+        // I18N file names object at the end, out of sight!
 
         // dojo.declare.constructor is called to construct the widget instance. Implement to initialize non-primitive properties.
         constructor: function () {
@@ -197,6 +199,7 @@ define([
                 dataTablesColumn,
                 locale,
                 language,
+                languageFilename = null,
                 thisObj = this;
 
             this._tableNodelist = $("#" + this.domNode.id + " #tableToConvert");
@@ -232,11 +235,16 @@ define([
             
             locale = dojoKernel.locale;
             language = locale.substring(0, 2);
-            if (this.i18nData[locale]) {
-                dataTablesOptions.language = this.i18nData[locale];
-            } else if (this.i18nData[language]) {
-                dataTablesOptions.language = this.i18nData[language];
+            if (this._i18nFilenames[locale]) {
+                languageFilename = this._i18nFilenames[locale];
+            } else if (this._i18nFilenames[language]) {
+                languageFilename = this._i18nFilenames[language];
             }
+            if (languageFilename) {
+                dataTablesOptions.language = {url: document.location.origin + "/widgets/DataTables/i18n/" + languageFilename};
+            }
+
+            // If the file does not load, check that it has no comments in it as the parser does not like comments.
             
             if (this.isResponsive) {
                 dataTablesOptions.responsive = true;
@@ -410,26 +418,51 @@ define([
                 this._handles = [ objectHandle /*, attrHandle */];
             }
         },
-        i18nData : {
-            "nl" : {
-                "sProcessing": "Bezig...",
-                "sLengthMenu": "_MENU_ resultaten weergeven",
-                "sZeroRecords": "Geen resultaten gevonden",
-                "sInfo": "_START_ tot _END_ van _TOTAL_ resultaten",
-                "sInfoEmpty": "Geen resultaten om weer te geven",
-                "sInfoFiltered": " (gefilterd uit _MAX_ resultaten)",
-                "sInfoPostFix": "",
-                "sSearch": "Zoeken:",
-                "sEmptyTable": "Geen resultaten aanwezig in de tabel",
-                "sInfoThousands": ".",
-                "sLoadingRecords": "Een moment geduld aub - bezig met laden...",
-                "oPaginate": {
-                    "sFirst": "Eerste",
-                    "sLast": "Laatste",
-                    "sNext": "Volgende",
-                    "sPrevious": "Vorige"
-                }
-            }
+        _i18nFilenames: {
+            "sq": "Albanian.lang",
+            "ar": "Arabic.lang",
+            "be": "Belarusian.lang",
+            "bg": "Bulgarian.lang",
+            "ca-es": "Catalan.lang",
+            "zh-hk": "Chinese-traditional.lang",
+            "zh-tw": "Chinese-traditional.lang",
+            "zh": "Chinese.lang",
+            "hr": "Croatian.lang",
+            "cs": "Czech.lang",
+            "da": "Danish.lang",
+            "nl": "Dutch.lang",
+            "et": "Estonian.lang",
+            "fi": "Finnish.lang",
+            "fr": "French.lang",
+            "de": "German.lang",
+            "el": "Greek.lang",
+            "he": "Hebrew.lang",
+            "hi": "Hindi.lang",
+            "hu": "Hungarian.lang",
+            "is": "Icelandic.lang",
+            "id": "Indonesian.lang",
+            "ga": "Irish.lang",
+            "it": "Italian.lang",
+            "ja": "Japanese.lang",
+            "ko": "Korean.lang",
+            "lv": "Latvian.lang",
+            "lt": "Lithuanian.lang",
+            "mk": "Macedonian.lang",
+            "ms": "Malay.lang",
+            "no": "Norwegian.lang",
+            "pl": "Polish.lang",
+            "pt-BR": "Portuguese-Brasil.lang",
+            "pt": "Portuguese.lang",
+            "ro": "Romanian.lang",
+            "ru": "Russian.lang",
+            "sr": "Serbian.lang",
+            "sk": "Slovak.lang",
+            "sl": "Slovenian.lang",
+            "es": "Spanish.lang",
+            "sv": "Swedish.lang",
+            "th": "Thai.lang",
+            "tr": "Turkish.lang",
+            "uk": "Ukrainian.lang"
         }
     });
 });
