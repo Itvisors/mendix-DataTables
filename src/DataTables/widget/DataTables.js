@@ -29,6 +29,7 @@ define([
     "dojo/_base/array",
     "dojo/_base/lang",
     "dojo/_base/event",
+    "dojo/_base/kernel",
 
     "DataTables/lib/jquery",
     "dojo/text!DataTables/widget/template/DataTables.html",
@@ -36,7 +37,7 @@ define([
     // DataTables modules. When updating to a new version, do not forget to update the module names in the DataTables module sources because the default does not work in a custom widget.
     "DataTables/lib/jquery.datatables"/*,
     "DataTables/lib/dataTables.bootstrap" */
-], function (declare, _WidgetBase, _TemplatedMixin, dom, dojoStyle, dojoArray, dojoLang, dojoEvent, _jQuery, widgetTemplate) {
+], function (declare, _WidgetBase, _TemplatedMixin, dom, dojoStyle, dojoArray, dojoLang, dojoEvent, dojoKernel, _jQuery, widgetTemplate) {
     "use strict";
 
     var $ = _jQuery.noConflict(true);
@@ -194,6 +195,8 @@ define([
             var dataTablesOptions,
                 dataTablesColumns = [],
                 dataTablesColumn,
+                locale,
+                language,
                 thisObj = this;
 
             this._tableNodelist = $("#" + this.domNode.id + " #tableToConvert");
@@ -223,7 +226,17 @@ define([
                 columns: dataTablesColumns
             };
             
-            dataTablesOptions.autoWidth = this.autoColumnWidth;
+            if (!this.autoColumnWidth) {
+                dataTablesOptions.autoWidth = false;
+            }
+            
+            locale = dojoKernel.locale;
+            language = locale.substring(0, 2);
+            if (this.i18nData[locale]) {
+                dataTablesOptions.language = this.i18nData[locale];
+            } else if (this.i18nData[language]) {
+                dataTablesOptions.language = this.i18nData[language];
+            }
             
             if (this.isResponsive) {
                 dataTablesOptions.responsive = true;
@@ -395,6 +408,27 @@ define([
 //                });
 
                 this._handles = [ objectHandle /*, attrHandle */];
+            }
+        },
+        i18nData : {
+            "nl" : {
+                "sProcessing": "Bezig...",
+                "sLengthMenu": "_MENU_ resultaten weergeven",
+                "sZeroRecords": "Geen resultaten gevonden",
+                "sInfo": "_START_ tot _END_ van _TOTAL_ resultaten",
+                "sInfoEmpty": "Geen resultaten om weer te geven",
+                "sInfoFiltered": " (gefilterd uit _MAX_ resultaten)",
+                "sInfoPostFix": "",
+                "sSearch": "Zoeken:",
+                "sEmptyTable": "Geen resultaten aanwezig in de tabel",
+                "sInfoThousands": ".",
+                "sLoadingRecords": "Een moment geduld aub - bezig met laden...",
+                "oPaginate": {
+                    "sFirst": "Eerste",
+                    "sLast": "Laatste",
+                    "sNext": "Volgende",
+                    "sPrevious": "Vorige"
+                }
             }
         }
     });
