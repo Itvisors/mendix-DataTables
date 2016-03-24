@@ -60,6 +60,7 @@ define([
         allowColumnReorder: true,
         allowColumnVisibility: false,
         tableClass: "",
+        stateSaveName: null,
         columnList: null,
         
         // Internal variables. Non-primitives created in the prototype are shared between all widget instances.
@@ -225,14 +226,12 @@ define([
             dataTablesOptions = {
                 serverSide: true,
                 searching: false,
+                autoWidth: this.autoColumnWidth,
                 ajax: dojoLang.hitch(this, this._getData),
                 columns: dataTablesColumns
             };
-            
-            if (!this.autoColumnWidth) {
-                dataTablesOptions.autoWidth = false;
-            }
-            
+
+            // I18N
             locale = dojoKernel.locale;
             language = locale.substring(0, 2);
             if (this._i18nFilenames[locale]) {
@@ -240,16 +239,17 @@ define([
             } else if (this._i18nFilenames[language]) {
                 languageFilename = this._i18nFilenames[language];
             }
+            // If the file does not load, check that it has no comments in it as the parser does not like comments.
             if (languageFilename) {
                 dataTablesOptions.language = {url: document.location.origin + "/widgets/DataTables/i18n/" + languageFilename};
             }
 
-            // If the file does not load, check that it has no comments in it as the parser does not like comments.
-            
+            // Responsive
             if (this.isResponsive) {
                 dataTablesOptions.responsive = true;
             }
             
+            // Column reorder
             if (this.allowColumnReorder) {
                 dataTablesOptions.colReorder = true;
             }
@@ -263,11 +263,36 @@ define([
             if (this.allowColumnVisibility) {
                 dataTablesOptions.buttons.push("colvis");
             }
-            
+
+            // Additional class(es) on the table itself
             if (this.tableClass) {
                 this._tableNodelist.addClass(this.tableClass);
             }
+
+            // State saving, only when local storage is available
+            if (this.stateSaveName && typeof Storage !== "undefined") {
+                // Turn it on
+                dataTablesOptions.stateSave = true;
+
+                // Override so start position and search data are not saved.
+                dataTablesOptions.stateSaveParams = function (settings, data) {
+                    data.start = 0;
+                    data.search.search = "";
+                };
+
+                // Override save and load functions because Mendix widgets do not have a fixed HTML tag ID.
+                dataTablesOptions.stateSaveCallback = function (settings, data) {
+                    localStorage.setItem("MxDataTables_" + thisObj.stateSaveName, JSON.stringify(data));
+                };
+                dataTablesOptions.stateLoadCallback = function (settings) {
+                    return JSON.parse(localStorage.getItem("MxDataTables_" + thisObj.stateSaveName));
+                };
+            }
+
+            // Create DataTables object
             this._table = this._tableNodelist.DataTable(dataTablesOptions);
+            
+            // Set additional column header classes on the generated table.
             dojoArray.forEach(this.columnList, function (column, i) {
                 if (column.headerClass) {
                     $(thisObj._table.column(i).header()).addClass(column.headerClass);

@@ -36,6 +36,11 @@
             <category>Configuration</category>
             <description>Optional. Specify class(es) to be put on the table.</description>
         </property>                
+        <property key="stateSaveName" type="string" required="false">
+            <caption>State save name</caption>
+            <category>Configuration</category>
+            <description>Optional. When specified, grid state is saved to and loaded from browser local storage using the specied name. Make sure this name is unique across your application!</description>
+        </property>                
         
         <property key="columnList" type="object" isList="true" required="false">
             <caption>Columns</caption>
