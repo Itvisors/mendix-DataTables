@@ -64,6 +64,7 @@ define([
         showTableInformation: true,
         infiniteScroll: false,
         scrollY: null,
+        selectionType: null,
         columnList: null,
         
         // Internal variables. Non-primitives created in the prototype are shared between all widget instances.
@@ -111,6 +112,9 @@ define([
             }
             if (this.infiniteScroll) {
                 moduleList.push("DataTables/lib/dataTables.scroller");
+            }
+            if (this.selectionType !== "none") {
+                moduleList.push("DataTables/lib/dataTables.select");
             }
             
             // Require all necessary modules
@@ -207,6 +211,7 @@ define([
                 locale,
                 language,
                 languageFilename = null,
+                table,
                 thisObj = this;
 
             this._tableNodelist = $("#" + this.domNode.id + " #tableToConvert");
@@ -305,6 +310,14 @@ define([
             if (this.scrollY) {
                 dataTablesOptions.scrollY = this.scrollY;
             }
+            
+            // Selection
+            if (this.selectionType !== "none") {
+                dataTablesOptions.select = {
+                    info: false,
+                    style: this.selectionType
+                };
+            }
 
             // Set the DOM options, depending on other configuration options
             dataTablesOptions.dom = "";
@@ -328,7 +341,21 @@ define([
             }
             
             // Create DataTables object
-            this._table = this._tableNodelist.DataTable(dataTablesOptions);
+            table = this._tableNodelist.DataTable(dataTablesOptions);
+            this._table = table;
+
+            // Selection event
+            if (this.selectionType !== "none") {
+                this._table
+                    .on("select", function (e, dt, type, indexes) {
+                        var rowData = table.rows({selected: true}).data().toArray();
+                        console.dir(rowData);
+                    })
+                    .on("deselect", function (e, dt, type, indexes) {
+                        var rowData = table.rows({selected: true}).data().toArray();
+                        console.dir(rowData);
+                    });
+            }
             
             // Set additional column header classes on the generated table.
             dojoArray.forEach(this.columnList, function (column, i) {

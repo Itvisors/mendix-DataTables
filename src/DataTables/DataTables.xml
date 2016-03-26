@@ -55,7 +55,18 @@
             <caption>Vertical scrolling</caption>
             <category>Configuration</category>
             <description>Optional, any CSS unit, default 200px. When specified, vertical scrolling is used and height of the rows is constrained to the specified height.</description>
-        </property>                
+        </property>
+        <property key="selectionType" type="enumeration" defaultValue="single">
+            <caption>Selection</caption>
+            <category>Configuration</category>
+            <description>Selection type.</description>
+            <enumerationValues>
+                <enumerationValue key="single">single selection</enumerationValue>
+                <enumerationValue key="os">Multi-selection</enumerationValue>
+                <enumerationValue key="multi">Simple multi-selection</enumerationValue>
+                <enumerationValue key="none">No selection</enumerationValue>
+            </enumerationValues>
+        </property>
         <property key="columnList" type="object" isList="true" required="false">
             <caption>Columns</caption>
             <category>Configuration</category>
