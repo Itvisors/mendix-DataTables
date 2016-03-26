@@ -1,11 +1,11 @@
-/*! Responsive 2.0.3-dev
+/*! Responsive 2.0.2
  * 2014-2016 SpryMedia Ltd - datatables.net/license
  */
 
 /**
  * @summary     Responsive
  * @description Responsive tables plug-in for DataTables
- * @version     2.0.3-dev
+ * @version     2.0.2
  * @file        dataTables.responsive.js
  * @author      SpryMedia Ltd (www.sprymedia.co.uk)
  * @contact     www.sprymedia.co.uk/contact
@@ -233,7 +233,6 @@ $.extend( Responsive.prototype, {
 
 		// Change in column sizes means we need to calc
 		dt.on( 'column-sizing.dtr', function () {
-			that._resizeAuto();
 			that._resize();
 		});
 
@@ -543,7 +542,7 @@ $.extend( Responsive.prototype, {
 		var dt = this.s.dt;
 		var details = this.c.details;
 
-		if ( details && details.type !== false ) {
+		if ( details && details.type ) {
 			var res = details.display( row, update, function () {
 				return details.renderer(
 					dt, row[0], that._detailsObj(row[0])
@@ -814,7 +813,7 @@ $.extend( Responsive.prototype, {
 		if ( footer ) {
 			var clonedFooter = $( footer.cloneNode( false ) ).appendTo( clonedTable );
 			var footerCells = dt.columns()
-				.footer()
+				.header()
 				.filter( function (idx) {
 					return dt.column(idx).visible();
 				} )
@@ -838,11 +837,6 @@ $.extend( Responsive.prototype, {
 			$(clonedTable).addClass( 'dtr-inline collapsed' );
 		}
 
-		// It is unsafe to insert elements with the same name into the DOM
-		// multiple times. For example, cloning and inserting a checked radio
-		// clears the chcecked state of the original radio.
-		$( clonedTable ).find( '[name]' ).removeAttr( 'name' );
-		
 		var inserted = $('<div/>')
 			.css( {
 				width: 1,
@@ -1170,7 +1164,7 @@ Api.register( 'responsive.hasHidden()', function () {
  * @name Responsive.version
  * @static
  */
-Responsive.version = '2.0.3-dev';
+Responsive.version = '2.0.2';
 
 
 $.fn.dataTable.Responsive = Responsive;

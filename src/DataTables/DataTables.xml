@@ -41,7 +41,21 @@
             <category>Configuration</category>
             <description>Optional. When specified, grid state is saved to and loaded from browser local storage using the specied name. Make sure this name is unique across your application!</description>
         </property>                
-        
+        <property key="showTableInformation" type="boolean" defaultValue="true">
+            <caption>Show table information</caption>
+            <category>Configuration</category>
+            <description>When turned on, display information: Showing 1 to 6 of 50,000 entries</description>
+        </property>
+        <property key="infiniteScroll" type="boolean" defaultValue="false">
+            <caption>Use infinite scroll</caption>
+            <category>Configuration</category>
+            <description>Use infinite scroll rather than the default paging buttons. Set nowrap on the table class!</description>
+        </property>
+        <property key="scrollY" type="string" required="false">
+            <caption>Vertical scrolling</caption>
+            <category>Configuration</category>
+            <description>Optional, any CSS unit, default 200px. When specified, vertical scrolling is used and height of the rows is constrained to the specified height.</description>
+        </property>                
         <property key="columnList" type="object" isList="true" required="false">
             <caption>Columns</caption>
             <category>Configuration</category>

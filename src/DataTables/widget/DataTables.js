@@ -61,6 +61,9 @@ define([
         allowColumnVisibility: false,
         tableClass: "",
         stateSaveName: null,
+        showTableInformation: true,
+        infiniteScroll: false,
+        scrollY: null,
         columnList: null,
         
         // Internal variables. Non-primitives created in the prototype are shared between all widget instances.
@@ -105,6 +108,9 @@ define([
             }
             if (this.allowColumnVisibility) {
                 moduleList.push("DataTables/lib/buttons.colVis");
+            }
+            if (this.infiniteScroll) {
+                moduleList.push("DataTables/lib/dataTables.scroller");
             }
             
             // Require all necessary modules
@@ -256,8 +262,6 @@ define([
             
             // The buttons extension consists of multiple modules. First include the common option then configure it.
             if (this.allowColumnVisibility) {
-                // This option needs to be set too for the button to appear.
-                dataTablesOptions.dom = "Blfrtip";
                 dataTablesOptions.buttons = [];
             }
             if (this.allowColumnVisibility) {
@@ -289,6 +293,40 @@ define([
                 };
             }
 
+            // Infinite scroll
+            if (this.infiniteScroll) {
+                // for normal paging, show the page length drop down.
+                dataTablesOptions.scroller = {
+                    loadingIndicator: true
+                };
+            }
+            
+            // Vertical scrolling
+            if (this.scrollY) {
+                dataTablesOptions.scrollY = this.scrollY;
+            }
+
+            // Set the DOM options, depending on other configuration options
+            dataTablesOptions.dom = "";
+            if (this.allowColumnVisibility) {
+                // This option needs to be set too for the buttons plugin.
+                dataTablesOptions.dom += "B";
+            }
+            if (!this.infiniteScroll) {
+                // for normal paging, show the page length drop down.
+                dataTablesOptions.dom += "l";
+            }
+            dataTablesOptions.dom += "rt";
+                //dataTablesOptions.dom = "rtip";
+            if (this.showTableInformation) {
+                // Display table information: Showing 1 to 6 of 50,000 entries
+                dataTablesOptions.dom += "i";
+            }
+            if (!this.infiniteScroll) {
+                // for normal paging, show the paging buttons.
+                dataTablesOptions.dom += "p";
+            }
+            
             // Create DataTables object
             this._table = this._tableNodelist.DataTable(dataTablesOptions);
             
