@@ -376,7 +376,7 @@ define([
             dojoArray.forEach(this.buttonDefinitionList, function (buttonDefinition, i) {
                 var microflowName = buttonDefinition.buttonMicroflowName;
                 // Met normale create element functies button maken en eventueel glyphicon er in zetten. Classes overnemen van Mendix buttons.
-                button = dojoConstruct.place("<button type='button' class='btn mx-button'>" + buttonDefinition.caption + "</button>", this.buttonContainer);
+                button = dojoConstruct.place("<button type='button' class='btn mx-button btn-" + buttonDefinition.buttonType + "'>" + buttonDefinition.caption + "</button>", this.buttonContainer);
                 if (buttonDefinition.buttonName) {
                     dojoClass.add(button, "mx-name-" + buttonDefinition.buttonName);
                 }

@@ -187,6 +187,20 @@
                     <category>Selection</category>
                     <description>Button name, will be mx-name- class on the button</description>
                 </property>
+                <property key="buttonType" type="enumeration" defaultValue="default">
+                    <caption>Button type</caption>
+                    <category>Selection</category>
+                    <description>Button type</description>
+                    <enumerationValues>
+                        <enumerationValue key="default">Default</enumerationValue>
+                        <enumerationValue key="primary">Primary</enumerationValue>
+                        <enumerationValue key="inverse">Inverse</enumerationValue>
+                        <enumerationValue key="info">Info</enumerationValue>
+                        <enumerationValue key="success">Success</enumerationValue>
+                        <enumerationValue key="warning">Warning</enumerationValue>
+                        <enumerationValue key="danger">Danger</enumerationValue>
+                    </enumerationValues>
+                </property>
                 <property key="buttonClass" type="string" required="false">
                     <caption>Class</caption>
                     <category>Selection</category>
