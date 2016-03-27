@@ -6,75 +6,22 @@
     </icon>
 
     <properties>
+        
+        <!--    Data source    -->
+        
         <property key="tableEntity" type="entity">
             <caption>Table entity</caption>
-            <category>Configuration</category>
+            <category>Datasource</category>
             <description>The entity to display in the table</description>
-        </property>
-        <property key="isResponsive" type="boolean" defaultValue="false">
-            <caption>Is responsive</caption>
-            <category>Configuration</category>
-            <description>When turned on, columns will be hidden on smaller screen sizes depending on their responsive priorities</description>
-        </property>
-        <property key="autoColumnWidth" type="boolean" defaultValue="true">
-            <caption>Auto column width</caption>
-            <category>Configuration</category>
-            <description>Control the auto column width feature. Turn off when specifying widths on the columns.</description>
-        </property>
-        <property key="allowColumnReorder" type="boolean" defaultValue="true">
-            <caption>Allow column reorder</caption>
-            <category>Configuration</category>
-            <description>When turned on, the user can drag and drop columns to reorder them</description>
-        </property>
-        <property key="allowColumnVisibility" type="boolean" defaultValue="false">
-            <caption>Allow column visibility</caption>
-            <category>Configuration</category>
-            <description>When turned on, the user can choose which columns to display</description>
-        </property>
-        <property key="tableClass" type="string" required="false">
-            <caption>Table class</caption>
-            <category>Configuration</category>
-            <description>Optional. Specify class(es) to be put on the table.</description>
-        </property>                
-        <property key="stateSaveName" type="string" required="false">
-            <caption>State save name</caption>
-            <category>Configuration</category>
-            <description>Optional. When specified, grid state is saved to and loaded from browser local storage using the specied name. Make sure this name is unique across your application!</description>
-        </property>                
-        <property key="showTableInformation" type="boolean" defaultValue="true">
-            <caption>Show table information</caption>
-            <category>Configuration</category>
-            <description>When turned on, display information: Showing 1 to 6 of 50,000 entries</description>
-        </property>
-        <property key="infiniteScroll" type="boolean" defaultValue="false">
-            <caption>Use infinite scroll</caption>
-            <category>Configuration</category>
-            <description>Use infinite scroll rather than the default paging buttons. Set nowrap on the table class!</description>
-        </property>
-        <property key="scrollY" type="string" required="false">
-            <caption>Vertical scrolling</caption>
-            <category>Configuration</category>
-            <description>Optional, any CSS unit, default 200px. When specified, vertical scrolling is used and height of the rows is constrained to the specified height.</description>
-        </property>
-        <property key="selectionType" type="enumeration" defaultValue="single">
-            <caption>Selection</caption>
-            <category>Configuration</category>
-            <description>Selection type.</description>
-            <enumerationValues>
-                <enumerationValue key="single">single selection</enumerationValue>
-                <enumerationValue key="os">Multi-selection</enumerationValue>
-                <enumerationValue key="multi">Simple multi-selection</enumerationValue>
-                <enumerationValue key="none">No selection</enumerationValue>
-            </enumerationValues>
         </property>
         <property key="columnList" type="object" isList="true" required="false">
             <caption>Columns</caption>
-            <category>Configuration</category>
+            <category>Datasource</category>
             <description>The columns to display in the grid</description>
             <properties>
                 <!--property key="attr" type="attribute" entityProperty="tableEntity" This does not work! Error: entity cannot be resolved>
                     <caption>Attribute</caption>
-                    <category>Configuration</category>
+                    <category>Datasource</category>
                     <description>The attribute to display</description>
                     <attributeTypes>
                         <attributeType name="AutoNumber"/>
@@ -90,17 +37,17 @@
                 </property-->
                 <property key="attrName" type="string">
                     <caption>Attribute name</caption>
-                    <category>Configuration</category>
+                    <category>Datasource</category>
                     <description>Attribute name, this is case sensitive.</description>
                 </property>
                 <property key="caption" type="translatableString">
                     <caption>Caption</caption>
-                    <category>Configuration</category>
+                    <category>Datasource</category>
                     <description>Column caption, translatable</description>
                 </property>
                 <property key="dateTimeType" type="enumeration" defaultValue="na">
                     <caption>Date/time type</caption>
-                    <category>Configuration</category>
+                    <category>Datasource</category>
                     <description>Display date as date, date/time or time.</description>
                     <enumerationValues>
                         <enumerationValue key="na">Not applicable</enumerationValue>
@@ -111,7 +58,7 @@
                 </property>
                 <property key="dateFormat" type="translatableString">
                     <caption>Default date format</caption>
-                    <category>Configuration</category>
+                    <category>Datasource</category>
                     <description>Default date format, translatable</description>
                     <translations>
                         <translation lang="en_US">MM/dd/yyyy</translation>
@@ -120,7 +67,7 @@
                 </property>
                 <property key="dateTimeFormat" type="translatableString">
                     <caption>Default date/time format</caption>
-                    <category>Configuration</category>
+                    <category>Datasource</category>
                     <description>Default date format, translatable</description>
                     <translations>
                         <translation lang="en_US">MM/dd/yyyy KK:mm a</translation>
@@ -129,7 +76,7 @@
                 </property>
                 <property key="timeFormat" type="translatableString">
                     <caption>Default time format</caption>
-                    <category>Configuration</category>
+                    <category>Datasource</category>
                     <description>Default time format, translatable</description>
                     <translations>
                         <translation lang="en_US">KK:mm a</translation>
@@ -138,29 +85,126 @@
                 </property>
                 <property key="initiallyVisible" type="boolean" defaultValue="true">
                     <caption>Visible</caption>
-                    <category>Configuration</category>
+                    <category>Datasource</category>
                     <description>By default all columns are visible. Turn this off to hide the column by default. Combine with column visibility</description>
                 </property>
                 <property key="responsivePriority" type="integer" defaultValue="0">
                     <caption>Responsive priority</caption>
-                    <category>Configuration</category>
+                    <category>Datasource</category>
                     <description>Responsive priority, 0 is the highest, columns with higher numbers will be hidden first when the grid does not fit in the current display size.</description>
                 </property>
                 <property key="columnWidth" type="string" required="false">
                     <caption>Column width</caption>
-                    <category>Configuration</category>
+                    <category>Datasource</category>
                     <description>Optional. Specify width, value is used exactly as you enter it: 20%, 150px, 5em, etc</description>
                 </property>                
                 <property key="headerClass" type="string" required="false">
                     <caption>Header class</caption>
-                    <category>Configuration</category>
+                    <category>Datasource</category>
                     <description>Optional. Specify class(es) to be put on the header</description>
                 </property>                
                 <property key="cellClass" type="string" required="false">
                     <caption>Cell class</caption>
-                    <category>Configuration</category>
+                    <category>Datasource</category>
                     <description>Optional. Specify class(es) to be put on each cell in the column</description>
                 </property>                
+            </properties>
+        </property>
+        
+        <!--    Layout    -->
+        
+        <property key="isResponsive" type="boolean" defaultValue="false">
+            <caption>Is responsive</caption>
+            <category>Layout</category>
+            <description>When turned on, columns will be hidden on smaller screen sizes depending on their responsive priorities</description>
+        </property>
+        <property key="autoColumnWidth" type="boolean" defaultValue="true">
+            <caption>Auto column width</caption>
+            <category>Layout</category>
+            <description>Control the auto column width feature. Turn off when specifying widths on the columns.</description>
+        </property>
+        <property key="allowColumnReorder" type="boolean" defaultValue="true">
+            <caption>Allow column reorder</caption>
+            <category>Layout</category>
+            <description>When turned on, the user can drag and drop columns to reorder them</description>
+        </property>
+        <property key="allowColumnVisibility" type="boolean" defaultValue="false">
+            <caption>Allow column visibility</caption>
+            <category>Layout</category>
+            <description>When turned on, the user can choose which columns to display</description>
+        </property>
+        <property key="tableClass" type="string" required="false">
+            <caption>Table class</caption>
+            <category>Layout</category>
+            <description>Optional. Specify class(es) to be put on the table.</description>
+        </property>                
+        <property key="showTableInformation" type="boolean" defaultValue="true">
+            <caption>Show table information</caption>
+            <category>Layout</category>
+            <description>When turned on, display information: Showing 1 to 6 of 50,000 entries</description>
+        </property>
+        <property key="infiniteScroll" type="boolean" defaultValue="false">
+            <caption>Use infinite scroll</caption>
+            <category>Layout</category>
+            <description>Use infinite scroll rather than the default paging buttons. Set nowrap on the table class!</description>
+        </property>
+        <property key="scrollY" type="string" required="false">
+            <caption>Vertical scrolling</caption>
+            <category>Layout</category>
+            <description>Optional, any CSS unit, default 200px. When specified, vertical scrolling is used and height of the rows is constrained to the specified height.</description>
+        </property>
+        <property key="stateSaveName" type="string" required="false">
+            <caption>State save name</caption>
+            <category>Layout</category>
+            <description>Optional. When specified, grid layout state is saved to and loaded from browser local storage using the specied name. Make sure this name is unique across your application!</description>
+        </property>                
+
+        <!--    Selection    -->
+        
+        <property key="selectionType" type="enumeration" defaultValue="single">
+            <caption>Selection</caption>
+            <category>Selection</category>
+            <description>Selection type.</description>
+            <enumerationValues>
+                <enumerationValue key="single">single selection</enumerationValue>
+                <enumerationValue key="os">Multi-selection</enumerationValue>
+                <enumerationValue key="multi">Simple multi-selection</enumerationValue>
+                <enumerationValue key="none">No selection</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="buttonDefinitionList" type="object" isList="true" required="false">
+            <caption>Buttons</caption>
+            <category>Selection</category>
+            <description>The buttons to use for processing selections</description>
+            <properties>
+                <property key="caption" type="translatableString">
+                    <caption>Caption</caption>
+                    <category>Selection</category>
+                    <description>Button caption, translatable</description>
+                </property>
+                <property key="buttonName" type="string" required="false">
+                    <caption>Name</caption>
+                    <category>Selection</category>
+                    <description>Button name, will be mx-name- class on the button</description>
+                </property>
+                <property key="buttonClass" type="string" required="false">
+                    <caption>Class</caption>
+                    <category>Selection</category>
+                    <description>Optional. Specify class(es) to be put on the button</description>
+                </property>
+                <property key="buttonMicroflowName" type="string">
+                    <caption>Button microflow</caption>
+                    <category>Selection</category>
+                    <description>The name of the microflow (Module.Microflow) that is called when the microflow is clicked.</description>
+                </property>
+<!--
+                <property key="buttonMicroflow" entityProperty="tableEntity" This does not work! Error: entity cannot be resolved type="microflow">
+                    <caption>Button microflow</caption>
+                    <category>Selection</category>
+                    <description>The microflow that is called when the microflow is clicked.</description>
+                    <returnType type="Void"></returnType>
+                </property>
+-->
             </properties>
         </property>
     </properties>

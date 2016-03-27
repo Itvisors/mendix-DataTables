@@ -1,6 +1,6 @@
 /*jshint undef: true, browser:true, nomen: true */
 /*jslint browser:true, nomen: true */
-/*global mx, define, require, console, logger*/
+/*global mx, mxui, define, require, console, logger*/
 /*
     DataTables
     ========================
@@ -25,7 +25,10 @@ define([
 
     "mxui/dom",
 
+    "dojo/dom-class",
     "dojo/dom-style",
+    "dojo/dom-construct",
+    "dojo/on",
     "dojo/_base/array",
     "dojo/_base/lang",
     "dojo/_base/event",
@@ -37,7 +40,7 @@ define([
     // DataTables modules. When updating to a new version, do not forget to update the module names in the DataTables module sources because the default does not work in a custom widget.
     "DataTables/lib/jquery.datatables"/*,
     "DataTables/lib/dataTables.bootstrap" */
-], function (declare, _WidgetBase, _TemplatedMixin, dom, dojoStyle, dojoArray, dojoLang, dojoEvent, dojoKernel, _jQuery, widgetTemplate) {
+], function (declare, _WidgetBase, _TemplatedMixin, dom, dojoClass, dojoStyle, dojoConstruct, dojoOn, dojoArray, dojoLang, dojoEvent, dojoKernel, _jQuery, widgetTemplate) {
     "use strict";
 
     var $ = _jQuery.noConflict(true);
@@ -48,10 +51,8 @@ define([
         templateString: widgetTemplate,
 
         // DOM elements
-        inputNodes: null,
-        colorSelectNode: null,
-        colorInputNode: null,
-        infoTextNode: null,
+        controlbar: null,
+        buttonContainer: null,
 
         // Parameters configured in the Modeler.
         tableEntity: null,
@@ -66,6 +67,7 @@ define([
         scrollY: null,
         selectionType: null,
         columnList: null,
+        buttonDefinitionList: null,
         
         // Internal variables. Non-primitives created in the prototype are shared between all widget instances.
         _handles: null,
@@ -73,6 +75,7 @@ define([
         _entityMetaData: null,
         _tableNodelist: null,
         _table: null,
+        _buttonList: null,
         
         // I18N file names object at the end, out of sight!
 
@@ -157,6 +160,7 @@ define([
             // Clean up listeners, helper objects, etc. There is no need to remove listeners added with this.connect / this.subscribe / this.own.
             this._clearTableData();
             this._table = null;
+            this._buttonList = null;
         },
 
         // We want to stop events on a mobile device
@@ -205,7 +209,8 @@ define([
         _createTableObject: function () {
             logger.debug(this.id + "._createTableObject");
 
-            var dataTablesOptions,
+            var button,
+                dataTablesOptions,
                 dataTablesColumns = [],
                 dataTablesColumn,
                 locale,
@@ -222,7 +227,7 @@ define([
                     data: column.attrName,
                     visible: column.initiallyVisible
                 };
-                if (thisObj.isResponsive) {
+                if (this.isResponsive) {
                     dataTablesColumn.responsivePriority = column.responsivePriority;
                 }
                 if (column.columnWidth) {
@@ -232,7 +237,7 @@ define([
                     dataTablesColumn.className = column.cellClass;
                 }
                 dataTablesColumns.push(dataTablesColumn);
-            });
+            }, this);
             // searching is handled in the widget and XPath, not in DataTables because the search field triggers a search with every key press.
             dataTablesOptions = {
                 serverSide: true,
@@ -350,20 +355,55 @@ define([
                     .on("select", function (e, dt, type, indexes) {
                         var rowData = table.rows({selected: true}).data().toArray();
                         console.dir(rowData);
+                        thisObj._setButtonEnabledStatus();
                     })
                     .on("deselect", function (e, dt, type, indexes) {
                         var rowData = table.rows({selected: true}).data().toArray();
                         console.dir(rowData);
+                        thisObj._setButtonEnabledStatus();
                     });
             }
             
             // Set additional column header classes on the generated table.
             dojoArray.forEach(this.columnList, function (column, i) {
                 if (column.headerClass) {
-                    $(thisObj._table.column(i).header()).addClass(column.headerClass);
+                    $(this._table.column(i).header()).addClass(column.headerClass);
                 }
-            });
+            }, this);
             
+            // Buttons
+            this._buttonList = [];
+            dojoArray.forEach(this.buttonDefinitionList, function (buttonDefinition, i) {
+                var microflowName = buttonDefinition.buttonMicroflowName;
+                // Met normale create element functies button maken en eventueel glyphicon er in zetten. Classes overnemen van Mendix buttons.
+                button = dojoConstruct.place("<button type='button' class='btn mx-button'>" + buttonDefinition.caption + "</button>", this.buttonContainer);
+                if (buttonDefinition.buttonName) {
+                    dojoClass.add(button, "mx-name-" + buttonDefinition.buttonName);
+                }
+                if (buttonDefinition.buttonClass) {
+                    dojoClass.add(button, buttonDefinition.buttonClass);
+                }
+                dojoOn(button, "click", function () {
+                    var guids = [],
+                        rowDataArray = table.rows({selected: true}).data().toArray();
+                    dojoArray.forEach(rowDataArray, function (rowData) {
+                        guids.push(rowData.guid);
+                    });
+                    mx.data.action({
+                        params : {
+                            applyto : "selection",
+                            actionname : microflowName,
+                            guids : guids
+                        }
+                    });
+                });
+                this._buttonList.push(button);
+            }, this);
+            thisObj._setButtonEnabledStatus();
+            // Show our own button container if it has child nodes.
+            if (this.buttonContainer.hasChildNodes()) {
+                dojoStyle.set(this.controlbar, "display", "block");
+            }
         },
         
         // Get data 
@@ -398,17 +438,16 @@ define([
             logger.debug(this.id + "._convertMendixObjectArrayToDataArray");
             var attrName,
                 dataArray = [],
-                dataObj,
-                thisObj = this;
+                dataObj;
             
             dojoArray.forEach(objs, function (obj) {
                 dataObj = { guid: obj.getGuid()};
-                dojoArray.forEach(thisObj.columnList, function (column) {
+                dojoArray.forEach(this.columnList, function (column) {
                     attrName = column.attrName;
-                    dataObj[attrName] = thisObj._getDisplayValue(obj, column);
-                });
+                    dataObj[attrName] = this._getDisplayValue(obj, column);
+                }, this);
                 dataArray.push(dataObj);
-            });
+            }, this);
             return dataArray;
         },
 
@@ -475,6 +514,19 @@ define([
             if (this._table) {
                 this._table.clear();
             }
+        },
+        
+        // Enable/Disable buttons when selection changes
+        _setButtonEnabledStatus: function () {
+            logger.debug(this.id + "._setButtonEnabledStatus");
+            var hasSelection = (this._table.rows({selected: true}).data().toArray().length > 0);
+            dojoArray.forEach(this._buttonList, function (button) {
+                if (hasSelection) {
+                    button.removeAttribute("disabled");
+                } else {
+                    button.setAttribute("disabled", "");
+                }
+            }, this);
         },
 
         // Reset subscriptions.
