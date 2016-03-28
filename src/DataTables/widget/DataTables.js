@@ -57,6 +57,7 @@ define([
 
         // Parameters configured in the Modeler.
         tableEntity: null,
+        refreshAttr: null,
         isResponsive: false,
         autoColumnWidth: true,
         allowColumnReorder: true,
@@ -74,6 +75,7 @@ define([
         
         // Internal variables. Non-primitives created in the prototype are shared between all widget instances.
         _handles: null,
+        _rowObjectHandles: null,
         _contextObj: null,
         _entityMetaData: null,
         _tableNodelist: null,
@@ -476,6 +478,8 @@ define([
                 sortColumn = data.columns[sortColumnIndex],
                 thisObj = this;
             
+            this._resetRowObjectSubscriptions();
+            
             mx.data.get({
                 xpath: "//" + this.tableEntity,
                 count: true,
@@ -496,6 +500,15 @@ define([
             });
         },
         
+        _resetRowObjectSubscriptions: function () {
+            if (this._rowObjectHandles) {
+                dojoArray.forEach(this._rowObjectHandles, function (handle) {
+                    mx.data.unsubscribe(handle);
+                });
+                this._rowObjectHandles = [];
+            }
+        },
+        
         _convertMendixObjectArrayToDataArray: function (objs) {
             logger.debug(this.id + "._convertMendixObjectArrayToDataArray");
             var attrName,
@@ -509,6 +522,13 @@ define([
                     dataObj[attrName] = this._getDisplayValue(obj, column);
                 }, this);
                 dataArray.push(dataObj);
+                var objectHandle = this.subscribe({
+                    guid: dataObj.guid,
+                    callback: dojoLang.hitch(this, function (guid) {
+                        this._reloadTableData();
+                    })
+                });
+                
             }, this);
             return dataArray;
         },
@@ -553,13 +573,29 @@ define([
             return result;
         },
         
+        _reloadTableData: function () {
+            if (this._table) {
+                this._table.ajax.reload(null, false);
+            }
+        },
+        
         // Rerender the interface.
         _updateRendering: function () {
             logger.debug(this.id + "._updateRendering");
-//            this.colorSelectNode.disabled = this.readOnly;
 
             if (this._contextObj !== null) {
-                if (!this._table) {
+                if (this._table) {
+                    if (this.refreshAttr && this._contextObj.get(this.refreshAttr)) {
+                        this._contextObj.set(this.refreshAttr, false);
+                        mx.data.save({
+                            mxobj: this._contextObj,
+							callback: function () {
+								logger.debug("Object saved");
+							}
+                        });
+                        this._reloadTableData();
+                    }
+                } else {
                     this._createTableObject();
                 }
                 dojoStyle.set(this.domNode, "display", "block");
@@ -576,6 +612,7 @@ define([
             if (this._table) {
                 this._table.clear();
             }
+            this._resetRowObjectSubscriptions();
         },
         
         // Enable/Disable buttons when selection changes
@@ -594,6 +631,9 @@ define([
         // Reset subscriptions.
         _resetSubscriptions: function () {
             logger.debug(this.id + "._resetSubscriptions");
+            
+            var objectHandle;
+            
             // Release handles on previous object, if any.
             if (this._handles) {
                 dojoArray.forEach(this._handles, function (handle) {
@@ -604,22 +644,13 @@ define([
 
             // When a mendix object exists create subscribtions.
             if (this._contextObj) {
-                var objectHandle = this.subscribe({
+                objectHandle = this.subscribe({
                     guid: this._contextObj.getGuid(),
                     callback: dojoLang.hitch(this, function (guid) {
                         this._updateRendering();
                     })
                 });
-
-//                var attrHandle = this.subscribe({
-//                    guid: this._contextObj.getGuid(),
-//                    attr: this.backgroundColor,
-//                    callback: dojoLang.hitch(this, function (guid, attr, attrValue) {
-//                        this._updateRendering();
-//                    })
-//                });
-
-                this._handles = [ objectHandle /*, attrHandle */];
+                this._handles = [ objectHandle ];
             }
         },
         _i18nFilenames: {

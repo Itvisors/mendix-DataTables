@@ -14,6 +14,14 @@
             <category>Datasource</category>
             <description>The entity to display in the table</description>
         </property>
+        <property key="refreshAttr" type="attribute" required="false">
+            <caption>Refresh attribute</caption>
+            <category>Datasource</category>
+            <description>The attribute used force a refresh. Set it to true and change with refresh in client to trigger a refresh.</description>
+            <attributeTypes>
+                <attributeType name="Boolean"/>
+            </attributeTypes>
+        </property>
         <property key="columnList" type="object" isList="true" required="false">
             <caption>Columns</caption>
             <category>Datasource</category>
@@ -182,6 +190,8 @@
             <category>Selection</category>
             <description>The name of the microflow (Module.Microflow) that is called when the selection has been changed.</description>
         </property>
+
+        <!--    Buttons    -->
         
         <property key="buttonDefinitionList" type="object" isList="true" required="false">
             <caption>Buttons</caption>
