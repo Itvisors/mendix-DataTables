@@ -29,6 +29,7 @@ define([
     "dojo/dom-style",
     "dojo/dom-construct",
     "dojo/on",
+    "dojo/query",
     "dojo/_base/array",
     "dojo/_base/lang",
     "dojo/_base/event",
@@ -40,7 +41,7 @@ define([
     // DataTables modules. When updating to a new version, do not forget to update the module names in the DataTables module sources because the default does not work in a custom widget.
     "DataTables/lib/jquery.datatables"/*,
     "DataTables/lib/dataTables.bootstrap" */
-], function (declare, _WidgetBase, _TemplatedMixin, dom, dojoClass, dojoStyle, dojoConstruct, dojoOn, dojoArray, dojoLang, dojoEvent, dojoKernel, _jQuery, widgetTemplate) {
+], function (declare, _WidgetBase, _TemplatedMixin, dom, dojoClass, dojoStyle, dojoConstruct, dojoOn, dojoQuery, dojoArray, dojoLang, dojoEvent, dojoKernel, _jQuery, widgetTemplate) {
     "use strict";
 
     var $ = _jQuery.noConflict(true);
@@ -382,22 +383,34 @@ define([
             this._buttonList = [];
             dojoArray.forEach(this.buttonDefinitionList, function (buttonDefinition, i) {
                 var buttonHtml,
-                    microflowName = buttonDefinition.buttonMicroflowName,
-                    askConfirmation = buttonDefinition.askConfirmation,
-                    confirmationQuestion = buttonDefinition.confirmationQuestion,
-                    proceedCaption = buttonDefinition.proceedCaption,
-                    cancelCaption = buttonDefinition.cancelCaption;
+                    refNode,
+                    refNodeList,
+                    refNodePos;
 
+                // Default button?
                 if (buttonDefinition.isDefaultButton && !this._defaultButtonDefinition) {
                     this._defaultButtonDefinition = buttonDefinition;
                 }
+                
+                // Create the basic HTML for the button
                 buttonHtml  = "<button type='button' class='btn mx-button btn-" + buttonDefinition.buttonType + "'>";
                 if (buttonDefinition.buttonGlyphiconClass) {
-                    buttonHtml += "<span class='" + buttonDefinition.buttonGlyphiconClass + "'>&nbsp;</span>";
+                    buttonHtml += "<span class='" + buttonDefinition.buttonGlyphiconClass + "'></span> "; // The space is intentional! Separation between icon and caption
                 }
                 buttonHtml += buttonDefinition.caption;
                 buttonHtml += "</button>";
-                button = dojoConstruct.place(buttonHtml, this.buttonContainer);
+                
+                // Put it in our own container or a specified one?
+                refNode = this.buttonContainer;
+                refNodePos = "last";
+                if (buttonDefinition.placeRefCssSelector) {
+                    refNodeList = dojoQuery(buttonDefinition.placeRefCssSelector);
+                    if (refNodeList && refNodeList.length) {
+                        refNode = refNodeList[0];
+                        refNodePos = buttonDefinition.placeRefPos;
+                    }
+                }
+                button = dojoConstruct.place(buttonHtml, refNode, refNodePos);
                 if (buttonDefinition.buttonName) {
                     dojoClass.add(button, "mx-name-" + buttonDefinition.buttonName);
                 }

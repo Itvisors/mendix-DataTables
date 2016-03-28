@@ -259,6 +259,22 @@
                         <translation lang="nl_NL">Annuleren</translation>
                     </translations>
                 </property>
+                <property key="placeRefCssSelector" type="string" required="false">
+                    <caption>Placement selector</caption>
+                    <category>Placement</category>
+                    <description>Optional. Places the button relative to the node found using this CSS selector. If empty, button is placed in default container above the table. Can be used to bring new and edit button together in one container.</description>
+                </property>
+                <property key="placeRefPos" type="enumeration" defaultValue="last">
+                    <caption>Placement position</caption>
+                    <category>Placement</category>
+                    <description>Position of the button in the placement container. Only relevant when placement selector has been specified. </description>
+                    <enumerationValues>
+                        <enumerationValue key="before">Before the other node</enumerationValue>
+                        <enumerationValue key="after">After the other node</enumerationValue>
+                        <enumerationValue key="first">First child of the other node</enumerationValue>
+                        <enumerationValue key="last">Last child of the other node</enumerationValue>
+                    </enumerationValues>
+                </property>
             </properties>
         </property>
     </properties>
