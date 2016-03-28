@@ -76,6 +76,7 @@ define([
         _tableNodelist: null,
         _table: null,
         _buttonList: null,
+        _defaultButtonDefinition: null,
         
         // I18N file names object at the end, out of sight!
 
@@ -246,6 +247,12 @@ define([
                 ajax: dojoLang.hitch(this, this._getData),
                 columns: dataTablesColumns
             };
+            
+            dataTablesOptions.drawCallback = function () {
+                this.api().rows().every(function (rowIdx, tableLoop, rowLoop) {
+                    this.node().setAttribute("data-guid", this.data().guid);
+                });
+            };
 
             // I18N
             locale = dojoKernel.locale;
@@ -353,13 +360,13 @@ define([
             if (this.selectionType !== "none") {
                 this._table
                     .on("select", function (e, dt, type, indexes) {
-                        var rowData = table.rows({selected: true}).data().toArray();
-                        console.dir(rowData);
+//                        var rowData = table.rows({selected: true}).data().toArray();
+//                        console.dir(rowData);
                         thisObj._setButtonEnabledStatus();
                     })
                     .on("deselect", function (e, dt, type, indexes) {
-                        var rowData = table.rows({selected: true}).data().toArray();
-                        console.dir(rowData);
+//                        var rowData = table.rows({selected: true}).data().toArray();
+//                        console.dir(rowData);
                         thisObj._setButtonEnabledStatus();
                     });
             }
@@ -381,6 +388,9 @@ define([
                     proceedCaption = buttonDefinition.proceedCaption,
                     cancelCaption = buttonDefinition.cancelCaption;
 
+                if (buttonDefinition.isDefaultButton && !this._defaultButtonDefinition) {
+                    this._defaultButtonDefinition = buttonDefinition;
+                }
                 buttonHtml  = "<button type='button' class='btn mx-button btn-" + buttonDefinition.buttonType + "'>";
                 if (buttonDefinition.buttonGlyphiconClass) {
                     buttonHtml += "<span class='" + buttonDefinition.buttonGlyphiconClass + "'>&nbsp;</span>";
@@ -400,30 +410,7 @@ define([
                     dojoArray.forEach(rowDataArray, function (rowData) {
                         guids.push(rowData.guid);
                     });
-                    if (askConfirmation) {
-                        mx.ui.confirmation({
-                            content: confirmationQuestion,
-                            proceed: proceedCaption,
-                            cancel: cancelCaption,
-                            handler: function () {
-                                mx.data.action({
-                                    params : {
-                                        applyto : "selection",
-                                        actionname : microflowName,
-                                        guids : guids
-                                    }
-                                });
-                            }
-                        });
-                    } else {
-                        mx.data.action({
-                            params : {
-                                applyto : "selection",
-                                actionname : microflowName,
-                                guids : guids
-                            }
-                        });
-                    }
+                    thisObj._callMicroflow(buttonDefinition, guids);
                 });
                 this._buttonList.push(button);
             }, this);
@@ -431,6 +418,42 @@ define([
             // Show our own button container if it has child nodes.
             if (this.buttonContainer.hasChildNodes()) {
                 dojoStyle.set(this.controlbar, "display", "block");
+            }
+            
+            // Add click handler for default button
+            if (this._defaultButtonDefinition) {
+                $(this._tableNodelist).on("dblclick", "tr", function () {
+                    thisObj._callMicroflow(thisObj._defaultButtonDefinition, [this.getAttribute("data-guid")]);
+                });
+            }
+
+        },
+        
+        // call microflow
+        _callMicroflow: function (buttonDefinition, guids) {
+            if (buttonDefinition.askConfirmation) {
+                mx.ui.confirmation({
+                    content: buttonDefinition.confirmationQuestion,
+                    proceed: buttonDefinition.proceedCaption,
+                    cancel: buttonDefinition.cancelCaption,
+                    handler: function () {
+                        mx.data.action({
+                            params : {
+                                applyto : "selection",
+                                actionname : buttonDefinition.buttonMicroflowName,
+                                guids : guids
+                            }
+                        });
+                    }
+                });
+            } else {
+                mx.data.action({
+                    params : {
+                        applyto : "selection",
+                        actionname : buttonDefinition.buttonMicroflowName,
+                        guids : guids
+                    }
+                });
             }
         },
         
