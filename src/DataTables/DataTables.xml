@@ -21,7 +21,7 @@
             <properties>
                 <!--property key="attr" type="attribute" entityProperty="tableEntity" This does not work! Error: entity cannot be resolved>
                     <caption>Attribute</caption>
-                    <category>Datasource</category>
+                    <category>Column</category>
                     <description>The attribute to display</description>
                     <attributeTypes>
                         <attributeType name="AutoNumber"/>
@@ -37,17 +37,17 @@
                 </property-->
                 <property key="attrName" type="string">
                     <caption>Attribute name</caption>
-                    <category>Datasource</category>
+                    <category>Common</category>
                     <description>Attribute name, this is case sensitive.</description>
                 </property>
                 <property key="caption" type="translatableString">
                     <caption>Caption</caption>
-                    <category>Datasource</category>
+                    <category>Common</category>
                     <description>Column caption, translatable</description>
                 </property>
                 <property key="dateTimeType" type="enumeration" defaultValue="na">
                     <caption>Date/time type</caption>
-                    <category>Datasource</category>
+                    <category>Date values</category>
                     <description>Display date as date, date/time or time.</description>
                     <enumerationValues>
                         <enumerationValue key="na">Not applicable</enumerationValue>
@@ -58,7 +58,7 @@
                 </property>
                 <property key="dateFormat" type="translatableString">
                     <caption>Default date format</caption>
-                    <category>Datasource</category>
+                    <category>Date values</category>
                     <description>Default date format, translatable</description>
                     <translations>
                         <translation lang="en_US">MM/dd/yyyy</translation>
@@ -67,7 +67,7 @@
                 </property>
                 <property key="dateTimeFormat" type="translatableString">
                     <caption>Default date/time format</caption>
-                    <category>Datasource</category>
+                    <category>Date values</category>
                     <description>Default date format, translatable</description>
                     <translations>
                         <translation lang="en_US">MM/dd/yyyy KK:mm a</translation>
@@ -76,7 +76,7 @@
                 </property>
                 <property key="timeFormat" type="translatableString">
                     <caption>Default time format</caption>
-                    <category>Datasource</category>
+                    <category>Date values</category>
                     <description>Default time format, translatable</description>
                     <translations>
                         <translation lang="en_US">KK:mm a</translation>
@@ -85,27 +85,27 @@
                 </property>
                 <property key="initiallyVisible" type="boolean" defaultValue="true">
                     <caption>Visible</caption>
-                    <category>Datasource</category>
+                    <category>Layout</category>
                     <description>By default all columns are visible. Turn this off to hide the column by default. Combine with column visibility</description>
                 </property>
                 <property key="responsivePriority" type="integer" defaultValue="0">
                     <caption>Responsive priority</caption>
-                    <category>Datasource</category>
+                    <category>Layout</category>
                     <description>Responsive priority, 0 is the highest, columns with higher numbers will be hidden first when the grid does not fit in the current display size.</description>
                 </property>
                 <property key="columnWidth" type="string" required="false">
                     <caption>Column width</caption>
-                    <category>Datasource</category>
+                    <category>Layout</category>
                     <description>Optional. Specify width, value is used exactly as you enter it: 20%, 150px, 5em, etc</description>
                 </property>                
                 <property key="headerClass" type="string" required="false">
                     <caption>Header class</caption>
-                    <category>Datasource</category>
+                    <category>Layout</category>
                     <description>Optional. Specify class(es) to be put on the header</description>
                 </property>                
                 <property key="cellClass" type="string" required="false">
                     <caption>Cell class</caption>
-                    <category>Datasource</category>
+                    <category>Layout</category>
                     <description>Optional. Specify class(es) to be put on each cell in the column</description>
                 </property>                
             </properties>
@@ -179,17 +179,17 @@
             <properties>
                 <property key="caption" type="translatableString">
                     <caption>Caption</caption>
-                    <category>Selection</category>
+                    <category>Button</category>
                     <description>Button caption, translatable</description>
                 </property>
                 <property key="buttonName" type="string" required="false">
                     <caption>Name</caption>
-                    <category>Selection</category>
+                    <category>Button</category>
                     <description>Button name, will be mx-name- class on the button</description>
                 </property>
                 <property key="buttonType" type="enumeration" defaultValue="default">
                     <caption>Button type</caption>
-                    <category>Selection</category>
+                    <category>Button</category>
                     <description>Button type</description>
                     <enumerationValues>
                         <enumerationValue key="default">Default</enumerationValue>
@@ -203,22 +203,52 @@
                 </property>
                 <property key="buttonClass" type="string" required="false">
                     <caption>Class</caption>
-                    <category>Selection</category>
+                    <category>Button</category>
                     <description>Optional. Specify class(es) to be put on the button</description>
                 </property>
                 <property key="buttonMicroflowName" type="string">
                     <caption>Button microflow</caption>
-                    <category>Selection</category>
+                    <category>Button</category>
                     <description>The name of the microflow (Module.Microflow) that is called when the microflow is clicked.</description>
                 </property>
-<!--
-                <property key="buttonMicroflow" entityProperty="tableEntity" This does not work! Error: entity cannot be resolved type="microflow">
+                <!--property key="buttonMicroflow" entityProperty="tableEntity" This does not work! Error: entity cannot be resolved type="microflow">
                     <caption>Button microflow</caption>
-                    <category>Selection</category>
+                    <category>Button</category>
                     <description>The microflow that is called when the microflow is clicked.</description>
                     <returnType type="Void"></returnType>
+                </property-->
+                <property key="askConfirmation" type="boolean" defaultValue="false">
+                    <caption>Ask confirmation</caption>
+                    <category>Confirmation</category>
+                    <description>Ask for confirmation</description>
                 </property>
--->
+                <property key="confirmationQuestion" type="translatableString">
+                    <caption>Question</caption>
+                    <category>Confirmation</category>
+                    <description>Confirmation question</description>
+                    <translations>
+                        <translation lang="en_US">Are you sure?</translation>
+                        <translation lang="nl_NL">Weet u het zeker?</translation>
+                    </translations>
+                </property>
+                <property key="proceedCaption" type="translatableString">
+                    <caption>Proceed caption</caption>
+                    <category>Confirmation</category>
+                    <description>Proceed button caption</description>
+                    <translations>
+                        <translation lang="en_US">Proceed</translation>
+                        <translation lang="nl_NL">Doorgaan</translation>
+                    </translations>
+                </property>
+                <property key="cancelCaption" type="translatableString">
+                    <caption>Cancel caption</caption>
+                    <category>Confirmation</category>
+                    <description>Cancel button caption</description>
+                    <translations>
+                        <translation lang="en_US">Cancel</translation>
+                        <translation lang="nl_NL">Annuleren</translation>
+                    </translations>
+                </property>
             </properties>
         </property>
     </properties>

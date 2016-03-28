@@ -374,8 +374,12 @@ define([
             // Buttons
             this._buttonList = [];
             dojoArray.forEach(this.buttonDefinitionList, function (buttonDefinition, i) {
-                var microflowName = buttonDefinition.buttonMicroflowName;
-                // Met normale create element functies button maken en eventueel glyphicon er in zetten. Classes overnemen van Mendix buttons.
+                var microflowName = buttonDefinition.buttonMicroflowName,
+                    askConfirmation = buttonDefinition.askConfirmation,
+                    confirmationQuestion = buttonDefinition.confirmationQuestion,
+                    proceedCaption = buttonDefinition.proceedCaption,
+                    cancelCaption = buttonDefinition.cancelCaption;
+
                 button = dojoConstruct.place("<button type='button' class='btn mx-button btn-" + buttonDefinition.buttonType + "'>" + buttonDefinition.caption + "</button>", this.buttonContainer);
                 if (buttonDefinition.buttonName) {
                     dojoClass.add(button, "mx-name-" + buttonDefinition.buttonName);
@@ -389,13 +393,30 @@ define([
                     dojoArray.forEach(rowDataArray, function (rowData) {
                         guids.push(rowData.guid);
                     });
-                    mx.data.action({
-                        params : {
-                            applyto : "selection",
-                            actionname : microflowName,
-                            guids : guids
-                        }
-                    });
+                    if (askConfirmation) {
+                        mx.ui.confirmation({
+                            content: confirmationQuestion,
+                            proceed: proceedCaption,
+                            cancel: cancelCaption,
+                            handler: function () {
+                                mx.data.action({
+                                    params : {
+                                        applyto : "selection",
+                                        actionname : microflowName,
+                                        guids : guids
+                                    }
+                                });
+                            }
+                        });
+                    } else {
+                        mx.data.action({
+                            params : {
+                                applyto : "selection",
+                                actionname : microflowName,
+                                guids : guids
+                            }
+                        });
+                    }
                 });
                 this._buttonList.push(button);
             }, this);
