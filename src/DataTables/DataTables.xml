@@ -206,6 +206,11 @@
                     <category>Button</category>
                     <description>Optional. Specify class(es) to be put on the button</description>
                 </property>
+                <property key="buttonGlyphiconClass" type="string" required="false">
+                    <caption>Glyphicon classes</caption>
+                    <category>Button</category>
+                    <description>Optional. Glyphicon classes, like glyphicon glyphicon-edit</description>
+                </property>
                 <property key="buttonMicroflowName" type="string">
                     <caption>Button microflow</caption>
                     <category>Button</category>

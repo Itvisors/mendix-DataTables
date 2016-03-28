@@ -374,13 +374,20 @@ define([
             // Buttons
             this._buttonList = [];
             dojoArray.forEach(this.buttonDefinitionList, function (buttonDefinition, i) {
-                var microflowName = buttonDefinition.buttonMicroflowName,
+                var buttonHtml,
+                    microflowName = buttonDefinition.buttonMicroflowName,
                     askConfirmation = buttonDefinition.askConfirmation,
                     confirmationQuestion = buttonDefinition.confirmationQuestion,
                     proceedCaption = buttonDefinition.proceedCaption,
                     cancelCaption = buttonDefinition.cancelCaption;
 
-                button = dojoConstruct.place("<button type='button' class='btn mx-button btn-" + buttonDefinition.buttonType + "'>" + buttonDefinition.caption + "</button>", this.buttonContainer);
+                buttonHtml  = "<button type='button' class='btn mx-button btn-" + buttonDefinition.buttonType + "'>";
+                if (buttonDefinition.buttonGlyphiconClass) {
+                    buttonHtml += "<span class='" + buttonDefinition.buttonGlyphiconClass + "'>&nbsp;</span>";
+                }
+                buttonHtml += buttonDefinition.caption;
+                buttonHtml += "</button>";
+                button = dojoConstruct.place(buttonHtml, this.buttonContainer);
                 if (buttonDefinition.buttonName) {
                     dojoClass.add(button, "mx-name-" + buttonDefinition.buttonName);
                 }
