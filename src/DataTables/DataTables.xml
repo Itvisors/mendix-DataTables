@@ -172,6 +172,11 @@
                 <enumerationValue key="none">No selection</enumerationValue>
             </enumerationValues>
         </property>
+        <property key="selectFirst" type="boolean" defaultValue="false">
+            <caption>Select first row</caption>
+            <category>Selection</category>
+            <description>select first row after displaying data</description>
+        </property>
         <property key="selectionMicroflowName" type="string" required="false">
             <caption>Selection changed callback microflow</caption>
             <category>Selection</category>

@@ -67,6 +67,7 @@ define([
         infiniteScroll: false,
         scrollY: null,
         selectionType: null,
+        selectFirst: false,
         selectionMicroflowName: "",
         columnList: null,
         buttonDefinitionList: null,
@@ -224,6 +225,9 @@ define([
             dataTablesOptions.drawCallback = function () {
                 this.api().rows().every(function (rowIdx, tableLoop, rowLoop) {
                     this.node().setAttribute("data-guid", this.data().guid);
+                    if (thisObj.selectFirst && rowLoop === 0) {
+                        this.select();
+                    }
                 });
             };
 
