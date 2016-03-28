@@ -172,6 +172,12 @@
                 <enumerationValue key="none">No selection</enumerationValue>
             </enumerationValues>
         </property>
+        <property key="selectionMicroflowName" type="string" required="false">
+            <caption>Selection changed callback microflow</caption>
+            <category>Selection</category>
+            <description>The name of the microflow (Module.Microflow) that is called when the selection has been changed.</description>
+        </property>
+        
         <property key="buttonDefinitionList" type="object" isList="true" required="false">
             <caption>Buttons</caption>
             <category>Selection</category>
@@ -219,12 +225,12 @@
                 <property key="buttonMicroflowName" type="string">
                     <caption>Button microflow</caption>
                     <category>Button</category>
-                    <description>The name of the microflow (Module.Microflow) that is called when the microflow is clicked.</description>
+                    <description>The name of the microflow (Module.Microflow) that is called when the button is clicked.</description>
                 </property>
                 <!--property key="buttonMicroflow" entityProperty="tableEntity" This does not work! Error: entity cannot be resolved type="microflow">
                     <caption>Button microflow</caption>
                     <category>Button</category>
-                    <description>The microflow that is called when the microflow is clicked.</description>
+                    <description>The microflow that is called when the button is clicked.</description>
                     <returnType type="Void"></returnType>
                 </property-->
                 <property key="askConfirmation" type="boolean" defaultValue="false">

@@ -67,6 +67,7 @@ define([
         infiniteScroll: false,
         scrollY: null,
         selectionType: null,
+        selectionMicroflowName: "",
         columnList: null,
         buttonDefinitionList: null,
         
@@ -176,35 +177,6 @@ define([
         // Attach events to HTML dom elements
         _setupEvents: function () {
             logger.debug(this.id + "._setupEvents");
-//            this.connect(this.colorSelectNode, "change", function (e) {
-//                // Function from mendix object to set an attribute.
-//                this._contextObj.set(this.backgroundColor, this.colorSelectNode.value);
-//            });
-
-//            this.connect(this.infoTextNode, "click", function (e) {
-//                // Only on mobile stop event bubbling!
-//                this._stopBubblingEventOnMobile(e);
-//
-//                // If a microflow has been set execute the microflow on a click.
-//                if (this.mfToExecute !== "") {
-//                    mx.data.action({
-//                        params: {
-//                            applyto: "selection",
-//                            actionname: this.mfToExecute,
-//                            guids: [ this._contextObj.getGuid() ]
-//                        },
-//                        store: {
-//                            caller: this.mxform
-//                        },
-//                        callback: function (obj) {
-//                            //TODO what to do when all is ok!
-//                        },
-//                        error: dojoLang.hitch(this, function (error) {
-//                            logger.error(this.id + ": An error occurred while executing microflow: " + error.description);
-//                        })
-//                    }, this);
-//                }
-//            });
         },
         
         // Create the DataTables object
@@ -358,19 +330,23 @@ define([
             this._table = table;
 
             // Selection event
-            if (this.selectionType !== "none") {
-                this._table
-                    .on("select", function (e, dt, type, indexes) {
-//                        var rowData = table.rows({selected: true}).data().toArray();
-//                        console.dir(rowData);
+            this._table
+                .on("select", function (e, dt, type, indexes) {
+                    if (thisObj.selectionType !== "none") {
                         thisObj._setButtonEnabledStatus();
-                    })
-                    .on("deselect", function (e, dt, type, indexes) {
-//                        var rowData = table.rows({selected: true}).data().toArray();
-//                        console.dir(rowData);
+                    }
+                    if (thisObj.selectionMicroflowName) {
+                        thisObj._callSelectionMicroflow();
+                    }
+                })
+                .on("deselect", function (e, dt, type, indexes) {
+                    if (thisObj.selectionType !== "none") {
                         thisObj._setButtonEnabledStatus();
-                    });
-            }
+                    }
+                    if (thisObj.selectionMicroflowName) {
+                        thisObj._callSelectionMicroflow();
+                    }
+                });
             
             // Set additional column header classes on the generated table.
             dojoArray.forEach(this.columnList, function (column, i) {
@@ -418,12 +394,8 @@ define([
                     dojoClass.add(button, buttonDefinition.buttonClass);
                 }
                 dojoOn(button, "click", function () {
-                    var guids = [],
-                        rowDataArray = table.rows({selected: true}).data().toArray();
-                    dojoArray.forEach(rowDataArray, function (rowData) {
-                        guids.push(rowData.guid);
-                    });
-                    thisObj._callMicroflow(buttonDefinition, guids);
+                    var guids = thisObj._getSelectedRows();
+                    thisObj._callButtonMicroflow(buttonDefinition, guids);
                 });
                 this._buttonList.push(button);
             }, this);
@@ -436,14 +408,14 @@ define([
             // Add click handler for default button
             if (this._defaultButtonDefinition) {
                 $(this._tableNodelist).on("dblclick", "tr", function () {
-                    thisObj._callMicroflow(thisObj._defaultButtonDefinition, [this.getAttribute("data-guid")]);
+                    thisObj._callButtonMicroflow(thisObj._defaultButtonDefinition, [this.getAttribute("data-guid")]);
                 });
             }
 
         },
         
-        // call microflow
-        _callMicroflow: function (buttonDefinition, guids) {
+        // call button microflow
+        _callButtonMicroflow: function (buttonDefinition, guids) {
             if (buttonDefinition.askConfirmation) {
                 mx.ui.confirmation({
                     content: buttonDefinition.confirmationQuestion,
@@ -468,6 +440,28 @@ define([
                     }
                 });
             }
+        },
+        
+        // Call selection microflow
+        _callSelectionMicroflow: function () {
+            var guids = this._getSelectedRows();
+            mx.data.action({
+                params : {
+                    applyto : "selection",
+                    actionname : this.selectionMicroflowName,
+                    guids : guids
+                }
+            });
+        },
+        
+        // Get selected rows
+        _getSelectedRows: function () {
+            var guids = [],
+                rowDataArray = this._table.rows({selected: true}).data().toArray();
+            dojoArray.forEach(rowDataArray, function (rowData) {
+                guids.push(rowData.guid);
+            });
+            return guids;
         },
         
         // Get data 
