@@ -24,7 +24,7 @@
 	if ( typeof define === 'function' && define.amd ) {
 		// AMD
         /* Marcel Groeneweg ITvisors: adjust module names to use the modules supplied with the Mendix widget */        
-		define( ['DataTables/lib/jquery', 'DataTables/lib/jquery.datatables'], function ( $ ) {
+		define( ['DataTables/lib/jquery', 'DataTables/lib/jquery.dataTables'], function ( $ ) {
 			return factory( $, window, document );
 		} );
 	}

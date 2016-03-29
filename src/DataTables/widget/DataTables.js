@@ -39,7 +39,7 @@ define([
     "dojo/text!DataTables/widget/template/DataTables.html",
     
     // DataTables modules. When updating to a new version, do not forget to update the module names in the DataTables module sources because the default does not work in a custom widget.
-    "DataTables/lib/jquery.datatables"/*,
+    "DataTables/lib/jquery.dataTables"/*,
     "DataTables/lib/dataTables.bootstrap" */
 ], function (declare, _WidgetBase, _TemplatedMixin, dom, dojoClass, dojoStyle, dojoConstruct, dojoOn, dojoQuery, dojoArray, dojoLang, dojoEvent, dojoKernel, _jQuery, widgetTemplate) {
     "use strict";
