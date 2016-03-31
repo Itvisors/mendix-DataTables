@@ -22,6 +22,14 @@
                 <attributeType name="Boolean"/>
             </attributeTypes>
         </property>
+        <property key="xpathConstraintAttr" type="attribute" required="false">
+            <caption>XPath</caption>
+            <category>Datasource</category>
+            <description>Optional. Specify an XPath constraint here, just like in a retrieve from database action.</description>
+            <attributeTypes>
+                <attributeType name="String"/>
+            </attributeTypes>
+        </property>
         <property key="columnList" type="object" isList="true" required="false">
             <caption>Columns</caption>
             <category>Datasource</category>
@@ -119,6 +127,66 @@
             </properties>
         </property>
         
+        <!--    Search filters    -->
+        
+        <property key="attrSearchFilterList" type="object" isList="true" required="false">
+            <caption>Attr search filters</caption>
+            <category>Datasource</category>
+            <description>The attribute filters for retrieving the data.</description>
+            <properties>
+                <property key="contextEntityAttr" type="attribute" required="false">
+                    <caption>Context entity attribute</caption>
+                    <category>Datasource</category>
+                    <description>The attribute on the context entity to get the filter value.</description>
+                    <attributeTypes>
+                        <attributeType name="Boolean"/>
+                        <attributeType name="DateTime"/>
+                        <attributeType name="Enum"/>
+                        <attributeType name="Decimal"/>
+                        <attributeType name="Integer"/>
+                        <attributeType name="Long"/>
+                        <attributeType name="String"/>
+                    </attributeTypes>
+                </property>
+                <property key="attrName" type="string">
+                    <caption>Attribute name</caption>
+                    <category>Datasource</category>
+                    <description>Attribute name to filter on, this is case sensitive.</description>
+                </property>
+                <property key="operatorType" type="enumeration" defaultValue="eq">
+                    <caption>Operator</caption>
+                    <category>Datasource</category>
+                    <description>Operator to use.</description>
+                    <enumerationValues>
+                        <enumerationValue key="eq">Equals</enumerationValue>
+                        <enumerationValue key="st">Starts with</enumerationValue>
+                        <enumerationValue key="ct">Contains</enumerationValue>
+                        <enumerationValue key="lt">Less than</enumerationValue>
+                        <enumerationValue key="le">Less than or equals</enumerationValue>
+                        <enumerationValue key="ge">Greater than or equals</enumerationValue>
+                        <enumerationValue key="gt">Greater than</enumerationValue>
+                    </enumerationValues>
+                </property>
+            </properties>
+        </property>
+        <property key="refSearchFilterList" type="object" isList="true" required="false">
+            <caption>Ref search filters</caption>
+            <category>Datasource</category>
+            <description>The reference filters for retrieving the data.</description>
+            <properties>
+                <property key="contextEntityRef" type="entity" isPath="yes" pathType="reference" allowNonPersistableEntities="true">
+                    <caption>Context entity reference</caption>
+                    <category>Datasource</category>
+                    <description>The association on the context entity to get the filter object.</description>
+                </property>
+                <property key="refName" type="string">
+                    <caption>Reference name</caption>
+                    <category>Datasource</category>
+                    <description>Reference name (module.refname) to filter on, this is case sensitive.</description>
+                </property>
+            </properties>
+        </property>
+        
         <!--    Layout    -->
         
         <property key="isResponsive" type="boolean" defaultValue="false">
@@ -140,6 +208,15 @@
             <caption>Allow column visibility</caption>
             <category>Layout</category>
             <description>When turned on, the user can choose which columns to display</description>
+        </property>
+        <property key="colVisButtonText" type="translatableString">
+            <caption>Columns button caption</caption>
+            <category>Layout</category>
+            <description>Caption of the columns button</description>
+            <translations>
+                <translation lang="en_US">Columns...</translation>
+                <translation lang="nl_NL">Kolommen...</translation>
+            </translations>
         </property>
         <property key="tableClass" type="string" required="false">
             <caption>Table class</caption>

@@ -58,10 +58,12 @@ define([
         // Parameters configured in the Modeler.
         tableEntity: null,
         refreshAttr: null,
+        xpathConstraintAttr: "",
         isResponsive: false,
         autoColumnWidth: true,
         allowColumnReorder: true,
         allowColumnVisibility: false,
+        colVisButtonText: "",
         tableClass: "",
         stateSaveName: null,
         showTableInformation: true,
@@ -71,6 +73,8 @@ define([
         selectFirst: false,
         selectionMicroflowName: "",
         columnList: null,
+        attrSearchFilterList: null,
+        refSearchFilterList: null,
         buttonDefinitionList: null,
         
         // Internal variables. Non-primitives created in the prototype are shared between all widget instances.
@@ -114,7 +118,7 @@ define([
             }
             // The buttons extension consists of multiple modules. First include the common module then the necessary specific ones.
             if (this.allowColumnVisibility) {
-                moduleList.push("DataTables/lib/datatables.buttons");
+                moduleList.push("DataTables/lib/dataTables.buttons");
             }
             if (this.allowColumnVisibility) {
                 moduleList.push("DataTables/lib/buttons.colVis");
@@ -198,6 +202,23 @@ define([
 
             this._tableNodelist = $("#" + this.domNode.id + " #tableToConvert");
 
+            // Add dummy column when column visibility is turned on, to prevent rendering issues.
+            // When the first column is hidden, column reorder shows the dragging line at the wrong position.
+            if (this.allowColumnVisibility && this.allowColumnReorder) {
+                dataTablesColumn = {
+                    title: " ",
+                    name: "colVisDummy",
+                    data: "colVisDummy",
+                    orderable: false,
+                    width: "1px"
+                };
+                if (this.isResponsive) {
+                    dataTablesColumn.responsivePriority = 0;
+                }
+                dataTablesColumns.push(dataTablesColumn);
+            }
+
+            // Process column definitions.
             dojoArray.forEach(this.columnList, function (column) {
                 dataTablesColumn = {
                     title: column.caption,
@@ -215,6 +236,7 @@ define([
                 }
                 dataTablesColumns.push(dataTablesColumn);
             }, this);
+            
             // searching is handled in the widget and XPath, not in DataTables because the search field triggers a search with every key press.
             dataTablesOptions = {
                 serverSide: true,
@@ -223,6 +245,11 @@ define([
                 ajax: dojoLang.hitch(this, this._getData),
                 columns: dataTablesColumns
             };
+            
+            // Force sort on the first real column rather than the dummy column when column visibility is turned on.
+            if (this.allowColumnVisibility && this.allowColumnReorder) {
+                dataTablesOptions.order = [[ 1, "asc" ]];
+            }
             
             dataTablesOptions.drawCallback = function () {
                 this.api().rows().every(function (rowIdx, tableLoop, rowLoop) {
@@ -253,15 +280,24 @@ define([
             
             // Column reorder
             if (this.allowColumnReorder) {
-                dataTablesOptions.colReorder = true;
+                dataTablesOptions.colReorder = { realtime: true };
+                if (this.allowColumnVisibility) {
+                    dataTablesOptions.colReorder.fixedColumnsLeft = 1;
+                }
             }
             
             // The buttons extension consists of multiple modules. First include the common option then configure it.
             if (this.allowColumnVisibility) {
                 dataTablesOptions.buttons = [];
             }
-            if (this.allowColumnVisibility) {
-                dataTablesOptions.buttons.push("colvis");
+            // Skip dummy column so first column is not touched by column visibility
+            // When the first column is hidden, column reorder shows the dragging line at the wrong position.
+            if (this.allowColumnVisibility && this.allowColumnReorder) {
+                dataTablesOptions.buttons.push({
+                    extend: "colvis",
+                    text: this.colVisButtonText,
+                    columns: ":gt(0)"
+                });
             }
 
             // Additional class(es) on the table itself
@@ -471,17 +507,24 @@ define([
         },
         
         // Get data 
-        _getData: function (data, datTablesCallback, settings) {
+        _getData: function (data, dataTablesCallback, settings) {
             logger.debug(this.id + "._getData");
             
             var sortColumnIndex = data.order[0].column,
                 sortColumn = data.columns[sortColumnIndex],
-                thisObj = this;
+                thisObj = this,
+                xpath;
             
             this._resetRowObjectSubscriptions();
             
+            xpath = "//" + this.tableEntity;
+            if (this.xpathConstraintAttr) {
+                xpath += this._contextObj.get(this.xpathConstraintAttr);
+            }
+            
+            logger.debug(this.id + "._getData XPath: " + xpath);
             mx.data.get({
-                xpath: "//" + this.tableEntity,
+                xpath: xpath,
                 count: true,
                 filter: {
                     sort: [[sortColumn.data, data.order[0].dir]],
@@ -489,13 +532,12 @@ define([
                     amount: data.length
                 },
                 callback: function (objs, extra) {
-                    datTablesCallback({
+                    dataTablesCallback({
                         draw: data.draw,
                         data: thisObj._convertMendixObjectArrayToDataArray(objs),
                         recordsTotal: extra.count,
                         recordsFiltered: extra.count
                     });
-                    
                 }
             });
         },
@@ -516,7 +558,7 @@ define([
                 dataObj;
             
             dojoArray.forEach(objs, function (obj) {
-                dataObj = { guid: obj.getGuid()};
+                dataObj = { guid: obj.getGuid(), colVisDummy: ""};
                 dojoArray.forEach(this.columnList, function (column) {
                     attrName = column.attrName;
                     dataObj[attrName] = this._getDisplayValue(obj, column);
