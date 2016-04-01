@@ -569,6 +569,20 @@ define([
                     }
                 }
             }, this);
+
+            dojoArray.forEach(this.refSearchFilterList, function (searchFilter, i) {
+                // Take off the referenced entity name when getting the reference guid.
+                constraintValue = this._contextObj.getReference(searchFilter.contextEntityRef.substr(0, searchFilter.contextEntityRef.indexOf("/")));
+                if (constraintValue) {
+                    if (hasConstraint) {
+                        xpath += " and ";
+                    } else {
+                        xpath += "[";
+                    }
+                    hasConstraint = true;
+                    xpath += searchFilter.refName + " = " + constraintValue;
+                }
+            }, this);
             
             if (hasConstraint) {
                 xpath += "]";
