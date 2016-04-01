@@ -81,6 +81,7 @@ define([
         _handles: null,
         _rowObjectHandles: null,
         _contextObj: null,
+        _contextObjMetaData: null,
         _entityMetaData: null,
         _tableNodelist: null,
         _table: null,
@@ -510,16 +511,67 @@ define([
         _getData: function (data, dataTablesCallback, settings) {
             logger.debug(this.id + "._getData");
             
-            var sortColumnIndex = data.order[0].column,
+            var hasConstraint = false,
+                constraintValue,
+                sortColumnIndex = data.order[0].column,
                 sortColumn = data.columns[sortColumnIndex],
                 thisObj = this,
-                xpath;
+                xpath,
+                xpathAttrValue;
             
             this._resetRowObjectSubscriptions();
             
             xpath = "//" + this.tableEntity;
             if (this.xpathConstraintAttr) {
-                xpath += this._contextObj.get(this.xpathConstraintAttr);
+                xpathAttrValue = this._contextObj.get(this.xpathConstraintAttr);
+                if (xpathAttrValue && xpathAttrValue.trim().length > 0) {
+                    xpath += "[(" + xpathAttrValue.trim() + ")";
+                    hasConstraint = true;
+                }
+            }
+            
+            dojoArray.forEach(this.attrSearchFilterList, function (searchFilter, i) {
+                constraintValue = this._getConstraintValue(searchFilter.contextEntityAttr, searchFilter.attrName);
+                if (constraintValue) {
+                    if (hasConstraint) {
+                        xpath += " and ";
+                    } else {
+                        xpath += "[";
+                    }
+                    hasConstraint = true;
+                    switch (searchFilter.operatorType) {
+                    case "st":
+                        xpath += "starts-with(" + searchFilter.attrName + ", " + constraintValue + ")";
+                        break;
+
+                    case "ct":
+                        xpath += "contains(" + searchFilter.attrName + ", " + constraintValue + ")";
+                        break;
+
+                    case "lt":
+                        xpath += searchFilter.attrName + " < " + constraintValue;
+                        break;
+
+                    case "le":
+                        xpath += searchFilter.attrName + " <= " + constraintValue;
+                        break;
+
+                    case "ge":
+                        xpath += searchFilter.attrName + " >= " + constraintValue;
+                        break;
+
+                    case "gt":
+                        xpath += searchFilter.attrName + " > " + constraintValue;
+                        break;
+                            
+                    default:
+                        xpath += searchFilter.attrName + " = " + constraintValue;
+                    }
+                }
+            }, this);
+            
+            if (hasConstraint) {
+                xpath += "]";
             }
             
             logger.debug(this.id + "._getData XPath: " + xpath);
@@ -614,6 +666,68 @@ define([
 
             return result;
         },
+
+        /**
+         * Get the attribute value for use as constraint value
+         *
+         * @param attrName      The attribute name
+         * @returns {string}    The value
+         */
+        _getConstraintValue : function (contextEntityAttr, attrName) {
+
+            var attrType,
+                attrValue,
+                dateFormat,
+                result;
+
+            if (!this._contextObjMetaData.has(contextEntityAttr)) {
+                console.error(this._contextObj.getEntity() + " does not have attribute " + contextEntityAttr);
+                return null;
+            }
+            if (!this._entityMetaData.has(attrName)) {
+                console.error(this._contextObj.getEntity() + " does not have attribute " + attrName);
+                return null;
+            }
+            
+            attrValue = this._contextObj.get(contextEntityAttr);
+            
+            if (!attrValue || (attrType === "String" && attrValue.trim().length === 0)) {
+                return null;
+            }
+
+            // Use the type of the grid entity attribute. Important for boolean because the context entity attribute will be an enum.
+            attrType = this._entityMetaData.getAttributeType(attrName);
+            
+            switch (attrType) {
+            case "String":
+                // Return the string value between quotes and replace any single or double quotes in the value
+                result = "\'" + attrValue.trim().replace("\'", "&#39;").replace("\"", "&#34;") + "\'";
+                break;
+
+            case "Enum":
+                // Return the string value between quotes
+                result = "\'" + attrValue + "\'";
+                break;
+
+            case "Boolean":
+                // A boolean directly as filter is not a good solution as you can never tell the difference between false and no value.
+                // So, an enum is expected, starting with 't' indicate true, anything else is false.
+                if (attrValue.toLowerCase() === "t") {
+                    result = "true()";
+                } else {
+                    result = "false()";
+                }
+                break;
+            case "Decimal":
+                result = attrValue.toString();
+                break;
+                    
+            default:
+                result = attrValue;
+            }
+
+            return result;
+        },
         
         _reloadTableData: function () {
             if (this._table) {
@@ -626,6 +740,7 @@ define([
             logger.debug(this.id + "._updateRendering");
 
             if (this._contextObj !== null) {
+                this._contextObjMetaData = mx.meta.getEntity(this._contextObj.getEntity());
                 if (this._table) {
                     if (this.refreshAttr && this._contextObj.get(this.refreshAttr)) {
                         this._contextObj.set(this.refreshAttr, false);

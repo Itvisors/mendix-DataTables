@@ -25,7 +25,7 @@
         <property key="xpathConstraintAttr" type="attribute" required="false">
             <caption>XPath</caption>
             <category>Datasource</category>
-            <description>Optional. Specify an XPath constraint here, just like in a retrieve from database action.</description>
+            <description>Optional. Specify an XPath constraint here, without the surrounding [ and ]</description>
             <attributeTypes>
                 <attributeType name="String"/>
             </attributeTypes>
