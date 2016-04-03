@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <widget id="DataTables.widget.DataTables" needsEntityContext="true" xmlns="http://www.mendix.com/widget/1.0/">
     <name>DataTables</name>
-    <description>DataTables widget.</description>
+    <description>DataTables widget</description>
     <icon>iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAb1JREFUeNqck8tKw1AQhv/E1LTe0KWISlNqS1vFCyK4bXXnSnwE8QXcFt/EF3Enoqh47YViaUVUXBU3oq3NSZyZNullJR045D8n55/55iRH2zs62gEwjcHiA7vZ7IE7YLDXcJTSXEq1fQPQmj8cx5Hh8rN73n5/lZ4Ee3WllM4bOLYimjwzVkenSafDrr/uafaw11C2rSlJoOGk4sIy6tTZt1TOhKjihwON3rN2fE1mdwLsNWzb7iFw3n5wmJiS+fXTE9YXFkSfFwrYTCZFnz48EMEc2NtFACFIm8BdtSr9jgaDuCyVpOexUAhnuZxoDvb4BIo2dwiA1Py8zO8rFaxGoy0aSrSRSIi+yOfBHiGQBH0E+ZcXIQiZJm7LZak6wjTFYg9BK0Gz6bfgEcRnZ2Wef37GUiQi+o7OYy0eb9FQIklA3p5D9AhKr69CYA4P45Ha4KpBorlpn4f3GdmrUxZd9f0H0ZkZxIii8fuLZDiMlGWh3mhgmb7ISizWaYG8RqNeH+onKL+/CwFHgdrwqt5TG90E7DU+azUzEAjgOPbVvh/mv+4We9irjS8u7lM1a5CrqOt6VfOQBo0/AQYADu2BHPVXcUgAAAAASUVORK5CYII=   
     </icon>
 
@@ -17,13 +17,13 @@
         <property key="refreshAttr" type="attribute" required="false">
             <caption>Refresh attribute</caption>
             <category>Datasource</category>
-            <description>The attribute used force a refresh. Set it to true and change with refresh in client to trigger a refresh.</description>
+            <description>The attribute used force a refresh. Set it to true and change with refresh in client to trigger a refresh</description>
             <attributeTypes>
                 <attributeType name="Boolean"/>
             </attributeTypes>
         </property>
         <property key="xpathConstraintAttr" type="attribute" required="false">
-            <caption>XPath</caption>
+            <caption>XPath constraint</caption>
             <category>Datasource</category>
             <description>Optional. Specify an XPath constraint here, without the surrounding [ and ]</description>
             <attributeTypes>
@@ -54,7 +54,7 @@
                 <property key="attrName" type="string">
                     <caption>Attribute name</caption>
                     <category>Common</category>
-                    <description>Attribute name, this is case sensitive.</description>
+                    <description>Attribute name, this is case sensitive</description>
                 </property>
                 <property key="caption" type="translatableString">
                     <caption>Caption</caption>
@@ -64,7 +64,7 @@
                 <property key="dateTimeType" type="enumeration" defaultValue="na">
                     <caption>Date/time type</caption>
                     <category>Date values</category>
-                    <description>Display date as date, date/time or time.</description>
+                    <description>Display date as date, date/time or time</description>
                     <enumerationValues>
                         <enumerationValue key="na">Not applicable</enumerationValue>
                         <enumerationValue key="date">Date</enumerationValue>
@@ -107,7 +107,7 @@
                 <property key="responsivePriority" type="integer" defaultValue="0">
                     <caption>Responsive priority</caption>
                     <category>Layout</category>
-                    <description>Responsive priority, 0 is the highest, columns with higher numbers will be hidden first when the grid does not fit in the current display size.</description>
+                    <description>Responsive priority, 0 is the highest, columns with higher numbers will be hidden first when the grid does not fit in the current display size</description>
                 </property>
                 <property key="columnWidth" type="string" required="false">
                     <caption>Column width</caption>
@@ -132,12 +132,12 @@
         <property key="attrSearchFilterList" type="object" isList="true" required="false">
             <caption>Attr search filters</caption>
             <category>Datasource</category>
-            <description>The attribute filters for retrieving the data.</description>
+            <description>The attribute filters for retrieving the data</description>
             <properties>
                 <property key="contextEntityAttr" type="attribute" required="false">
                     <caption>Context entity attribute</caption>
                     <category>Datasource</category>
-                    <description>The attribute on the context entity to get the filter value.</description>
+                    <description>The attribute on the context entity to get the filter value</description>
                     <attributeTypes>
                         <attributeType name="Boolean"/>
                         <attributeType name="DateTime"/>
@@ -151,12 +151,12 @@
                 <property key="attrName" type="string">
                     <caption>Attribute name</caption>
                     <category>Datasource</category>
-                    <description>Attribute name to filter on, this is case sensitive.</description>
+                    <description>Attribute name to filter on, this is case sensitive</description>
                 </property>
                 <property key="operatorType" type="enumeration" defaultValue="eq">
                     <caption>Operator</caption>
                     <category>Datasource</category>
-                    <description>Operator to use.</description>
+                    <description>Operator to use</description>
                     <enumerationValues>
                         <enumerationValue key="eq">Equals</enumerationValue>
                         <enumerationValue key="st">Starts with</enumerationValue>
@@ -172,17 +172,17 @@
         <property key="refSearchFilterList" type="object" isList="true" required="false">
             <caption>Ref search filters</caption>
             <category>Datasource</category>
-            <description>The reference filters for retrieving the data.</description>
+            <description>The reference filters for retrieving the data</description>
             <properties>
                 <property key="contextEntityRef" type="entity" isPath="yes" pathType="reference" allowNonPersistableEntities="true">
                     <caption>Context entity reference</caption>
                     <category>Datasource</category>
-                    <description>The association on the context entity to get the filter object.</description>
+                    <description>The association on the context entity to get the filter object</description>
                 </property>
                 <property key="refName" type="string">
                     <caption>Reference name</caption>
                     <category>Datasource</category>
-                    <description>Reference name (module.refname) to filter on, this is case sensitive.</description>
+                    <description>Reference name (module.refname) to filter on, this is case sensitive</description>
                 </property>
             </properties>
         </property>
@@ -197,7 +197,7 @@
         <property key="autoColumnWidth" type="boolean" defaultValue="true">
             <caption>Auto column width</caption>
             <category>Layout</category>
-            <description>Control the auto column width feature. Turn off when specifying widths on the columns.</description>
+            <description>Control the auto column width feature. Turn off when specifying widths on the columns</description>
         </property>
         <property key="allowColumnReorder" type="boolean" defaultValue="true">
             <caption>Allow column reorder</caption>
@@ -212,16 +212,16 @@
         <property key="colVisButtonText" type="translatableString">
             <caption>Columns button caption</caption>
             <category>Layout</category>
-            <description>Caption of the columns button</description>
+            <description>Caption of the columns button, translatable</description>
             <translations>
                 <translation lang="en_US">Columns...</translation>
                 <translation lang="nl_NL">Kolommen...</translation>
             </translations>
         </property>
-        <property key="tableClass" type="string" required="false">
+        <property key="tableClass" type="string" required="true" defaultValue="display">
             <caption>Table class</caption>
             <category>Layout</category>
-            <description>Optional. Specify class(es) to be put on the table.</description>
+            <description>Specify class(es) to be put on the table</description>
         </property>                
         <property key="showTableInformation" type="boolean" defaultValue="true">
             <caption>Show table information</caption>
@@ -236,7 +236,7 @@
         <property key="scrollY" type="string" required="false">
             <caption>Vertical scrolling</caption>
             <category>Layout</category>
-            <description>Optional, any CSS unit, default 200px. When specified, vertical scrolling is used and height of the rows is constrained to the specified height.</description>
+            <description>Optional, any CSS unit, default 200px. When specified, vertical scrolling is used and height of the rows is constrained to the specified height</description>
         </property>
         <property key="stateSaveName" type="string" required="false">
             <caption>State save name</caption>
@@ -249,7 +249,7 @@
         <property key="selectionType" type="enumeration" defaultValue="single">
             <caption>Selection</caption>
             <category>Selection</category>
-            <description>Selection type.</description>
+            <description>Selection type</description>
             <enumerationValues>
                 <enumerationValue key="single">single selection</enumerationValue>
                 <enumerationValue key="os">Multi-selection</enumerationValue>
@@ -260,12 +260,12 @@
         <property key="selectFirst" type="boolean" defaultValue="false">
             <caption>Select first row</caption>
             <category>Selection</category>
-            <description>select first row after displaying data</description>
+            <description>Select first row after displaying data</description>
         </property>
         <property key="selectionMicroflowName" type="string" required="false">
             <caption>Selection changed callback microflow</caption>
             <category>Selection</category>
-            <description>The name of the microflow (Module.Microflow) that is called when the selection has been changed.</description>
+            <description>The name of the microflow (Module.Microflow) that is called when the selection has been changed</description>
         </property>
 
         <!--    Buttons    -->
@@ -317,12 +317,12 @@
                 <property key="buttonMicroflowName" type="string">
                     <caption>Button microflow</caption>
                     <category>Button</category>
-                    <description>The name of the microflow (Module.Microflow) that is called when the button is clicked.</description>
+                    <description>The name of the microflow (Module.Microflow) that is called when the button is clicked</description>
                 </property>
                 <!--property key="buttonMicroflow" entityProperty="tableEntity" This does not work! Error: entity cannot be resolved type="microflow">
                     <caption>Button microflow</caption>
                     <category>Button</category>
-                    <description>The microflow that is called when the button is clicked.</description>
+                    <description>The microflow that is called when the button is clicked</description>
                     <returnType type="Void"></returnType>
                 </property-->
                 <property key="askConfirmation" type="boolean" defaultValue="false">
@@ -360,12 +360,12 @@
                 <property key="placeRefCssSelector" type="string" required="false">
                     <caption>Placement selector</caption>
                     <category>Placement</category>
-                    <description>Optional. Places the button relative to the node found using this CSS selector. If empty, button is placed in default container above the table. Can be used to bring new and edit button together in one container.</description>
+                    <description>Optional. Places the button relative to the node found using this CSS selector. If empty, button is placed in default container above the table. Can be used to bring new and edit button together in one container</description>
                 </property>
                 <property key="placeRefPos" type="enumeration" defaultValue="last">
                     <caption>Placement position</caption>
                     <category>Placement</category>
-                    <description>Position of the button in the placement container. Only relevant when placement selector has been specified. </description>
+                    <description>Position of the button in the placement container. Only relevant when placement selector has been specified</description>
                     <enumerationValues>
                         <enumerationValue key="before">Before the other node</enumerationValue>
                         <enumerationValue key="after">After the other node</enumerationValue>
