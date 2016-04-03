@@ -33,10 +33,13 @@ All features can be seen in action in the test/demo project.
 
 ## Limitations
 
-- Currently only direct attributes can be displayed in the grid. First feature on the next release will be to allow associations one level deep.
-- Currently only XPath can be used to get the grid data. Datasource microflows will be supported in a future release.
 - Currently it is not possible to resize columns at runtime.
 - Due to limitations in the custom widget definition, the attributes and references need to be entered as text rather than selected from a list.
+
+## Backlog
+
+- Currently only direct attributes can be displayed in the grid. First feature on the next release will be to allow associations one level deep.
+- Currently only XPath can be used to get the grid data. Datasource microflows will be supported in a future release.
 
 ## Configuration
 
