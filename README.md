@@ -125,7 +125,7 @@ The widget does not display search filter inputs. To provide search filters, def
 The default DataTables stylesheet has the following class names available to control the different styling features of a DataTable.
 
 Class | Description
----------- | ----------
+--------------- | ----------
 display | Short-hand for the stripe, hover, row-border and order-column classes.
 cell-border | Border around all four sides of each cell
 compact | Reduce the amount of white-space the default styling for the DataTable uses, increasing the information density on screen (since 1.10.1)
