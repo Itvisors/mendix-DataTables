@@ -87,6 +87,8 @@ define([
         _table: null,
         _buttonList: null,
         _defaultButtonDefinition: null,
+        _referenceColumns: null,
+        _hasReferenceColumns: false,
         
         // I18N file names object at the end, out of sight!
 
@@ -198,6 +200,7 @@ define([
                 locale,
                 language,
                 languageFilename = null,
+                referencePropertyName,
                 table,
                 thisObj = this;
 
@@ -220,10 +223,13 @@ define([
             }
 
             // Process column definitions.
+            this._referenceColumns = {};
+            this._hasReferenceColumns = false;
             dojoArray.forEach(this.columnList, function (column) {
                 dataTablesColumn = {
                     title: column.caption,
                     data: column.attrName,
+                    name: column.attrName,
                     visible: column.initiallyVisible
                 };
                 if (this.isResponsive) {
@@ -234,6 +240,13 @@ define([
                 }
                 if (column.cellClass) {
                     dataTablesColumn.className = column.cellClass;
+                }
+                if (column.refName) {
+                    referencePropertyName = this._getReferencePropertyName(column);
+                    this._referenceColumns[referencePropertyName] = column;
+                    this._hasReferenceColumns = true;
+                    dataTablesColumn.data = referencePropertyName;
+                    dataTablesColumn.name = referencePropertyName;
                 }
                 dataTablesColumns.push(dataTablesColumn);
             }, this);
@@ -507,12 +520,27 @@ define([
             return guids;
         },
         
+        _resetRowObjectSubscriptions: function () {
+            if (this._rowObjectHandles) {
+                dojoArray.forEach(this._rowObjectHandles, function (handle) {
+                    mx.data.unsubscribe(handle);
+                });
+                this._rowObjectHandles = [];
+            }
+        },
+
+        // Get reference property name
+        _getReferencePropertyName: function (column) {
+            // Remove the dot from the reference name as DataGrid would expect an object under the data object.
+            return column.refName.replace(".", "$") + "_" + column.attrName;
+        },
+
         // Get data 
         _getData: function (data, dataTablesCallback, settings) {
             logger.debug(this.id + "._getData");
             
-            var hasConstraint = false,
-                constraintValue,
+            var dataArray,
+                hasConstraint = false,
                 sortColumnIndex = data.order[0].column,
                 sortColumn = data.columns[sortColumnIndex],
                 thisObj = this,
@@ -531,7 +559,7 @@ define([
             }
             
             dojoArray.forEach(this.attrSearchFilterList, function (searchFilter, i) {
-                constraintValue = this._getConstraintValue(searchFilter.contextEntityAttr, searchFilter.attrName);
+                var constraintValue = this._getConstraintValue(searchFilter.contextEntityAttr, searchFilter.attrName);
                 if (constraintValue) {
                     if (hasConstraint) {
                         xpath += " and ";
@@ -572,7 +600,7 @@ define([
 
             dojoArray.forEach(this.refSearchFilterList, function (searchFilter, i) {
                 // Take off the referenced entity name when getting the reference guid.
-                constraintValue = this._contextObj.getReference(searchFilter.contextEntityRef.substr(0, searchFilter.contextEntityRef.indexOf("/")));
+                var constraintValue = this._contextObj.getReference(searchFilter.contextEntityRef.substr(0, searchFilter.contextEntityRef.indexOf("/")));
                 if (constraintValue) {
                     if (hasConstraint) {
                         xpath += " and ";
@@ -591,6 +619,7 @@ define([
             logger.debug(this.id + "._getData XPath: " + xpath);
             mx.data.get({
                 xpath: xpath,
+                noCache: true,
                 count: true,
                 filter: {
                     sort: [[sortColumn.data, data.order[0].dir]],
@@ -598,36 +627,57 @@ define([
                     amount: data.length
                 },
                 callback: function (objs, extra) {
-                    dataTablesCallback({
-                        draw: data.draw,
-                        data: thisObj._convertMendixObjectArrayToDataArray(objs),
-                        recordsTotal: extra.count,
-                        recordsFiltered: extra.count
-                    });
+                    var refGuids;
+                    dataArray = thisObj._convertMendixObjectArrayToDataArray(objs);
+                    if (thisObj._hasReferenceColumns) {
+                        // Get referenced objects first and supplement the data objects.
+                        refGuids = thisObj._getReferencedGuids(dataArray);
+                        mx.data.get({
+                            guids: refGuids,
+                            noCache: false,
+                            count: false,
+                            callback: function (refObjs) {
+                                thisObj._includeReferencedObjData(dataArray, refObjs);
+                                dataTablesCallback({
+                                    draw: data.draw,
+                                    data: dataArray,
+                                    recordsTotal: extra.count,
+                                    recordsFiltered: extra.count
+                                });
+                            }
+                        });
+                        
+                    } else {
+                        // No referenced objects, just return the data.
+                        dataTablesCallback({
+                            draw: data.draw,
+                            data: dataArray,
+                            recordsTotal: extra.count,
+                            recordsFiltered: extra.count
+                        });
+                    }
                 }
             });
         },
-        
-        _resetRowObjectSubscriptions: function () {
-            if (this._rowObjectHandles) {
-                dojoArray.forEach(this._rowObjectHandles, function (handle) {
-                    mx.data.unsubscribe(handle);
-                });
-                this._rowObjectHandles = [];
-            }
-        },
-        
+
+        // Convert returned data to plain data object
         _convertMendixObjectArrayToDataArray: function (objs) {
             logger.debug(this.id + "._convertMendixObjectArrayToDataArray");
             var attrName,
                 dataArray = [],
-                dataObj;
+                dataObj,
+                referencePropertyName;
             
             dojoArray.forEach(objs, function (obj) {
                 dataObj = { guid: obj.getGuid(), colVisDummy: ""};
                 dojoArray.forEach(this.columnList, function (column) {
                     attrName = column.attrName;
-                    dataObj[attrName] = this._getDisplayValue(obj, column);
+                    if (column.refName) {
+                        referencePropertyName = this._getReferencePropertyName(column);
+                        dataObj[referencePropertyName] = obj.getReference(column.refName);
+                    } else {
+                        dataObj[attrName] = this._getDisplayValue(obj, column);
+                    }
                 }, this);
                 dataArray.push(dataObj);
                 var objectHandle = this.subscribe({
@@ -641,6 +691,57 @@ define([
             return dataArray;
         },
 
+        // Get referenced guids.
+        _getReferencedGuids: function (dataArray) {
+            var guid,
+                guidArray = [],
+                guidMap = {}; // We want each guid only once, so start with an object rather than an array.
+            dojoArray.forEach(dataArray, function (data) {
+                var referenceColumnName;
+                for (referenceColumnName in this._referenceColumns) {
+                    if (this._referenceColumns.hasOwnProperty(referenceColumnName)) {
+                        guid = data[referenceColumnName];
+                        if (guid) {
+                            guidMap[guid] = "Y";
+                        }
+                    }
+                }
+            }, this);
+            
+            for (guid in guidMap) {
+                if (guidMap.hasOwnProperty(guid)) {
+                    guidArray.push(guid);
+                }
+            }
+            return guidArray;
+        },
+
+        // Include referenced object data in the data array
+        _includeReferencedObjData: function (dataArray, refObjs) {
+            var guid,
+                refObj,
+                refObjMap = {};
+            // Create a map of the returned objects;
+            dojoArray.forEach(refObjs, function (obj) {
+                refObjMap[obj.getGuid()] = obj;
+            }, this);
+            dojoArray.forEach(dataArray, function (data) {
+                var column,
+                    referenceColumnName;
+                for (referenceColumnName in this._referenceColumns) {
+                    if (this._referenceColumns.hasOwnProperty(referenceColumnName)) {
+                        guid = data[referenceColumnName];
+                        if (guid) {
+                            refObj = refObjMap[guid];
+                            if (refObj) {
+                                column = this._referenceColumns[referenceColumnName];
+                                data[referenceColumnName] = refObj.get(column.attrName);
+                            }
+                        }
+                    }
+                }
+            }, this);
+        },
 
         /**
          * Get the attribute value for use as display value

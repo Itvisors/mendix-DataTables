@@ -34,6 +34,7 @@ All features can be seen in action in the test/demo project.
 ## Limitations
 
 - Currently it is not possible to resize columns at runtime.
+- Currently the widget uses a default style where it should use the Mendix theme settings.
 - References can be used one level deep.
 - Due to limitations in the custom widget definition, the attributes and references need to be entered as text rather than selected from a list.
 
@@ -74,7 +75,8 @@ For each column, add an item to the list
 
 ##### Common
 
-- _Attribute name_ - The name of the attribute to be displayed in the column. This is case sensitive.
+- _Attribute name_ - The name of the attribute to be displayed in the column. This is case sensitive
+- _Reference name_ - For one level deep references, this is the reference name, case sensitive
 - _Caption_ - The column caption, translatable.
 
 ##### Date values
@@ -130,7 +132,7 @@ display | Short-hand for the stripe, hover, row-border and order-column classes.
 cell-border | Border around all four sides of each cell
 compact | Reduce the amount of white-space the default styling for the DataTable uses
 hover | Row highlighting on mouse over
-nowrap | Disable wrapping of content in the table, so all text in the cells is on a single line (since 1.10.1)
+nowrap | Disable wrapping of content in the table, so all text in the cells is on a single line
 order-column | Highlight the column that the table data is currently ordered on
 row-border | Border around only the top an bottom of each each (i.e. for the rows).
 stripe | Row striping

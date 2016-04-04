@@ -54,12 +54,17 @@
                 <property key="attrName" type="string">
                     <caption>Attribute name</caption>
                     <category>Common</category>
-                    <description>Attribute name, this is case sensitive</description>
+                    <description>Attribute name, case sensitive</description>
                 </property>
                 <property key="caption" type="translatableString">
                     <caption>Caption</caption>
                     <category>Common</category>
                     <description>Column caption, translatable</description>
+                </property>
+                <property key="refName" type="string" required="false">
+                    <caption>Reference name</caption>
+                    <category>Common</category>
+                    <description>For one level deep references, this is the reference name, case sensitive</description>
                 </property>
                 <property key="dateTimeType" type="enumeration" defaultValue="na">
                     <caption>Date/time type</caption>
