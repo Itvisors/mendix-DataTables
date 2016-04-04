@@ -34,11 +34,12 @@ All features can be seen in action in the test/demo project.
 ## Limitations
 
 - Currently it is not possible to resize columns at runtime.
+- References can be used one level deep.
 - Due to limitations in the custom widget definition, the attributes and references need to be entered as text rather than selected from a list.
 
 ## Backlog
 
-- Currently only direct attributes can be displayed in the grid. First feature on the next release will be to allow associations one level deep.
+- Set CSS classes on rows or cells based on styling rules.
 - Currently only XPath can be used to get the grid data. Datasource microflows will be supported in a future release.
 
 ## Configuration
@@ -124,6 +125,7 @@ The widget does not display search filter inputs. To provide search filters, def
 The default DataTables stylesheet has the following class names available to control the different styling features of a DataTable.
 
 Class | Description
+---------- | ----------
 display | Short-hand for the stripe, hover, row-border and order-column classes.
 cell-border | Border around all four sides of each cell
 compact | Reduce the amount of white-space the default styling for the DataTable uses, increasing the information density on screen (since 1.10.1)
