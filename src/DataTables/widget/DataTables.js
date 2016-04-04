@@ -411,62 +411,64 @@ define([
                 }
             }, this);
             
-            // Buttons
-            this._buttonList = [];
-            dojoArray.forEach(this.buttonDefinitionList, function (buttonDefinition, i) {
-                var buttonHtml,
-                    refNode,
-                    refNodeList,
-                    refNodePos;
+            // Buttons, use a timeout to make sure that Mendix ha created the page before we attempt to show buttons in another container.
+            setTimeout(function () {
+                thisObj._buttonList = [];
+                dojoArray.forEach(thisObj.buttonDefinitionList, function (buttonDefinition, i) {
+                    var buttonHtml,
+                        refNode,
+                        refNodeList,
+                        refNodePos;
 
-                // Default button?
-                if (buttonDefinition.isDefaultButton && !this._defaultButtonDefinition) {
-                    this._defaultButtonDefinition = buttonDefinition;
-                }
-                
-                // Create the basic HTML for the button
-                buttonHtml  = "<button type='button' class='btn mx-button btn-" + buttonDefinition.buttonType + "'>";
-                if (buttonDefinition.buttonGlyphiconClass) {
-                    buttonHtml += "<span class='" + buttonDefinition.buttonGlyphiconClass + "'></span> "; // The space is intentional! Separation between icon and caption
-                }
-                buttonHtml += buttonDefinition.caption;
-                buttonHtml += "</button>";
-                
-                // Put it in our own container or a specified one?
-                refNode = this.buttonContainer;
-                refNodePos = "last";
-                if (buttonDefinition.placeRefCssSelector) {
-                    refNodeList = dojoQuery(buttonDefinition.placeRefCssSelector);
-                    if (refNodeList && refNodeList.length) {
-                        refNode = refNodeList[0];
-                        refNodePos = buttonDefinition.placeRefPos;
+                    // Default button?
+                    if (buttonDefinition.isDefaultButton && !thisObj._defaultButtonDefinition) {
+                        thisObj._defaultButtonDefinition = buttonDefinition;
                     }
+
+                    // Create the basic HTML for the button
+                    buttonHtml  = "<button type='button' class='btn mx-button btn-" + buttonDefinition.buttonType + "'>";
+                    if (buttonDefinition.buttonGlyphiconClass) {
+                        buttonHtml += "<span class='" + buttonDefinition.buttonGlyphiconClass + "'></span> "; // The space is intentional! Separation between icon and caption
+                    }
+                    buttonHtml += buttonDefinition.caption;
+                    buttonHtml += "</button>";
+
+                    // Put it in our own container or a specified one?
+                    refNode = thisObj.buttonContainer;
+                    refNodePos = "last";
+                    if (buttonDefinition.placeRefCssSelector) {
+                        refNodeList = dojoQuery(buttonDefinition.placeRefCssSelector);
+                        if (refNodeList && refNodeList.length) {
+                            refNode = refNodeList[0];
+                            refNodePos = buttonDefinition.placeRefPos;
+                        }
+                    }
+                    button = dojoConstruct.place(buttonHtml, refNode, refNodePos);
+                    if (buttonDefinition.buttonName) {
+                        dojoClass.add(button, "mx-name-" + buttonDefinition.buttonName);
+                    }
+                    if (buttonDefinition.buttonClass) {
+                        dojoClass.add(button, buttonDefinition.buttonClass);
+                    }
+                    dojoOn(button, "click", function () {
+                        var guids = thisObj._getSelectedRows();
+                        thisObj._callButtonMicroflow(buttonDefinition, guids);
+                    });
+                    thisObj._buttonList.push(button);
+                }, thisObj);
+                thisObj._setButtonEnabledStatus();
+                // Show our own button container if it has child nodes.
+                if (thisObj.buttonContainer.hasChildNodes()) {
+                    dojoStyle.set(thisObj.controlbar, "display", "block");
                 }
-                button = dojoConstruct.place(buttonHtml, refNode, refNodePos);
-                if (buttonDefinition.buttonName) {
-                    dojoClass.add(button, "mx-name-" + buttonDefinition.buttonName);
+
+                // Add click handler for default button
+                if (thisObj._defaultButtonDefinition) {
+                    $(thisObj._tableNodelist).on("dblclick", "tr", function () {
+                        thisObj._callButtonMicroflow(thisObj._defaultButtonDefinition, [thisObj.getAttribute("data-guid")]);
+                    });
                 }
-                if (buttonDefinition.buttonClass) {
-                    dojoClass.add(button, buttonDefinition.buttonClass);
-                }
-                dojoOn(button, "click", function () {
-                    var guids = thisObj._getSelectedRows();
-                    thisObj._callButtonMicroflow(buttonDefinition, guids);
-                });
-                this._buttonList.push(button);
-            }, this);
-            thisObj._setButtonEnabledStatus();
-            // Show our own button container if it has child nodes.
-            if (this.buttonContainer.hasChildNodes()) {
-                dojoStyle.set(this.controlbar, "display", "block");
-            }
-            
-            // Add click handler for default button
-            if (this._defaultButtonDefinition) {
-                $(this._tableNodelist).on("dblclick", "tr", function () {
-                    thisObj._callButtonMicroflow(thisObj._defaultButtonDefinition, [this.getAttribute("data-guid")]);
-                });
-            }
+            }, 0);
 
         },
         
@@ -683,7 +685,7 @@ define([
                 var objectHandle = this.subscribe({
                     guid: dataObj.guid,
                     callback: dojoLang.hitch(this, function (guid) {
-                        this._reloadTableData();
+                        this._reloadTableData(false);
                     })
                 });
                 
@@ -844,9 +846,9 @@ define([
             return result;
         },
         
-        _reloadTableData: function () {
+        _reloadTableData: function (resetPaging) {
             if (this._table) {
-                this._table.ajax.reload(null, false);
+                this._table.ajax.reload(null, resetPaging);
             }
         },
         
@@ -865,7 +867,7 @@ define([
 								logger.debug("Object saved");
 							}
                         });
-                        this._reloadTableData();
+                        this._reloadTableData(true);
                     }
                 } else {
                     this._createTableObject();
