@@ -737,7 +737,7 @@ define([
                             refObj = refObjMap[guid];
                             if (refObj) {
                                 column = this._referenceColumns[referenceColumnName];
-                                data[referenceColumnName] = refObj.get(column.attrName);
+                                data[referenceColumnName] = this._getDisplayValue(refObj, column);
                             }
                         }
                     }
