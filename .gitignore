@@ -8,3 +8,4 @@ test/.project
 *.bak
 .idea/
 *DS_Store*
+test/theme/.sass-cache/

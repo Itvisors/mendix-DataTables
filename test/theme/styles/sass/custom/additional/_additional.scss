@@ -1,0 +1,14 @@
+/*********************************************************************
+
+Additional styling
+
+*********************************************************************/
+
+.DataTypesRowStyling {
+    tr[data-devicetype=Phone] {
+        background-color: lighten($brand-success, 40);
+    }
+    tr[data-devicetype=Tablet] {
+        background-color: lighten($brand-info, 20);
+    }
+}

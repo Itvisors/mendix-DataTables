@@ -1195,3 +1195,15 @@ body .mx-header .mx-sidebartoggle {
 .templategrid-profilecard .templategrid-profilecard-subtitle {
   /* Styles here */
 }
+
+/*********************************************************************
+
+Additional styling
+
+*********************************************************************/
+.DataTypesRowStyling tr[data-devicetype=Phone] {
+  background-color: #d5f1c1;
+}
+.DataTypesRowStyling tr[data-devicetype=Tablet] {
+  background-color: #aadafb;
+}

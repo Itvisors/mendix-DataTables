@@ -59,6 +59,17 @@ This widget needs a context entity:
 
 It is advised to use a non-persistent entity.
 
+## Button and selection microflows
+
+When the table has some form of multiple selection, there is a little snag with the parameters of microflows that receive the selection:
+
+- When the user selects one row, that row is passed to an object parameter of the same type as your table entity.
+- When the user selects multiple rows, the rows are passed to a list parameter of the same type as your table entity.
+
+So, for multiple selection you need to have two parameters and check which one is actually passed (not empty). The demo project has an example of this.
+
+Mendix hides this little easter egg for the default DataGrid, for multiple selection, the list parameter will just get the one object when only one object is selected.
+
 ## Properties
 
 For the class properties, multiple classes can be entered, separated by a single space.
@@ -91,6 +102,10 @@ For each column, add an item to the list
 - _Column width_ - Optional. Specify width, value is used exactly as you enter it: 20%, 150px, 5em, etc
 - _Header class_ - Optional. Specify class(es) to be put on the column header.
 - _Cell class_ - Optional. Specify class(es) to be put on each cell in the column.
+
+##### Extra
+
+- _TR data attr_ - Include the value as data- attribute on the table row. Useful for styling with CSS selection.
 
 #### Attribute search filters
 

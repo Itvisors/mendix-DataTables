@@ -129,6 +129,11 @@
                     <category>Layout</category>
                     <description>Optional. Specify class(es) to be put on each cell in the column</description>
                 </property>                
+                <property key="includeAsTrDataAttr" type="boolean" defaultValue="false">
+                    <caption>TR data attr</caption>
+                    <category>Extra</category>
+                    <description>Include the value as data- attribute on the table row. Useful for styling with CSS selection.</description>
+                </property>
             </properties>
         </property>
         

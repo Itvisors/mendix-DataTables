@@ -89,6 +89,7 @@ define([
         _defaultButtonDefinition: null,
         _referenceColumns: null,
         _hasReferenceColumns: false,
+        _trDataAttrNames: null,
         
         // I18N file names object at the end, out of sight!
 
@@ -225,6 +226,7 @@ define([
             // Process column definitions.
             this._referenceColumns = {};
             this._hasReferenceColumns = false;
+            this._trDataAttrNames = [];
             dojoArray.forEach(this.columnList, function (column) {
                 dataTablesColumn = {
                     title: column.caption,
@@ -248,6 +250,9 @@ define([
                     dataTablesColumn.data = referencePropertyName;
                     dataTablesColumn.name = referencePropertyName;
                 }
+                if (column.includeAsTrDataAttr) {
+                    this._trDataAttrNames.push(dataTablesColumn.data);
+                }
                 dataTablesColumns.push(dataTablesColumn);
             }, this);
             
@@ -267,7 +272,18 @@ define([
             
             dataTablesOptions.drawCallback = function () {
                 this.api().rows().every(function (rowIdx, tableLoop, rowLoop) {
-                    this.node().setAttribute("data-guid", this.data().guid);
+                    var rowData = this.data(),
+                        trNode = this.node();
+                    trNode.setAttribute("data-guid", rowData.guid);
+                    dojoArray.forEach(thisObj._trDataAttrNames, function (attrName) {
+                        var attrNameInternal = attrName + "-internal";
+                        // When available, use the internal value, this is for boolean and enum.
+                        if (rowData.hasOwnProperty(attrNameInternal)) {
+                            trNode.setAttribute("data-" + attrName, rowData[attrNameInternal]);
+                        } else {
+                            trNode.setAttribute("data-" + attrName, rowData[attrName]);
+                        }
+                    });
                     if (thisObj.selectFirst && rowLoop === 0) {
                         this.select();
                     }
@@ -665,20 +681,26 @@ define([
         // Convert returned data to plain data object
         _convertMendixObjectArrayToDataArray: function (objs) {
             logger.debug(this.id + "._convertMendixObjectArrayToDataArray");
-            var attrName,
-                dataArray = [],
+            var dataArray = [],
                 dataObj,
                 referencePropertyName;
             
             dojoArray.forEach(objs, function (obj) {
                 dataObj = { guid: obj.getGuid(), colVisDummy: ""};
                 dojoArray.forEach(this.columnList, function (column) {
-                    attrName = column.attrName;
+                    var attrName = column.attrName,
+                        attrNameInternal,
+                        attrType = this._entityMetaData.getAttributeType(attrName);
                     if (column.refName) {
                         referencePropertyName = this._getReferencePropertyName(column);
                         dataObj[referencePropertyName] = obj.getReference(column.refName);
                     } else {
-                        dataObj[attrName] = this._getDisplayValue(obj, column);
+                        dataObj[attrName] = this._getDisplayValue(obj, attrType, column);
+                        // For boolean and enum, include internal value in the data object as well.
+                        if (attrType === "Boolean" || attrType === "Enum") {
+                            attrNameInternal = attrName + "-internal";
+                            dataObj[attrNameInternal] = obj.get(attrName);
+                        }
                     }
                 }, this);
                 dataArray.push(dataObj);
@@ -728,8 +750,11 @@ define([
                 refObjMap[obj.getGuid()] = obj;
             }, this);
             dojoArray.forEach(dataArray, function (data) {
-                var column,
-                    referenceColumnName;
+                var attrName,
+                    attrType,
+                    column,
+                    referenceColumnName,
+                    referenceColumnNameInternal;
                 for (referenceColumnName in this._referenceColumns) {
                     if (this._referenceColumns.hasOwnProperty(referenceColumnName)) {
                         guid = data[referenceColumnName];
@@ -737,7 +762,13 @@ define([
                             refObj = refObjMap[guid];
                             if (refObj) {
                                 column = this._referenceColumns[referenceColumnName];
-                                data[referenceColumnName] = this._getDisplayValue(refObj, column);
+                                attrType = mx.meta.getEntity(refObj.getEntity()).getAttributeType(column.attrName);
+                                data[referenceColumnName] = this._getDisplayValue(refObj, attrType, column);
+                                // For boolean and enum, include internal value in the data object as well.
+                                if (attrType === "Boolean" || attrType === "Enum") {
+                                    referenceColumnNameInternal = referenceColumnName + "-internal";
+                                    data[referenceColumnName] = refObj.get(column.attrName);
+                                }
                             }
                         }
                     }
@@ -745,22 +776,14 @@ define([
             }, this);
         },
 
-        /**
-         * Get the attribute value for use as display value
-         *
-         * @param obj           The Mendix object to take the value from
-         * @param column        The column name
-         * @returns {string}    The value
-         */
-        _getDisplayValue : function (obj, column) {
+        // Get the attribute value for use as display value
+        _getDisplayValue : function (obj, attrType, column) {
 
             var attrName,
-                attrType,
                 dateFormat,
                 result;
 
             attrName = column.attrName;
-            attrType = this._entityMetaData.getAttributeType(attrName);
 
             switch (attrType) {
             case "DateTime":
@@ -960,7 +983,7 @@ define([
             "ms": "Malay.lang",
             "no": "Norwegian.lang",
             "pl": "Polish.lang",
-            "pt-BR": "Portuguese-Brasil.lang",
+            "pt-br": "Portuguese-Brasil.lang",
             "pt": "Portuguese.lang",
             "ro": "Romanian.lang",
             "ru": "Russian.lang",
