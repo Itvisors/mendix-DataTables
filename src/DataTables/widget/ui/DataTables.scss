@@ -5,11 +5,11 @@ This SCSS imports them all into one CSS for faster loading.
 
 */
 
-@import "jquery.dataTables";
-@import "responsive.dataTables";
-@import "colReorder.dataTables";
-@import "buttons.dataTables";
-@import "scroller.dataTables";
-@import "select.dataTables";
+@import "dataTables.bootstrap";
+@import "responsive.bootstrap";
+@import "colReorder.bootstrap";
+@import "buttons.bootstrap";
+@import "scroller.bootstrap";
+@import "select.bootstrap";
 
 @import "custom";

@@ -39,8 +39,8 @@ define([
     "dojo/text!DataTables/widget/template/DataTables.html",
     
     // DataTables modules. When updating to a new version, do not forget to update the module names in the DataTables module sources because the default does not work in a custom widget.
-    "DataTables/lib/jquery.dataTables"/*,
-    "DataTables/lib/dataTables.bootstrap" */
+    "DataTables/lib/jquery.dataTables",
+    "DataTables/lib/dataTables.bootstrap"
 ], function (declare, _WidgetBase, _TemplatedMixin, dom, dojoClass, dojoStyle, dojoConstruct, dojoOn, dojoQuery, dojoArray, dojoLang, dojoEvent, dojoKernel, _jQuery, widgetTemplate) {
     "use strict";
 
@@ -116,6 +116,7 @@ define([
             // When updating to a new version, do not forget to update the module names in the DataTables module sources because the default does not work in a custom widget.  
             if (this.isResponsive) {
                 moduleList.push("DataTables/lib/dataTables.responsive");
+                moduleList.push("DataTables/lib/responsive.bootstrap");
             }
             if (this.allowColumnReorder) {
                 moduleList.push("DataTables/lib/dataTables.colReorder");
@@ -123,6 +124,7 @@ define([
             // The buttons extension consists of multiple modules. First include the common module then the necessary specific ones.
             if (this.allowColumnVisibility) {
                 moduleList.push("DataTables/lib/dataTables.buttons");
+                moduleList.push("DataTables/lib/buttons.bootstrap");
             }
             if (this.allowColumnVisibility) {
                 moduleList.push("DataTables/lib/buttons.colVis");

@@ -228,7 +228,7 @@
                 <translation lang="nl_NL">Kolommen...</translation>
             </translations>
         </property>
-        <property key="tableClass" type="string" required="true" defaultValue="display">
+        <property key="tableClass" type="string" required="false" defaultValue="table-hover table-striped">
             <caption>Table class</caption>
             <category>Layout</category>
             <description>Specify class(es) to be put on the table</description>

@@ -143,17 +143,13 @@ The default DataTables stylesheet has the following class names available to con
 
 Class | Description
 --------------- | -----
-display | Short-hand for the stripe, hover, row-border and order-column classes.
-cell-border | Border around all four sides of each cell
-compact | Reduce the amount of white-space the default styling for the DataTable uses
-hover | Row highlighting on mouse over
 nowrap | Disable wrapping of content in the table, so all text in the cells is on a single line
-order-column | Highlight the column that the table data is currently ordered on
-row-border | Border around only the top an bottom of each each (i.e. for the rows).
-stripe | Row striping
+table-bordered | Bordered table
+table-hover | Row highlighting on mouse over
+table-striped | Row striping
+table-condensed | More compact table by reducing padding
 
-Note: cell-border and row-border are mutually exclusive and cannot be used together.
-
+The nowrap class is DataTables specific, the others are Bootstrap classes.
 
 ### Selection
 
