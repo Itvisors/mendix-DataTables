@@ -563,6 +563,8 @@ define([
                 hasConstraint = false,
                 sortColumnIndex = data.order[0].column,
                 sortColumn = data.columns[sortColumnIndex],
+                referenceColumnDef,
+                sortName,
                 thisObj = this,
                 xpath,
                 xpathAttrValue;
@@ -636,13 +638,20 @@ define([
                 xpath += "]";
             }
             
+            if (this._referenceColumns[sortColumn.name]) {
+                referenceColumnDef = this._referenceColumns[sortColumn.name];
+                sortName = referenceColumnDef.refName + "/" + this._entityMetaData.getSelectorEntity(referenceColumnDef.refName) + "/" + referenceColumnDef.attrName;
+            } else {
+                sortName = sortColumn.data;
+            }
+            
             logger.debug(this.id + "._getData XPath: " + xpath);
             mx.data.get({
                 xpath: xpath,
                 noCache: true,
                 count: true,
                 filter: {
-                    sort: [[sortColumn.data, data.order[0].dir]],
+                    sort: [[sortName, data.order[0].dir]],
                     offset: data.start,
                     amount: data.length
                 },
