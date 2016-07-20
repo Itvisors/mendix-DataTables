@@ -182,7 +182,7 @@
         <property key="refSearchFilterList" type="object" isList="true" required="false">
             <caption>Ref search filters</caption>
             <category>Datasource</category>
-            <description>The reference filters for retrieving the data</description>
+            <description>The reference filters for retrieving the data, can be multiple levels deep.</description>
             <properties>
                 <property key="contextEntityRef" type="entity" isPath="yes" pathType="reference" allowNonPersistableEntities="true">
                     <caption>Context entity reference</caption>
