@@ -811,6 +811,10 @@ define([
                 result = mx.parser.formatAttribute(obj, attrName, { datePattern: dateFormat });
                 break;
 
+            case "Decimal":
+                result = mx.parser.formatAttribute(obj, attrName, { places: column.decimalPositions, groups: column.groupDigits });
+                break;
+                    
             default:
                 result = mx.parser.formatAttribute(obj, attrName);
             }

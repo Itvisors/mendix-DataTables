@@ -129,6 +129,16 @@
                     <category>Layout</category>
                     <description>Optional. Specify class(es) to be put on each cell in the column</description>
                 </property>                
+                <property key="groupDigits" type="boolean" defaultValue="false">
+                    <caption>Group digits</caption>
+                    <category>Layout</category>
+                    <description>Whether to group digits with thousand separators</description>
+                </property>
+                <property key="decimalPositions" type="integer" defaultValue="2">
+                    <caption>Decimal positions</caption>
+                    <category>Layout</category>
+                    <description>Decimal positions</description>
+                </property>
                 <property key="includeAsTrDataAttr" type="boolean" defaultValue="false">
                     <caption>TR data attr</caption>
                     <category>Extra</category>
