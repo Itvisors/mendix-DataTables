@@ -5,10 +5,22 @@ Additional styling
 *********************************************************************/
 
 .DataTypesRowStyling {
-    tr[data-devicetype=Phone] {
+    tr[data-devicetype=Phone] td {
         background-color: lighten($brand-success, 40);
     }
-    tr[data-devicetype=Tablet] {
+    tr[data-devicetype=Tablet] td {
         background-color: lighten($brand-info, 20);
+    }
+}
+
+.mx-name-dataTablesTestCalcAttr {
+    tr[data-calcattr=Green] td {
+        background-color: lighten($brand-success, 40);
+    }
+    tr[data-calcattr=Yellow] td {
+        background-color: lighten($brand-warning, 20);
+    }
+    tr[data-calcattr=Red] td {
+        background-color: lighten($brand-danger, 40);
     }
 }

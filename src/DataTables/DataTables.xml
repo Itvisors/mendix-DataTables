@@ -66,6 +66,11 @@
                     <category>Common</category>
                     <description>For one level deep references, this is the reference name, case sensitive</description>
                 </property>
+                <property key="allowSort" type="boolean" defaultValue="true">
+                    <caption>Allow sort</caption>
+                    <category>Common</category>
+                    <description>By default all columns are visible. Turn this off for calculated attributes.</description>
+                </property>
                 <property key="dateTimeType" type="enumeration" defaultValue="na">
                     <caption>Date/time type</caption>
                     <category>Date values</category>

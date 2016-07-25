@@ -1,6 +1,6 @@
 /*jshint undef: true, browser:true, nomen: true */
 /*jslint browser:true, nomen: true */
-/*global mx, mxui, define, require, console, logger*/
+/*global mx, mxui, define, require, console, logger, alert */
 /*
     DataTables
     ========================
@@ -204,6 +204,7 @@ define([
                 language,
                 languageFilename = null,
                 referencePropertyName,
+                sortIndex,
                 table,
                 thisObj = this;
 
@@ -236,6 +237,7 @@ define([
                     name: column.attrName,
                     visible: column.initiallyVisible
                 };
+                dataTablesColumn.orderable = column.allowSort;
                 if (this.isResponsive) {
                     dataTablesColumn.responsivePriority = column.responsivePriority;
                 }
@@ -267,10 +269,18 @@ define([
                 columns: dataTablesColumns
             };
             
-            // Force sort on the first real column rather than the dummy column when column visibility is turned on.
-            if (this.allowColumnVisibility && this.allowColumnReorder) {
-                dataTablesOptions.order = [[ 1, "asc" ]];
+            // Search for the first orderable column
+            sortIndex = -1;
+            dojoArray.forEach(dataTablesColumns, function (dataTablesColumn, i) {
+                if (dataTablesColumn.orderable && sortIndex < 0) {
+                    sortIndex = i;
+                }
+            });
+            if (sortIndex < 0) {
+                alert("None of the columns are orderable, defaulting to the first column");
+                sortIndex = 0;
             }
+            dataTablesOptions.order = [[ sortIndex, "asc" ]];
             
             dataTablesOptions.drawCallback = function () {
                 this.api().rows().every(function (rowIdx, tableLoop, rowLoop) {
@@ -483,7 +493,7 @@ define([
                 // Add click handler for default button
                 if (thisObj._defaultButtonDefinition) {
                     $(thisObj._tableNodelist).on("dblclick", "tr", function () {
-                        thisObj._callButtonMicroflow(thisObj._defaultButtonDefinition, [thisObj.getAttribute("data-guid")]);
+                        thisObj._callButtonMicroflow(thisObj._defaultButtonDefinition, [this.getAttribute("data-guid")]);
                     });
                 }
             }, 0);

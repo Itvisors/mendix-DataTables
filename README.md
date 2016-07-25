@@ -89,6 +89,7 @@ For each column, add an item to the list
 - _Attribute name_ - The name of the attribute to be displayed in the column. This is case sensitive
 - _Reference name_ - For one level deep references, this is the reference name, case sensitive
 - _Caption_ - The column caption, translatable.
+- _Allow sort_ - By default all columns are visible. Turn this off for calculated attributes.
 
 ##### Date values
 
@@ -102,6 +103,8 @@ For each column, add an item to the list
 - _Column width_ - Optional. Specify width, value is used exactly as you enter it: 20%, 150px, 5em, etc
 - _Header class_ - Optional. Specify class(es) to be put on the column header.
 - _Cell class_ - Optional. Specify class(es) to be put on each cell in the column.
+- _Group digits_ - Whether to group digits with thousand separators
+- _Decimal positions_ - Decimal positions, decimal data type only.
 
 ##### Extra
 
@@ -122,7 +125,7 @@ __Filtering on booleans.__ Filtering on booleans is a little tricky because ther
 The widget does not display search filter inputs. To provide search filters, define an association to the same entity on your context entity.
 
 - _Context entity reference_ - The reference from the context entity to the entity to filter on.
-- _Reference name_ - The reference (module.reference) from the table entity to the same entity.
+- _Reference name_ - The reference (module.reference) from the table entity to the same entity. Note that the reference from the table entity to that entity can span multiple associations.
 
 ### Layout
 
