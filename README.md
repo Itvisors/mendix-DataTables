@@ -186,3 +186,7 @@ The buttons to use for processing selections. Note that buttons are displayed in
 - _Cancel caption_ - Cancel button caption on the confirmation popup
 - _Placement selector_ - Optional. Places the button relative to the node found using this CSS selector. If empty, button is placed in default container above the table. Can be used to bring new and edit button together in one container
 - _Placement position_ - Position of the button in the placement container. Only relevant when placement selector has been specified
+
+### Advanced
+
+- _Responsive priority_ - Delay (ms) before placing or moving buttons. Depending on complexity of the page, browsers may need more time to properly render the buttons.

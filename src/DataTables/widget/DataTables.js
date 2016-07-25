@@ -79,6 +79,7 @@ define([
         attrSearchFilterList: null,
         refSearchFilterList: null,
         buttonDefinitionList: null,
+        buttonPlacementDelay: 0,
         
         // Internal variables. Non-primitives created in the prototype are shared between all widget instances.
         _handles: null,
@@ -517,7 +518,7 @@ define([
                         thisObj._callButtonMicroflow(thisObj._defaultButtonDefinition, [this.getAttribute("data-guid")]);
                     });
                 }
-            }, 0);
+            }, thisObj.buttonPlacementDelay);
 
         },
         
