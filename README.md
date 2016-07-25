@@ -132,13 +132,20 @@ The widget does not display search filter inputs. To provide search filters, def
 - _Is responsive_ - When turned on, columns will be hidden on smaller screen sizes depending on their responsive priorities
 - _Auto column width_ - Control the auto column width feature. Turn off when specifying widths on the columns
 - _Allow column reorder_ - When turned on, the user can drag and drop columns to reorder them
-- _Allow column visibility_ - When turned on, the user can choose which columns to display
-- _Columns button caption_ - Caption of the columns button, translatable
 - _Table class_ - Specify class(es) to be put on the table
 - _Show table information_ - When turned on, display information: Showing 1 to 6 of 50,000 entries
 - _Use infinite scroll_ - Use infinite scroll rather than the default paging buttons. Set nowrap on the table class!
 - _Vertical scrolling_ - Optional, any CSS unit, default 200px. When specified, vertical scrolling is used and height of the rows is constrained to the specified height
 - _State save name_ - Optional. When specified, grid layout state is saved to and loaded from browser local storage using the specied name. Make sure this name is unique across your application!
+
+#### Column visibility
+
+- _Allow column visibility_ - When turned on, the user can choose which columns to display
+- _Columns button caption_ - Caption of the columns button, translatable
+- _Button class_ - Optional. Additional classes to put on the button. When placing the button together with other buttons, be sure to put at least mx-button on it.
+- _Placement selector_ - Optional. Places the button relative to the node found using this CSS selector. If empty, button is placed in default container above the table. Can be used to bring buttons together in one container.
+- _Placement position_ - Position of the button in the placement container. Only relevant when placement selector has been specified.
+
 
 #### Built-in table classes
 

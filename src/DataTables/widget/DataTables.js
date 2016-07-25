@@ -64,6 +64,9 @@ define([
         allowColumnReorder: true,
         allowColumnVisibility: false,
         colVisButtonText: "",
+        colVisPlaceRefCssSelector: "",
+        colVisPlaceRefPos: "",
+        colVisButtonClass: "",
         tableClass: "",
         stateSaveName: null,
         showTableInformation: true,
@@ -197,6 +200,8 @@ define([
             logger.debug(this.id + "._createTableObject");
 
             var button,
+                colVisButtonNodeList,
+                colVisRefNodeList,
                 dataTablesOptions,
                 dataTablesColumns = [],
                 dataTablesColumn,
@@ -439,8 +444,24 @@ define([
                 }
             }, this);
             
-            // Buttons, use a timeout to make sure that Mendix ha created the page before we attempt to show buttons in another container.
+            
+            // Buttons, use a timeout to make sure that Mendix has created the page before we attempt to show buttons in another container.
             setTimeout(function () {
+            
+                // Place (move) the column visibility button if desired.
+                if (thisObj.allowColumnVisibility) {
+                    colVisButtonNodeList = dojoQuery(".buttons-colvis", thisObj.domNode);
+                    if (thisObj.colVisPlaceRefCssSelector) {
+                        colVisRefNodeList = dojoQuery(thisObj.colVisPlaceRefCssSelector);
+                        if (colVisRefNodeList && colVisRefNodeList.length && colVisButtonNodeList && colVisButtonNodeList.length) {
+                            dojoConstruct.place(colVisButtonNodeList[0], colVisRefNodeList[0], thisObj.colVisPlaceRefPos);
+                        }
+                    }
+                    if (thisObj.colVisButtonClass) {
+                        colVisButtonNodeList.addClass(thisObj.colVisButtonClass);
+                    }
+                }
+                
                 thisObj._buttonList = [];
                 dojoArray.forEach(thisObj.buttonDefinitionList, function (buttonDefinition, i) {
                     var buttonHtml,

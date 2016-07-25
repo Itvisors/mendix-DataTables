@@ -231,17 +231,38 @@
         </property>
         <property key="allowColumnVisibility" type="boolean" defaultValue="false">
             <caption>Allow column visibility</caption>
-            <category>Layout</category>
+            <category>Column visibility</category>
             <description>When turned on, the user can choose which columns to display</description>
         </property>
         <property key="colVisButtonText" type="translatableString">
             <caption>Columns button caption</caption>
-            <category>Layout</category>
+            <category>Column visibility</category>
             <description>Caption of the columns button, translatable</description>
             <translations>
                 <translation lang="en_US">Columns...</translation>
                 <translation lang="nl_NL">Kolommen...</translation>
             </translations>
+        </property>
+        <property key="colVisButtonClass" type="string" required="false">
+            <caption>Button class</caption>
+            <category>Column visibility</category>
+            <description>Optional. Additional classes to put on the button. When placing the button together with other buttons, be sure to put at least mx-button on it.</description>
+        </property>
+        <property key="colVisPlaceRefCssSelector" type="string" required="false">
+            <caption>Placement selector</caption>
+            <category>Column visibility</category>
+            <description>Optional. Places the button relative to the node found using this CSS selector. If empty, button is placed in default container above the table. Can be used to bring buttons together in one container</description>
+        </property>
+        <property key="colVisPlaceRefPos" type="enumeration" defaultValue="last">
+            <caption>Placement position</caption>
+            <category>Column visibility</category>
+            <description>Position of the button in the placement container. Only relevant when placement selector has been specified</description>
+            <enumerationValues>
+                <enumerationValue key="before">Before the other node</enumerationValue>
+                <enumerationValue key="after">After the other node</enumerationValue>
+                <enumerationValue key="first">First child of the other node</enumerationValue>
+                <enumerationValue key="last">Last child of the other node</enumerationValue>
+            </enumerationValues>
         </property>
         <property key="tableClass" type="string" required="false" defaultValue="table-hover table-striped">
             <caption>Table class</caption>
