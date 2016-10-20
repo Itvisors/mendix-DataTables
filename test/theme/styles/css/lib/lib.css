@@ -300,27 +300,27 @@ textarea.form-control {
 }
 
 .alert-success {
-  border-color: #4b8b1f;
-  background-color: #e0f2d4;
-  color: #3d7119;
+  border-color: shade(#66bc2a, 26);
+  background-color: tint(#66bc2a, 80);
+  color: shade(#66bc2a, 40);
 }
 
 .alert-info {
-  border-color: #3582b7;
-  background-color: #daeffd;
-  color: #2b6a94;
+  border-color: shade(#48B0F7, 26);
+  background-color: tint(#48B0F7, 80);
+  color: shade(#48B0F7, 40);
 }
 
 .alert-warning {
-  border-color: #b89a3d;
-  background-color: #fef6dd;
-  color: #957d32;
+  border-color: shade(#F8D053, 26);
+  background-color: tint(#F8D053, 80);
+  color: shade(#F8D053, 40);
 }
 
 .alert-danger {
-  border-color: #af151b;
-  background-color: #fbd2d3;
-  color: #8e1116;
+  border-color: shade(#ed1c24, 26);
+  background-color: tint(#ed1c24, 80);
+  color: shade(#ed1c24, 40);
 }
 
 .has-error .alert {
@@ -346,19 +346,19 @@ textarea.form-control {
 }
 
 .background-default-darker {
-  background-color: #858585 !important;
+  background-color: shade(#DDDDDD, 40) !important;
 }
 
 .background-default-dark {
-  background-color: #a4a4a4 !important;
+  background-color: shade(#DDDDDD, 26) !important;
 }
 
 .background-default-light {
-  background-color: #ebebeb !important;
+  background-color: tint(#DDDDDD, 40) !important;
 }
 
 .background-default-lighter {
-  background-color: #f8f8f8 !important;
+  background-color: tint(#DDDDDD, 80) !important;
 }
 
 .background-inverse {
@@ -366,19 +366,19 @@ textarea.form-control {
 }
 
 .background-inverse-darker {
-  background-color: #111215 !important;
+  background-color: shade(#1d1e23, 40) !important;
 }
 
 .background-inverse-dark {
-  background-color: #15161a !important;
+  background-color: shade(#1d1e23, 26) !important;
 }
 
 .background-inverse-light {
-  background-color: #77787b !important;
+  background-color: tint(#1d1e23, 40) !important;
 }
 
 .background-inverse-lighter {
-  background-color: #d2d2d3 !important;
+  background-color: tint(#1d1e23, 80) !important;
 }
 
 .background-primary {
@@ -386,19 +386,19 @@ textarea.form-control {
 }
 
 .background-primary-darker {
-  background-color: #284d7a !important;
+  background-color: shade(#4280cb, 40) !important;
 }
 
 .background-primary-dark {
-  background-color: #315f96 !important;
+  background-color: shade(#4280cb, 26) !important;
 }
 
 .background-primary-light {
-  background-color: #8eb3e0 !important;
+  background-color: tint(#4280cb, 40) !important;
 }
 
 .background-primary-lighter {
-  background-color: #d9e6f5 !important;
+  background-color: tint(#4280cb, 80) !important;
 }
 
 .background-info {
@@ -406,19 +406,19 @@ textarea.form-control {
 }
 
 .background-info-darker {
-  background-color: #2b6a94 !important;
+  background-color: shade(#48B0F7, 40) !important;
 }
 
 .background-info-dark {
-  background-color: #3582b7 !important;
+  background-color: shade(#48B0F7, 26) !important;
 }
 
 .background-info-light {
-  background-color: #91d0fa !important;
+  background-color: tint(#48B0F7, 40) !important;
 }
 
 .background-info-lighter {
-  background-color: #daeffd !important;
+  background-color: tint(#48B0F7, 80) !important;
 }
 
 .background-success {
@@ -426,19 +426,19 @@ textarea.form-control {
 }
 
 .background-success-darker {
-  background-color: #3d7119 !important;
+  background-color: shade(#66bc2a, 40) !important;
 }
 
 .background-success-dark {
-  background-color: #4b8b1f !important;
+  background-color: shade(#66bc2a, 26) !important;
 }
 
 .background-success-light {
-  background-color: #a3d77f !important;
+  background-color: tint(#66bc2a, 40) !important;
 }
 
 .background-success-lighter {
-  background-color: #e0f2d4 !important;
+  background-color: tint(#66bc2a, 80) !important;
 }
 
 .background-warning {
@@ -446,19 +446,19 @@ textarea.form-control {
 }
 
 .background-warning-darker {
-  background-color: #957d32 !important;
+  background-color: shade(#F8D053, 40) !important;
 }
 
 .background-warning-dark {
-  background-color: #b89a3d !important;
+  background-color: shade(#F8D053, 26) !important;
 }
 
 .background-warning-light {
-  background-color: #fbe398 !important;
+  background-color: tint(#F8D053, 40) !important;
 }
 
 .background-warning-lighter {
-  background-color: #fef6dd !important;
+  background-color: tint(#F8D053, 80) !important;
 }
 
 .background-danger {
@@ -466,19 +466,19 @@ textarea.form-control {
 }
 
 .background-danger-darker {
-  background-color: #8e1116 !important;
+  background-color: shade(#ed1c24, 40) !important;
 }
 
 .background-danger-dark {
-  background-color: #af151b !important;
+  background-color: shade(#ed1c24, 26) !important;
 }
 
 .background-danger-light {
-  background-color: #f4777c !important;
+  background-color: tint(#ed1c24, 40) !important;
 }
 
 .background-danger-lighter {
-  background-color: #fbd2d3 !important;
+  background-color: tint(#ed1c24, 80) !important;
 }
 
 /* ==========================================================================
@@ -996,10 +996,10 @@ textarea.form-control {
    Default Mendix Datagrid Widget with hover
 ========================================================================== */
 .datagrid-hover.mx-datagrid .mx-datagrid-body-table .mx-datagrid-body tr:hover td, .mx-datagrid.multilevel-grid .mx-datagrid-body-table .mx-datagrid-body tr:hover td {
-  background-color: #d2dfee !important;
+  background-color: shade(tint(#4280cb, 80), 3) !important;
 }
 .datagrid-hover.mx-datagrid .mx-datagrid-body-table .mx-datagrid-body tr.selected:hover td, .mx-datagrid.multilevel-grid .mx-datagrid-body-table .mx-datagrid-body tr.selected:hover td {
-  background-color: #d2dfee !important;
+  background-color: shade(tint(#4280cb, 80), 3) !important;
 }
 
 /* ==========================================================================
@@ -1586,28 +1586,28 @@ textarea.form-control {
 }
 .mx-groupbox.groupbox-callout-info > .mx-groupbox-header,
 .mx-groupbox.groupbox-callout-info > .mx-groupbox-body {
-  background-color: #daeffd;
+  background-color: tint(#48B0F7, 80);
 }
 .mx-groupbox.groupbox-callout-info > .mx-groupbox-header {
   color: #48B0F7;
 }
 .mx-groupbox.groupbox-callout-success > .mx-groupbox-header,
 .mx-groupbox.groupbox-callout-success > .mx-groupbox-body {
-  background-color: #e0f2d4;
+  background-color: tint(#66bc2a, 80);
 }
 .mx-groupbox.groupbox-callout-success > .mx-groupbox-header {
   color: #66bc2a;
 }
 .mx-groupbox.groupbox-callout-warning > .mx-groupbox-header,
 .mx-groupbox.groupbox-callout-warning > .mx-groupbox-body {
-  background-color: #fef6dd;
+  background-color: tint(#F8D053, 80);
 }
 .mx-groupbox.groupbox-callout-warning > .mx-groupbox-header {
   color: #F8D053;
 }
 .mx-groupbox.groupbox-callout-danger > .mx-groupbox-header,
 .mx-groupbox.groupbox-callout-danger > .mx-groupbox-body {
-  background-color: #fbd2d3;
+  background-color: tint(#ed1c24, 80);
 }
 .mx-groupbox.groupbox-callout-danger > .mx-groupbox-header {
   color: #ed1c24;
@@ -1814,7 +1814,7 @@ img.img-auto,
   background-color: #4280cb !important;
 }
 .mx-listview .mx-listview-item.selected:hover {
-  background-color: #d2dfee !important;
+  background-color: shade(tint(#4280cb, 80), 3) !important;
 }
 .mx-listview .mx-listview-item:nth-child(2n+1) {
   background-color: #FFF;
@@ -1830,7 +1830,7 @@ img.img-auto,
    Default Mendix Listview Widget with hover
 ========================================================================== */
 .listview-hover.mx-listview .mx-listview-item:hover, .mx-listview.multilevel-list .mx-listview-item:hover, .listview-hover.mx-listview .mx-listview-item:active, .mx-listview.multilevel-list .mx-listview-item:active {
-  background-color: #d2dfee !important;
+  background-color: shade(tint(#4280cb, 80), 3) !important;
 }
 
 /* ==========================================================================
@@ -2711,13 +2711,13 @@ table.table-fixed {
    Default Mendix Templategrid Widget Hover
 ========================================================================== */
 .templategrid-hover.mx-templategrid .mx-templategrid-item:hover {
-  background-color: #d2dfee !important;
+  background-color: shade(tint(#4280cb, 80), 3) !important;
 }
 .templategrid-hover.mx-templategrid .mx-templategrid-item.selected {
   background-color: #4280cb !important;
 }
 .templategrid-hover.mx-templategrid .mx-templategrid-item.selected:hover {
-  background-color: #d2dfee !important;
+  background-color: shade(tint(#4280cb, 80), 3) !important;
 }
 
 /* ==========================================================================
@@ -3865,20 +3865,20 @@ h1, h2, h3, h4, h5, h6,
 }
 
 .wizard-progress-step-active {
-  background-color: #d9e6f5;
+  background-color: tint(#4280cb, 80);
 }
 .wizard-progress-step-active:after {
-  border-left-color: #d9e6f5;
+  border-left-color: tint(#4280cb, 80);
 }
 .wizard-progress-step-active .wizard-progress-number {
   background-color: #4280cb;
 }
 
 .wizard-progress-step-visited {
-  background-color: #d9e6f5;
+  background-color: tint(#4280cb, 80);
 }
 .wizard-progress-step-visited:after {
-  border-left-color: #d9e6f5;
+  border-left-color: tint(#4280cb, 80);
 }
 .wizard-progress-step-visited .wizard-progress-number {
   background-color: #66bc2a;
@@ -4531,3 +4531,5 @@ body[dir="ltr"] .mx-header-right {
   padding: 0 30px;
   line-height: 60px;
 }
+
+/*# sourceMappingURL=lib.css.map */

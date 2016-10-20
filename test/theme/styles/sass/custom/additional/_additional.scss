@@ -27,3 +27,9 @@ Additional styling
         background-color: lighten($brand-danger, 40);
     }
 }
+
+button.btn.mx-button[disabled] {
+    border-color: $brand-default;
+    background-color: white;
+    color: $brand-default;
+}

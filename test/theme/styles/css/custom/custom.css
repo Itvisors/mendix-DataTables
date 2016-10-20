@@ -1220,3 +1220,11 @@ Additional styling
 .mx-name-dataTablesTestCalcAttr tr[data-calcattr=Red] td {
   background-color: #fcd9da;
 }
+
+button.btn.mx-button[disabled] {
+  border-color: #DDDDDD;
+  background-color: white;
+  color: #DDDDDD;
+}
+
+/*# sourceMappingURL=custom.css.map */
