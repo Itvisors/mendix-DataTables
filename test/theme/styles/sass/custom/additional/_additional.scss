@@ -11,6 +11,9 @@ Additional styling
     tr[data-devicetype=Tablet] td {
         background-color: lighten($brand-info, 20);
     }
+    tr[data-devicetype=Desktop] td[data-columnname=DeviceType] {
+        background-color: lighten($brand-info, 20);
+    }
 }
 
 .mx-name-dataTablesTestCalcAttr {

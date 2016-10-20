@@ -1207,6 +1207,9 @@ Additional styling
 .DataTypesRowStyling tr[data-devicetype=Tablet] td {
   background-color: #aadafb;
 }
+.DataTypesRowStyling tr[data-devicetype=Desktop] td[data-columnname=DeviceType] {
+  background-color: #aadafb;
+}
 
 .mx-name-dataTablesTestCalcAttr tr[data-calcattr=Green] td {
   background-color: #d5f1c1;

@@ -289,6 +289,7 @@ define([
             dataTablesOptions.order = [[ sortIndex, "asc" ]];
             
             dataTablesOptions.drawCallback = function () {
+                var dataTablesThisObj = this;
                 this.api().rows().every(function (rowIdx, tableLoop, rowLoop) {
                     var rowData = this.data(),
                         trNode = this.node();
@@ -302,6 +303,11 @@ define([
                             trNode.setAttribute("data-" + attrName, rowData[attrName]);
                         }
                     });
+                    dojoArray.forEach(dataTablesColumns, function (column, i) {
+                        var cellNode;
+                        cellNode = dataTablesThisObj.api().cell({row : rowIdx, column : i}).node();
+                        cellNode.setAttribute("data-columnName", column.name);
+                    }, this);
                     if (thisObj.selectFirst && rowLoop === 0) {
                         this.select();
                     }
