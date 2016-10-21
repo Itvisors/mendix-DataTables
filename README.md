@@ -42,7 +42,6 @@ All features can be seen in action in the test/demo project.
 
 ## Backlog
 
-- Set CSS classes on rows or cells based on styling rules.
 - Currently only XPath can be used to get the grid data. Datasource microflows will be supported in a future release.
 
 ## Configuration
