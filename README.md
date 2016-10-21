@@ -175,7 +175,9 @@ The _Selection changed callback microflow_ can be used to create functionality s
 
 The buttons to use for processing selections. Note that buttons are displayed in the widget itself, above the grid. You can place the buttons in a container on your page using the _placement_ properties. This allows you to create one toolbar containing Mendix action buttons and buttons created by the widget. The demo project has an example of this in the Data Types demo.
 
-Buttons can be enabled or disabled depending on a value in the grid entity. Only one attribute, boolean or enumeration, for each button to keep the widget simple. If there is a lot of business logic involed, you could introduce a new boolean attribute and set it when your object is changed or in a before commit event. For enumerations, use the internal value, not the caption. 
+Buttons can be enabled or disabled depending on a value in the grid entity. Only one attribute, boolean or enumeration, for each button to keep the widget simple. If there is a lot of business logic involed, you could introduce a new boolean attribute and set it when your object is changed or in a before commit event. For enumerations, use the internal value, not the caption.
+
+Make sure that the default button is always allowed.
 
 #### Definition
 

@@ -976,6 +976,7 @@ define([
         
         // Clear selection
         _clearSelection: function () {
+            logger.debug(this.id + "._clearSelection");
             this._table.rows({selected: true}).deselect();
             this._setButtonEnabledStatus();
         },
@@ -983,13 +984,41 @@ define([
         // Enable/Disable buttons when selection changes
         _setButtonEnabledStatus: function () {
             logger.debug(this.id + "._setButtonEnabledStatus");
-            var hasSelection,
+            var attrValue,
+                buttonDefinition,
+                buttonEnabled,
+                hasSelection,
                 rowDataArray;
             rowDataArray = this._getSelectedRowData();
             hasSelection = (rowDataArray.length > 0);
-            dojoArray.forEach(this._buttonList, function (button) {
+            dojoArray.forEach(this._buttonList, function (button, i) {
                 if (hasSelection) {
-                    button.removeAttribute("disabled");
+                    // When there is a selection, check whether the button is enabled depending on an attribute value.
+                    // The button will be enabled when the value matches for all selected rows.
+                    buttonEnabled = true;
+                    buttonDefinition = this.buttonDefinitionList[i];
+                    if (buttonDefinition.enabledAttrName && buttonDefinition.enabledValue) {
+                        dojoArray.forEach(rowDataArray, function (rowData) {
+                            var attrNameInternal = buttonDefinition.enabledAttrName + "-internal";
+                            // When available, use the internal value, this is for boolean and enum.
+                            if (rowData.hasOwnProperty(attrNameInternal)) {
+                                attrValue = rowData[attrNameInternal];
+                            } else {
+                                attrValue = rowData[buttonDefinition.enabledAttrName];
+                            }
+                            if (typeof attrValue === "boolean") {
+                                attrValue = attrValue.toString();
+                            }
+                            if (attrValue !== buttonDefinition.enabledValue) {
+                                buttonEnabled = false;
+                            }
+                        });
+                    }
+                    if (buttonEnabled) {
+                        button.removeAttribute("disabled");
+                    } else {
+                        button.setAttribute("disabled", "");
+                    }
                 } else {
                     button.setAttribute("disabled", "");
                 }
