@@ -71,6 +71,7 @@ define([
         stateSaveName: null,
         showTableInformation: true,
         infiniteScroll: false,
+        scrollX: false,
         scrollY: null,
         selectionType: null,
         selectFirst: false,
@@ -386,6 +387,11 @@ define([
                 dataTablesOptions.scroller = {
                     loadingIndicator: true
                 };
+            }
+            
+            // Horizontal scrolling
+            if (this.scrollX) {
+                dataTablesOptions.scrollX = true;
             }
             
             // Vertical scrolling

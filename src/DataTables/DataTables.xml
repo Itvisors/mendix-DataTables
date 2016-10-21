@@ -279,6 +279,11 @@
             <category>Layout</category>
             <description>Use infinite scroll rather than the default paging buttons. Set nowrap on the table class!</description>
         </property>
+        <property key="scrollX" type="boolean" defaultValue="false">
+            <caption>Horizontal scrolling</caption>
+            <category>Layout</category>
+            <description>When true, horizontal scrolling is used. Set nowrap on the table class!</description>
+        </property>
         <property key="scrollY" type="string" required="false">
             <caption>Vertical scrolling</caption>
             <category>Layout</category>

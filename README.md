@@ -26,6 +26,7 @@ All features can be seen in action in the test/demo project.
 - Force a table refresh from your microflow
 - Feed XPath constraints from an attribute
 - Specify column widths or allow the grid to size the columns based on actual data and available space.
+- Either fit the grid in the available width, or use horizontal scrolling.
 - Selection similar to DataGrid
 - Selection changed microflow, to implement functionality similar to 'listen to grid'
 - Define buttons to work with the selected rows. Each button will call a microflow, which receives the current selection.
@@ -136,6 +137,7 @@ The widget does not display search filter inputs. To provide search filters, def
 - _Table class_ - Specify class(es) to be put on the table
 - _Show table information_ - When turned on, display information: Showing 1 to 6 of 50,000 entries
 - _Use infinite scroll_ - Use infinite scroll rather than the default paging buttons. Set nowrap on the table class!
+- _Horizontal scrolling_ - When true, horizontal scrolling is used. Set nowrap on the table class!
 - _Vertical scrolling_ - Optional, any CSS unit, default 200px. When specified, vertical scrolling is used and height of the rows is constrained to the specified height
 - _State save name_ - Optional. When specified, grid layout state is saved to and loaded from browser local storage using the specied name. Make sure this name is unique across your application!
 
