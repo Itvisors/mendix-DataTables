@@ -30,6 +30,8 @@ All features can be seen in action in the test/demo project.
 - Selection changed microflow, to implement functionality similar to 'listen to grid'
 - Define buttons to work with the selected rows. Each button will call a microflow, which receives the current selection.
 - Place buttons in another container to put them together with other page elements, like a new button that sits in a container above the widget.
+- Enable/disable buttons depending on a boolean or enum value.
+- Style rows or cells depending on data in the row. The demo project has an example of this in the Data Types demo.
 
 ## Limitations
 
@@ -173,6 +175,10 @@ The _Selection changed callback microflow_ can be used to create functionality s
 
 The buttons to use for processing selections. Note that buttons are displayed in the widget itself, above the grid. You can place the buttons in a container on your page using the _placement_ properties. This allows you to create one toolbar containing Mendix action buttons and buttons created by the widget. The demo project has an example of this in the Data Types demo.
 
+Buttons can be enabled or disabled depending on a value in the grid entity. Only one attribute, boolean or enumeration, for each button to keep the widget simple. If there is a lot of business logic involed, you could introduce a new boolean attribute and set it when your object is changed or in a before commit event. For enumerations, use the internal value, not the caption. 
+
+#### Definition
+
 - _Caption_ - Button caption, translatable
 - _Name_ - Button name, will be mx-name- class on the button
 - _Is default button_ - Is default button, microflow will be called when user doubleclicks a row. Only that row is passed, even if other rows are selected too.
@@ -180,13 +186,24 @@ The buttons to use for processing selections. Note that buttons are displayed in
 - _Class_ - Optional. Specify class(es) to be put on the button
 - _Glyphicon classes_ - Optional. Glyphicon classes, like __glyphicon glyphicon-edit__
 - _Button microflow_ - The name of the microflow (Module.Microflow) that is called when the button is clicked
+
+#### Confirmation
+
 - _Ask confirmation_ - Ask for confirmation
 - _Question_ - Confirmation question
 - _Proceed caption_ - Proceed button caption on the confirmation popup
 - _Cancel caption_ - Cancel button caption on the confirmation popup
+
+#### Placement
+
 - _Placement selector_ - Optional. Places the button relative to the node found using this CSS selector. If empty, button is placed in default container above the table. Can be used to bring new and edit button together in one container
 - _Placement position_ - Position of the button in the placement container. Only relevant when placement selector has been specified
 
+#### Enabled
+
+- _Enabled attribute name_ - Optional. Direct attribute of the grid entity to control button disabled status.
+- _Enabled value_ - Optional. The value for which the button is enabled. 
+
 ### Advanced
 
-- _Responsive priority_ - Delay (ms) before placing or moving buttons. Depending on complexity of the page, browsers may need more time to properly render the buttons.
+- _Placement delay_ - Delay (ms) before placing or moving buttons. Depending on complexity of the page, browsers may need more time to properly render the buttons.

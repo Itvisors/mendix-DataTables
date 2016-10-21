@@ -419,13 +419,23 @@
                         <enumerationValue key="last">Last child of the other node</enumerationValue>
                     </enumerationValues>
                 </property>
+                <property key="enabledAttrName" type="string" required="false">
+                    <caption>Enabled attribute name</caption>
+                    <category>Enabled</category>
+                    <description>Optional. Direct attribute of the grid entity to control button disabled status.</description>
+                </property>
+                <property key="enabledValue" type="string" required="false">
+                    <caption>Enabled value</caption>
+                    <category>Enabled</category>
+                    <description>Optional. The value for which the button is enabled.</description>
+                </property>
             </properties>
         </property>
 
-        <!--    Buttons    -->
+        <!--    Advanced    -->
         
         <property key="buttonPlacementDelay" type="integer" defaultValue="100">
-            <caption>Responsive priority</caption>
+            <caption>Placement delay</caption>
             <category>Advanced</category>
             <description>Delay (ms) before placing or moving buttons. Depending on complexity of the page, browsers may need more time to properly render the buttons.</description>
         </property>

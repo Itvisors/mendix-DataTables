@@ -102,6 +102,7 @@ define([
             // Uncomment the following line to enable debug messages
             //logger.level(logger.DEBUG);
             logger.debug(this.id + ".constructor");
+            this._rowObjectHandles = [];
             this._handles = [];
         },
 
@@ -536,6 +537,7 @@ define([
                     proceed: buttonDefinition.proceedCaption,
                     cancel: buttonDefinition.cancelCaption,
                     handler: function () {
+                        this._clearSelection();
                         mx.data.action({
                             params : {
                                 applyto : "selection",
@@ -546,6 +548,7 @@ define([
                     }
                 });
             } else {
+                this._clearSelection();
                 mx.data.action({
                     params : {
                         applyto : "selection",
@@ -569,9 +572,14 @@ define([
         },
         
         // Get selected rows
+        _getSelectedRowData: function () {
+            return this._table.rows({selected: true}).data().toArray();
+        },
+        
+        // Get selected rows
         _getSelectedRows: function () {
             var guids = [],
-                rowDataArray = this._table.rows({selected: true}).data().toArray();
+                rowDataArray = this._getSelectedRowData();
             dojoArray.forEach(rowDataArray, function (rowData) {
                 guids.push(rowData.guid);
             });
@@ -759,6 +767,7 @@ define([
                         this._reloadTableData(false);
                     })
                 });
+                this._rowObjectHandles.push(objectHandle);
                 
             }, this);
             return dataArray;
@@ -965,10 +974,19 @@ define([
             this._resetRowObjectSubscriptions();
         },
         
+        // Clear selection
+        _clearSelection: function () {
+            this._table.rows({selected: true}).deselect();
+            this._setButtonEnabledStatus();
+        },
+        
         // Enable/Disable buttons when selection changes
         _setButtonEnabledStatus: function () {
             logger.debug(this.id + "._setButtonEnabledStatus");
-            var hasSelection = (this._table.rows({selected: true}).data().toArray().length > 0);
+            var hasSelection,
+                rowDataArray;
+            rowDataArray = this._getSelectedRowData();
+            hasSelection = (rowDataArray.length > 0);
             dojoArray.forEach(this._buttonList, function (button) {
                 if (hasSelection) {
                     button.removeAttribute("disabled");
