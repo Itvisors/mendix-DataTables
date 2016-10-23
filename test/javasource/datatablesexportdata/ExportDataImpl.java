@@ -32,6 +32,8 @@ public class ExportDataImpl {
 		
 		final boolean exportVisibleColumnsOnly = jsonObject.getBoolean("exportVisibleColumnsOnly");
 		final String entityName = jsonObject.getString("tableEntity");
+		final String sortName = jsonObject.getString("sortName");
+		final String sortDir = jsonObject.getString("sortDir");
 		JSONArray columns = jsonObject.getJSONArray("columns");
 		for (JSONObject column : columns.toJSONObjectCollection()) {
 			final String caption = column.getString("caption");

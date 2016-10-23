@@ -107,6 +107,8 @@ define([
         _referenceColumns: null,
         _hasReferenceColumns: false,
         _trDataAttrNames: null,
+        _sortName: "",
+        _sortDir: "",
         _exportButton: null,
         
         // I18N file names object at the end, out of sight!
@@ -646,6 +648,8 @@ define([
             configData = {
                 tableEntity : this.tableEntity,
                 exportVisibleColumnsOnly : this.exportVisibleColumnsOnly,
+                sortName : this._sortName,
+                sortDir: this._sortDir,
                 columns : []
             };
             dojoArray.forEach(this.columnList, function (column, i) {
@@ -775,7 +779,6 @@ define([
                 referenceColumnDef,
                 sortColumnIndex = data.order[0].column,
                 sortColumn = data.columns[sortColumnIndex],
-                sortName,
                 thisObj = this,
                 xpath;
             
@@ -785,17 +788,18 @@ define([
             
             if (this._referenceColumns[sortColumn.name]) {
                 referenceColumnDef = this._referenceColumns[sortColumn.name];
-                sortName = referenceColumnDef.refName + "/" + this._entityMetaData.getSelectorEntity(referenceColumnDef.refName) + "/" + referenceColumnDef.attrName;
+                this._sortName = referenceColumnDef.refName + "/" + this._entityMetaData.getSelectorEntity(referenceColumnDef.refName) + "/" + referenceColumnDef.attrName;
             } else {
-                sortName = sortColumn.data;
+                this._sortName = sortColumn.data;
             }
+            this._sortDir = data.order[0].dir;
             
             mx.data.get({
                 xpath: xpath,
                 noCache: true,
                 count: true,
                 filter: {
-                    sort: [[sortName, data.order[0].dir]],
+                    sort: [[this._sortName, this._sortDir]],
                     offset: data.start,
                     amount: data.length
                 },
