@@ -81,9 +81,20 @@ define([
         refSearchFilterList: null,
         buttonDefinitionList: null,
         buttonPlacementDelay: 0,
+        allowExport: false,
+        exportButtonCaption: "",
+        exportVisibleColumnsOnly: true,
+        exportConfigAttr: "",
+        exportXPathAttr: "",
+        exportButtonType: "",
+        exportButtonClass: "",
+        exportButtonGlyphiconClass: "",
+        exportButtonPlaceRefCssSelector: "",
+        exportButtonPlaceRefPos: "",
         
         // Internal variables. Non-primitives created in the prototype are shared between all widget instances.
         _handles: null,
+        _progressDialogId: null,
         _rowObjectHandles: null,
         _contextObj: null,
         _contextObjMetaData: null,
@@ -95,6 +106,7 @@ define([
         _referenceColumns: null,
         _hasReferenceColumns: false,
         _trDataAttrNames: null,
+        _exportButton: null,
         
         // I18N file names object at the end, out of sight!
 
@@ -183,6 +195,7 @@ define([
             this._clearTableData();
             this._table = null;
             this._buttonList = null;
+            this._exportButton = null;
         },
 
         // We want to stop events on a mobile device
@@ -520,10 +533,6 @@ define([
                     thisObj._buttonList.push(button);
                 }, thisObj);
                 thisObj._setButtonEnabledStatus();
-                // Show our own button container if it has child nodes.
-                if (thisObj.buttonContainer.hasChildNodes()) {
-                    dojoStyle.set(thisObj.controlbar, "display", "block");
-                }
 
                 // Add click handler for default button
                 if (thisObj._defaultButtonDefinition) {
@@ -531,8 +540,126 @@ define([
                         thisObj._callButtonMicroflow(thisObj._defaultButtonDefinition, [this.getAttribute("data-guid")]);
                     });
                 }
+                
+                // Export button
+                if (thisObj.allowExport && thisObj._checkExportConfiguration()) {
+                    thisObj._createExportButton();
+                }
+
+                // Show our own button container if it has child nodes.
+                if (thisObj.buttonContainer.hasChildNodes()) {
+                    dojoStyle.set(thisObj.controlbar, "display", "block");
+                }
             }, thisObj.buttonPlacementDelay);
 
+        },
+        
+        // Check export configuration
+        _checkExportConfiguration: function () {
+            logger.debug(this.id + "._checkExportConfiguration");
+            var result = true;
+            
+            if (!this.exportConfigAttr) {
+                logger.error(this.id + "._checkExportConfiguration: Export configuration attribute not set");
+                result = false;
+            }
+            
+            if (!this.exportXPathAttr) {
+                logger.error(this.id + "._checkExportConfiguration: Export XPath constraint attribute not set");
+                result = false;
+            }
+            
+            if (!this.exportMicroflow) {
+                logger.error(this.id + "._checkExportConfiguration: Export microflow not set");
+                result = false;
+            }
+            
+            return result;
+        },
+            
+        _createExportButton: function () {
+            logger.debug(this.id + "._createExportButton");
+            var buttonHtml,
+                refNode,
+                refNodeList,
+                refNodePos,
+                thisObj = this;
+
+
+            // Create the basic HTML for the button
+            buttonHtml  = "<button type='button' class='btn mx-button btn-" + this.exportButtonType + "'>";
+            if (this.exportButtonGlyphiconClass) {
+                buttonHtml += "<span class='" + this.exportButtonGlyphiconClass + "'></span> "; // The space is intentional! Separation between icon and caption
+            }
+            buttonHtml += this.exportButtonCaption;
+            buttonHtml += "</button>";
+
+            // Put it in our own container or a specified one?
+            refNode = this.buttonContainer;
+            refNodePos = "last";
+            if (this.exportButtonPlaceRefCssSelector) {
+                refNodeList = dojoQuery(this.exportButtonPlaceRefCssSelector);
+                if (refNodeList && refNodeList.length) {
+                    refNode = refNodeList[0];
+                    refNodePos = this.exportButtonPlaceRefPos;
+                }
+            }
+            this._exportButton = dojoConstruct.place(buttonHtml, refNode, refNodePos);
+            dojoClass.add(this._exportButton, "mx-name-DataTablesExportButton");
+            if (this.exportButtonClass) {
+                dojoClass.add(this._exportButton, this.exportButtonClass);
+            }
+            dojoOn(this._exportButton, "click", function () {
+                thisObj._contextObj.set(thisObj.exportConfigAttr, thisObj._createExportConfigData());
+                thisObj._contextObj.set(thisObj.exportXPathAttr, "XPath");
+                mx.data.save({
+                    mxobj: thisObj._contextObj,
+                    callback: function () {
+                        thisObj._showProgress();
+                        mx.data.action({
+                            params : {
+                                applyto    : "selection",
+                                actionname : thisObj.exportMicroflow,
+                                guids      : [thisObj._contextObj.getGuid()]
+                            },
+                            callback: function () {
+                                console.log("Export MF callback");
+                                thisObj._hideProgress();
+                            },
+                            error: function () {
+                                logger.error("Call to " + thisObj.exportMicroflow + " ended in error");
+                                thisObj._hideProgress();
+                            }
+                        });
+                    }
+                });
+            });
+        },
+        
+        _createExportConfigData: function () {
+            
+            var configData;
+            
+            configData = {
+                tableEntity : this.tableEntity,
+                exportVisibleColumnsOnly : this.exportVisibleColumnsOnly,
+                columns : []
+            };
+            dojoArray.forEach(this.columnList, function (column) {
+                var configColumn = {
+                    caption: column.caption,
+                    attrName: column.attrName,
+                    refName: column.refName,
+                    dateTimeType: column.dateTimeType,
+                    dateFormat: column.dateFormat,
+                    dateTimeFormat: column.dateTimeFormat,
+                    timeFormat: column.timeFormat,
+                    groupDigits: column.groupDigits,
+                    decimalPositions: column.decimalPositions
+                };
+                configData.columns.push(configColumn);
+            }, this);
+            return JSON.stringify(configData);
         },
         
         // call button microflow
@@ -563,6 +690,21 @@ define([
                     }
                 });
             }
+        },
+
+        /**
+         * Show progress indicator, depends on Mendix version
+         */
+        _showProgress: function () {
+            this._progressDialogId = mx.ui.showProgress();
+        },
+
+        /**
+         * Hide progress indicator, depends on Mendix version
+         */
+        _hideProgress: function () {
+            mx.ui.hideProgress(this._progressDialogId);
+            this._progressDialogId = null;
         },
         
         // Call selection microflow
@@ -889,11 +1031,11 @@ define([
                 result;
 
             if (!this._contextObjMetaData.has(contextEntityAttr)) {
-                console.error(this._contextObj.getEntity() + " does not have attribute " + contextEntityAttr);
+                logger.error(this._contextObj.getEntity() + " does not have attribute " + contextEntityAttr);
                 return null;
             }
             if (!this._entityMetaData.has(attrName)) {
-                console.error(this._contextObj.getEntity() + " does not have attribute " + attrName);
+                logger.error(this._contextObj.getEntity() + " does not have attribute " + attrName);
                 return null;
             }
             

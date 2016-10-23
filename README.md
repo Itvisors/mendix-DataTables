@@ -207,6 +207,23 @@ Make sure that the default button is always allowed.
 - _Enabled attribute name_ - Optional. Direct attribute of the grid entity to control button disabled status.
 - _Enabled value_ - Optional. The value for which the button is enabled. 
 
+### Export
+
+The export cannot be done on the client because the client only has a subset of the data. Therefore, the export is run on the server. The widget sets two values on the context object for the backend to use. For this to work, add two unlimited string attributes (configuration and XPath constraint) to your context entity and choose those in the widget properties. 
+
+The demo project has a generic implementation to create data exports. 
+
+- _Allow export_ - If on, an additional export button will be displayed
+- _Button caption_ - Export button caption
+- _Visible only_ - Export visible columns only
+- _Export config attribute_ - Export configuration attribute
+- _Export XPath attribute_ - Export XPath constraint attribute
+- _Export button type_ - Button type, the same as normal Mendix buttons.
+- _Export button class_ - Optional. Specify class(es) to be put on the button
+- _Export button glyphicon classes_ - Optional. Glyphicon classes, like __glyphicon glyphicon-edit__
+- _Placement selector_ - Optional. Places the button relative to the node found using this CSS selector. If empty, button is placed in default container above the table.
+- _Placement position_ - Position of the button in the placement container. Only relevant when placement selector has been specified
+
 ### Advanced
 
 - _Placement delay_ - Delay (ms) before placing or moving buttons. Depending on complexity of the page, browsers may need more time to properly render the buttons.

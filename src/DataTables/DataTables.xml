@@ -437,6 +437,91 @@
             </properties>
         </property>
 
+        <!--    Export    -->
+
+        <property key="allowExport" type="boolean" defaultValue="false">
+            <caption>Allow export</caption>
+            <category>Export</category>
+            <description>Allow export</description>
+        </property>
+        <property key="exportButtonCaption" type="translatableString">
+            <caption>Button caption</caption>
+            <category>Export</category>
+            <description>Button caption, translatable</description>
+            <translations>
+                <translation lang="en_US">Export</translation>
+                <translation lang="nl_NL">Export</translation>
+            </translations>
+        </property>
+        <property key="exportVisibleColumnsOnly" type="boolean" defaultValue="true">
+            <caption>Visible only</caption>
+            <category>Export</category>
+            <description>Export visible columns only</description>
+        </property>
+        <property key="exportConfigAttr" type="attribute" required="false">
+            <caption>Export config attribute</caption>
+            <category>Export</category>
+            <description>Export configuration attribute</description>
+            <attributeTypes>
+                <attributeType name="String"/>
+            </attributeTypes>
+        </property>
+        <property key="exportXPathAttr" type="attribute" required="false">
+            <caption>Export XPath attribute</caption>
+            <category>Export</category>
+            <description>Export XPath constraint attribute</description>
+            <attributeTypes>
+                <attributeType name="String"/>
+            </attributeTypes>
+        </property>
+        <property key="exportMicroflow" type="microflow" required="false">
+            <caption>Export microflow</caption>
+            <category>Export</category>
+            <description>The microflow that receives an object of the same type as the export entity property.</description>
+            <returnType type="Void"></returnType>
+        </property>        
+        <property key="exportButtonType" type="enumeration" defaultValue="default">
+            <caption>Export button type</caption>
+            <category>Export</category>
+            <description>Export button type</description>
+            <enumerationValues>
+                <enumerationValue key="default">Default</enumerationValue>
+                <enumerationValue key="primary">Primary</enumerationValue>
+                <enumerationValue key="inverse">Inverse</enumerationValue>
+                <enumerationValue key="info">Info</enumerationValue>
+                <enumerationValue key="success">Success</enumerationValue>
+                <enumerationValue key="warning">Warning</enumerationValue>
+                <enumerationValue key="danger">Danger</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="exportButtonClass" type="string" required="false">
+            <caption>Export button class</caption>
+            <category>Export</category>
+            <description>Optional. Specify class(es) to be put on the button</description>
+        </property>
+        <property key="exportButtonGlyphiconClass" type="string" required="false">
+            <caption>Export button glyphicon classes</caption>
+            <category>Export</category>
+            <description>Optional. Glyphicon classes, like glyphicon glyphicon-edit</description>
+        </property>
+        <property key="exportButtonPlaceRefCssSelector" type="string" required="false">
+            <caption>Export placement selector</caption>
+            <category>Export</category>
+            <description>Optional. Places the button relative to the node found using this CSS selector. If empty, button is placed in default container above the table.</description>
+        </property>
+        <property key="exportButtonPlaceRefPos" type="enumeration" defaultValue="last">
+            <caption>Export placement position</caption>
+            <category>Export</category>
+            <description>Position of the button in the placement container. Only relevant when placement selector has been specified</description>
+            <enumerationValues>
+                <enumerationValue key="before">Before the other node</enumerationValue>
+                <enumerationValue key="after">After the other node</enumerationValue>
+                <enumerationValue key="first">First child of the other node</enumerationValue>
+                <enumerationValue key="last">Last child of the other node</enumerationValue>
+            </enumerationValues>
+        </property>
+        
+
         <!--    Advanced    -->
         
         <property key="buttonPlacementDelay" type="integer" defaultValue="100">
