@@ -645,7 +645,7 @@ define([
                 exportVisibleColumnsOnly : this.exportVisibleColumnsOnly,
                 columns : []
             };
-            dojoArray.forEach(this.columnList, function (column) {
+            dojoArray.forEach(this.columnList, function (column, i) {
                 var configColumn = {
                     caption: column.caption,
                     attrName: column.attrName,
@@ -655,7 +655,8 @@ define([
                     dateTimeFormat: column.dateTimeFormat,
                     timeFormat: column.timeFormat,
                     groupDigits: column.groupDigits,
-                    decimalPositions: column.decimalPositions
+                    decimalPositions: column.decimalPositions,
+                    visible: this._table.column(i).visible()
                 };
                 configData.columns.push(configColumn);
             }, this);

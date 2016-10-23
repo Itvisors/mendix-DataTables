@@ -43,7 +43,8 @@ public class ExportDataImpl {
 			final String timeFormat = column.getString("timeFormat");
 			final boolean groupDigits = column.getBoolean("groupDigits");
 			final int decimalPositions = column.getInt("decimalPositions");
-			logger.info(caption + ", " + attrName);
+			final boolean visible = column.getBoolean("visible");
+			logger.info(caption + ", " + attrName + ", visible: " + Boolean.toString(visible));
 		}
 		
 		return exportDocument;
