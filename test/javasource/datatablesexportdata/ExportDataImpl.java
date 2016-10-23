@@ -20,7 +20,7 @@ public class ExportDataImpl {
 		this.context = context;
 	}
 		
-	public DataTablesExportDocument export(String exportConfig, String xpathConstraint) {
+	public DataTablesExportDocument export(String exportConfig, String xpath) {
 		String logPrefix = CLASS_NAME + ".export ";
 		if (logger.isTraceEnabled()) {
 			logger.trace(logPrefix + "start");
@@ -46,6 +46,11 @@ public class ExportDataImpl {
 			final boolean visible = column.getBoolean("visible");
 			logger.info(caption + ", " + attrName + ", visible: " + Boolean.toString(visible));
 		}
+		
+		if (logger.isDebugEnabled()) {
+			logger.debug(logPrefix + "XPath: " + xpath);
+		}		
+		
 		
 		return exportDocument;
 	}

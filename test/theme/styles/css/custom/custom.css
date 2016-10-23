@@ -321,7 +321,8 @@ a:hover {
   /* Styles here */
 }
 .mx-navigationtree .navbar-inner ul li a {
-  padding: 20px;
+  padding: 12px 20px;
+  /* @Changed Marcel Groeneweg */
   border: 0;
 }
 .mx-navigationtree .navbar-inner ul li a .glyphicon {

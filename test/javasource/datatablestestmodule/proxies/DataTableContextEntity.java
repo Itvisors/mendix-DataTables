@@ -35,7 +35,7 @@ public class DataTableContextEntity
 		DecimalValue("DecimalValue"),
 		BooleanFilter("BooleanFilter"),
 		ExportConfig("ExportConfig"),
-		ExportXPathConstraint("ExportXPathConstraint"),
+		ExportXPath("ExportXPath"),
 		DataTableContextEntity_Person_Current("DataTablesTestModule.DataTableContextEntity_Person_Current"),
 		DataTableContextEntity_Country("DataTablesTestModule.DataTableContextEntity_Country"),
 		DataTableContextEntity_Language("DataTablesTestModule.DataTableContextEntity_Language");
@@ -574,39 +574,39 @@ public class DataTableContextEntity
 	}
 
 	/**
-	 * @return value of ExportXPathConstraint
+	 * @return value of ExportXPath
 	 */
-	public final String getExportXPathConstraint()
+	public final String getExportXPath()
 	{
-		return getExportXPathConstraint(getContext());
+		return getExportXPath(getContext());
 	}
 
 	/**
 	 * @param context
-	 * @return value of ExportXPathConstraint
+	 * @return value of ExportXPath
 	 */
-	public final String getExportXPathConstraint(com.mendix.systemwideinterfaces.core.IContext context)
+	public final String getExportXPath(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.ExportXPathConstraint.toString());
+		return (String) getMendixObject().getValue(context, MemberNames.ExportXPath.toString());
 	}
 
 	/**
-	 * Set value of ExportXPathConstraint
-	 * @param exportxpathconstraint
+	 * Set value of ExportXPath
+	 * @param exportxpath
 	 */
-	public final void setExportXPathConstraint(String exportxpathconstraint)
+	public final void setExportXPath(String exportxpath)
 	{
-		setExportXPathConstraint(getContext(), exportxpathconstraint);
+		setExportXPath(getContext(), exportxpath);
 	}
 
 	/**
-	 * Set value of ExportXPathConstraint
+	 * Set value of ExportXPath
 	 * @param context
-	 * @param exportxpathconstraint
+	 * @param exportxpath
 	 */
-	public final void setExportXPathConstraint(com.mendix.systemwideinterfaces.core.IContext context, String exportxpathconstraint)
+	public final void setExportXPath(com.mendix.systemwideinterfaces.core.IContext context, String exportxpath)
 	{
-		getMendixObject().setValue(context, MemberNames.ExportXPathConstraint.toString(), exportxpathconstraint);
+		getMendixObject().setValue(context, MemberNames.ExportXPath.toString(), exportxpath);
 	}
 
 	/**

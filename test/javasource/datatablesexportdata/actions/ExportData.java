@@ -21,20 +21,20 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
 public class ExportData extends CustomJavaAction<IMendixObject>
 {
 	private String configData;
-	private String xpathConstraint;
+	private String xpath;
 
-	public ExportData(IContext context, String configData, String xpathConstraint)
+	public ExportData(IContext context, String configData, String xpath)
 	{
 		super(context);
 		this.configData = configData;
-		this.xpathConstraint = xpathConstraint;
+		this.xpath = xpath;
 	}
 
 	@Override
 	public IMendixObject executeAction() throws Exception
 	{
 		// BEGIN USER CODE
-		final DataTablesExportDocument exportDocument = new ExportDataImpl(getContext()).export(configData, xpathConstraint);
+		final DataTablesExportDocument exportDocument = new ExportDataImpl(getContext()).export(configData, xpath);
 		if (exportDocument != null) {
 			return exportDocument.getMendixObject();
 		} else {

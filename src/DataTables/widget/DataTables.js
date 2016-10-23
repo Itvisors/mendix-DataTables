@@ -101,6 +101,7 @@ define([
         _entityMetaData: null,
         _tableNodelist: null,
         _table: null,
+        _hasDummyColumn: false,
         _buttonList: null,
         _defaultButtonDefinition: null,
         _referenceColumns: null,
@@ -233,6 +234,7 @@ define([
 
             // Add dummy column when column visibility is turned on, to prevent rendering issues.
             // When the first column is hidden, column reorder shows the dragging line at the wrong position.
+            this._hasDummyColumn = false;
             if (this.allowColumnVisibility && this.allowColumnReorder) {
                 dataTablesColumn = {
                     title: " ",
@@ -245,6 +247,7 @@ define([
                     dataTablesColumn.responsivePriority = 0;
                 }
                 dataTablesColumns.push(dataTablesColumn);
+                this._hasDummyColumn = true;
             }
 
             // Process column definitions.
@@ -611,7 +614,7 @@ define([
             }
             dojoOn(this._exportButton, "click", function () {
                 thisObj._contextObj.set(thisObj.exportConfigAttr, thisObj._createExportConfigData());
-                thisObj._contextObj.set(thisObj.exportXPathAttr, "XPath");
+                thisObj._contextObj.set(thisObj.exportXPathAttr, thisObj._createXPathConstraint());
                 mx.data.save({
                     mxobj: thisObj._contextObj,
                     callback: function () {
@@ -646,19 +649,33 @@ define([
                 columns : []
             };
             dojoArray.forEach(this.columnList, function (column, i) {
-                var configColumn = {
-                    caption: column.caption,
-                    attrName: column.attrName,
-                    refName: column.refName,
-                    dateTimeType: column.dateTimeType,
-                    dateFormat: column.dateFormat,
-                    dateTimeFormat: column.dateTimeFormat,
-                    timeFormat: column.timeFormat,
-                    groupDigits: column.groupDigits,
-                    decimalPositions: column.decimalPositions,
-                    visible: this._table.column(i).visible()
-                };
-                configData.columns.push(configColumn);
+                var configColumn,
+                    dataTablesColumnIndex,
+                    visible;
+                
+                if (this._hasDummyColumn) {
+                    dataTablesColumnIndex = i + 1;
+                } else {
+                    dataTablesColumnIndex = 1;
+                }
+                // Only include columns that are to be included in the export.
+                // Either all columns or only the currently visible
+                visible = this._table.column(dataTablesColumnIndex).visible();
+                if (visible || !this.exportVisibleColumnsOnly) {
+                    configColumn = {
+                        caption: column.caption,
+                        attrName: column.attrName,
+                        refName: column.refName,
+                        dateTimeType: column.dateTimeType,
+                        dateFormat: column.dateFormat,
+                        dateTimeFormat: column.dateTimeFormat,
+                        timeFormat: column.timeFormat,
+                        groupDigits: column.groupDigits,
+                        decimalPositions: column.decimalPositions,
+                        visible: visible
+                    };
+                    configData.columns.push(configColumn);
+                }
             }, this);
             return JSON.stringify(configData);
         },
@@ -755,16 +772,75 @@ define([
             logger.debug(this.id + "._getData");
             
             var dataArray,
-                hasConstraint = false,
+                referenceColumnDef,
                 sortColumnIndex = data.order[0].column,
                 sortColumn = data.columns[sortColumnIndex],
-                referenceColumnDef,
                 sortName,
+                thisObj = this,
+                xpath;
+            
+            this._resetRowObjectSubscriptions();
+            
+            xpath = this._createXPathConstraint();
+            
+            if (this._referenceColumns[sortColumn.name]) {
+                referenceColumnDef = this._referenceColumns[sortColumn.name];
+                sortName = referenceColumnDef.refName + "/" + this._entityMetaData.getSelectorEntity(referenceColumnDef.refName) + "/" + referenceColumnDef.attrName;
+            } else {
+                sortName = sortColumn.data;
+            }
+            
+            mx.data.get({
+                xpath: xpath,
+                noCache: true,
+                count: true,
+                filter: {
+                    sort: [[sortName, data.order[0].dir]],
+                    offset: data.start,
+                    amount: data.length
+                },
+                callback: function (objs, extra) {
+                    var refGuids;
+                    dataArray = thisObj._convertMendixObjectArrayToDataArray(objs);
+                    if (thisObj._hasReferenceColumns) {
+                        // Get referenced objects first and supplement the data objects.
+                        refGuids = thisObj._getReferencedGuids(dataArray);
+                        mx.data.get({
+                            guids: refGuids,
+                            noCache: false,
+                            count: false,
+                            callback: function (refObjs) {
+                                thisObj._includeReferencedObjData(dataArray, refObjs);
+                                dataTablesCallback({
+                                    draw: data.draw,
+                                    data: dataArray,
+                                    recordsTotal: extra.count,
+                                    recordsFiltered: extra.count
+                                });
+                            }
+                        });
+                        
+                    } else {
+                        // No referenced objects, just return the data.
+                        dataTablesCallback({
+                            draw: data.draw,
+                            data: dataArray,
+                            recordsTotal: extra.count,
+                            recordsFiltered: extra.count
+                        });
+                    }
+                }
+            });
+        },
+        
+        // Create XPath constraint
+        _createXPathConstraint: function () {
+            logger.debug(this.id + "._createXPathConstraint");
+            
+            var hasConstraint = false,
                 thisObj = this,
                 xpath,
                 xpathAttrValue;
-            
-            this._resetRowObjectSubscriptions();
             
             xpath = "//" + this.tableEntity;
             if (this.xpathConstraintAttr) {
@@ -833,55 +909,9 @@ define([
                 xpath += "]";
             }
             
-            if (this._referenceColumns[sortColumn.name]) {
-                referenceColumnDef = this._referenceColumns[sortColumn.name];
-                sortName = referenceColumnDef.refName + "/" + this._entityMetaData.getSelectorEntity(referenceColumnDef.refName) + "/" + referenceColumnDef.attrName;
-            } else {
-                sortName = sortColumn.data;
-            }
+            logger.debug(this.id + "._createXPathConstraint XPath: " + xpath);
             
-            logger.debug(this.id + "._getData XPath: " + xpath);
-            mx.data.get({
-                xpath: xpath,
-                noCache: true,
-                count: true,
-                filter: {
-                    sort: [[sortName, data.order[0].dir]],
-                    offset: data.start,
-                    amount: data.length
-                },
-                callback: function (objs, extra) {
-                    var refGuids;
-                    dataArray = thisObj._convertMendixObjectArrayToDataArray(objs);
-                    if (thisObj._hasReferenceColumns) {
-                        // Get referenced objects first and supplement the data objects.
-                        refGuids = thisObj._getReferencedGuids(dataArray);
-                        mx.data.get({
-                            guids: refGuids,
-                            noCache: false,
-                            count: false,
-                            callback: function (refObjs) {
-                                thisObj._includeReferencedObjData(dataArray, refObjs);
-                                dataTablesCallback({
-                                    draw: data.draw,
-                                    data: dataArray,
-                                    recordsTotal: extra.count,
-                                    recordsFiltered: extra.count
-                                });
-                            }
-                        });
-                        
-                    } else {
-                        // No referenced objects, just return the data.
-                        dataTablesCallback({
-                            draw: data.draw,
-                            data: dataArray,
-                            recordsTotal: extra.count,
-                            recordsFiltered: extra.count
-                        });
-                    }
-                }
-            });
+            return xpath;
         },
 
         // Convert returned data to plain data object
