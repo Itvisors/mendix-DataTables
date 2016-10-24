@@ -16,25 +16,27 @@ import datatablesexportdata.proxies.DataTablesExportDocument;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 /**
- * Generic function to export the data in a DataTables widget as downloadable file.
+ * Generic function to export the data in a DataTables widget as downloadable file. The limit specifies the limit on each retrieve. 
  */
 public class ExportData extends CustomJavaAction<IMendixObject>
 {
 	private String configData;
 	private String xpath;
+	private Long limit;
 
-	public ExportData(IContext context, String configData, String xpath)
+	public ExportData(IContext context, String configData, String xpath, Long limit)
 	{
 		super(context);
 		this.configData = configData;
 		this.xpath = xpath;
+		this.limit = limit;
 	}
 
 	@Override
 	public IMendixObject executeAction() throws Exception
 	{
 		// BEGIN USER CODE
-		final DataTablesExportDocument exportDocument = new ExportDataImpl(getContext()).export(configData, xpath);
+		final DataTablesExportDocument exportDocument = new ExportDataImpl(getContext(), configData, xpath, limit).export();
 		if (exportDocument != null) {
 			return exportDocument.getMendixObject();
 		} else {

@@ -716,13 +716,14 @@ define([
         
         // call button microflow
         _callButtonMicroflow: function (buttonDefinition, guids) {
+            var thisObj = this;
             if (buttonDefinition.askConfirmation) {
                 mx.ui.confirmation({
                     content: buttonDefinition.confirmationQuestion,
                     proceed: buttonDefinition.proceedCaption,
                     cancel: buttonDefinition.cancelCaption,
                     handler: function () {
-                        this._clearSelection();
+                        thisObj._clearSelection();
                         mx.data.action({
                             params : {
                                 applyto : "selection",
