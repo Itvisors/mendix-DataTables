@@ -643,7 +643,8 @@ define([
         
         _createExportConfigData: function () {
             
-            var configData;
+            var configData,
+                thisObj = this;
             
             configData = {
                 tableEntity : this.tableEntity,
@@ -652,36 +653,65 @@ define([
                 sortDir: this._sortDir,
                 columns : []
             };
-            dojoArray.forEach(this.columnList, function (column, i) {
-                var configColumn,
-                    dataTablesColumnIndex,
-                    visible;
-                
-                if (this._hasDummyColumn) {
-                    dataTablesColumnIndex = i + 1;
-                } else {
-                    dataTablesColumnIndex = 1;
-                }
-                // Only include columns that are to be included in the export.
-                // Either all columns or only the currently visible
-                visible = this._table.column(dataTablesColumnIndex).visible();
-                if (visible || !this.exportVisibleColumnsOnly) {
-                    configColumn = {
-                        caption: column.caption,
-                        attrName: column.attrName,
-                        refName: column.refName,
-                        dateTimeType: column.dateTimeType,
-                        dateFormat: column.dateFormat,
-                        dateTimeFormat: column.dateTimeFormat,
-                        timeFormat: column.timeFormat,
-                        groupDigits: column.groupDigits,
-                        decimalPositions: column.decimalPositions,
-                        visible: visible
-                    };
-                    configData.columns.push(configColumn);
-                }
-            }, this);
+            if (this.allowColumnReorder) {
+                dojoArray.forEach(this._table.colReorder.order(), function (colIdx) {
+                    var colDefIdx,
+                        configColumn;
+                    if (this._hasDummyColumn) {
+                        colDefIdx = colIdx - 1;
+                    } else {
+                        colDefIdx = colIdx;
+                    }
+                    if (colDefIdx >= 0) {
+                        configColumn = this._createExportConfigColumn(this.columnList[colDefIdx]);
+                        if (configColumn) {
+                            configData.columns.push(configColumn);
+                        }
+                    }
+                }, this);
+            } else {
+                dojoArray.forEach(this.columnList, function (column) {
+                    var configColumn = this._createExportConfigColumn(column);
+                    if (configColumn) {
+                        configData.columns.push(configColumn);
+                    }
+                }, this);
+            }
             return JSON.stringify(configData);
+        },
+        
+        _createExportConfigColumn: function (column) {
+            var configColumn,
+                columnName,
+                dataTablesColumn,
+                visible;
+
+            if (column.refName) {
+                columnName = this._getReferencePropertyName(column);
+            } else {
+                columnName = column.attrName;
+            }
+            
+            dataTablesColumn = this._table.column(columnName + ":name");
+            visible = dataTablesColumn.visible();
+            
+            if (this.exportVisibleColumnsOnly && !visible) {
+                return null;
+            }
+            
+            configColumn = {
+                caption: column.caption,
+                attrName: column.attrName,
+                refName: column.refName,
+                dateTimeType: column.dateTimeType,
+                dateFormat: column.dateFormat,
+                dateTimeFormat: column.dateTimeFormat,
+                timeFormat: column.timeFormat,
+                groupDigits: column.groupDigits,
+                decimalPositions: column.decimalPositions,
+                visible: visible
+            };
+            return configColumn;
         },
         
         // call button microflow
