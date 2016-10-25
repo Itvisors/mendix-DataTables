@@ -56,6 +56,7 @@ public class ExportDataImpl {
 	private final String xpath;
 	private final int limit; 
 	
+	private String languageCode;
 	private Locale locale;
 	private File tempFile;
 	private Writer tempFileWriter;
@@ -137,7 +138,8 @@ public class ExportDataImpl {
 			logger.trace(logPrefix + "start");
 		}		
 
-		locale = Locale.forLanguageTag(context.getSession().getLanguage().getCode().substring(0,2));
+		languageCode = context.getSession().getLanguage().getCode();
+		locale = Locale.forLanguageTag(languageCode.substring(0,2));
 		decimalFormat = new DecimalFormat();
 		decimalFormat.setDecimalFormatSymbols(new DecimalFormatSymbols(locale));
 		decimalFormat.setGroupingUsed(false); // No grouping, Excel will take care of this.
@@ -290,17 +292,12 @@ public class ExportDataImpl {
 				case Enum:
 					stringValue = objectValue.toString();
 					IMetaEnumeration metaEnum = metaPrimitive.getEnumeration();
-//					String fullEnumName = metaEnum.getName().replaceAll("\\.", ".proxies.");
-//					Class enumClass = Class.forName(fullEnumName);
-//					if (enumClass.isEnum()) {
-//						String caption = enumClass.getDeclaredMethod("getCaption", String.class).invoke(arg0, arg1);
-//						stringValue = "\"" + x + "\"";
-//					}
 					// This results in the English version only.
 					Map<String, IMetaEnumValue> enumMap = metaEnum.getEnumValues();
 					if (enumMap.containsKey(stringValue)) {
 						IMetaEnumValue enumValue = enumMap.get(stringValue);
-						stringValue = "\"" + enumValue.toString() + "\"";
+						String enumCaption =  Core.getInternationalizedString(context, enumValue.getI18NCaptionKey());
+						stringValue = "\"" + enumCaption + "\"";
 					}
 					break;
 
