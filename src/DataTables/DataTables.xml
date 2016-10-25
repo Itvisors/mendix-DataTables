@@ -477,7 +477,7 @@
         <property key="exportMicroflow" type="microflow" required="false">
             <caption>Export microflow</caption>
             <category>Export</category>
-            <description>The microflow that receives an object of the same type as the export entity property.</description>
+            <description>The microflow that does the actual export, receives the context object.</description>
             <returnType type="Void"></returnType>
         </property>        
         <property key="exportButtonType" type="enumeration" defaultValue="default">

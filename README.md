@@ -33,6 +33,7 @@ All features can be seen in action in the test/demo project.
 - Place buttons in another container to put them together with other page elements, like a new button that sits in a container above the widget.
 - Enable/disable buttons depending on a boolean or enum value.
 - Style rows or cells depending on data in the row. The demo project has an example of this in the Data Types demo.
+- Export the data.
 
 ## Limitations
 
@@ -218,6 +219,7 @@ The demo project has a generic implementation to create data exports.
 - _Visible only_ - Export visible columns only
 - _Export config attribute_ - Export configuration attribute
 - _Export XPath attribute_ - Export XPath constraint attribute
+- _Export microflow_ - The microflow that does the actual export, receives the context object.
 - _Export button type_ - Button type, the same as normal Mendix buttons.
 - _Export button class_ - Optional. Specify class(es) to be put on the button
 - _Export button glyphicon classes_ - Optional. Glyphicon classes, like __glyphicon glyphicon-edit__
