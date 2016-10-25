@@ -202,6 +202,18 @@ public class Microflows
 			throw new MendixRuntimeException(e);
 		}
 	}
+	public static boolean aSU_AfterStartup(IContext context)
+	{
+		try
+		{
+			Map<String, Object> params = new HashMap<String, Object>();
+			return (Boolean)Core.execute(context, "DataTablesTestModule.ASU_AfterStartup", params);
+		}
+		catch (CoreException e)
+		{
+			throw new MendixRuntimeException(e);
+		}
+	}
 	public static datatablestestmodule.proxies.Color cAL_TestCalcAttr_CalcAttr(IContext context, datatablestestmodule.proxies.TestCalcAttr _testCalcAttr)
 	{
 		try

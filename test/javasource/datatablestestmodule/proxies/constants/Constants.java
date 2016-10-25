@@ -10,8 +10,8 @@ public class Constants
 {
 	// These are the constants for the DataTablesTestModule module
 
-	public static String getLOG_NODE()
+	public static String getLOGNODE_DATATABLES_TEST()
 	{
-		return (String)Core.getConfiguration().getConstantValue("DataTablesTestModule.LOG_NODE");
+		return (String)Core.getConfiguration().getConstantValue("DataTablesTestModule.LOGNODE_DATATABLES_TEST");
 	}
 }

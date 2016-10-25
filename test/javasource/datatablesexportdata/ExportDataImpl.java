@@ -27,7 +27,6 @@ import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.meta.IMetaEnumValue;
 import com.mendix.systemwideinterfaces.core.meta.IMetaEnumeration;
-import com.mendix.systemwideinterfaces.core.meta.IMetaObject;
 import com.mendix.systemwideinterfaces.core.meta.IMetaPrimitive;
 import com.mendix.systemwideinterfaces.core.meta.IMetaPrimitive.PrimitiveType;
 
@@ -60,7 +59,6 @@ public class ExportDataImpl {
 	private Locale locale;
 	private File tempFile;
 	private Writer tempFileWriter;
-	private IMetaObject metaObject;
 	private final List<ExportDataColumn> columnList = new ArrayList<>();
 	private Map<String, SimpleDateFormat> dateFormatterMap = new HashMap<>();
 	private DecimalFormat decimalFormat;
@@ -110,6 +108,22 @@ public class ExportDataImpl {
 			tempFileWriter.close();
 			
 			Core.storeFileDocumentContent(context, exportDocument.getMendixObject(), new BufferedInputStream(new FileInputStream(tempFile)));
+			
+			try {
+				if (tempFile.delete()) {
+					if (logger.isTraceEnabled()) {
+						logger.trace(logPrefix + "Temp file deleted");
+					}		
+				} else {
+					if (logger.isTraceEnabled()) {
+						logger.trace(logPrefix + "Temp file not deleted");
+					}		
+				}
+			} catch (Exception deleteException) {
+				if (logger.isTraceEnabled()) {
+					logger.trace(logPrefix + "Temp file not deleted, exception message: " + deleteException.getMessage());
+				}		
+			}
 		} catch (Exception e) {
 			logger.error(e);
 			throw new RuntimeException(e);			
@@ -126,6 +140,7 @@ public class ExportDataImpl {
 		locale = Locale.forLanguageTag(context.getSession().getLanguage().getCode().substring(0,2));
 		decimalFormat = new DecimalFormat();
 		decimalFormat.setDecimalFormatSymbols(new DecimalFormatSymbols(locale));
+		decimalFormat.setGroupingUsed(false); // No grouping, Excel will take care of this.
 		
 		jsonObject = new JSONObject(exportConfig);
 		
@@ -140,8 +155,6 @@ public class ExportDataImpl {
 		tempFile = File.createTempFile(StringUtils.randomString(15), ".tmp");
 		tempFile.deleteOnExit();
 		tempFileWriter = new BufferedWriter(new FileWriter(tempFile));
-		
-		metaObject = Core.getMetaObject(entityName);
 		
 		JSONArray columns = jsonObject.getJSONArray(TAG_COLUMNS);
 		for (JSONObject column : columns.toJSONObjectCollection()) {
@@ -235,61 +248,90 @@ public class ExportDataImpl {
 		
 		boolean firstColumn = true;
 		for (ExportDataColumn exportDataColumn : columnList) {
-			String stringValue;
+			Object objectValue = null;
+			IMetaPrimitive metaPrimitive = null;
 			if (exportDataColumn.isReference()) {
-				stringValue = "";
-			} else {
-				Object objectValue = object.getValue(context, exportDataColumn.getAttrName());
-				if (objectValue != null) {
-					IMetaPrimitive metaPrimitive = metaObject.getMetaPrimitive(exportDataColumn.getAttrName());
-					PrimitiveType attrType = metaPrimitive.getType();
-					switch (attrType) {
-					case AutoNumber:
-					case Integer:
-					case Long:
-					case Boolean:
-						stringValue = objectValue.toString();
-						break;
-	
-					case Enum:
-						stringValue = objectValue.toString();
-						IMetaEnumeration metaEnum = metaPrimitive.getEnumeration();
-						Map<String, IMetaEnumValue> enumMap = metaEnum.getEnumValues();
-						if (enumMap.containsKey(stringValue)) {
-							stringValue = "\"" + enumMap.get(stringValue).getI18NCaptionKey() + "\"";
-						}
-						break;
-	
-					case String:
-						stringValue = "\"" + objectValue.toString() + "\"";
-						break;
-	
-					case Float:
-					case Currency:
-						Double doubleValue = (Double) objectValue;
-						stringValue = String.format(locale, "%+1." + exportDataColumn.getDecimalPositions() + "f", doubleValue);
-						break;					
-	
-					case Decimal:
-						BigDecimal decimal = (BigDecimal) objectValue;
-						decimalFormat.setMinimumFractionDigits(exportDataColumn.getDecimalPositions());
-						decimalFormat.setMaximumFractionDigits(exportDataColumn.getDecimalPositions());
-						decimalFormat.setGroupingUsed(exportDataColumn.isGroupDigits());
-						stringValue = decimalFormat.format(decimal);
-						break;					
-	
-					case DateTime:
-						
-						stringValue = "\"" + getDateFormatter(exportDataColumn).format(objectValue) + "\"";
-						break;					
-						
-					default:
-						stringValue = "\"\""; // Just an empty string, not supported
-						break;
-					}
-				} else {
-					stringValue = "";
+				if (logger.isTraceEnabled()) {
+					logger.trace(logPrefix + "Reference: " + exportDataColumn.getFullRefName());
 				}
+				// This relies on the business server cache, no smart stuff here.
+				List<IMendixObject> retrieveByAssociationList = Core.retrieveByPath(context, object, exportDataColumn.getRefName());
+				if (retrieveByAssociationList != null && !retrieveByAssociationList.isEmpty()) {
+					IMendixObject referencedObject = retrieveByAssociationList.get(0);
+					objectValue = referencedObject.getValue(context, exportDataColumn.getAttrName());
+					metaPrimitive = referencedObject.getMetaObject().getMetaPrimitive(exportDataColumn.getAttrName());
+				}
+			} else {
+				if (logger.isTraceEnabled()) {
+					logger.trace(logPrefix + "Attribute: " + exportDataColumn.getAttrName());
+				}		
+				objectValue = object.getValue(context, exportDataColumn.getAttrName());
+				metaPrimitive = object.getMetaObject().getMetaPrimitive(exportDataColumn.getAttrName());
+			}
+			String stringValue;
+			if (logger.isTraceEnabled()) {
+				if (objectValue == null) {
+					logger.trace(logPrefix + "Object value is null");
+				}
+				if (metaPrimitive == null) {
+					logger.trace(logPrefix + "Meta primitive is null");
+				}
+			}		
+			if (objectValue != null && metaPrimitive != null) {
+				PrimitiveType attrType = metaPrimitive.getType();
+				switch (attrType) {
+				case AutoNumber:
+				case Integer:
+				case Long:
+				case Boolean:
+					stringValue = objectValue.toString();
+					break;
+
+				case Enum:
+					stringValue = objectValue.toString();
+					IMetaEnumeration metaEnum = metaPrimitive.getEnumeration();
+//					String fullEnumName = metaEnum.getName().replaceAll("\\.", ".proxies.");
+//					Class enumClass = Class.forName(fullEnumName);
+//					if (enumClass.isEnum()) {
+//						String caption = enumClass.getDeclaredMethod("getCaption", String.class).invoke(arg0, arg1);
+//						stringValue = "\"" + x + "\"";
+//					}
+					// This results in the English version only.
+					Map<String, IMetaEnumValue> enumMap = metaEnum.getEnumValues();
+					if (enumMap.containsKey(stringValue)) {
+						IMetaEnumValue enumValue = enumMap.get(stringValue);
+						stringValue = "\"" + enumValue.toString() + "\"";
+					}
+					break;
+
+				case String:
+					stringValue = "\"" + objectValue.toString() + "\"";
+					break;
+
+				case Float:
+				case Currency:
+					Double doubleValue = (Double) objectValue;
+					stringValue = String.format(locale, "%+1." + exportDataColumn.getDecimalPositions() + "f", doubleValue);
+					break;					
+
+				case Decimal:
+					BigDecimal decimal = (BigDecimal) objectValue;
+					decimalFormat.setMinimumFractionDigits(exportDataColumn.getDecimalPositions());
+					decimalFormat.setMaximumFractionDigits(exportDataColumn.getDecimalPositions());
+					stringValue = decimalFormat.format(decimal);
+					break;					
+
+				case DateTime:
+					
+					stringValue = "\"" + getDateFormatter(exportDataColumn).format(objectValue) + "\"";
+					break;					
+					
+				default:
+					stringValue = "\"\""; // Just an empty string, not supported
+					break;
+				}
+			} else {
+				stringValue = "";
 			}
 			
 			if (!firstColumn) {
