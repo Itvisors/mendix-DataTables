@@ -223,6 +223,8 @@ The export cannot be done on the client because the client only has a subset of 
 
 The demo project has a generic implementation to create data exports. 
 
+Please be sure to turn on the apply entity access setting on your export microflow where necessary.
+
 - _Allow export_ - If on, an additional export button will be displayed
 - _Button caption_ - Export button caption
 - _Visible only_ - Export visible columns only

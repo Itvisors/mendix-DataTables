@@ -8,7 +8,8 @@ table.dataTable {
   clear: both;
   margin-top: 6px !important;
   margin-bottom: 6px !important;
-  max-width: none !important; }
+  max-width: none !important;
+  border-collapse: separate !important; }
 
 table.dataTable td,
 table.dataTable th {
@@ -152,9 +153,6 @@ table.dataTable.table-condensed .sorting_desc:after {
   top: 6px;
   right: 6px; }
 
-table.table-bordered.dataTable {
-  border-collapse: separate !important; }
-
 table.table-bordered.dataTable th,
 table.table-bordered.dataTable td {
   border-left-width: 0; }
@@ -198,21 +196,20 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child {
 
 table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child:before,
 table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child:before {
-  top: 8px;
+  top: 9px;
   left: 4px;
-  height: 16px;
-  width: 16px;
+  height: 14px;
+  width: 14px;
   display: block;
   position: absolute;
   color: white;
   border: 2px solid white;
-  border-radius: 16px;
+  border-radius: 14px;
   box-shadow: 0 0 3px #444;
   box-sizing: content-box;
-  text-align: left;
+  text-align: center;
   font-family: 'Courier New', Courier, monospace;
-  text-indent: 4px;
-  line-height: 16px;
+  line-height: 14px;
   content: '+';
   background-color: #337ab7; }
 
@@ -255,13 +252,12 @@ table.dataTable.dtr-column > tbody > tr > th.control:before {
   position: absolute;
   color: white;
   border: 2px solid white;
-  border-radius: 16px;
+  border-radius: 14px;
   box-shadow: 0 0 3px #444;
   box-sizing: content-box;
-  text-align: left;
+  text-align: center;
   font-family: 'Courier New', Courier, monospace;
-  text-indent: 4px;
-  line-height: 16px;
+  line-height: 14px;
   content: '+';
   background-color: #337ab7; }
 
@@ -356,6 +352,9 @@ div.dtr-modal div.dtr-modal-background {
 @media screen and (max-width: 767px) {
   div.dtr-modal div.dtr-modal-display {
     width: 95%; } }
+div.dtr-bs-modal table.table tr:first-child td {
+  border-top: none; }
+
 table.DTCR_clonedTable.dataTable {
   position: absolute !important;
   background-color: rgba(255, 255, 255, 0.7);

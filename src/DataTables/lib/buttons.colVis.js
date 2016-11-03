@@ -1,6 +1,6 @@
 /*!
  * Column visibility buttons for Buttons and DataTables.
- * 2015 SpryMedia Ltd - datatables.net/license
+ * 2016 SpryMedia Ltd - datatables.net/license
  */
 
 (function( factory ){
@@ -105,12 +105,11 @@ $.extend( DataTable.ext.buttons, {
 		},
 		init: function ( dt, button, conf ) {
 			var that = this;
-			var col = dt.column( conf.columns );
 
 			dt
-				.on( 'column-visibility.dt'+conf.namespace, function (e, settings, column, state) {
-					if ( ! settings.bDestroying && column === conf.columns ) {
-						that.active( state );
+				.on( 'column-visibility.dt'+conf.namespace, function (e, settings) {
+					if ( ! settings.bDestroying ) {
+						that.active( dt.column( conf.columns ).visible() );
 					}
 				} )
 				.on( 'column-reorder.dt'+conf.namespace, function (e, settings, details) {
@@ -130,7 +129,7 @@ $.extend( DataTable.ext.buttons, {
 					that.active( col.visible() );
 				} );
 
-			this.active( col.visible() );
+			this.active( dt.column( conf.columns ).visible() );
 		},
 		destroy: function ( dt, button, conf ) {
 			dt
@@ -183,8 +182,10 @@ $.extend( DataTable.ext.buttons, {
 		className: 'buttons-colvisGroup',
 
 		action: function ( e, dt, button, conf ) {
-			dt.columns( conf.show ).visible( true );
-			dt.columns( conf.hide ).visible( false );
+			dt.columns( conf.show ).visible( true, false );
+			dt.columns( conf.hide ).visible( false, false );
+
+			dt.columns.adjust();
 		},
 
 		show: [],
