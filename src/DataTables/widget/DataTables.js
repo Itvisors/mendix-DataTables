@@ -332,8 +332,14 @@ define([
                         }
                     });
                     dojoArray.forEach(thisObj._tdDataAttrNames, function (tdData) {
-                        var cellNode;
-                        cellNode = dataTablesThisObj.api().cell({row : rowIdx, column : tdData.index}).node();
+                        var cellNode,
+                            colIdx;
+                        if (thisObj.allowColumnReorder) {
+                            colIdx = thisObj._table.colReorder.transpose(tdData.index);
+                        } else {
+                            colIdx = tdData.index;
+                        }
+                        cellNode = dataTablesThisObj.api().cell({row : rowIdx, column : colIdx}).node();
                         cellNode.setAttribute("data-columnName", tdData.name);
                     }, this);
                     if (thisObj.selectFirst && rowLoop === 0) {
