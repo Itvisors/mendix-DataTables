@@ -73,6 +73,14 @@ So, for multiple selection you need to have two parameters and check which one i
 
 Mendix hides this little easter egg for the default DataGrid, for multiple selection, the list parameter will just get the one object when only one object is selected.
 
+## Custom row and cell styling
+
+The widget allows row and cell styling based on attribute values. To use a value for styling, turn on its TR data attribute flag. The value will then be included as data- attribute on the table row. Using CSS selection, you can apply custom styling. 
+
+It is also possible to apply the styling to a single cell. In addition to the TR data flag for the value attribute, turn on the TD data attribute for the column you want to style.
+
+The demo project has examples of this.
+
 ## Properties
 
 For the class properties, multiple classes can be entered, separated by a single space.
@@ -112,6 +120,7 @@ For each column, add an item to the list
 ##### Extra
 
 - _TR data attr_ - Include the value as data- attribute on the table row. Useful for styling with CSS selection.
+- _TD data attr_ - Include the attribute name as data- attribute on the table cell. Useful for styling with CSS selection. Not done by default on all cells because that slows down the table rendering.
 
 #### Attribute search filters
 

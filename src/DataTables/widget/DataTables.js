@@ -106,6 +106,7 @@ define([
         _defaultButtonDefinition: null,
         _referenceColumns: null,
         _hasReferenceColumns: false,
+        _tdDataAttrNames: null,
         _trDataAttrNames: null,
         _sortName: "",
         _sortDir: "",
@@ -256,6 +257,7 @@ define([
             this._referenceColumns = {};
             this._hasReferenceColumns = false;
             this._trDataAttrNames = [];
+            this._tdDataAttrNames = [];
             dojoArray.forEach(this.columnList, function (column) {
                 dataTablesColumn = {
                     title: column.caption,
@@ -282,6 +284,12 @@ define([
                 }
                 if (column.includeAsTrDataAttr) {
                     this._trDataAttrNames.push(dataTablesColumn.data);
+                }
+                if (column.includeAsTdDataAttr) {
+                    this._tdDataAttrNames.push({
+                        name: dataTablesColumn.data,
+                        index: dataTablesColumns.length
+                    });
                 }
                 dataTablesColumns.push(dataTablesColumn);
             }, this);
@@ -323,10 +331,10 @@ define([
                             trNode.setAttribute("data-" + attrName, rowData[attrName]);
                         }
                     });
-                    dojoArray.forEach(dataTablesColumns, function (column, i) {
+                    dojoArray.forEach(thisObj._tdDataAttrNames, function (tdData) {
                         var cellNode;
-                        cellNode = dataTablesThisObj.api().cell({row : rowIdx, column : i}).node();
-                        cellNode.setAttribute("data-columnName", column.name);
+                        cellNode = dataTablesThisObj.api().cell({row : rowIdx, column : tdData.index}).node();
+                        cellNode.setAttribute("data-columnName", tdData.name);
                     }, this);
                     if (thisObj.selectFirst && rowLoop === 0) {
                         this.select();
@@ -628,7 +636,7 @@ define([
                                 guids      : [thisObj._contextObj.getGuid()]
                             },
                             callback: function () {
-                                console.log("Export MF callback");
+                                logger.debug("Export MF callback");
                                 thisObj._hideProgress();
                             },
                             error: function () {

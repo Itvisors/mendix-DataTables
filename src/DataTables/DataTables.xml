@@ -149,6 +149,11 @@
                     <category>Extra</category>
                     <description>Include the value as data- attribute on the table row. Useful for styling with CSS selection.</description>
                 </property>
+                <property key="includeAsTdDataAttr" type="boolean" defaultValue="false">
+                    <caption>TD data attr</caption>
+                    <category>Extra</category>
+                    <description>Include the attribute name as data- attribute on the table cell. Useful for styling with CSS selection.</description>
+                </property>
             </properties>
         </property>
         
