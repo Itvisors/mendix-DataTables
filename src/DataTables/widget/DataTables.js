@@ -58,6 +58,7 @@ define([
         // Parameters configured in the Modeler.
         tableEntity: null,
         refreshAttr: null,
+        refreshKeepScrollPosAttr: null,
         xpathConstraintAttr: "",
         isResponsive: false,
         autoColumnWidth: true,
@@ -111,6 +112,7 @@ define([
         _sortName: "",
         _sortDir: "",
         _exportButton: null,
+        _scrollerPage: null,
         
         // I18N file names object at the end, out of sight!
 
@@ -346,6 +348,11 @@ define([
                         this.select();
                     }
                 });
+                if (thisObj.infiniteScroll && thisObj._scrollerPage) {
+                    // For infinite scroll, scroll to the previous scroller position.
+                    thisObj._table.scroller().scrollToRow(thisObj._scrollerPage.start, false);
+                    thisObj._scrollerPage = null;
+                }
             };
 
             // I18N
@@ -1169,6 +1176,14 @@ define([
         
         _reloadTableData: function (resetPaging) {
             if (this._table) {
+                // For infinite scrolling, save the current scroller page position.
+                if (this.infiniteScroll) {
+                    if (resetPaging) {
+                        this._scrollerPage = null;
+                    } else {
+                        this._scrollerPage = this._table.scroller.page();
+                    }
+                }
                 this._table.ajax.reload(null, resetPaging);
             }
         },
@@ -1176,6 +1191,7 @@ define([
         // Rerender the interface.
         _updateRendering: function () {
             logger.debug(this.id + "._updateRendering");
+            var resetPaging = true;
 
             if (this._contextObj !== null) {
                 this._contextObjMetaData = mx.meta.getEntity(this._contextObj.getEntity());
@@ -1188,7 +1204,10 @@ define([
 								logger.debug("Object saved");
 							}
                         });
-                        this._reloadTableData(true);
+                        if (this.refreshKeepScrollPosAttr) {
+                            resetPaging = !this._contextObj.get(this.refreshKeepScrollPosAttr);
+                        }
+                        this._reloadTableData(resetPaging);
                     }
                 } else {
                     this._createTableObject();

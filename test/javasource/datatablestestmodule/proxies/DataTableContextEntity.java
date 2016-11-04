@@ -24,6 +24,7 @@ public class DataTableContextEntity
 	public enum MemberNames
 	{
 		RefreshTable("RefreshTable"),
+		RefreshKeepScrollPos("RefreshKeepScrollPos"),
 		XPath("XPath"),
 		Gender("Gender"),
 		FirstName("FirstName"),
@@ -159,6 +160,42 @@ public class DataTableContextEntity
 	public final void setRefreshTable(com.mendix.systemwideinterfaces.core.IContext context, Boolean refreshtable)
 	{
 		getMendixObject().setValue(context, MemberNames.RefreshTable.toString(), refreshtable);
+	}
+
+	/**
+	 * @return value of RefreshKeepScrollPos
+	 */
+	public final Boolean getRefreshKeepScrollPos()
+	{
+		return getRefreshKeepScrollPos(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of RefreshKeepScrollPos
+	 */
+	public final Boolean getRefreshKeepScrollPos(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (Boolean) getMendixObject().getValue(context, MemberNames.RefreshKeepScrollPos.toString());
+	}
+
+	/**
+	 * Set value of RefreshKeepScrollPos
+	 * @param refreshkeepscrollpos
+	 */
+	public final void setRefreshKeepScrollPos(Boolean refreshkeepscrollpos)
+	{
+		setRefreshKeepScrollPos(getContext(), refreshkeepscrollpos);
+	}
+
+	/**
+	 * Set value of RefreshKeepScrollPos
+	 * @param context
+	 * @param refreshkeepscrollpos
+	 */
+	public final void setRefreshKeepScrollPos(com.mendix.systemwideinterfaces.core.IContext context, Boolean refreshkeepscrollpos)
+	{
+		getMendixObject().setValue(context, MemberNames.RefreshKeepScrollPos.toString(), refreshkeepscrollpos);
 	}
 
 	/**

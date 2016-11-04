@@ -39,13 +39,26 @@ public class Microflows
 			throw new MendixRuntimeException(e);
 		}
 	}
-	public static void aCT_DataTableContextEntity_XPath(IContext context, datatablestestmodule.proxies.DataTableContextEntity _dataTableContextEntity)
+	public static void aCT_DataTableContextEntity_ForceRefresh(IContext context, datatablestestmodule.proxies.DataTableContextEntity _dataTableContextEntity)
 	{
 		try
 		{
 			Map<String, Object> params = new HashMap<String, Object>();
 			params.put("DataTableContextEntity", _dataTableContextEntity == null ? null : _dataTableContextEntity.getMendixObject());
-			Core.execute(context, "DataTablesTestModule.ACT_DataTableContextEntity_XPath", params);
+			Core.execute(context, "DataTablesTestModule.ACT_DataTableContextEntity_ForceRefresh", params);
+		}
+		catch (CoreException e)
+		{
+			throw new MendixRuntimeException(e);
+		}
+	}
+	public static void aCT_DataTableContextEntity_ForceRefreshKeepPosition(IContext context, datatablestestmodule.proxies.DataTableContextEntity _dataTableContextEntity)
+	{
+		try
+		{
+			Map<String, Object> params = new HashMap<String, Object>();
+			params.put("DataTableContextEntity", _dataTableContextEntity == null ? null : _dataTableContextEntity.getMendixObject());
+			Core.execute(context, "DataTablesTestModule.ACT_DataTableContextEntity_ForceRefreshKeepPosition", params);
 		}
 		catch (CoreException e)
 		{
@@ -80,6 +93,27 @@ public class Microflows
 			params.put("PersonList", listparam_personList);
 			params.put("Person", _person == null ? null : _person.getMendixObject());
 			Core.execute(context, "DataTablesTestModule.ACT_Person_LogSelection", params);
+		}
+		catch (CoreException e)
+		{
+			throw new MendixRuntimeException(e);
+		}
+	}
+	public static void aCT_Person_LogSelectionWithObjectRefresh(IContext context, java.util.List<datatablestestmodule.proxies.Person> _personList, datatablestestmodule.proxies.Person _person)
+	{
+		try
+		{
+			Map<String, Object> params = new HashMap<String, Object>();
+			java.util.ArrayList<IMendixObject> listparam_personList = null;
+			if (_personList != null)
+			{
+				listparam_personList = new java.util.ArrayList<IMendixObject>();
+				for (datatablestestmodule.proxies.Person obj : _personList)
+					listparam_personList.add(obj.getMendixObject());
+			}
+			params.put("PersonList", listparam_personList);
+			params.put("Person", _person == null ? null : _person.getMendixObject());
+			Core.execute(context, "DataTablesTestModule.ACT_Person_LogSelectionWithObjectRefresh", params);
 		}
 		catch (CoreException e)
 		{

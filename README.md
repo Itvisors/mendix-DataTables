@@ -89,6 +89,7 @@ For the class properties, multiple classes can be entered, separated by a single
 
 - _Table entity_ - This is the entity that is displayed in the grid.
 - _Refresh attribute_ - The attribute used force a refresh. Set it to true and change with refresh in client to trigger a refresh. The widget will set it to false.
+- _Keep scroll pos attribute_ - Used together with the refresh attribute. Set it to true to keep the page or scroll position after a refresh. If this attribute is not used, the scroll position will always be reset for each full refresh.
 - _XPath constraint_ - Optional. Set the attribute value to an XPath constraint, without the surrounding [ and ]
 
 #### Column definitions

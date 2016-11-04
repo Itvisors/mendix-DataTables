@@ -22,6 +22,14 @@
                 <attributeType name="Boolean"/>
             </attributeTypes>
         </property>
+        <property key="refreshKeepScrollPosAttr" type="attribute" required="false">
+            <caption>Keep scroll pos attribute</caption>
+            <category>Datasource</category>
+            <description>Used together with the refresh attribute. Set it to true to keep the page or scroll position after a refresh.</description>
+            <attributeTypes>
+                <attributeType name="Boolean"/>
+            </attributeTypes>
+        </property>
         <property key="xpathConstraintAttr" type="attribute" required="false">
             <caption>XPath constraint</caption>
             <category>Datasource</category>
