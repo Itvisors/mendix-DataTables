@@ -1089,6 +1089,14 @@ define([
             case "Decimal":
                 result = mx.parser.formatAttribute(obj, attrName, { places: column.decimalPositions, groups: column.groupDigits });
                 break;
+
+            case "Integer":
+                result = mx.parser.formatAttribute(obj, attrName, { groups: column.groupDigits });
+                break;
+
+            case "Long":
+                result = mx.parser.formatAttribute(obj, attrName, { groups: column.groupDigits });
+                break;
                     
             default:
                 result = mx.parser.formatAttribute(obj, attrName);

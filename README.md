@@ -114,7 +114,7 @@ For each column, add an item to the list
 - _Column width_ - Optional. Specify width, value is used exactly as you enter it: 20%, 150px, 5em, etc
 - _Header class_ - Optional. Specify class(es) to be put on the column header.
 - _Cell class_ - Optional. Specify class(es) to be put on each cell in the column.
-- _Group digits_ - Whether to group digits with thousand separators
+- _Group digits_ - Whether to group digits with thousand separators, for integer, long and decimal
 - _Decimal positions_ - Decimal positions, decimal data type only.
 
 ##### Extra
