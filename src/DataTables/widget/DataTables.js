@@ -76,6 +76,7 @@ define([
         scrollY: null,
         selectionType: null,
         selectFirst: false,
+        allowDeselect: true,
         selectionMicroflowName: "",
         columnList: null,
         attrSearchFilterList: null,
@@ -113,6 +114,7 @@ define([
         _sortDir: "",
         _exportButton: null,
         _scrollerPage: null,
+        _previousSelection: null,
         
         // I18N file names object at the end, out of sight!
 
@@ -344,7 +346,8 @@ define([
                         cellNode = dataTablesThisObj.api().cell({row : rowIdx, column : colIdx}).node();
                         cellNode.setAttribute("data-columnName", tdData.name);
                     }, this);
-                    if (thisObj.selectFirst && rowLoop === 0) {
+                    // Select the first row, unless there is already a selection. The draw callback can be called multiple times.
+                    if (thisObj.selectFirst && rowLoop === 0 && !thisObj._table.rows({selected: true}).any()) {
                         this.select();
                     }
                 });
@@ -475,7 +478,7 @@ define([
             this._table
                 .on("select", function (e, dt, type, indexes) {
                     if (thisObj.selectionType !== "none") {
-                        thisObj._setButtonEnabledStatus();
+                        thisObj._setButtonEnabledStatus("select");
                     }
                     if (thisObj.selectionMicroflowName) {
                         thisObj._callSelectionMicroflow();
@@ -483,7 +486,7 @@ define([
                 })
                 .on("deselect", function (e, dt, type, indexes) {
                     if (thisObj.selectionType !== "none") {
-                        thisObj._setButtonEnabledStatus();
+                        thisObj._setButtonEnabledStatus("deselect");
                     }
                     if (thisObj.selectionMicroflowName) {
                         thisObj._callSelectionMicroflow();
@@ -794,14 +797,9 @@ define([
         },
         
         // Get selected rows
-        _getSelectedRowData: function () {
-            return this._table.rows({selected: true}).data().toArray();
-        },
-        
-        // Get selected rows
         _getSelectedRows: function () {
             var guids = [],
-                rowDataArray = this._getSelectedRowData();
+                rowDataArray = this._table.rows({selected: true}).data().toArray();
             dojoArray.forEach(rowDataArray, function (rowData) {
                 guids.push(rowData.guid);
             });
@@ -1237,14 +1235,17 @@ define([
         },
         
         // Enable/Disable buttons when selection changes
-        _setButtonEnabledStatus: function () {
+        _setButtonEnabledStatus: function (eventName) {
             logger.debug(this.id + "._setButtonEnabledStatus");
             var attrValue,
                 buttonDefinition,
                 buttonEnabled,
                 hasSelection,
-                rowDataArray;
-            rowDataArray = this._getSelectedRowData();
+                rowDataArray,
+                selection,
+                thisObj = this;
+            selection = this._table.rows({selected: true});
+            rowDataArray = selection.data().toArray();
             hasSelection = (rowDataArray.length > 0);
             dojoArray.forEach(this._buttonList, function (button, i) {
                 if (hasSelection) {
@@ -1278,6 +1279,29 @@ define([
                     button.setAttribute("disabled", "");
                 }
             }, this);
+            switch (eventName) {
+            case "select":
+                this._previousSelection = selection;
+                break;
+
+            case "deselect":
+                    // If there is still a selection or deselection is allowed, just save the selection
+                if (selection.any() || this.allowDeselect) {
+                    this._previousSelection = selection;
+                } else {
+                    console.log("No selection anymore");
+                    setTimeout(function () {
+                        if (!thisObj._table.rows({selected: true}).any() && thisObj._previousSelection) {
+                            console.log("Reset selection");
+                            thisObj._previousSelection.select();
+                        }
+                    }, 100);
+                }
+                break;
+
+            default:
+                break;
+            }
         },
 
         // Reset subscriptions.

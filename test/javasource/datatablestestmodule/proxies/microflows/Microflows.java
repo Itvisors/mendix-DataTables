@@ -388,6 +388,19 @@ public class Microflows
 			throw new MendixRuntimeException(e);
 		}
 	}
+	public static void oCh_Person_ShowSelectedPerson_NoEmptySelection(IContext context, datatablestestmodule.proxies.Person _person)
+	{
+		try
+		{
+			Map<String, Object> params = new HashMap<String, Object>();
+			params.put("Person", _person == null ? null : _person.getMendixObject());
+			Core.execute(context, "DataTablesTestModule.OCh_Person_ShowSelectedPerson_NoEmptySelection", params);
+		}
+		catch (CoreException e)
+		{
+			throw new MendixRuntimeException(e);
+		}
+	}
 	public static datatablestestmodule.proxies.DataTableContextEntity sUB_DataTableContextEntity_GetFromSession(IContext context)
 	{
 		try

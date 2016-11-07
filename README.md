@@ -150,7 +150,7 @@ The widget does not display search filter inputs. To provide search filters, def
 - _Use infinite scroll_ - Use infinite scroll rather than the default paging buttons. Set nowrap on the table class!
 - _Horizontal scrolling_ - When true, horizontal scrolling is used. Set nowrap on the table class!
 - _Vertical scrolling_ - Optional, any CSS unit, default 200px. When specified, vertical scrolling is used and height of the rows is constrained to the specified height
-- _State save name_ - Optional. When specified, grid layout state is saved to and loaded from browser local storage using the specied name. Make sure this name is unique across your application!
+- _State save name_ - Optional. When specified, grid layout state is saved to and loaded from browser local storage using the specied name. Make sure this name is unique across your application! It is also advisable to put your project name first in each statesaving name, to prevent issues where multiple apps have an order overview grid.
 
 #### Column visibility
 
@@ -181,6 +181,7 @@ The _Selection changed callback microflow_ can be used to create functionality s
 
 - _Selection_ - Selection type
 - _Select first row_ - Select first row after displaying data
+- _Allow deselect_ - Allow deselect. When off, at least one row must remain selected.
 - _Selection changed callback microflow_ - The name of the microflow (Module.Microflow) that is called when the selection has been changed.
 
 ### Buttons

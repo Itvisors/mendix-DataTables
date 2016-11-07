@@ -326,6 +326,11 @@
             <category>Selection</category>
             <description>Select first row after displaying data</description>
         </property>
+        <property key="allowDeselect" type="boolean" defaultValue="true">
+            <caption>Allow deselect</caption>
+            <category>Selection</category>
+            <description>Allow deselect. When off, at least one row must remain selected.</description>
+        </property>
         <property key="selectionMicroflowName" type="string" required="false">
             <caption>Selection changed callback microflow</caption>
             <category>Selection</category>
