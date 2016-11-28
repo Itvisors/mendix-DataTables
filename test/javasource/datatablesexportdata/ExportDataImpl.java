@@ -36,6 +36,10 @@ import datatablesexportdata.proxies.constants.Constants;
 
 public class ExportDataImpl {
 
+	private static final String TAG_SORT_DIR = "dir";
+	private static final String TAG_SORT_NAME = "name";
+	private static final String TAG_SORT_DATA = "sortData";
+	private static final String TAG_TABLE_ENTITY = "tableEntity";
 	private static final String TAG_ATTR_NAME = "attrName";
 	private static final String TAG_CAPTION = "caption";
 	private static final String TAG_COLUMNS = "columns";
@@ -67,8 +71,7 @@ public class ExportDataImpl {
 	private JSONObject jsonObject;
 	private DataTablesExportDocument exportDocument = null;
 	private String entityName;
-	private String sortName;
-	private String sortDir;
+	Map<String, String> sortMap = new HashMap<>();
 
 	
 	public ExportDataImpl(IContext context, String exportConfig, String xpath, Long limit) {
@@ -146,9 +149,11 @@ public class ExportDataImpl {
 		
 		jsonObject = new JSONObject(exportConfig);
 		
-		entityName = jsonObject.getString("tableEntity");
-		sortName = jsonObject.getString("sortName");
-		sortDir = jsonObject.getString("sortDir");
+		entityName = jsonObject.getString(TAG_TABLE_ENTITY);
+		JSONArray sortData = jsonObject.getJSONArray(TAG_SORT_DATA);
+		for (JSONObject sortItemObject : sortData.toJSONObjectCollection()) {
+			sortMap.put(sortItemObject.getString(TAG_SORT_NAME), sortItemObject.getString(TAG_SORT_DIR));
+		}		
 
 		exportDocument = new DataTablesExportDocument(context);
 		exportDocument.setDeleteAfterDownload(true);
@@ -218,8 +223,6 @@ public class ExportDataImpl {
 			logger.debug(logPrefix + "Offset: " + offset + ", limit: " + limit);
 			logger.debug(logPrefix + "XPath: " + xpath);
 		}		
-		Map<String, String> sortMap = new HashMap<>();
-		sortMap.put(sortName, sortDir);
 		List<IMendixObject> objectList = Core.retrieveXPathQuery(context, xpath, limit, offset, sortMap);
 		if (logger.isDebugEnabled()) {
 			if (objectList != null) {

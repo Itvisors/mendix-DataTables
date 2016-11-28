@@ -60,6 +60,7 @@ define([
         refreshAttr: null,
         refreshKeepScrollPosAttr: null,
         xpathConstraintAttr: "",
+        allowMultiColumnSort: false,
         isResponsive: false,
         autoColumnWidth: true,
         allowColumnReorder: true,
@@ -110,8 +111,7 @@ define([
         _hasReferenceColumns: false,
         _tdDataAttrNames: null,
         _trDataAttrNames: null,
-        _sortName: "",
-        _sortDir: "",
+        _sortData: null,
         _exportButton: null,
         _scrollerPage: null,
         _previousSelection: null,
@@ -303,6 +303,7 @@ define([
                 serverSide: true,
                 searching: false,
                 autoWidth: this.autoColumnWidth,
+                orderMulti: this.allowMultiColumnSort,
                 ajax: dojoLang.hitch(this, this._getData),
                 columns: dataTablesColumns
             };
@@ -673,8 +674,7 @@ define([
             configData = {
                 tableEntity : this.tableEntity,
                 exportVisibleColumnsOnly : this.exportVisibleColumnsOnly,
-                sortName : this._sortName,
-                sortDir: this._sortDir,
+                sortData : [],
                 columns : []
             };
             if (this.allowColumnReorder) {
@@ -701,6 +701,13 @@ define([
                     }
                 }, this);
             }
+            //
+            dojoArray.forEach(this._sortData, function (sortDataItem) {
+                configData.sortData.push({
+                    name: sortDataItem[0],
+                    dir: sortDataItem[1]
+                });
+            }, this);
             return JSON.stringify(configData);
         },
         
@@ -826,9 +833,6 @@ define([
             logger.debug(this.id + "._getData");
             
             var dataArray,
-                referenceColumnDef,
-                sortColumnIndex = data.order[0].column,
-                sortColumn = data.columns[sortColumnIndex],
                 thisObj = this,
                 xpath;
             
@@ -836,20 +840,28 @@ define([
             
             xpath = this._createXPathConstraint();
             
-            if (this._referenceColumns[sortColumn.name]) {
-                referenceColumnDef = this._referenceColumns[sortColumn.name];
-                this._sortName = referenceColumnDef.refName + "/" + this._entityMetaData.getSelectorEntity(referenceColumnDef.refName) + "/" + referenceColumnDef.attrName;
-            } else {
-                this._sortName = sortColumn.data;
-            }
-            this._sortDir = data.order[0].dir;
+            this._sortData = [];
+                        
+            dojoArray.forEach(data.order, function (orderItem) {
+                var referenceColumnDef,
+                    sortColumnIndex = orderItem.column,
+                    sortColumn = data.columns[sortColumnIndex],
+                    sortName;
+                if (this._referenceColumns[sortColumn.name]) {
+                    referenceColumnDef = this._referenceColumns[sortColumn.name];
+                    sortName = referenceColumnDef.refName + "/" + this._entityMetaData.getSelectorEntity(referenceColumnDef.refName) + "/" + referenceColumnDef.attrName;
+                } else {
+                    sortName = sortColumn.data;
+                }
+                this._sortData.push([sortName, orderItem.dir]);
+            }, this);
             
             mx.data.get({
                 xpath: xpath,
                 noCache: true,
                 count: true,
                 filter: {
-                    sort: [[this._sortName, this._sortDir]],
+                    sort: this._sortData,
                     offset: data.start,
                     amount: data.length
                 },
