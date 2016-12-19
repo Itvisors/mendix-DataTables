@@ -229,6 +229,7 @@ define([
                 dataTablesOptions,
                 dataTablesColumns = [],
                 dataTablesColumn,
+                jQueryClosureObj = _jQuery,
                 locale,
                 language,
                 languageFilename = null,
@@ -321,9 +322,8 @@ define([
             }
             dataTablesOptions.order = [[ sortIndex, "asc" ]];
             
-            dataTablesOptions.drawCallback = function () {
-                var dataTablesThisObj = this;
-                this.api().rows().every(function (rowIdx, tableLoop, rowLoop) {
+            dataTablesOptions.drawCallback = function (settings) {
+                thisObj._table.rows().every(function (rowIdx, tableLoop, rowLoop) {
                     var rowData = this.data(),
                         trNode = this.node();
                     trNode.setAttribute("data-guid", rowData.guid);
@@ -344,7 +344,7 @@ define([
                         } else {
                             colIdx = tdData.index;
                         }
-                        cellNode = dataTablesThisObj.api().cell({row : rowIdx, column : colIdx}).node();
+                        cellNode = thisObj._table.cell({row : rowIdx, column : colIdx}).node();
                         cellNode.setAttribute("data-columnName", tdData.name);
                     }, this);
                     // Select the first row, unless there is already a selection. The draw callback can be called multiple times.
