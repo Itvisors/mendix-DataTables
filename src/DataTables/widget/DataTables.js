@@ -54,6 +54,7 @@ define([
         // DOM elements
         controlbar: null,
         buttonContainer: null,
+        tableToConvert: null,
 
         // Parameters configured in the Modeler.
         tableEntity: null,
@@ -102,7 +103,6 @@ define([
         _contextObj: null,
         _contextObjMetaData: null,
         _entityMetaData: null,
-        _tableNodelist: null,
         _table: null,
         _hasDummyColumn: false,
         _buttonList: null,
@@ -236,10 +236,9 @@ define([
                 referencePropertyName,
                 sortIndex,
                 table,
+                tableNodeList,
                 thisObj = this;
-
-            this._tableNodelist = $("#" + this.domNode.id + " #tableToConvert");
-
+            
             // Add dummy column when column visibility is turned on, to prevent rendering issues.
             // When the first column is hidden, column reorder shows the dragging line at the wrong position.
             this._hasDummyColumn = false;
@@ -401,7 +400,7 @@ define([
 
             // Additional class(es) on the table itself
             if (this.tableClass) {
-                this._tableNodelist.addClass(this.tableClass);
+                dojoClass.add(this.tableToConvert, this.tableClass);
             }
 
             // State saving, only when local storage is available
@@ -472,7 +471,9 @@ define([
             }
             
             // Create DataTables object
-            table = this._tableNodelist.DataTable(dataTablesOptions);
+            this.tableToConvert.id = this.domNode.id + "_tableToConvert";
+            tableNodeList = $("#" + this.tableToConvert.id);
+            table = tableNodeList.DataTable(dataTablesOptions);
             this._table = table;
 
             // Selection event
@@ -566,7 +567,7 @@ define([
 
                 // Add click handler for default button
                 if (thisObj._defaultButtonDefinition) {
-                    $(thisObj._tableNodelist).on("dblclick", "tr", function () {
+                    $(tableNodeList).on("dblclick", "tr", function () {
                         thisObj._callButtonMicroflow(thisObj._defaultButtonDefinition, [this.getAttribute("data-guid")]);
                     });
                 }
