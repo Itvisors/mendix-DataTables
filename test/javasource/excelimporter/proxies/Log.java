@@ -119,7 +119,7 @@ public class Log
 	/**
 	 * @return value of Logline
 	 */
-	public final String getLogline()
+	public final java.lang.String getLogline()
 	{
 		return getLogline(getContext());
 	}
@@ -128,16 +128,16 @@ public class Log
 	 * @param context
 	 * @return value of Logline
 	 */
-	public final String getLogline(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getLogline(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.Logline.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.Logline.toString());
 	}
 
 	/**
 	 * Set value of Logline
 	 * @param logline
 	 */
-	public final void setLogline(String logline)
+	public final void setLogline(java.lang.String logline)
 	{
 		setLogline(getContext(), logline);
 	}
@@ -147,7 +147,7 @@ public class Log
 	 * @param context
 	 * @param logline
 	 */
-	public final void setLogline(com.mendix.systemwideinterfaces.core.IContext context, String logline)
+	public final void setLogline(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String logline)
 	{
 		getMendixObject().setValue(context, MemberNames.Logline.toString(), logline);
 	}

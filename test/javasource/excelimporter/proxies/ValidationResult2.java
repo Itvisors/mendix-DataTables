@@ -6,28 +6,28 @@ package excelimporter.proxies;
 
 public enum ValidationResult2
 {
-	NoInputParams(new String[][] { new String[] { "en_US", "NoInputParams" }, new String[] { "nl_NL", "NoInputParams" }, new String[] { "en_GB", "NoInputParams" }, new String[] { "en_ZA", "NoInputParams" } }),
-	WrongNrOfInputParams(new String[][] { new String[] { "en_US", "WrongNrOfInputParams" }, new String[] { "nl_NL", "WrongNrOfInputParams" }, new String[] { "en_GB", "WrongNrOfInputParams" }, new String[] { "en_ZA", "WrongNrOfInputParams" } }),
-	WrongReturnType(new String[][] { new String[] { "en_US", "WrongReturnType" }, new String[] { "nl_NL", "WrongReturnType" }, new String[] { "en_GB", "WrongReturnType" }, new String[] { "en_ZA", "WrongReturnType" } }),
-	Valid(new String[][] { new String[] { "en_US", "Valid" }, new String[] { "nl_NL", "Geldig" }, new String[] { "en_GB", "Valid" }, new String[] { "en_ZA", "Valid" } });
+	NoInputParams(new java.lang.String[][] { new java.lang.String[] { "en_US", "NoInputParams" }, new java.lang.String[] { "nl_NL", "NoInputParams" }, new java.lang.String[] { "en_GB", "NoInputParams" }, new java.lang.String[] { "en_ZA", "NoInputParams" } }),
+	WrongNrOfInputParams(new java.lang.String[][] { new java.lang.String[] { "en_US", "WrongNrOfInputParams" }, new java.lang.String[] { "nl_NL", "WrongNrOfInputParams" }, new java.lang.String[] { "en_GB", "WrongNrOfInputParams" }, new java.lang.String[] { "en_ZA", "WrongNrOfInputParams" } }),
+	WrongReturnType(new java.lang.String[][] { new java.lang.String[] { "en_US", "WrongReturnType" }, new java.lang.String[] { "nl_NL", "WrongReturnType" }, new java.lang.String[] { "en_GB", "WrongReturnType" }, new java.lang.String[] { "en_ZA", "WrongReturnType" } }),
+	Valid(new java.lang.String[][] { new java.lang.String[] { "en_US", "Valid" }, new java.lang.String[] { "nl_NL", "Geldig" }, new java.lang.String[] { "en_GB", "Valid" }, new java.lang.String[] { "en_ZA", "Valid" } });
 
-	private java.util.Map<String,String> captions;
+	private java.util.Map<java.lang.String, java.lang.String> captions;
 
-	private ValidationResult2(String[][] captionStrings)
+	private ValidationResult2(java.lang.String[][] captionStrings)
 	{
-		this.captions = new java.util.HashMap<String,String>();
-		for (String[] captionString : captionStrings)
+		this.captions = new java.util.HashMap<java.lang.String, java.lang.String>();
+		for (java.lang.String[] captionString : captionStrings)
 			captions.put(captionString[0], captionString[1]);
 	}
 
-	public String getCaption(String languageCode)
+	public java.lang.String getCaption(java.lang.String languageCode)
 	{
 		if (captions.containsKey(languageCode))
 			return captions.get(languageCode);
 		return captions.get("en_US");
 	}
 
-	public String getCaption()
+	public java.lang.String getCaption()
 	{
 		return captions.get("en_US");
 	}

@@ -18,7 +18,7 @@ import com.mendix.webui.CustomJavaAction;
  * Synchronise all excel columns and add/update/remove the existing columns from the template in the parameter.
  * The return value is irrelevant and will be always true
  */
-public class GetHeaderInformationFromExcelFile extends CustomJavaAction<Boolean>
+public class GetHeaderInformationFromExcelFile extends CustomJavaAction<java.lang.Boolean>
 {
 	private IMendixObject __TemplateObject;
 	private excelimporter.proxies.Template TemplateObject;
@@ -33,7 +33,7 @@ public class GetHeaderInformationFromExcelFile extends CustomJavaAction<Boolean>
 	}
 
 	@Override
-	public Boolean executeAction() throws Exception
+	public java.lang.Boolean executeAction() throws Exception
 	{
 		this.TemplateObject = __TemplateObject == null ? null : excelimporter.proxies.Template.initialize(getContext(), __TemplateObject);
 
@@ -49,7 +49,7 @@ public class GetHeaderInformationFromExcelFile extends CustomJavaAction<Boolean>
 	 * Returns a string representation of this action
 	 */
 	@Override
-	public String toString()
+	public java.lang.String toString()
 	{
 		return "GetHeaderInformationFromExcelFile";
 	}

@@ -122,9 +122,11 @@ public abstract class ExcelXLSXReader {
 		}
 
 		protected void evaluateCellStyle( Attributes attributes ) {
-			this.formatString = null;
+			/*
+			 * Track the excel cell style so we can print a warning later on when we have a fall through in the processing of function: evaluateCellData
+			 * When we have a style but can't identify the type there is something wrong with the excel sheet
+			 */
 			this.excelStyle = -1;
-
 			String cellStyle = attributes.getValue("s");
 			if ( cellStyle != null ) {
 				XSSFCellStyle style = this.stylesTable.getStyleAt(Integer.parseInt(cellStyle));
@@ -137,6 +139,8 @@ public abstract class ExcelXLSXReader {
 				this.excelStyle = -1;
 			}
 
+			
+			this.formatString = null;
 			String cellType = attributes.getValue("t");
 			// Source: http://www.schemacentral.com/sc/ooxml/a-t-8.html
 			this.excelType = ExcelType.NUMBER;
@@ -207,13 +211,14 @@ public abstract class ExcelXLSXReader {
 						break;
 					case NUMBER:
 						if ( this.formatString != null ) {
-							cellData = new ExcelCellData(this.getCurrentColumnNr(), cellValueString, this.formatter.formatRawCellContents(
-									Double.parseDouble(cellValueString), this.formatIndex, this.formatString), this.formatString);
+							Double dblCellValue = Double.parseDouble(cellValueString);
+							cellData = new ExcelCellData(this.getCurrentColumnNr(), dblCellValue, this.formatter.formatRawCellContents(
+									dblCellValue, this.formatIndex, this.formatString), this.formatString);
 
 							if ( ExcelReader.logNode.isTraceEnabled() )
 								ExcelReader.logNode
 										.trace("Formatting " + this.colString + " / '" + cellValueString + "' using format: '" + this.formatString + "' as " + this.formatter
-												.formatRawCellContents(Double.parseDouble(cellValueString), this.formatIndex, this.formatString));
+												.formatRawCellContents(dblCellValue, this.formatIndex, this.formatString));
 						}
 						else
 							cellData = new ExcelCellData(this.getCurrentColumnNr(), cellValueString, null);

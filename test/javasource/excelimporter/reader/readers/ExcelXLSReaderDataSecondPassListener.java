@@ -277,8 +277,7 @@ public class ExcelXLSReaderDataSecondPassListener implements HSSFListener {
 				if ( row > this.startRow ) {
 					try {
 						if ( this.values.length > 0 )
-							this.excelRowProcessor.processValues(this.values, this.rowNow - 1, this.sheetNow);
-						// Use row nr - 1 because we already identified the next row at this point
+							this.excelRowProcessor.processValues(this.values, this.rowNow, this.sheetNow);
 					}
 					catch( Exception e ) {
 						throw new ExcelRuntimeException("XLS_DATA-2ndPass: an exception occured near row: " + row + ", the exception is: " + e.getMessage(), e);
@@ -289,7 +288,7 @@ public class ExcelXLSReaderDataSecondPassListener implements HSSFListener {
 
 			try {
 				if ( ExcelReader.logNode.isTraceEnabled() )
-					ExcelReader.logNode.error("Reading " + (row + 1) + ExcelReader.colNumberToText(col) + " / '" + rawValue + "'");
+					ExcelReader.logNode.trace("Reading " + (row + 1) + ExcelReader.colNumberToText(col) + " / '" + rawValue + "'");
 
 
 				this.values[col] = new ExcelCellData(col, rawValue, formattedValue, displayMask);

@@ -144,7 +144,7 @@ public class Column
 	/**
 	 * @return value of ColNumber
 	 */
-	public final Integer getColNumber()
+	public final java.lang.Integer getColNumber()
 	{
 		return getColNumber(getContext());
 	}
@@ -153,16 +153,16 @@ public class Column
 	 * @param context
 	 * @return value of ColNumber
 	 */
-	public final Integer getColNumber(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Integer getColNumber(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (Integer) getMendixObject().getValue(context, MemberNames.ColNumber.toString());
+		return (java.lang.Integer) getMendixObject().getValue(context, MemberNames.ColNumber.toString());
 	}
 
 	/**
 	 * Set value of ColNumber
 	 * @param colnumber
 	 */
-	public final void setColNumber(Integer colnumber)
+	public final void setColNumber(java.lang.Integer colnumber)
 	{
 		setColNumber(getContext(), colnumber);
 	}
@@ -172,7 +172,7 @@ public class Column
 	 * @param context
 	 * @param colnumber
 	 */
-	public final void setColNumber(com.mendix.systemwideinterfaces.core.IContext context, Integer colnumber)
+	public final void setColNumber(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Integer colnumber)
 	{
 		getMendixObject().setValue(context, MemberNames.ColNumber.toString(), colnumber);
 	}
@@ -180,7 +180,7 @@ public class Column
 	/**
 	 * @return value of Text
 	 */
-	public final String getText()
+	public final java.lang.String getText()
 	{
 		return getText(getContext());
 	}
@@ -189,16 +189,16 @@ public class Column
 	 * @param context
 	 * @return value of Text
 	 */
-	public final String getText(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getText(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.Text.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.Text.toString());
 	}
 
 	/**
 	 * Set value of Text
 	 * @param text
 	 */
-	public final void setText(String text)
+	public final void setText(java.lang.String text)
 	{
 		setText(getContext(), text);
 	}
@@ -208,7 +208,7 @@ public class Column
 	 * @param context
 	 * @param text
 	 */
-	public final void setText(com.mendix.systemwideinterfaces.core.IContext context, String text)
+	public final void setText(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String text)
 	{
 		getMendixObject().setValue(context, MemberNames.Text.toString(), text);
 	}
@@ -392,7 +392,7 @@ public class Column
 	/**
 	 * @return value of Details
 	 */
-	public final String getDetails()
+	public final java.lang.String getDetails()
 	{
 		return getDetails(getContext());
 	}
@@ -401,16 +401,16 @@ public class Column
 	 * @param context
 	 * @return value of Details
 	 */
-	public final String getDetails(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getDetails(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.Details.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.Details.toString());
 	}
 
 	/**
 	 * Set value of Details
 	 * @param details
 	 */
-	public final void setDetails(String details)
+	public final void setDetails(java.lang.String details)
 	{
 		setDetails(getContext(), details);
 	}
@@ -420,7 +420,7 @@ public class Column
 	 * @param context
 	 * @param details
 	 */
-	public final void setDetails(com.mendix.systemwideinterfaces.core.IContext context, String details)
+	public final void setDetails(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String details)
 	{
 		getMendixObject().setValue(context, MemberNames.Details.toString(), details);
 	}
@@ -472,7 +472,7 @@ public class Column
 	/**
 	 * @return value of FindAttribute
 	 */
-	public final String getFindAttribute()
+	public final java.lang.String getFindAttribute()
 	{
 		return getFindAttribute(getContext());
 	}
@@ -481,16 +481,16 @@ public class Column
 	 * @param context
 	 * @return value of FindAttribute
 	 */
-	public final String getFindAttribute(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getFindAttribute(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.FindAttribute.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.FindAttribute.toString());
 	}
 
 	/**
 	 * Set value of FindAttribute
 	 * @param findattribute
 	 */
-	public final void setFindAttribute(String findattribute)
+	public final void setFindAttribute(java.lang.String findattribute)
 	{
 		setFindAttribute(getContext(), findattribute);
 	}
@@ -500,7 +500,7 @@ public class Column
 	 * @param context
 	 * @param findattribute
 	 */
-	public final void setFindAttribute(com.mendix.systemwideinterfaces.core.IContext context, String findattribute)
+	public final void setFindAttribute(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String findattribute)
 	{
 		getMendixObject().setValue(context, MemberNames.FindAttribute.toString(), findattribute);
 	}
@@ -508,7 +508,7 @@ public class Column
 	/**
 	 * @return value of FindReference
 	 */
-	public final String getFindReference()
+	public final java.lang.String getFindReference()
 	{
 		return getFindReference(getContext());
 	}
@@ -517,16 +517,16 @@ public class Column
 	 * @param context
 	 * @return value of FindReference
 	 */
-	public final String getFindReference(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getFindReference(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.FindReference.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.FindReference.toString());
 	}
 
 	/**
 	 * Set value of FindReference
 	 * @param findreference
 	 */
-	public final void setFindReference(String findreference)
+	public final void setFindReference(java.lang.String findreference)
 	{
 		setFindReference(getContext(), findreference);
 	}
@@ -536,7 +536,7 @@ public class Column
 	 * @param context
 	 * @param findreference
 	 */
-	public final void setFindReference(com.mendix.systemwideinterfaces.core.IContext context, String findreference)
+	public final void setFindReference(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String findreference)
 	{
 		getMendixObject().setValue(context, MemberNames.FindReference.toString(), findreference);
 	}
@@ -544,7 +544,7 @@ public class Column
 	/**
 	 * @return value of FindObjectType
 	 */
-	public final String getFindObjectType()
+	public final java.lang.String getFindObjectType()
 	{
 		return getFindObjectType(getContext());
 	}
@@ -553,16 +553,16 @@ public class Column
 	 * @param context
 	 * @return value of FindObjectType
 	 */
-	public final String getFindObjectType(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getFindObjectType(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.FindObjectType.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.FindObjectType.toString());
 	}
 
 	/**
 	 * Set value of FindObjectType
 	 * @param findobjecttype
 	 */
-	public final void setFindObjectType(String findobjecttype)
+	public final void setFindObjectType(java.lang.String findobjecttype)
 	{
 		setFindObjectType(getContext(), findobjecttype);
 	}
@@ -572,7 +572,7 @@ public class Column
 	 * @param context
 	 * @param findobjecttype
 	 */
-	public final void setFindObjectType(com.mendix.systemwideinterfaces.core.IContext context, String findobjecttype)
+	public final void setFindObjectType(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String findobjecttype)
 	{
 		getMendixObject().setValue(context, MemberNames.FindObjectType.toString(), findobjecttype);
 	}
@@ -580,7 +580,7 @@ public class Column
 	/**
 	 * @return value of FindMicroflow
 	 */
-	public final String getFindMicroflow()
+	public final java.lang.String getFindMicroflow()
 	{
 		return getFindMicroflow(getContext());
 	}
@@ -589,16 +589,16 @@ public class Column
 	 * @param context
 	 * @return value of FindMicroflow
 	 */
-	public final String getFindMicroflow(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getFindMicroflow(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.FindMicroflow.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.FindMicroflow.toString());
 	}
 
 	/**
 	 * Set value of FindMicroflow
 	 * @param findmicroflow
 	 */
-	public final void setFindMicroflow(String findmicroflow)
+	public final void setFindMicroflow(java.lang.String findmicroflow)
 	{
 		setFindMicroflow(getContext(), findmicroflow);
 	}
@@ -608,7 +608,7 @@ public class Column
 	 * @param context
 	 * @param findmicroflow
 	 */
-	public final void setFindMicroflow(com.mendix.systemwideinterfaces.core.IContext context, String findmicroflow)
+	public final void setFindMicroflow(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String findmicroflow)
 	{
 		getMendixObject().setValue(context, MemberNames.FindMicroflow.toString(), findmicroflow);
 	}
@@ -704,7 +704,7 @@ public class Column
 	/**
 	 * @return value of InputMask
 	 */
-	public final String getInputMask()
+	public final java.lang.String getInputMask()
 	{
 		return getInputMask(getContext());
 	}
@@ -713,16 +713,16 @@ public class Column
 	 * @param context
 	 * @return value of InputMask
 	 */
-	public final String getInputMask(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getInputMask(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.InputMask.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.InputMask.toString());
 	}
 
 	/**
 	 * Set value of InputMask
 	 * @param inputmask
 	 */
-	public final void setInputMask(String inputmask)
+	public final void setInputMask(java.lang.String inputmask)
 	{
 		setInputMask(getContext(), inputmask);
 	}
@@ -732,7 +732,7 @@ public class Column
 	 * @param context
 	 * @param inputmask
 	 */
-	public final void setInputMask(com.mendix.systemwideinterfaces.core.IContext context, String inputmask)
+	public final void setInputMask(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String inputmask)
 	{
 		getMendixObject().setValue(context, MemberNames.InputMask.toString(), inputmask);
 	}

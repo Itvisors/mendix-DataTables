@@ -19,11 +19,11 @@ import com.mendix.webui.CustomJavaAction;
  */
 public class ValidateTokensInMessage extends CustomJavaAction<java.util.List<IMendixObject>>
 {
-	private String Text;
+	private java.lang.String Text;
 	private java.util.List<IMendixObject> __TokenList;
 	private java.util.List<mxmodelreflection.proxies.Token> TokenList;
 
-	public ValidateTokensInMessage(IContext context, String Text, java.util.List<IMendixObject> TokenList)
+	public ValidateTokensInMessage(IContext context, java.lang.String Text, java.util.List<IMendixObject> TokenList)
 	{
 		super(context);
 		this.Text = Text;
@@ -48,7 +48,7 @@ public class ValidateTokensInMessage extends CustomJavaAction<java.util.List<IMe
 	 * Returns a string representation of this action
 	 */
 	@Override
-	public String toString()
+	public java.lang.String toString()
 	{
 		return "ValidateTokensInMessage";
 	}

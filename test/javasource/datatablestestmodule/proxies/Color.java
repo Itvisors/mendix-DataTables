@@ -6,27 +6,27 @@ package datatablestestmodule.proxies;
 
 public enum Color
 {
-	Green(new String[][] { new String[] { "en_US", "Green" } }),
-	Yellow(new String[][] { new String[] { "en_US", "Yellow" } }),
-	Red(new String[][] { new String[] { "en_US", "Red" } });
+	Green(new java.lang.String[][] { new java.lang.String[] { "en_US", "Green" } }),
+	Yellow(new java.lang.String[][] { new java.lang.String[] { "en_US", "Yellow" } }),
+	Red(new java.lang.String[][] { new java.lang.String[] { "en_US", "Red" } });
 
-	private java.util.Map<String,String> captions;
+	private java.util.Map<java.lang.String, java.lang.String> captions;
 
-	private Color(String[][] captionStrings)
+	private Color(java.lang.String[][] captionStrings)
 	{
-		this.captions = new java.util.HashMap<String,String>();
-		for (String[] captionString : captionStrings)
+		this.captions = new java.util.HashMap<java.lang.String, java.lang.String>();
+		for (java.lang.String[] captionString : captionStrings)
 			captions.put(captionString[0], captionString[1]);
 	}
 
-	public String getCaption(String languageCode)
+	public java.lang.String getCaption(java.lang.String languageCode)
 	{
 		if (captions.containsKey(languageCode))
 			return captions.get(languageCode);
 		return captions.get("en_US");
 	}
 
-	public String getCaption()
+	public java.lang.String getCaption()
 	{
 		return captions.get("en_US");
 	}

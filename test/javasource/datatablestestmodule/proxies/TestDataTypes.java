@@ -130,7 +130,7 @@ public class TestDataTypes
 	/**
 	 * @return value of Name
 	 */
-	public final String getName()
+	public final java.lang.String getName()
 	{
 		return getName(getContext());
 	}
@@ -139,16 +139,16 @@ public class TestDataTypes
 	 * @param context
 	 * @return value of Name
 	 */
-	public final String getName(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getName(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.Name.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.Name.toString());
 	}
 
 	/**
 	 * Set value of Name
 	 * @param name
 	 */
-	public final void setName(String name)
+	public final void setName(java.lang.String name)
 	{
 		setName(getContext(), name);
 	}
@@ -158,7 +158,7 @@ public class TestDataTypes
 	 * @param context
 	 * @param name
 	 */
-	public final void setName(com.mendix.systemwideinterfaces.core.IContext context, String name)
+	public final void setName(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String name)
 	{
 		getMendixObject().setValue(context, MemberNames.Name.toString(), name);
 	}
@@ -166,7 +166,7 @@ public class TestDataTypes
 	/**
 	 * @return value of Description
 	 */
-	public final String getDescription()
+	public final java.lang.String getDescription()
 	{
 		return getDescription(getContext());
 	}
@@ -175,16 +175,16 @@ public class TestDataTypes
 	 * @param context
 	 * @return value of Description
 	 */
-	public final String getDescription(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getDescription(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.Description.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.Description.toString());
 	}
 
 	/**
 	 * Set value of Description
 	 * @param description
 	 */
-	public final void setDescription(String description)
+	public final void setDescription(java.lang.String description)
 	{
 		setDescription(getContext(), description);
 	}
@@ -194,7 +194,7 @@ public class TestDataTypes
 	 * @param context
 	 * @param description
 	 */
-	public final void setDescription(com.mendix.systemwideinterfaces.core.IContext context, String description)
+	public final void setDescription(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String description)
 	{
 		getMendixObject().setValue(context, MemberNames.Description.toString(), description);
 	}
@@ -202,7 +202,7 @@ public class TestDataTypes
 	/**
 	 * @return value of ItemNumber
 	 */
-	public final Long getItemNumber()
+	public final java.lang.Long getItemNumber()
 	{
 		return getItemNumber(getContext());
 	}
@@ -211,16 +211,16 @@ public class TestDataTypes
 	 * @param context
 	 * @return value of ItemNumber
 	 */
-	public final Long getItemNumber(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Long getItemNumber(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (Long) getMendixObject().getValue(context, MemberNames.ItemNumber.toString());
+		return (java.lang.Long) getMendixObject().getValue(context, MemberNames.ItemNumber.toString());
 	}
 
 	/**
 	 * Set value of ItemNumber
 	 * @param itemnumber
 	 */
-	public final void setItemNumber(Long itemnumber)
+	public final void setItemNumber(java.lang.Long itemnumber)
 	{
 		setItemNumber(getContext(), itemnumber);
 	}
@@ -230,7 +230,7 @@ public class TestDataTypes
 	 * @param context
 	 * @param itemnumber
 	 */
-	public final void setItemNumber(com.mendix.systemwideinterfaces.core.IContext context, Long itemnumber)
+	public final void setItemNumber(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Long itemnumber)
 	{
 		getMendixObject().setValue(context, MemberNames.ItemNumber.toString(), itemnumber);
 	}
@@ -238,7 +238,7 @@ public class TestDataTypes
 	/**
 	 * @return value of Bool
 	 */
-	public final Boolean getBool()
+	public final java.lang.Boolean getBool()
 	{
 		return getBool(getContext());
 	}
@@ -247,16 +247,16 @@ public class TestDataTypes
 	 * @param context
 	 * @return value of Bool
 	 */
-	public final Boolean getBool(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Boolean getBool(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (Boolean) getMendixObject().getValue(context, MemberNames.Bool.toString());
+		return (java.lang.Boolean) getMendixObject().getValue(context, MemberNames.Bool.toString());
 	}
 
 	/**
 	 * Set value of Bool
 	 * @param bool
 	 */
-	public final void setBool(Boolean bool)
+	public final void setBool(java.lang.Boolean bool)
 	{
 		setBool(getContext(), bool);
 	}
@@ -266,7 +266,7 @@ public class TestDataTypes
 	 * @param context
 	 * @param bool
 	 */
-	public final void setBool(com.mendix.systemwideinterfaces.core.IContext context, Boolean bool)
+	public final void setBool(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Boolean bool)
 	{
 		getMendixObject().setValue(context, MemberNames.Bool.toString(), bool);
 	}
@@ -462,7 +462,7 @@ public class TestDataTypes
 	/**
 	 * @return value of FloatValue
 	 */
-	public final Double getFloatValue()
+	public final java.lang.Double getFloatValue()
 	{
 		return getFloatValue(getContext());
 	}
@@ -471,16 +471,16 @@ public class TestDataTypes
 	 * @param context
 	 * @return value of FloatValue
 	 */
-	public final Double getFloatValue(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Double getFloatValue(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (Double) getMendixObject().getValue(context, MemberNames.FloatValue.toString());
+		return (java.lang.Double) getMendixObject().getValue(context, MemberNames.FloatValue.toString());
 	}
 
 	/**
 	 * Set value of FloatValue
 	 * @param floatvalue
 	 */
-	public final void setFloatValue(Double floatvalue)
+	public final void setFloatValue(java.lang.Double floatvalue)
 	{
 		setFloatValue(getContext(), floatvalue);
 	}
@@ -490,7 +490,7 @@ public class TestDataTypes
 	 * @param context
 	 * @param floatvalue
 	 */
-	public final void setFloatValue(com.mendix.systemwideinterfaces.core.IContext context, Double floatvalue)
+	public final void setFloatValue(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Double floatvalue)
 	{
 		getMendixObject().setValue(context, MemberNames.FloatValue.toString(), floatvalue);
 	}
@@ -498,7 +498,7 @@ public class TestDataTypes
 	/**
 	 * @return value of IntegerValue
 	 */
-	public final Integer getIntegerValue()
+	public final java.lang.Integer getIntegerValue()
 	{
 		return getIntegerValue(getContext());
 	}
@@ -507,16 +507,16 @@ public class TestDataTypes
 	 * @param context
 	 * @return value of IntegerValue
 	 */
-	public final Integer getIntegerValue(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Integer getIntegerValue(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (Integer) getMendixObject().getValue(context, MemberNames.IntegerValue.toString());
+		return (java.lang.Integer) getMendixObject().getValue(context, MemberNames.IntegerValue.toString());
 	}
 
 	/**
 	 * Set value of IntegerValue
 	 * @param integervalue
 	 */
-	public final void setIntegerValue(Integer integervalue)
+	public final void setIntegerValue(java.lang.Integer integervalue)
 	{
 		setIntegerValue(getContext(), integervalue);
 	}
@@ -526,7 +526,7 @@ public class TestDataTypes
 	 * @param context
 	 * @param integervalue
 	 */
-	public final void setIntegerValue(com.mendix.systemwideinterfaces.core.IContext context, Integer integervalue)
+	public final void setIntegerValue(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Integer integervalue)
 	{
 		getMendixObject().setValue(context, MemberNames.IntegerValue.toString(), integervalue);
 	}
@@ -534,7 +534,7 @@ public class TestDataTypes
 	/**
 	 * @return value of LongValue
 	 */
-	public final Long getLongValue()
+	public final java.lang.Long getLongValue()
 	{
 		return getLongValue(getContext());
 	}
@@ -543,16 +543,16 @@ public class TestDataTypes
 	 * @param context
 	 * @return value of LongValue
 	 */
-	public final Long getLongValue(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Long getLongValue(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (Long) getMendixObject().getValue(context, MemberNames.LongValue.toString());
+		return (java.lang.Long) getMendixObject().getValue(context, MemberNames.LongValue.toString());
 	}
 
 	/**
 	 * Set value of LongValue
 	 * @param longvalue
 	 */
-	public final void setLongValue(Long longvalue)
+	public final void setLongValue(java.lang.Long longvalue)
 	{
 		setLongValue(getContext(), longvalue);
 	}
@@ -562,7 +562,7 @@ public class TestDataTypes
 	 * @param context
 	 * @param longvalue
 	 */
-	public final void setLongValue(com.mendix.systemwideinterfaces.core.IContext context, Long longvalue)
+	public final void setLongValue(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Long longvalue)
 	{
 		getMendixObject().setValue(context, MemberNames.LongValue.toString(), longvalue);
 	}
@@ -570,7 +570,7 @@ public class TestDataTypes
 	/**
 	 * @return value of CurrencyValue
 	 */
-	public final Double getCurrencyValue()
+	public final java.lang.Double getCurrencyValue()
 	{
 		return getCurrencyValue(getContext());
 	}
@@ -579,16 +579,16 @@ public class TestDataTypes
 	 * @param context
 	 * @return value of CurrencyValue
 	 */
-	public final Double getCurrencyValue(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Double getCurrencyValue(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (Double) getMendixObject().getValue(context, MemberNames.CurrencyValue.toString());
+		return (java.lang.Double) getMendixObject().getValue(context, MemberNames.CurrencyValue.toString());
 	}
 
 	/**
 	 * Set value of CurrencyValue
 	 * @param currencyvalue
 	 */
-	public final void setCurrencyValue(Double currencyvalue)
+	public final void setCurrencyValue(java.lang.Double currencyvalue)
 	{
 		setCurrencyValue(getContext(), currencyvalue);
 	}
@@ -598,7 +598,7 @@ public class TestDataTypes
 	 * @param context
 	 * @param currencyvalue
 	 */
-	public final void setCurrencyValue(com.mendix.systemwideinterfaces.core.IContext context, Double currencyvalue)
+	public final void setCurrencyValue(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Double currencyvalue)
 	{
 		getMendixObject().setValue(context, MemberNames.CurrencyValue.toString(), currencyvalue);
 	}

@@ -129,7 +129,7 @@ public class MxObjectMember
 	/**
 	 * @return value of AttributeName
 	 */
-	public final String getAttributeName()
+	public final java.lang.String getAttributeName()
 	{
 		return getAttributeName(getContext());
 	}
@@ -138,16 +138,16 @@ public class MxObjectMember
 	 * @param context
 	 * @return value of AttributeName
 	 */
-	public final String getAttributeName(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getAttributeName(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.AttributeName.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.AttributeName.toString());
 	}
 
 	/**
 	 * Set value of AttributeName
 	 * @param attributename
 	 */
-	public final void setAttributeName(String attributename)
+	public final void setAttributeName(java.lang.String attributename)
 	{
 		setAttributeName(getContext(), attributename);
 	}
@@ -157,7 +157,7 @@ public class MxObjectMember
 	 * @param context
 	 * @param attributename
 	 */
-	public final void setAttributeName(com.mendix.systemwideinterfaces.core.IContext context, String attributename)
+	public final void setAttributeName(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String attributename)
 	{
 		getMendixObject().setValue(context, MemberNames.AttributeName.toString(), attributename);
 	}
@@ -165,7 +165,7 @@ public class MxObjectMember
 	/**
 	 * @return value of AttributeType
 	 */
-	public final String getAttributeType()
+	public final java.lang.String getAttributeType()
 	{
 		return getAttributeType(getContext());
 	}
@@ -174,16 +174,16 @@ public class MxObjectMember
 	 * @param context
 	 * @return value of AttributeType
 	 */
-	public final String getAttributeType(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getAttributeType(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.AttributeType.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.AttributeType.toString());
 	}
 
 	/**
 	 * Set value of AttributeType
 	 * @param attributetype
 	 */
-	public final void setAttributeType(String attributetype)
+	public final void setAttributeType(java.lang.String attributetype)
 	{
 		setAttributeType(getContext(), attributetype);
 	}
@@ -193,7 +193,7 @@ public class MxObjectMember
 	 * @param context
 	 * @param attributetype
 	 */
-	public final void setAttributeType(com.mendix.systemwideinterfaces.core.IContext context, String attributetype)
+	public final void setAttributeType(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String attributetype)
 	{
 		getMendixObject().setValue(context, MemberNames.AttributeType.toString(), attributetype);
 	}
@@ -245,7 +245,7 @@ public class MxObjectMember
 	/**
 	 * @return value of CompleteName
 	 */
-	public final String getCompleteName()
+	public final java.lang.String getCompleteName()
 	{
 		return getCompleteName(getContext());
 	}
@@ -254,16 +254,16 @@ public class MxObjectMember
 	 * @param context
 	 * @return value of CompleteName
 	 */
-	public final String getCompleteName(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getCompleteName(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.CompleteName.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.CompleteName.toString());
 	}
 
 	/**
 	 * Set value of CompleteName
 	 * @param completename
 	 */
-	public final void setCompleteName(String completename)
+	public final void setCompleteName(java.lang.String completename)
 	{
 		setCompleteName(getContext(), completename);
 	}
@@ -273,7 +273,7 @@ public class MxObjectMember
 	 * @param context
 	 * @param completename
 	 */
-	public final void setCompleteName(com.mendix.systemwideinterfaces.core.IContext context, String completename)
+	public final void setCompleteName(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String completename)
 	{
 		getMendixObject().setValue(context, MemberNames.CompleteName.toString(), completename);
 	}
@@ -281,7 +281,7 @@ public class MxObjectMember
 	/**
 	 * @return value of DescriptiveName
 	 */
-	public final String getDescriptiveName()
+	public final java.lang.String getDescriptiveName()
 	{
 		return getDescriptiveName(getContext());
 	}
@@ -290,16 +290,16 @@ public class MxObjectMember
 	 * @param context
 	 * @return value of DescriptiveName
 	 */
-	public final String getDescriptiveName(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getDescriptiveName(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.DescriptiveName.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.DescriptiveName.toString());
 	}
 
 	/**
 	 * Set value of DescriptiveName
 	 * @param descriptivename
 	 */
-	public final void setDescriptiveName(String descriptivename)
+	public final void setDescriptiveName(java.lang.String descriptivename)
 	{
 		setDescriptiveName(getContext(), descriptivename);
 	}
@@ -309,7 +309,7 @@ public class MxObjectMember
 	 * @param context
 	 * @param descriptivename
 	 */
-	public final void setDescriptiveName(com.mendix.systemwideinterfaces.core.IContext context, String descriptivename)
+	public final void setDescriptiveName(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String descriptivename)
 	{
 		getMendixObject().setValue(context, MemberNames.DescriptiveName.toString(), descriptivename);
 	}
@@ -317,7 +317,7 @@ public class MxObjectMember
 	/**
 	 * @return value of FieldLength
 	 */
-	public final Integer getFieldLength()
+	public final java.lang.Integer getFieldLength()
 	{
 		return getFieldLength(getContext());
 	}
@@ -326,16 +326,16 @@ public class MxObjectMember
 	 * @param context
 	 * @return value of FieldLength
 	 */
-	public final Integer getFieldLength(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Integer getFieldLength(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (Integer) getMendixObject().getValue(context, MemberNames.FieldLength.toString());
+		return (java.lang.Integer) getMendixObject().getValue(context, MemberNames.FieldLength.toString());
 	}
 
 	/**
 	 * Set value of FieldLength
 	 * @param fieldlength
 	 */
-	public final void setFieldLength(Integer fieldlength)
+	public final void setFieldLength(java.lang.Integer fieldlength)
 	{
 		setFieldLength(getContext(), fieldlength);
 	}
@@ -345,7 +345,7 @@ public class MxObjectMember
 	 * @param context
 	 * @param fieldlength
 	 */
-	public final void setFieldLength(com.mendix.systemwideinterfaces.core.IContext context, Integer fieldlength)
+	public final void setFieldLength(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Integer fieldlength)
 	{
 		getMendixObject().setValue(context, MemberNames.FieldLength.toString(), fieldlength);
 	}
@@ -353,7 +353,7 @@ public class MxObjectMember
 	/**
 	 * @return value of IsVirtual
 	 */
-	public final Boolean getIsVirtual()
+	public final java.lang.Boolean getIsVirtual()
 	{
 		return getIsVirtual(getContext());
 	}
@@ -362,16 +362,16 @@ public class MxObjectMember
 	 * @param context
 	 * @return value of IsVirtual
 	 */
-	public final Boolean getIsVirtual(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Boolean getIsVirtual(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (Boolean) getMendixObject().getValue(context, MemberNames.IsVirtual.toString());
+		return (java.lang.Boolean) getMendixObject().getValue(context, MemberNames.IsVirtual.toString());
 	}
 
 	/**
 	 * Set value of IsVirtual
 	 * @param isvirtual
 	 */
-	public final void setIsVirtual(Boolean isvirtual)
+	public final void setIsVirtual(java.lang.Boolean isvirtual)
 	{
 		setIsVirtual(getContext(), isvirtual);
 	}
@@ -381,7 +381,7 @@ public class MxObjectMember
 	 * @param context
 	 * @param isvirtual
 	 */
-	public final void setIsVirtual(com.mendix.systemwideinterfaces.core.IContext context, Boolean isvirtual)
+	public final void setIsVirtual(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Boolean isvirtual)
 	{
 		getMendixObject().setValue(context, MemberNames.IsVirtual.toString(), isvirtual);
 	}

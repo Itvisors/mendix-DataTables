@@ -17,11 +17,11 @@ import com.mendix.webui.CustomJavaAction;
 
 public class getWithParams extends CustomJavaAction<IMendixObject>
 {
-	private String resourceUrl;
+	private java.lang.String resourceUrl;
 	private IMendixObject requestData;
 	private IMendixObject targetObject;
 
-	public getWithParams(IContext context, String resourceUrl, IMendixObject requestData, IMendixObject targetObject)
+	public getWithParams(IContext context, java.lang.String resourceUrl, IMendixObject requestData, IMendixObject targetObject)
 	{
 		super(context);
 		this.resourceUrl = resourceUrl;
@@ -41,7 +41,7 @@ public class getWithParams extends CustomJavaAction<IMendixObject>
 	 * Returns a string representation of this action
 	 */
 	@Override
-	public String toString()
+	public java.lang.String toString()
 	{
 		return "getWithParams";
 	}

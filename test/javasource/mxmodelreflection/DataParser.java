@@ -6,25 +6,17 @@ package mxmodelreflection;
 
 import java.math.BigDecimal;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Formatter;
 import java.util.Locale;
 import java.util.TimeZone;
 
 import com.mendix.core.Core;
 import com.mendix.core.CoreException;
-import com.mendix.core.objectmanagement.member.MendixAutoNumber;
-import com.mendix.core.objectmanagement.member.MendixBoolean;
-import com.mendix.core.objectmanagement.member.MendixCurrency;
-import com.mendix.core.objectmanagement.member.MendixDateTime;
-import com.mendix.core.objectmanagement.member.MendixDecimal;
 import com.mendix.core.objectmanagement.member.MendixEnum;
-import com.mendix.core.objectmanagement.member.MendixFloat;
-import com.mendix.core.objectmanagement.member.MendixHashString;
-import com.mendix.core.objectmanagement.member.MendixInteger;
-import com.mendix.core.objectmanagement.member.MendixLong;
-import com.mendix.core.objectmanagement.member.MendixString;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObjectMember;
 import com.mendix.systemwideinterfaces.core.ISession;
@@ -33,39 +25,84 @@ import com.mendix.systemwideinterfaces.core.meta.IMetaEnumValue;
 public class DataParser
 {
 
-	public static String getStringValue( Object value, IContext context ) throws CoreException
+	public static String getStringValue( Object value, String pattern, IContext context ) throws CoreException
 	{
 		if ( value == null ) {
 			return "";
 		}
+		
+		else if ( value instanceof String ) {
+			if( pattern != null && !"".equals(pattern) ) 
+				return getFormattedValue(context, pattern, value);
+			
+			return ((String) value).trim();
+		}
 
 		else if ( value instanceof Integer ) {
 			TokenReplacer._logger.trace("Processing value as integer");
+			
+			if( pattern != null && !"".equals(pattern) ) 
+				return getFormattedValue(context, pattern, value);
 			return Integer.toString((Integer) value);
 		}
 		else if ( value instanceof Boolean ) {
 			TokenReplacer._logger.trace("Processing value as Boolean");
+
+			if( pattern != null && !"".equals(pattern) ) 
+				return getFormattedValue(context, pattern, value);
 			return Boolean.toString((Boolean) value);
 		}
 		else if ( value instanceof Double ) {
 			TokenReplacer._logger.trace("Processing value as double");
+
+			if( pattern != null && !"".equals(pattern) ) {
+				DecimalFormat df = (DecimalFormat) NumberFormat.getInstance( Core.getLocale(context) );
+				df.applyLocalizedPattern(pattern);
+				
+				return df.format( (Double) value );
+			}
 			return getFormattedNumber(context, (Double) value, 2, 20);
 		}
 		else if ( value instanceof Float ) {
 			TokenReplacer._logger.trace("Processing value as float");
+			
+			if( pattern != null && !"".equals(pattern) ) {
+				DecimalFormat df = (DecimalFormat) NumberFormat.getInstance( Core.getLocale(context) );
+				df.applyLocalizedPattern(pattern);
+				
+				return df.format( (Float) value );
+			}
 			return getFormattedNumber(context, Double.valueOf((Float) value), 2, 20);
 		}
 		else if ( value instanceof Date ) {
 			TokenReplacer._logger.trace("Processing value as date, localized");
+			
+			if( pattern != null && !"".equals(pattern) ) {
+				SimpleDateFormat df = new SimpleDateFormat(pattern, Core.getLocale(context) );
+				
+				return df.format( (Date) value );
+			}
 			return processDate(context, (Date) value, true);
 		}
 		else if ( value instanceof Long ) {
 			TokenReplacer._logger.trace("Processing value as long");
+
+			if( pattern != null && !"".equals(pattern) ) 
+				return getFormattedValue(context, pattern, value);
 			return Long.toString((Long) value);
 		}
 		else if ( value instanceof BigDecimal ) {
 			TokenReplacer._logger.trace("Processing value as Big Decimal");
-			return ((BigDecimal) value).toString();
+			BigDecimal bd = ((BigDecimal) value);
+			if ( bd != null ) {
+				if( pattern != null && !"".equals(pattern) ) {
+					DecimalFormat df = (DecimalFormat) NumberFormat.getInstance( Core.getLocale(context) );
+					df.applyLocalizedPattern(pattern);
+					
+					return df.format( bd );
+				}
+				return bd.toString();
+			}
 		}
 		else if ( value instanceof IMendixObjectMember ) {
 			IMendixObjectMember<?> member = (IMendixObjectMember<?>) value;
@@ -74,19 +111,7 @@ public class DataParser
 				return "";
 			}
 
-			if ( value instanceof MendixBoolean ) {
-				TokenReplacer._logger.trace("Processing value as MendixBoolean");
-				return Boolean.toString(((MendixBoolean) value).getValue(context));
-			}
-			else if ( value instanceof MendixCurrency ) {
-				TokenReplacer._logger.trace("Processing value as MendixCurrency");
-				return getFormattedNumber(context, ((MendixCurrency) value).getValue(context), 2, 2);
-			}
-			else if ( value instanceof MendixDateTime ) {
-				TokenReplacer._logger.trace("Processing value as MendixDateTime");
-				return processDate(context, ((MendixDateTime) value).getValue(context), ((MendixDateTime) value).shouldLocalize());
-			}
-			else if ( value instanceof MendixEnum ) {
+			if ( value instanceof MendixEnum ) {
 				TokenReplacer._logger.trace("Processing value as MendixEnum");
 				MendixEnum enumeration = (MendixEnum) value;
 				try {
@@ -98,47 +123,13 @@ public class DataParser
 					return enumeration.getValue(context);
 				}
 			}
-			else if ( value instanceof MendixFloat ) {
-				TokenReplacer._logger.trace("Processing value as MendixFloat");
-				return Double.toString(((MendixFloat) value).getValue(context));
-			}
-			else if ( value instanceof MendixDecimal ) {
-				TokenReplacer._logger.trace("Processing value as MendixDecimal");
-				BigDecimal bd = ((MendixDecimal) value).getValue(context);
-				if ( bd != null )
-					return bd.toString();
-				return "";
-			}
-			else if ( value instanceof MendixHashString ) {
-				TokenReplacer._logger.trace("Processing value as MendixHashString");
-				return ((MendixHashString) value).getValue(context);
-			}
-			else if ( value instanceof MendixInteger ) {
-				TokenReplacer._logger.trace("Processing value as MendixInteger");
-				return Integer.toString(((MendixInteger) value).getValue(context));
-			}
-			else if ( value instanceof MendixString ) {
-				TokenReplacer._logger.trace("Processing value as MendixString");
-				return ((MendixString) value).getValue(context);
-			}
-			else if ( value instanceof MendixLong ) {
-				TokenReplacer._logger.trace("Processing value as MendixLong");
-				return Long.toString(((MendixLong) value).getValue(context));
-			}
-			else if ( value instanceof MendixAutoNumber ) {
-				TokenReplacer._logger.trace("Processing value as MendixAutoNumber");
-				return Long.toString(((MendixAutoNumber) value).getValue(context));
-			}
-			else
-				TokenReplacer._logger.warn("Unimplemented attribute type: " + member.getName() + " <" + member.getClass().getName() + ">");
-
+			// Now re-do this same function after getting the actual attribute value
+			else 
+				return getStringValue( ((IMendixObjectMember<?>) value).getValue(context), pattern, context );
+			
 		}
 		else
 			TokenReplacer._logger.warn("Unimplemented value: " + value + " <" + value.getClass().getName() + ">");
-
-		if ( value instanceof String ) {
-			return ((String) value).trim();
-		}
 
 		return "";
 	}
@@ -205,5 +196,13 @@ public class DataParser
 		TokenReplacer._logger.trace("Processing number value " + curValue + ", it is not a number");
 
 		return "";
+	}
+	
+	private static String getFormattedValue( IContext context, String pattern, Object value ) { 
+	   Formatter formatter = new Formatter(Core.getLocale(context));
+	   String strValue = formatter.format(Core.getLocale(context), pattern, value ).toString();
+	   formatter.close();
+	   
+	   return strValue;
 	}
 }

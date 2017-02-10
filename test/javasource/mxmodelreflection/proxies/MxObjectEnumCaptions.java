@@ -120,7 +120,7 @@ public class MxObjectEnumCaptions
 	/**
 	 * @return value of Caption
 	 */
-	public final String getCaption()
+	public final java.lang.String getCaption()
 	{
 		return getCaption(getContext());
 	}
@@ -129,16 +129,16 @@ public class MxObjectEnumCaptions
 	 * @param context
 	 * @return value of Caption
 	 */
-	public final String getCaption(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getCaption(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.Caption.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.Caption.toString());
 	}
 
 	/**
 	 * Set value of Caption
 	 * @param caption
 	 */
-	public final void setCaption(String caption)
+	public final void setCaption(java.lang.String caption)
 	{
 		setCaption(getContext(), caption);
 	}
@@ -148,7 +148,7 @@ public class MxObjectEnumCaptions
 	 * @param context
 	 * @param caption
 	 */
-	public final void setCaption(com.mendix.systemwideinterfaces.core.IContext context, String caption)
+	public final void setCaption(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String caption)
 	{
 		getMendixObject().setValue(context, MemberNames.Caption.toString(), caption);
 	}
@@ -156,7 +156,7 @@ public class MxObjectEnumCaptions
 	/**
 	 * @return value of LanguageCode
 	 */
-	public final String getLanguageCode()
+	public final java.lang.String getLanguageCode()
 	{
 		return getLanguageCode(getContext());
 	}
@@ -165,16 +165,16 @@ public class MxObjectEnumCaptions
 	 * @param context
 	 * @return value of LanguageCode
 	 */
-	public final String getLanguageCode(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getLanguageCode(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.LanguageCode.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.LanguageCode.toString());
 	}
 
 	/**
 	 * Set value of LanguageCode
 	 * @param languagecode
 	 */
-	public final void setLanguageCode(String languagecode)
+	public final void setLanguageCode(java.lang.String languagecode)
 	{
 		setLanguageCode(getContext(), languagecode);
 	}
@@ -184,7 +184,7 @@ public class MxObjectEnumCaptions
 	 * @param context
 	 * @param languagecode
 	 */
-	public final void setLanguageCode(com.mendix.systemwideinterfaces.core.IContext context, String languagecode)
+	public final void setLanguageCode(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String languagecode)
 	{
 		getMendixObject().setValue(context, MemberNames.LanguageCode.toString(), languagecode);
 	}
@@ -192,7 +192,7 @@ public class MxObjectEnumCaptions
 	/**
 	 * @return value of LanguageName
 	 */
-	public final String getLanguageName()
+	public final java.lang.String getLanguageName()
 	{
 		return getLanguageName(getContext());
 	}
@@ -201,16 +201,16 @@ public class MxObjectEnumCaptions
 	 * @param context
 	 * @return value of LanguageName
 	 */
-	public final String getLanguageName(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getLanguageName(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.LanguageName.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.LanguageName.toString());
 	}
 
 	/**
 	 * Set value of LanguageName
 	 * @param languagename
 	 */
-	public final void setLanguageName(String languagename)
+	public final void setLanguageName(java.lang.String languagename)
 	{
 		setLanguageName(getContext(), languagename);
 	}
@@ -220,7 +220,7 @@ public class MxObjectEnumCaptions
 	 * @param context
 	 * @param languagename
 	 */
-	public final void setLanguageName(com.mendix.systemwideinterfaces.core.IContext context, String languagename)
+	public final void setLanguageName(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String languagename)
 	{
 		getMendixObject().setValue(context, MemberNames.LanguageName.toString(), languagename);
 	}

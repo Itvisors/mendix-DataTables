@@ -120,7 +120,7 @@ public class DataSyncState
 	/**
 	 * @return value of CollectionUrl
 	 */
-	public final String getCollectionUrl()
+	public final java.lang.String getCollectionUrl()
 	{
 		return getCollectionUrl(getContext());
 	}
@@ -129,16 +129,16 @@ public class DataSyncState
 	 * @param context
 	 * @return value of CollectionUrl
 	 */
-	public final String getCollectionUrl(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getCollectionUrl(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.CollectionUrl.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.CollectionUrl.toString());
 	}
 
 	/**
 	 * Set value of CollectionUrl
 	 * @param collectionurl
 	 */
-	public final void setCollectionUrl(String collectionurl)
+	public final void setCollectionUrl(java.lang.String collectionurl)
 	{
 		setCollectionUrl(getContext(), collectionurl);
 	}
@@ -148,7 +148,7 @@ public class DataSyncState
 	 * @param context
 	 * @param collectionurl
 	 */
-	public final void setCollectionUrl(com.mendix.systemwideinterfaces.core.IContext context, String collectionurl)
+	public final void setCollectionUrl(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String collectionurl)
 	{
 		getMendixObject().setValue(context, MemberNames.CollectionUrl.toString(), collectionurl);
 	}
@@ -156,7 +156,7 @@ public class DataSyncState
 	/**
 	 * @return value of SequenceNr
 	 */
-	public final Long getSequenceNr()
+	public final java.lang.Long getSequenceNr()
 	{
 		return getSequenceNr(getContext());
 	}
@@ -165,16 +165,16 @@ public class DataSyncState
 	 * @param context
 	 * @return value of SequenceNr
 	 */
-	public final Long getSequenceNr(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Long getSequenceNr(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (Long) getMendixObject().getValue(context, MemberNames.SequenceNr.toString());
+		return (java.lang.Long) getMendixObject().getValue(context, MemberNames.SequenceNr.toString());
 	}
 
 	/**
 	 * Set value of SequenceNr
 	 * @param sequencenr
 	 */
-	public final void setSequenceNr(Long sequencenr)
+	public final void setSequenceNr(java.lang.Long sequencenr)
 	{
 		setSequenceNr(getContext(), sequencenr);
 	}
@@ -184,7 +184,7 @@ public class DataSyncState
 	 * @param context
 	 * @param sequencenr
 	 */
-	public final void setSequenceNr(com.mendix.systemwideinterfaces.core.IContext context, Long sequencenr)
+	public final void setSequenceNr(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Long sequencenr)
 	{
 		getMendixObject().setValue(context, MemberNames.SequenceNr.toString(), sequencenr);
 	}

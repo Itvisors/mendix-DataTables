@@ -164,7 +164,7 @@ public class TestCalcAttr
 	/**
 	 * @return value of Count
 	 */
-	public final Integer getCount()
+	public final java.lang.Integer getCount()
 	{
 		return getCount(getContext());
 	}
@@ -173,16 +173,16 @@ public class TestCalcAttr
 	 * @param context
 	 * @return value of Count
 	 */
-	public final Integer getCount(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Integer getCount(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (Integer) getMendixObject().getValue(context, MemberNames.Count.toString());
+		return (java.lang.Integer) getMendixObject().getValue(context, MemberNames.Count.toString());
 	}
 
 	/**
 	 * Set value of Count
 	 * @param count
 	 */
-	public final void setCount(Integer count)
+	public final void setCount(java.lang.Integer count)
 	{
 		setCount(getContext(), count);
 	}
@@ -192,7 +192,7 @@ public class TestCalcAttr
 	 * @param context
 	 * @param count
 	 */
-	public final void setCount(com.mendix.systemwideinterfaces.core.IContext context, Integer count)
+	public final void setCount(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Integer count)
 	{
 		getMendixObject().setValue(context, MemberNames.Count.toString(), count);
 	}
@@ -200,7 +200,7 @@ public class TestCalcAttr
 	/**
 	 * @return value of Item
 	 */
-	public final String getItem()
+	public final java.lang.String getItem()
 	{
 		return getItem(getContext());
 	}
@@ -209,16 +209,16 @@ public class TestCalcAttr
 	 * @param context
 	 * @return value of Item
 	 */
-	public final String getItem(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getItem(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.Item.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.Item.toString());
 	}
 
 	/**
 	 * Set value of Item
 	 * @param item
 	 */
-	public final void setItem(String item)
+	public final void setItem(java.lang.String item)
 	{
 		setItem(getContext(), item);
 	}
@@ -228,7 +228,7 @@ public class TestCalcAttr
 	 * @param context
 	 * @param item
 	 */
-	public final void setItem(com.mendix.systemwideinterfaces.core.IContext context, String item)
+	public final void setItem(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String item)
 	{
 		getMendixObject().setValue(context, MemberNames.Item.toString(), item);
 	}

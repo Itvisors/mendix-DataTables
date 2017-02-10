@@ -221,7 +221,7 @@ public class ReferenceHandling
 	/**
 	 * @return value of PrintNotFoundMessages
 	 */
-	public final Boolean getPrintNotFoundMessages()
+	public final java.lang.Boolean getPrintNotFoundMessages()
 	{
 		return getPrintNotFoundMessages(getContext());
 	}
@@ -230,16 +230,16 @@ public class ReferenceHandling
 	 * @param context
 	 * @return value of PrintNotFoundMessages
 	 */
-	public final Boolean getPrintNotFoundMessages(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Boolean getPrintNotFoundMessages(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (Boolean) getMendixObject().getValue(context, MemberNames.PrintNotFoundMessages.toString());
+		return (java.lang.Boolean) getMendixObject().getValue(context, MemberNames.PrintNotFoundMessages.toString());
 	}
 
 	/**
 	 * Set value of PrintNotFoundMessages
 	 * @param printnotfoundmessages
 	 */
-	public final void setPrintNotFoundMessages(Boolean printnotfoundmessages)
+	public final void setPrintNotFoundMessages(java.lang.Boolean printnotfoundmessages)
 	{
 		setPrintNotFoundMessages(getContext(), printnotfoundmessages);
 	}
@@ -249,7 +249,7 @@ public class ReferenceHandling
 	 * @param context
 	 * @param printnotfoundmessages
 	 */
-	public final void setPrintNotFoundMessages(com.mendix.systemwideinterfaces.core.IContext context, Boolean printnotfoundmessages)
+	public final void setPrintNotFoundMessages(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Boolean printnotfoundmessages)
 	{
 		getMendixObject().setValue(context, MemberNames.PrintNotFoundMessages.toString(), printnotfoundmessages);
 	}
@@ -257,7 +257,7 @@ public class ReferenceHandling
 	/**
 	 * @return value of CommitUnchangedObjects
 	 */
-	public final Boolean getCommitUnchangedObjects()
+	public final java.lang.Boolean getCommitUnchangedObjects()
 	{
 		return getCommitUnchangedObjects(getContext());
 	}
@@ -266,16 +266,16 @@ public class ReferenceHandling
 	 * @param context
 	 * @return value of CommitUnchangedObjects
 	 */
-	public final Boolean getCommitUnchangedObjects(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Boolean getCommitUnchangedObjects(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (Boolean) getMendixObject().getValue(context, MemberNames.CommitUnchangedObjects.toString());
+		return (java.lang.Boolean) getMendixObject().getValue(context, MemberNames.CommitUnchangedObjects.toString());
 	}
 
 	/**
 	 * Set value of CommitUnchangedObjects
 	 * @param commitunchangedobjects
 	 */
-	public final void setCommitUnchangedObjects(Boolean commitunchangedobjects)
+	public final void setCommitUnchangedObjects(java.lang.Boolean commitunchangedobjects)
 	{
 		setCommitUnchangedObjects(getContext(), commitunchangedobjects);
 	}
@@ -285,7 +285,7 @@ public class ReferenceHandling
 	 * @param context
 	 * @param commitunchangedobjects
 	 */
-	public final void setCommitUnchangedObjects(com.mendix.systemwideinterfaces.core.IContext context, Boolean commitunchangedobjects)
+	public final void setCommitUnchangedObjects(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Boolean commitunchangedobjects)
 	{
 		getMendixObject().setValue(context, MemberNames.CommitUnchangedObjects.toString(), commitunchangedobjects);
 	}
@@ -293,7 +293,7 @@ public class ReferenceHandling
 	/**
 	 * @return value of IgnoreEmptyKeys
 	 */
-	public final Boolean getIgnoreEmptyKeys()
+	public final java.lang.Boolean getIgnoreEmptyKeys()
 	{
 		return getIgnoreEmptyKeys(getContext());
 	}
@@ -302,16 +302,16 @@ public class ReferenceHandling
 	 * @param context
 	 * @return value of IgnoreEmptyKeys
 	 */
-	public final Boolean getIgnoreEmptyKeys(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Boolean getIgnoreEmptyKeys(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (Boolean) getMendixObject().getValue(context, MemberNames.IgnoreEmptyKeys.toString());
+		return (java.lang.Boolean) getMendixObject().getValue(context, MemberNames.IgnoreEmptyKeys.toString());
 	}
 
 	/**
 	 * Set value of IgnoreEmptyKeys
 	 * @param ignoreemptykeys
 	 */
-	public final void setIgnoreEmptyKeys(Boolean ignoreemptykeys)
+	public final void setIgnoreEmptyKeys(java.lang.Boolean ignoreemptykeys)
 	{
 		setIgnoreEmptyKeys(getContext(), ignoreemptykeys);
 	}
@@ -321,7 +321,7 @@ public class ReferenceHandling
 	 * @param context
 	 * @param ignoreemptykeys
 	 */
-	public final void setIgnoreEmptyKeys(com.mendix.systemwideinterfaces.core.IContext context, Boolean ignoreemptykeys)
+	public final void setIgnoreEmptyKeys(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Boolean ignoreemptykeys)
 	{
 		getMendixObject().setValue(context, MemberNames.IgnoreEmptyKeys.toString(), ignoreemptykeys);
 	}

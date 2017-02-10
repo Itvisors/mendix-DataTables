@@ -6,27 +6,27 @@ package excelimporter.proxies;
 
 public enum RemoveIndicator
 {
-	TrackChanges(new String[][] { new String[] { "nl_NL", "Hou alleen de wijzigingen bij" }, new String[] { "en_US", "Track changes" }, new String[] { "en_GB", "Track changes" }, new String[] { "en_ZA", "Track changes" } }),
-	RemoveUnchangedObjects(new String[][] { new String[] { "nl_NL", "Verwijder alle ongewijzigde objecten" }, new String[] { "en_US", "Remove unchanged objects" }, new String[] { "en_GB", "Remove unchanged objects" }, new String[] { "en_ZA", "Remove unchanged objects" } }),
-	Nothing(new String[][] { new String[] { "nl_NL", "Niets" }, new String[] { "en_US", "Nothing" }, new String[] { "en_GB", "Nothing" }, new String[] { "en_ZA", "Nothing" } });
+	TrackChanges(new java.lang.String[][] { new java.lang.String[] { "nl_NL", "Hou alleen de wijzigingen bij" }, new java.lang.String[] { "en_US", "Track changes" }, new java.lang.String[] { "en_GB", "Track changes" }, new java.lang.String[] { "en_ZA", "Track changes" } }),
+	RemoveUnchangedObjects(new java.lang.String[][] { new java.lang.String[] { "nl_NL", "Verwijder alle ongewijzigde objecten" }, new java.lang.String[] { "en_US", "Remove unchanged objects" }, new java.lang.String[] { "en_GB", "Remove unchanged objects" }, new java.lang.String[] { "en_ZA", "Remove unchanged objects" } }),
+	Nothing(new java.lang.String[][] { new java.lang.String[] { "nl_NL", "Niets" }, new java.lang.String[] { "en_US", "Nothing" }, new java.lang.String[] { "en_GB", "Nothing" }, new java.lang.String[] { "en_ZA", "Nothing" } });
 
-	private java.util.Map<String,String> captions;
+	private java.util.Map<java.lang.String, java.lang.String> captions;
 
-	private RemoveIndicator(String[][] captionStrings)
+	private RemoveIndicator(java.lang.String[][] captionStrings)
 	{
-		this.captions = new java.util.HashMap<String,String>();
-		for (String[] captionString : captionStrings)
+		this.captions = new java.util.HashMap<java.lang.String, java.lang.String>();
+		for (java.lang.String[] captionString : captionStrings)
 			captions.put(captionString[0], captionString[1]);
 	}
 
-	public String getCaption(String languageCode)
+	public java.lang.String getCaption(java.lang.String languageCode)
 	{
 		if (captions.containsKey(languageCode))
 			return captions.get(languageCode);
 		return captions.get("en_US");
 	}
 
-	public String getCaption()
+	public java.lang.String getCaption()
 	{
 		return captions.get("en_US");
 	}

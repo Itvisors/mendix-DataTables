@@ -118,7 +118,7 @@ public class ExcelImporter {
 
 					String extension = fileName.substring(lastdot).toLowerCase();
 
-					if (".xls".equals(extension) || ".xlsx".equals(extension)) {
+					if (".xls".equalsIgnoreCase(extension) || ".xlsx".equalsIgnoreCase(extension)) {
 						ExcelReader reader = new ExcelReader(context, template);
 						reader.importData(context, templateDocument, template, parentObject);
 					}

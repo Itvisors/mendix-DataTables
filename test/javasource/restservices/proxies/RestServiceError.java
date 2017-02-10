@@ -111,7 +111,7 @@ public class RestServiceError
 	/**
 	 * @return value of errorMessage
 	 */
-	public final String geterrorMessage()
+	public final java.lang.String geterrorMessage()
 	{
 		return geterrorMessage(getContext());
 	}
@@ -120,16 +120,16 @@ public class RestServiceError
 	 * @param context
 	 * @return value of errorMessage
 	 */
-	public final String geterrorMessage(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String geterrorMessage(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.errorMessage.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.errorMessage.toString());
 	}
 
 	/**
 	 * Set value of errorMessage
 	 * @param errormessage
 	 */
-	public final void seterrorMessage(String errormessage)
+	public final void seterrorMessage(java.lang.String errormessage)
 	{
 		seterrorMessage(getContext(), errormessage);
 	}
@@ -139,7 +139,7 @@ public class RestServiceError
 	 * @param context
 	 * @param errormessage
 	 */
-	public final void seterrorMessage(com.mendix.systemwideinterfaces.core.IContext context, String errormessage)
+	public final void seterrorMessage(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String errormessage)
 	{
 		getMendixObject().setValue(context, MemberNames.errorMessage.toString(), errormessage);
 	}
@@ -147,7 +147,7 @@ public class RestServiceError
 	/**
 	 * @return value of errorCode
 	 */
-	public final String geterrorCode()
+	public final java.lang.String geterrorCode()
 	{
 		return geterrorCode(getContext());
 	}
@@ -156,16 +156,16 @@ public class RestServiceError
 	 * @param context
 	 * @return value of errorCode
 	 */
-	public final String geterrorCode(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String geterrorCode(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.errorCode.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.errorCode.toString());
 	}
 
 	/**
 	 * Set value of errorCode
 	 * @param errorcode
 	 */
-	public final void seterrorCode(String errorcode)
+	public final void seterrorCode(java.lang.String errorcode)
 	{
 		seterrorCode(getContext(), errorcode);
 	}
@@ -175,7 +175,7 @@ public class RestServiceError
 	 * @param context
 	 * @param errorcode
 	 */
-	public final void seterrorCode(com.mendix.systemwideinterfaces.core.IContext context, String errorcode)
+	public final void seterrorCode(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String errorcode)
 	{
 		getMendixObject().setValue(context, MemberNames.errorCode.toString(), errorcode);
 	}

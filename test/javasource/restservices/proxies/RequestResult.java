@@ -116,7 +116,7 @@ public class RequestResult
 	/**
 	 * @return value of RequestUrl
 	 */
-	public final String getRequestUrl()
+	public final java.lang.String getRequestUrl()
 	{
 		return getRequestUrl(getContext());
 	}
@@ -125,16 +125,16 @@ public class RequestResult
 	 * @param context
 	 * @return value of RequestUrl
 	 */
-	public final String getRequestUrl(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getRequestUrl(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.RequestUrl.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.RequestUrl.toString());
 	}
 
 	/**
 	 * Set value of RequestUrl
 	 * @param requesturl
 	 */
-	public final void setRequestUrl(String requesturl)
+	public final void setRequestUrl(java.lang.String requesturl)
 	{
 		setRequestUrl(getContext(), requesturl);
 	}
@@ -144,7 +144,7 @@ public class RequestResult
 	 * @param context
 	 * @param requesturl
 	 */
-	public final void setRequestUrl(com.mendix.systemwideinterfaces.core.IContext context, String requesturl)
+	public final void setRequestUrl(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String requesturl)
 	{
 		getMendixObject().setValue(context, MemberNames.RequestUrl.toString(), requesturl);
 	}
@@ -196,7 +196,7 @@ public class RequestResult
 	/**
 	 * @return value of RawResponseCode
 	 */
-	public final Integer getRawResponseCode()
+	public final java.lang.Integer getRawResponseCode()
 	{
 		return getRawResponseCode(getContext());
 	}
@@ -205,16 +205,16 @@ public class RequestResult
 	 * @param context
 	 * @return value of RawResponseCode
 	 */
-	public final Integer getRawResponseCode(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Integer getRawResponseCode(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (Integer) getMendixObject().getValue(context, MemberNames.RawResponseCode.toString());
+		return (java.lang.Integer) getMendixObject().getValue(context, MemberNames.RawResponseCode.toString());
 	}
 
 	/**
 	 * Set value of RawResponseCode
 	 * @param rawresponsecode
 	 */
-	public final void setRawResponseCode(Integer rawresponsecode)
+	public final void setRawResponseCode(java.lang.Integer rawresponsecode)
 	{
 		setRawResponseCode(getContext(), rawresponsecode);
 	}
@@ -224,7 +224,7 @@ public class RequestResult
 	 * @param context
 	 * @param rawresponsecode
 	 */
-	public final void setRawResponseCode(com.mendix.systemwideinterfaces.core.IContext context, Integer rawresponsecode)
+	public final void setRawResponseCode(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Integer rawresponsecode)
 	{
 		getMendixObject().setValue(context, MemberNames.RawResponseCode.toString(), rawresponsecode);
 	}
@@ -232,7 +232,7 @@ public class RequestResult
 	/**
 	 * @return value of ETag
 	 */
-	public final String getETag()
+	public final java.lang.String getETag()
 	{
 		return getETag(getContext());
 	}
@@ -241,16 +241,16 @@ public class RequestResult
 	 * @param context
 	 * @return value of ETag
 	 */
-	public final String getETag(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getETag(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.ETag.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.ETag.toString());
 	}
 
 	/**
 	 * Set value of ETag
 	 * @param etag
 	 */
-	public final void setETag(String etag)
+	public final void setETag(java.lang.String etag)
 	{
 		setETag(getContext(), etag);
 	}
@@ -260,7 +260,7 @@ public class RequestResult
 	 * @param context
 	 * @param etag
 	 */
-	public final void setETag(com.mendix.systemwideinterfaces.core.IContext context, String etag)
+	public final void setETag(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String etag)
 	{
 		getMendixObject().setValue(context, MemberNames.ETag.toString(), etag);
 	}
@@ -268,7 +268,7 @@ public class RequestResult
 	/**
 	 * @return value of ResponseBody
 	 */
-	public final String getResponseBody()
+	public final java.lang.String getResponseBody()
 	{
 		return getResponseBody(getContext());
 	}
@@ -277,16 +277,16 @@ public class RequestResult
 	 * @param context
 	 * @return value of ResponseBody
 	 */
-	public final String getResponseBody(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getResponseBody(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.ResponseBody.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.ResponseBody.toString());
 	}
 
 	/**
 	 * Set value of ResponseBody
 	 * @param responsebody
 	 */
-	public final void setResponseBody(String responsebody)
+	public final void setResponseBody(java.lang.String responsebody)
 	{
 		setResponseBody(getContext(), responsebody);
 	}
@@ -296,7 +296,7 @@ public class RequestResult
 	 * @param context
 	 * @param responsebody
 	 */
-	public final void setResponseBody(com.mendix.systemwideinterfaces.core.IContext context, String responsebody)
+	public final void setResponseBody(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String responsebody)
 	{
 		getMendixObject().setValue(context, MemberNames.ResponseBody.toString(), responsebody);
 	}
@@ -304,7 +304,7 @@ public class RequestResult
 	/**
 	 * @return value of _ResponseHeaders
 	 */
-	public final String get_ResponseHeaders()
+	public final java.lang.String get_ResponseHeaders()
 	{
 		return get_ResponseHeaders(getContext());
 	}
@@ -313,16 +313,16 @@ public class RequestResult
 	 * @param context
 	 * @return value of _ResponseHeaders
 	 */
-	public final String get_ResponseHeaders(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String get_ResponseHeaders(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames._ResponseHeaders.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames._ResponseHeaders.toString());
 	}
 
 	/**
 	 * Set value of _ResponseHeaders
 	 * @param _responseheaders
 	 */
-	public final void set_ResponseHeaders(String _responseheaders)
+	public final void set_ResponseHeaders(java.lang.String _responseheaders)
 	{
 		set_ResponseHeaders(getContext(), _responseheaders);
 	}
@@ -332,7 +332,7 @@ public class RequestResult
 	 * @param context
 	 * @param _responseheaders
 	 */
-	public final void set_ResponseHeaders(com.mendix.systemwideinterfaces.core.IContext context, String _responseheaders)
+	public final void set_ResponseHeaders(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String _responseheaders)
 	{
 		getMendixObject().setValue(context, MemberNames._ResponseHeaders.toString(), _responseheaders);
 	}

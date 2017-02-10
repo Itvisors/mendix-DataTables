@@ -120,7 +120,7 @@ public class Country
 	/**
 	 * @return value of Code
 	 */
-	public final String getCode()
+	public final java.lang.String getCode()
 	{
 		return getCode(getContext());
 	}
@@ -129,16 +129,16 @@ public class Country
 	 * @param context
 	 * @return value of Code
 	 */
-	public final String getCode(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getCode(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.Code.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.Code.toString());
 	}
 
 	/**
 	 * Set value of Code
 	 * @param code
 	 */
-	public final void setCode(String code)
+	public final void setCode(java.lang.String code)
 	{
 		setCode(getContext(), code);
 	}
@@ -148,7 +148,7 @@ public class Country
 	 * @param context
 	 * @param code
 	 */
-	public final void setCode(com.mendix.systemwideinterfaces.core.IContext context, String code)
+	public final void setCode(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String code)
 	{
 		getMendixObject().setValue(context, MemberNames.Code.toString(), code);
 	}
@@ -156,7 +156,7 @@ public class Country
 	/**
 	 * @return value of Name
 	 */
-	public final String getName()
+	public final java.lang.String getName()
 	{
 		return getName(getContext());
 	}
@@ -165,16 +165,16 @@ public class Country
 	 * @param context
 	 * @return value of Name
 	 */
-	public final String getName(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getName(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.Name.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.Name.toString());
 	}
 
 	/**
 	 * Set value of Name
 	 * @param name
 	 */
-	public final void setName(String name)
+	public final void setName(java.lang.String name)
 	{
 		setName(getContext(), name);
 	}
@@ -184,7 +184,7 @@ public class Country
 	 * @param context
 	 * @param name
 	 */
-	public final void setName(com.mendix.systemwideinterfaces.core.IContext context, String name)
+	public final void setName(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String name)
 	{
 		getMendixObject().setValue(context, MemberNames.Name.toString(), name);
 	}

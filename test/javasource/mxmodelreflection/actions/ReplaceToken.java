@@ -18,14 +18,14 @@ import com.mendix.webui.CustomJavaAction;
 /**
  * Search the parameter text for the token from the parameter TokenObject, replace the value with a value from the parameter ValueObject.
  */
-public class ReplaceToken extends CustomJavaAction<String>
+public class ReplaceToken extends CustomJavaAction<java.lang.String>
 {
 	private IMendixObject __TokenObject;
 	private mxmodelreflection.proxies.Token TokenObject;
 	private IMendixObject ValueObject;
-	private String TextToReplace;
+	private java.lang.String TextToReplace;
 
-	public ReplaceToken(IContext context, IMendixObject TokenObject, IMendixObject ValueObject, String TextToReplace)
+	public ReplaceToken(IContext context, IMendixObject TokenObject, IMendixObject ValueObject, java.lang.String TextToReplace)
 	{
 		super(context);
 		this.__TokenObject = TokenObject;
@@ -34,7 +34,7 @@ public class ReplaceToken extends CustomJavaAction<String>
 	}
 
 	@Override
-	public String executeAction() throws Exception
+	public java.lang.String executeAction() throws Exception
 	{
 		this.TokenObject = __TokenObject == null ? null : mxmodelreflection.proxies.Token.initialize(getContext(), __TokenObject);
 
@@ -47,7 +47,7 @@ public class ReplaceToken extends CustomJavaAction<String>
 	 * Returns a string representation of this action
 	 */
 	@Override
-	public String toString()
+	public java.lang.String toString()
 	{
 		return "ReplaceToken";
 	}

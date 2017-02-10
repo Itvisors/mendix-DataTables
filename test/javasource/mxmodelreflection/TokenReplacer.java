@@ -138,7 +138,7 @@ public class TokenReplacer
 				}
 			}
 
-			String replacementValue = DataParser.getStringValue(replacementMember, context);
+			String replacementValue = DataParser.getStringValue(replacementMember, (String) token.getValue(context, Token.MemberNames.DisplayPattern.toString()), context);
 			_logger.debug("Trying to replcace the token: "+tokenValue+" with the parsed value: " +replacementValue);
 			if (replacementValue == null)
 			{

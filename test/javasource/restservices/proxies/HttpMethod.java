@@ -6,28 +6,28 @@ package restservices.proxies;
 
 public enum HttpMethod
 {
-	GET(new String[][] { new String[] { "en_US", "GET" }, new String[] { "nl_NL", "GET" } }),
-	POST(new String[][] { new String[] { "en_US", "POST" }, new String[] { "nl_NL", "POST" } }),
-	PUT(new String[][] { new String[] { "en_US", "PUT" }, new String[] { "nl_NL", "PUT" } }),
-	DELETE(new String[][] { new String[] { "en_US", "DELETE" }, new String[] { "nl_NL", "DELETE" } });
+	GET(new java.lang.String[][] { new java.lang.String[] { "en_US", "GET" }, new java.lang.String[] { "nl_NL", "GET" } }),
+	POST(new java.lang.String[][] { new java.lang.String[] { "en_US", "POST" }, new java.lang.String[] { "nl_NL", "POST" } }),
+	PUT(new java.lang.String[][] { new java.lang.String[] { "en_US", "PUT" }, new java.lang.String[] { "nl_NL", "PUT" } }),
+	DELETE(new java.lang.String[][] { new java.lang.String[] { "en_US", "DELETE" }, new java.lang.String[] { "nl_NL", "DELETE" } });
 
-	private java.util.Map<String,String> captions;
+	private java.util.Map<java.lang.String, java.lang.String> captions;
 
-	private HttpMethod(String[][] captionStrings)
+	private HttpMethod(java.lang.String[][] captionStrings)
 	{
-		this.captions = new java.util.HashMap<String,String>();
-		for (String[] captionString : captionStrings)
+		this.captions = new java.util.HashMap<java.lang.String, java.lang.String>();
+		for (java.lang.String[] captionString : captionStrings)
 			captions.put(captionString[0], captionString[1]);
 	}
 
-	public String getCaption(String languageCode)
+	public java.lang.String getCaption(java.lang.String languageCode)
 	{
 		if (captions.containsKey(languageCode))
 			return captions.get(languageCode);
 		return captions.get("en_US");
 	}
 
-	public String getCaption()
+	public java.lang.String getCaption()
 	{
 		return captions.get("en_US");
 	}

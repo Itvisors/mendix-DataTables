@@ -121,7 +121,7 @@ public class ChangeLog
 	/**
 	 * @return value of SequenceNr
 	 */
-	public final Long getSequenceNr()
+	public final java.lang.Long getSequenceNr()
 	{
 		return getSequenceNr(getContext());
 	}
@@ -130,16 +130,16 @@ public class ChangeLog
 	 * @param context
 	 * @return value of SequenceNr
 	 */
-	public final Long getSequenceNr(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Long getSequenceNr(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (Long) getMendixObject().getValue(context, MemberNames.SequenceNr.toString());
+		return (java.lang.Long) getMendixObject().getValue(context, MemberNames.SequenceNr.toString());
 	}
 
 	/**
 	 * Set value of SequenceNr
 	 * @param sequencenr
 	 */
-	public final void setSequenceNr(Long sequencenr)
+	public final void setSequenceNr(java.lang.Long sequencenr)
 	{
 		setSequenceNr(getContext(), sequencenr);
 	}
@@ -149,7 +149,7 @@ public class ChangeLog
 	 * @param context
 	 * @param sequencenr
 	 */
-	public final void setSequenceNr(com.mendix.systemwideinterfaces.core.IContext context, Long sequencenr)
+	public final void setSequenceNr(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Long sequencenr)
 	{
 		getMendixObject().setValue(context, MemberNames.SequenceNr.toString(), sequencenr);
 	}
@@ -157,7 +157,7 @@ public class ChangeLog
 	/**
 	 * @return value of _ConfigurationHash
 	 */
-	public final String get_ConfigurationHash()
+	public final java.lang.String get_ConfigurationHash()
 	{
 		return get_ConfigurationHash(getContext());
 	}
@@ -166,16 +166,16 @@ public class ChangeLog
 	 * @param context
 	 * @return value of _ConfigurationHash
 	 */
-	public final String get_ConfigurationHash(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String get_ConfigurationHash(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames._ConfigurationHash.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames._ConfigurationHash.toString());
 	}
 
 	/**
 	 * Set value of _ConfigurationHash
 	 * @param _configurationhash
 	 */
-	public final void set_ConfigurationHash(String _configurationhash)
+	public final void set_ConfigurationHash(java.lang.String _configurationhash)
 	{
 		set_ConfigurationHash(getContext(), _configurationhash);
 	}
@@ -185,7 +185,7 @@ public class ChangeLog
 	 * @param context
 	 * @param _configurationhash
 	 */
-	public final void set_ConfigurationHash(com.mendix.systemwideinterfaces.core.IContext context, String _configurationhash)
+	public final void set_ConfigurationHash(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String _configurationhash)
 	{
 		getMendixObject().setValue(context, MemberNames._ConfigurationHash.toString(), _configurationhash);
 	}
@@ -193,7 +193,7 @@ public class ChangeLog
 	/**
 	 * @return value of NrOfConnections
 	 */
-	public final Integer getNrOfConnections()
+	public final java.lang.Integer getNrOfConnections()
 	{
 		return getNrOfConnections(getContext());
 	}
@@ -202,16 +202,16 @@ public class ChangeLog
 	 * @param context
 	 * @return value of NrOfConnections
 	 */
-	public final Integer getNrOfConnections(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Integer getNrOfConnections(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (Integer) getMendixObject().getValue(context, MemberNames.NrOfConnections.toString());
+		return (java.lang.Integer) getMendixObject().getValue(context, MemberNames.NrOfConnections.toString());
 	}
 
 	/**
 	 * Set value of NrOfConnections
 	 * @param nrofconnections
 	 */
-	public final void setNrOfConnections(Integer nrofconnections)
+	public final void setNrOfConnections(java.lang.Integer nrofconnections)
 	{
 		setNrOfConnections(getContext(), nrofconnections);
 	}
@@ -221,7 +221,7 @@ public class ChangeLog
 	 * @param context
 	 * @param nrofconnections
 	 */
-	public final void setNrOfConnections(com.mendix.systemwideinterfaces.core.IContext context, Integer nrofconnections)
+	public final void setNrOfConnections(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Integer nrofconnections)
 	{
 		getMendixObject().setValue(context, MemberNames.NrOfConnections.toString(), nrofconnections);
 	}

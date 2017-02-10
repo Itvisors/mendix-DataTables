@@ -124,7 +124,7 @@ public class ChangeItem
 	/**
 	 * @return value of Key
 	 */
-	public final String getKey()
+	public final java.lang.String getKey()
 	{
 		return getKey(getContext());
 	}
@@ -133,16 +133,16 @@ public class ChangeItem
 	 * @param context
 	 * @return value of Key
 	 */
-	public final String getKey(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getKey(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.Key.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.Key.toString());
 	}
 
 	/**
 	 * Set value of Key
 	 * @param key
 	 */
-	public final void setKey(String key)
+	public final void setKey(java.lang.String key)
 	{
 		setKey(getContext(), key);
 	}
@@ -152,7 +152,7 @@ public class ChangeItem
 	 * @param context
 	 * @param key
 	 */
-	public final void setKey(com.mendix.systemwideinterfaces.core.IContext context, String key)
+	public final void setKey(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String key)
 	{
 		getMendixObject().setValue(context, MemberNames.Key.toString(), key);
 	}
@@ -160,7 +160,7 @@ public class ChangeItem
 	/**
 	 * @return value of SequenceNr
 	 */
-	public final Long getSequenceNr()
+	public final java.lang.Long getSequenceNr()
 	{
 		return getSequenceNr(getContext());
 	}
@@ -169,16 +169,16 @@ public class ChangeItem
 	 * @param context
 	 * @return value of SequenceNr
 	 */
-	public final Long getSequenceNr(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Long getSequenceNr(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (Long) getMendixObject().getValue(context, MemberNames.SequenceNr.toString());
+		return (java.lang.Long) getMendixObject().getValue(context, MemberNames.SequenceNr.toString());
 	}
 
 	/**
 	 * Set value of SequenceNr
 	 * @param sequencenr
 	 */
-	public final void setSequenceNr(Long sequencenr)
+	public final void setSequenceNr(java.lang.Long sequencenr)
 	{
 		setSequenceNr(getContext(), sequencenr);
 	}
@@ -188,7 +188,7 @@ public class ChangeItem
 	 * @param context
 	 * @param sequencenr
 	 */
-	public final void setSequenceNr(com.mendix.systemwideinterfaces.core.IContext context, Long sequencenr)
+	public final void setSequenceNr(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Long sequencenr)
 	{
 		getMendixObject().setValue(context, MemberNames.SequenceNr.toString(), sequencenr);
 	}
@@ -196,7 +196,7 @@ public class ChangeItem
 	/**
 	 * @return value of Etag
 	 */
-	public final String getEtag()
+	public final java.lang.String getEtag()
 	{
 		return getEtag(getContext());
 	}
@@ -205,16 +205,16 @@ public class ChangeItem
 	 * @param context
 	 * @return value of Etag
 	 */
-	public final String getEtag(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getEtag(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.Etag.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.Etag.toString());
 	}
 
 	/**
 	 * Set value of Etag
 	 * @param etag
 	 */
-	public final void setEtag(String etag)
+	public final void setEtag(java.lang.String etag)
 	{
 		setEtag(getContext(), etag);
 	}
@@ -224,7 +224,7 @@ public class ChangeItem
 	 * @param context
 	 * @param etag
 	 */
-	public final void setEtag(com.mendix.systemwideinterfaces.core.IContext context, String etag)
+	public final void setEtag(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String etag)
 	{
 		getMendixObject().setValue(context, MemberNames.Etag.toString(), etag);
 	}
@@ -232,7 +232,7 @@ public class ChangeItem
 	/**
 	 * @return value of Json
 	 */
-	public final String getJson()
+	public final java.lang.String getJson()
 	{
 		return getJson(getContext());
 	}
@@ -241,16 +241,16 @@ public class ChangeItem
 	 * @param context
 	 * @return value of Json
 	 */
-	public final String getJson(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getJson(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.Json.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.Json.toString());
 	}
 
 	/**
 	 * Set value of Json
 	 * @param json
 	 */
-	public final void setJson(String json)
+	public final void setJson(java.lang.String json)
 	{
 		setJson(getContext(), json);
 	}
@@ -260,7 +260,7 @@ public class ChangeItem
 	 * @param context
 	 * @param json
 	 */
-	public final void setJson(com.mendix.systemwideinterfaces.core.IContext context, String json)
+	public final void setJson(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String json)
 	{
 		getMendixObject().setValue(context, MemberNames.Json.toString(), json);
 	}
@@ -268,7 +268,7 @@ public class ChangeItem
 	/**
 	 * @return value of IsDeleted
 	 */
-	public final Boolean getIsDeleted()
+	public final java.lang.Boolean getIsDeleted()
 	{
 		return getIsDeleted(getContext());
 	}
@@ -277,16 +277,16 @@ public class ChangeItem
 	 * @param context
 	 * @return value of IsDeleted
 	 */
-	public final Boolean getIsDeleted(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Boolean getIsDeleted(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (Boolean) getMendixObject().getValue(context, MemberNames.IsDeleted.toString());
+		return (java.lang.Boolean) getMendixObject().getValue(context, MemberNames.IsDeleted.toString());
 	}
 
 	/**
 	 * Set value of IsDeleted
 	 * @param isdeleted
 	 */
-	public final void setIsDeleted(Boolean isdeleted)
+	public final void setIsDeleted(java.lang.Boolean isdeleted)
 	{
 		setIsDeleted(getContext(), isdeleted);
 	}
@@ -296,7 +296,7 @@ public class ChangeItem
 	 * @param context
 	 * @param isdeleted
 	 */
-	public final void setIsDeleted(com.mendix.systemwideinterfaces.core.IContext context, Boolean isdeleted)
+	public final void setIsDeleted(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Boolean isdeleted)
 	{
 		getMendixObject().setValue(context, MemberNames.IsDeleted.toString(), isdeleted);
 	}
@@ -304,7 +304,7 @@ public class ChangeItem
 	/**
 	 * @return value of _IsDirty
 	 */
-	public final Boolean get_IsDirty()
+	public final java.lang.Boolean get_IsDirty()
 	{
 		return get_IsDirty(getContext());
 	}
@@ -313,16 +313,16 @@ public class ChangeItem
 	 * @param context
 	 * @return value of _IsDirty
 	 */
-	public final Boolean get_IsDirty(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Boolean get_IsDirty(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (Boolean) getMendixObject().getValue(context, MemberNames._IsDirty.toString());
+		return (java.lang.Boolean) getMendixObject().getValue(context, MemberNames._IsDirty.toString());
 	}
 
 	/**
 	 * Set value of _IsDirty
 	 * @param _isdirty
 	 */
-	public final void set_IsDirty(Boolean _isdirty)
+	public final void set_IsDirty(java.lang.Boolean _isdirty)
 	{
 		set_IsDirty(getContext(), _isdirty);
 	}
@@ -332,7 +332,7 @@ public class ChangeItem
 	 * @param context
 	 * @param _isdirty
 	 */
-	public final void set_IsDirty(com.mendix.systemwideinterfaces.core.IContext context, Boolean _isdirty)
+	public final void set_IsDirty(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Boolean _isdirty)
 	{
 		getMendixObject().setValue(context, MemberNames._IsDirty.toString(), _isdirty);
 	}

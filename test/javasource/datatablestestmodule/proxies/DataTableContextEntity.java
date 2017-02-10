@@ -129,7 +129,7 @@ public class DataTableContextEntity
 	/**
 	 * @return value of RefreshTable
 	 */
-	public final Boolean getRefreshTable()
+	public final java.lang.Boolean getRefreshTable()
 	{
 		return getRefreshTable(getContext());
 	}
@@ -138,16 +138,16 @@ public class DataTableContextEntity
 	 * @param context
 	 * @return value of RefreshTable
 	 */
-	public final Boolean getRefreshTable(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Boolean getRefreshTable(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (Boolean) getMendixObject().getValue(context, MemberNames.RefreshTable.toString());
+		return (java.lang.Boolean) getMendixObject().getValue(context, MemberNames.RefreshTable.toString());
 	}
 
 	/**
 	 * Set value of RefreshTable
 	 * @param refreshtable
 	 */
-	public final void setRefreshTable(Boolean refreshtable)
+	public final void setRefreshTable(java.lang.Boolean refreshtable)
 	{
 		setRefreshTable(getContext(), refreshtable);
 	}
@@ -157,7 +157,7 @@ public class DataTableContextEntity
 	 * @param context
 	 * @param refreshtable
 	 */
-	public final void setRefreshTable(com.mendix.systemwideinterfaces.core.IContext context, Boolean refreshtable)
+	public final void setRefreshTable(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Boolean refreshtable)
 	{
 		getMendixObject().setValue(context, MemberNames.RefreshTable.toString(), refreshtable);
 	}
@@ -165,7 +165,7 @@ public class DataTableContextEntity
 	/**
 	 * @return value of RefreshKeepScrollPos
 	 */
-	public final Boolean getRefreshKeepScrollPos()
+	public final java.lang.Boolean getRefreshKeepScrollPos()
 	{
 		return getRefreshKeepScrollPos(getContext());
 	}
@@ -174,16 +174,16 @@ public class DataTableContextEntity
 	 * @param context
 	 * @return value of RefreshKeepScrollPos
 	 */
-	public final Boolean getRefreshKeepScrollPos(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Boolean getRefreshKeepScrollPos(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (Boolean) getMendixObject().getValue(context, MemberNames.RefreshKeepScrollPos.toString());
+		return (java.lang.Boolean) getMendixObject().getValue(context, MemberNames.RefreshKeepScrollPos.toString());
 	}
 
 	/**
 	 * Set value of RefreshKeepScrollPos
 	 * @param refreshkeepscrollpos
 	 */
-	public final void setRefreshKeepScrollPos(Boolean refreshkeepscrollpos)
+	public final void setRefreshKeepScrollPos(java.lang.Boolean refreshkeepscrollpos)
 	{
 		setRefreshKeepScrollPos(getContext(), refreshkeepscrollpos);
 	}
@@ -193,7 +193,7 @@ public class DataTableContextEntity
 	 * @param context
 	 * @param refreshkeepscrollpos
 	 */
-	public final void setRefreshKeepScrollPos(com.mendix.systemwideinterfaces.core.IContext context, Boolean refreshkeepscrollpos)
+	public final void setRefreshKeepScrollPos(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Boolean refreshkeepscrollpos)
 	{
 		getMendixObject().setValue(context, MemberNames.RefreshKeepScrollPos.toString(), refreshkeepscrollpos);
 	}
@@ -201,7 +201,7 @@ public class DataTableContextEntity
 	/**
 	 * @return value of XPath
 	 */
-	public final String getXPath()
+	public final java.lang.String getXPath()
 	{
 		return getXPath(getContext());
 	}
@@ -210,16 +210,16 @@ public class DataTableContextEntity
 	 * @param context
 	 * @return value of XPath
 	 */
-	public final String getXPath(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getXPath(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.XPath.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.XPath.toString());
 	}
 
 	/**
 	 * Set value of XPath
 	 * @param xpath
 	 */
-	public final void setXPath(String xpath)
+	public final void setXPath(java.lang.String xpath)
 	{
 		setXPath(getContext(), xpath);
 	}
@@ -229,7 +229,7 @@ public class DataTableContextEntity
 	 * @param context
 	 * @param xpath
 	 */
-	public final void setXPath(com.mendix.systemwideinterfaces.core.IContext context, String xpath)
+	public final void setXPath(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String xpath)
 	{
 		getMendixObject().setValue(context, MemberNames.XPath.toString(), xpath);
 	}
@@ -281,7 +281,7 @@ public class DataTableContextEntity
 	/**
 	 * @return value of FirstName
 	 */
-	public final String getFirstName()
+	public final java.lang.String getFirstName()
 	{
 		return getFirstName(getContext());
 	}
@@ -290,16 +290,16 @@ public class DataTableContextEntity
 	 * @param context
 	 * @return value of FirstName
 	 */
-	public final String getFirstName(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getFirstName(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.FirstName.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.FirstName.toString());
 	}
 
 	/**
 	 * Set value of FirstName
 	 * @param firstname
 	 */
-	public final void setFirstName(String firstname)
+	public final void setFirstName(java.lang.String firstname)
 	{
 		setFirstName(getContext(), firstname);
 	}
@@ -309,7 +309,7 @@ public class DataTableContextEntity
 	 * @param context
 	 * @param firstname
 	 */
-	public final void setFirstName(com.mendix.systemwideinterfaces.core.IContext context, String firstname)
+	public final void setFirstName(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String firstname)
 	{
 		getMendixObject().setValue(context, MemberNames.FirstName.toString(), firstname);
 	}
@@ -317,7 +317,7 @@ public class DataTableContextEntity
 	/**
 	 * @return value of LastName
 	 */
-	public final String getLastName()
+	public final java.lang.String getLastName()
 	{
 		return getLastName(getContext());
 	}
@@ -326,16 +326,16 @@ public class DataTableContextEntity
 	 * @param context
 	 * @return value of LastName
 	 */
-	public final String getLastName(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getLastName(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.LastName.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.LastName.toString());
 	}
 
 	/**
 	 * Set value of LastName
 	 * @param lastname
 	 */
-	public final void setLastName(String lastname)
+	public final void setLastName(java.lang.String lastname)
 	{
 		setLastName(getContext(), lastname);
 	}
@@ -345,7 +345,7 @@ public class DataTableContextEntity
 	 * @param context
 	 * @param lastname
 	 */
-	public final void setLastName(com.mendix.systemwideinterfaces.core.IContext context, String lastname)
+	public final void setLastName(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String lastname)
 	{
 		getMendixObject().setValue(context, MemberNames.LastName.toString(), lastname);
 	}
@@ -389,7 +389,7 @@ public class DataTableContextEntity
 	/**
 	 * @return value of DateTimeLongValue
 	 */
-	public final Long getDateTimeLongValue()
+	public final java.lang.Long getDateTimeLongValue()
 	{
 		return getDateTimeLongValue(getContext());
 	}
@@ -398,16 +398,16 @@ public class DataTableContextEntity
 	 * @param context
 	 * @return value of DateTimeLongValue
 	 */
-	public final Long getDateTimeLongValue(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Long getDateTimeLongValue(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (Long) getMendixObject().getValue(context, MemberNames.DateTimeLongValue.toString());
+		return (java.lang.Long) getMendixObject().getValue(context, MemberNames.DateTimeLongValue.toString());
 	}
 
 	/**
 	 * Set value of DateTimeLongValue
 	 * @param datetimelongvalue
 	 */
-	public final void setDateTimeLongValue(Long datetimelongvalue)
+	public final void setDateTimeLongValue(java.lang.Long datetimelongvalue)
 	{
 		setDateTimeLongValue(getContext(), datetimelongvalue);
 	}
@@ -417,7 +417,7 @@ public class DataTableContextEntity
 	 * @param context
 	 * @param datetimelongvalue
 	 */
-	public final void setDateTimeLongValue(com.mendix.systemwideinterfaces.core.IContext context, Long datetimelongvalue)
+	public final void setDateTimeLongValue(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Long datetimelongvalue)
 	{
 		getMendixObject().setValue(context, MemberNames.DateTimeLongValue.toString(), datetimelongvalue);
 	}
@@ -425,7 +425,7 @@ public class DataTableContextEntity
 	/**
 	 * @return value of Number
 	 */
-	public final Long getNumber()
+	public final java.lang.Long getNumber()
 	{
 		return getNumber(getContext());
 	}
@@ -434,16 +434,16 @@ public class DataTableContextEntity
 	 * @param context
 	 * @return value of Number
 	 */
-	public final Long getNumber(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Long getNumber(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (Long) getMendixObject().getValue(context, MemberNames.Number.toString());
+		return (java.lang.Long) getMendixObject().getValue(context, MemberNames.Number.toString());
 	}
 
 	/**
 	 * Set value of Number
 	 * @param number
 	 */
-	public final void setNumber(Long number)
+	public final void setNumber(java.lang.Long number)
 	{
 		setNumber(getContext(), number);
 	}
@@ -453,7 +453,7 @@ public class DataTableContextEntity
 	 * @param context
 	 * @param number
 	 */
-	public final void setNumber(com.mendix.systemwideinterfaces.core.IContext context, Long number)
+	public final void setNumber(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Long number)
 	{
 		getMendixObject().setValue(context, MemberNames.Number.toString(), number);
 	}
@@ -577,7 +577,7 @@ public class DataTableContextEntity
 	/**
 	 * @return value of ExportConfig
 	 */
-	public final String getExportConfig()
+	public final java.lang.String getExportConfig()
 	{
 		return getExportConfig(getContext());
 	}
@@ -586,16 +586,16 @@ public class DataTableContextEntity
 	 * @param context
 	 * @return value of ExportConfig
 	 */
-	public final String getExportConfig(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getExportConfig(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.ExportConfig.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.ExportConfig.toString());
 	}
 
 	/**
 	 * Set value of ExportConfig
 	 * @param exportconfig
 	 */
-	public final void setExportConfig(String exportconfig)
+	public final void setExportConfig(java.lang.String exportconfig)
 	{
 		setExportConfig(getContext(), exportconfig);
 	}
@@ -605,7 +605,7 @@ public class DataTableContextEntity
 	 * @param context
 	 * @param exportconfig
 	 */
-	public final void setExportConfig(com.mendix.systemwideinterfaces.core.IContext context, String exportconfig)
+	public final void setExportConfig(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String exportconfig)
 	{
 		getMendixObject().setValue(context, MemberNames.ExportConfig.toString(), exportconfig);
 	}
@@ -613,7 +613,7 @@ public class DataTableContextEntity
 	/**
 	 * @return value of ExportXPath
 	 */
-	public final String getExportXPath()
+	public final java.lang.String getExportXPath()
 	{
 		return getExportXPath(getContext());
 	}
@@ -622,16 +622,16 @@ public class DataTableContextEntity
 	 * @param context
 	 * @return value of ExportXPath
 	 */
-	public final String getExportXPath(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getExportXPath(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.ExportXPath.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.ExportXPath.toString());
 	}
 
 	/**
 	 * Set value of ExportXPath
 	 * @param exportxpath
 	 */
-	public final void setExportXPath(String exportxpath)
+	public final void setExportXPath(java.lang.String exportxpath)
 	{
 		setExportXPath(getContext(), exportxpath);
 	}
@@ -641,7 +641,7 @@ public class DataTableContextEntity
 	 * @param context
 	 * @param exportxpath
 	 */
-	public final void setExportXPath(com.mendix.systemwideinterfaces.core.IContext context, String exportxpath)
+	public final void setExportXPath(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String exportxpath)
 	{
 		getMendixObject().setValue(context, MemberNames.ExportXPath.toString(), exportxpath);
 	}

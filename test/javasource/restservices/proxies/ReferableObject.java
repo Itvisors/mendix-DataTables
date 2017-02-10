@@ -72,7 +72,7 @@ public class ReferableObject extends restservices.proxies.AnyObject
 	/**
 	 * @return value of URL
 	 */
-	public final String getURL()
+	public final java.lang.String getURL()
 	{
 		return getURL(getContext());
 	}
@@ -81,16 +81,16 @@ public class ReferableObject extends restservices.proxies.AnyObject
 	 * @param context
 	 * @return value of URL
 	 */
-	public final String getURL(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getURL(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.URL.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.URL.toString());
 	}
 
 	/**
 	 * Set value of URL
 	 * @param url
 	 */
-	public final void setURL(String url)
+	public final void setURL(java.lang.String url)
 	{
 		setURL(getContext(), url);
 	}
@@ -100,7 +100,7 @@ public class ReferableObject extends restservices.proxies.AnyObject
 	 * @param context
 	 * @param url
 	 */
-	public final void setURL(com.mendix.systemwideinterfaces.core.IContext context, String url)
+	public final void setURL(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String url)
 	{
 		getMendixObject().setValue(context, MemberNames.URL.toString(), url);
 	}
@@ -108,7 +108,7 @@ public class ReferableObject extends restservices.proxies.AnyObject
 	/**
 	 * @return value of ETag
 	 */
-	public final String getETag()
+	public final java.lang.String getETag()
 	{
 		return getETag(getContext());
 	}
@@ -117,16 +117,16 @@ public class ReferableObject extends restservices.proxies.AnyObject
 	 * @param context
 	 * @return value of ETag
 	 */
-	public final String getETag(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getETag(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.ETag.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.ETag.toString());
 	}
 
 	/**
 	 * Set value of ETag
 	 * @param etag
 	 */
-	public final void setETag(String etag)
+	public final void setETag(java.lang.String etag)
 	{
 		setETag(getContext(), etag);
 	}
@@ -136,7 +136,7 @@ public class ReferableObject extends restservices.proxies.AnyObject
 	 * @param context
 	 * @param etag
 	 */
-	public final void setETag(com.mendix.systemwideinterfaces.core.IContext context, String etag)
+	public final void setETag(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String etag)
 	{
 		getMendixObject().setValue(context, MemberNames.ETag.toString(), etag);
 	}

@@ -20,11 +20,11 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
  */
 public class ExportData extends CustomJavaAction<IMendixObject>
 {
-	private String configData;
-	private String xpath;
-	private Long limit;
+	private java.lang.String configData;
+	private java.lang.String xpath;
+	private java.lang.Long limit;
 
-	public ExportData(IContext context, String configData, String xpath, Long limit)
+	public ExportData(IContext context, java.lang.String configData, java.lang.String xpath, java.lang.Long limit)
 	{
 		super(context);
 		this.configData = configData;
@@ -49,7 +49,7 @@ public class ExportData extends CustomJavaAction<IMendixObject>
 	 * Returns a string representation of this action
 	 */
 	@Override
-	public String toString()
+	public java.lang.String toString()
 	{
 		return "ExportData";
 	}

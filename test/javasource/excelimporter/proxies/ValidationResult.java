@@ -6,35 +6,35 @@ package excelimporter.proxies;
 
 public enum ValidationResult
 {
-	UnUsed(new String[][] { new String[] { "en_US", "UnUsed" }, new String[] { "nl_NL", "Ongebruikt" }, new String[] { "en_GB", "UnUsed" }, new String[] { "en_ZA", "UnUsed" } }),
-	ValidAttribute(new String[][] { new String[] { "en_US", "ValidAttribute" }, new String[] { "nl_NL", "Geldig attribuut" }, new String[] { "en_GB", "ValidAttribute" }, new String[] { "en_ZA", "ValidAttribute" } }),
-	ValidReference(new String[][] { new String[] { "en_US", "ValidReference" }, new String[] { "nl_NL", "Geldige referentie" }, new String[] { "en_GB", "ValidReference" }, new String[] { "en_ZA", "ValidReference" } }),
-	NoReferenceSelected(new String[][] { new String[] { "en_US", "NoReferenceSelected" }, new String[] { "nl_NL", "NoReferenceSelected" }, new String[] { "en_GB", "NoReferenceSelected" }, new String[] { "en_ZA", "NoReferenceSelected" } }),
-	NoReferencedObjectSelected(new String[][] { new String[] { "en_US", "NoReferencedObjectSelected" }, new String[] { "nl_NL", "NoReferencedObjectSelected" }, new String[] { "en_GB", "NoReferencedObjectSelected" }, new String[] { "en_ZA", "NoReferencedObjectSelected" } }),
-	NoAttributeSelected(new String[][] { new String[] { "en_US", "NoAttributeSelected" }, new String[] { "nl_NL", "NoAttributeSelected" }, new String[] { "en_GB", "NoAttributeSelected" }, new String[] { "en_ZA", "NoAttributeSelected" } }),
-	InvalidAttribute(new String[][] { new String[] { "en_US", "InvalidAttribute" }, new String[] { "nl_NL", "Ongeldig attribuut" }, new String[] { "en_GB", "InvalidAttribute" }, new String[] { "en_ZA", "InvalidAttribute" } }),
-	InvalidReference(new String[][] { new String[] { "en_US", "InvalidReference" }, new String[] { "nl_NL", "Ongeldige referentie" }, new String[] { "en_GB", "InvalidReference" }, new String[] { "en_ZA", "InvalidReference" } }),
-	InvalidReferencedObject(new String[][] { new String[] { "en_US", "InvalidReferencedObject" }, new String[] { "nl_NL", "Ongeldig gerefereerd object" }, new String[] { "en_GB", "InvalidReferencedObject" }, new String[] { "en_ZA", "InvalidReferencedObject" } }),
-	NoAssociationKeys(new String[][] { new String[] { "en_US", "No key columns for the association" }, new String[] { "nl_NL", "Geen sleutel kolommen voor de associatie" }, new String[] { "en_GB", "No key columns for the association" }, new String[] { "en_ZA", "No key columns for the association" } }),
-	InvalidAutoNumberSelection(new String[][] { new String[] { "en_US", "InvalidAutoNumberSelection" }, new String[] { "nl_NL", "InvalidAutoNumberSelection" }, new String[] { "en_GB", "InvalidAutoNumberSelection" }, new String[] { "en_ZA", "InvalidAutoNumberSelection" } });
+	UnUsed(new java.lang.String[][] { new java.lang.String[] { "en_US", "UnUsed" }, new java.lang.String[] { "nl_NL", "Ongebruikt" }, new java.lang.String[] { "en_GB", "UnUsed" }, new java.lang.String[] { "en_ZA", "UnUsed" } }),
+	ValidAttribute(new java.lang.String[][] { new java.lang.String[] { "en_US", "ValidAttribute" }, new java.lang.String[] { "nl_NL", "Geldig attribuut" }, new java.lang.String[] { "en_GB", "ValidAttribute" }, new java.lang.String[] { "en_ZA", "ValidAttribute" } }),
+	ValidReference(new java.lang.String[][] { new java.lang.String[] { "en_US", "ValidReference" }, new java.lang.String[] { "nl_NL", "Geldige referentie" }, new java.lang.String[] { "en_GB", "ValidReference" }, new java.lang.String[] { "en_ZA", "ValidReference" } }),
+	NoReferenceSelected(new java.lang.String[][] { new java.lang.String[] { "en_US", "NoReferenceSelected" }, new java.lang.String[] { "nl_NL", "NoReferenceSelected" }, new java.lang.String[] { "en_GB", "NoReferenceSelected" }, new java.lang.String[] { "en_ZA", "NoReferenceSelected" } }),
+	NoReferencedObjectSelected(new java.lang.String[][] { new java.lang.String[] { "en_US", "NoReferencedObjectSelected" }, new java.lang.String[] { "nl_NL", "NoReferencedObjectSelected" }, new java.lang.String[] { "en_GB", "NoReferencedObjectSelected" }, new java.lang.String[] { "en_ZA", "NoReferencedObjectSelected" } }),
+	NoAttributeSelected(new java.lang.String[][] { new java.lang.String[] { "en_US", "NoAttributeSelected" }, new java.lang.String[] { "nl_NL", "NoAttributeSelected" }, new java.lang.String[] { "en_GB", "NoAttributeSelected" }, new java.lang.String[] { "en_ZA", "NoAttributeSelected" } }),
+	InvalidAttribute(new java.lang.String[][] { new java.lang.String[] { "en_US", "InvalidAttribute" }, new java.lang.String[] { "nl_NL", "Ongeldig attribuut" }, new java.lang.String[] { "en_GB", "InvalidAttribute" }, new java.lang.String[] { "en_ZA", "InvalidAttribute" } }),
+	InvalidReference(new java.lang.String[][] { new java.lang.String[] { "en_US", "InvalidReference" }, new java.lang.String[] { "nl_NL", "Ongeldige referentie" }, new java.lang.String[] { "en_GB", "InvalidReference" }, new java.lang.String[] { "en_ZA", "InvalidReference" } }),
+	InvalidReferencedObject(new java.lang.String[][] { new java.lang.String[] { "en_US", "InvalidReferencedObject" }, new java.lang.String[] { "nl_NL", "Ongeldig gerefereerd object" }, new java.lang.String[] { "en_GB", "InvalidReferencedObject" }, new java.lang.String[] { "en_ZA", "InvalidReferencedObject" } }),
+	NoAssociationKeys(new java.lang.String[][] { new java.lang.String[] { "en_US", "No key columns for the association" }, new java.lang.String[] { "nl_NL", "Geen sleutel kolommen voor de associatie" }, new java.lang.String[] { "en_GB", "No key columns for the association" }, new java.lang.String[] { "en_ZA", "No key columns for the association" } }),
+	InvalidAutoNumberSelection(new java.lang.String[][] { new java.lang.String[] { "en_US", "InvalidAutoNumberSelection" }, new java.lang.String[] { "nl_NL", "InvalidAutoNumberSelection" }, new java.lang.String[] { "en_GB", "InvalidAutoNumberSelection" }, new java.lang.String[] { "en_ZA", "InvalidAutoNumberSelection" } });
 
-	private java.util.Map<String,String> captions;
+	private java.util.Map<java.lang.String, java.lang.String> captions;
 
-	private ValidationResult(String[][] captionStrings)
+	private ValidationResult(java.lang.String[][] captionStrings)
 	{
-		this.captions = new java.util.HashMap<String,String>();
-		for (String[] captionString : captionStrings)
+		this.captions = new java.util.HashMap<java.lang.String, java.lang.String>();
+		for (java.lang.String[] captionString : captionStrings)
 			captions.put(captionString[0], captionString[1]);
 	}
 
-	public String getCaption(String languageCode)
+	public java.lang.String getCaption(java.lang.String languageCode)
 	{
 		if (captions.containsKey(languageCode))
 			return captions.get(languageCode);
 		return captions.get("en_US");
 	}
 
-	public String getCaption()
+	public java.lang.String getCaption()
 	{
 		return captions.get("en_US");
 	}

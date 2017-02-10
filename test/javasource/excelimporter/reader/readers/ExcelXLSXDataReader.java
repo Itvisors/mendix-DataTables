@@ -113,7 +113,7 @@ public class ExcelXLSXDataReader extends ExcelXLSXReader {
 
 					if ( processRow ) {
 						try {
-							this.excelRowProcessor.processValues(this.getValues(), this.getCurrentRow(), this.getCurrentSheet());
+							this.excelRowProcessor.processValues(this.getValues(), this.getCurrentRow() - 1, this.getCurrentSheet());
 						}
 						catch( MendixReplicationException e ) {
 							throw new SAXException("Unable to store Excel row. Error found in row of cell nr: " + this.getCurrentColumnStr(), e);

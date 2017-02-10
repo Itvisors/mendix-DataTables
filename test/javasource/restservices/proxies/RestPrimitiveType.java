@@ -6,28 +6,28 @@ package restservices.proxies;
 
 public enum RestPrimitiveType
 {
-	String(new String[][] { new String[] { "en_US", "String" }, new String[] { "nl_NL", "String" } }),
-	_Boolean(new String[][] { new String[] { "en_US", "Boolean" }, new String[] { "nl_NL", "Boolean" } }),
-	Number(new String[][] { new String[] { "en_US", "Number" }, new String[] { "nl_NL", "Number" } }),
-	_NULL(new String[][] { new String[] { "en_US", "NULL" }, new String[] { "nl_NL", "NULL" } });
+	String(new java.lang.String[][] { new java.lang.String[] { "en_US", "String" }, new java.lang.String[] { "nl_NL", "String" } }),
+	_Boolean(new java.lang.String[][] { new java.lang.String[] { "en_US", "Boolean" }, new java.lang.String[] { "nl_NL", "Boolean" } }),
+	Number(new java.lang.String[][] { new java.lang.String[] { "en_US", "Number" }, new java.lang.String[] { "nl_NL", "Number" } }),
+	_NULL(new java.lang.String[][] { new java.lang.String[] { "en_US", "NULL" }, new java.lang.String[] { "nl_NL", "NULL" } });
 
-	private java.util.Map<String,String> captions;
+	private java.util.Map<java.lang.String, java.lang.String> captions;
 
-	private RestPrimitiveType(String[][] captionStrings)
+	private RestPrimitiveType(java.lang.String[][] captionStrings)
 	{
-		this.captions = new java.util.HashMap<String,String>();
-		for (String[] captionString : captionStrings)
+		this.captions = new java.util.HashMap<java.lang.String, java.lang.String>();
+		for (java.lang.String[] captionString : captionStrings)
 			captions.put(captionString[0], captionString[1]);
 	}
 
-	public String getCaption(String languageCode)
+	public java.lang.String getCaption(java.lang.String languageCode)
 	{
 		if (captions.containsKey(languageCode))
 			return captions.get(languageCode);
 		return captions.get("en_US");
 	}
 
-	public String getCaption()
+	public java.lang.String getCaption()
 	{
 		return captions.get("en_US");
 	}

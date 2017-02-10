@@ -6,27 +6,27 @@ package excelimporter.proxies;
 
 public enum StatisticsLevel
 {
-	AllStatistics(new String[][] { new String[] { "en_US", "All Statistics" }, new String[] { "nl_NL", "Alle Statistieken" }, new String[] { "en_GB", "All Statistics" }, new String[] { "en_ZA", "All Statistics" } }),
-	OnlyFinalStatistics(new String[][] { new String[] { "en_US", "Only Final Statistics" }, new String[] { "nl_NL", "Alleen volledige statistieken" }, new String[] { "en_GB", "Only Final Statistics" }, new String[] { "en_ZA", "Only Final Statistics" } }),
-	NoStatistics(new String[][] { new String[] { "en_US", "No Statistics" }, new String[] { "nl_NL", "Geen Statistieken" }, new String[] { "en_GB", "No Statistics" }, new String[] { "en_ZA", "No Statistics" } });
+	AllStatistics(new java.lang.String[][] { new java.lang.String[] { "en_US", "All Statistics" }, new java.lang.String[] { "nl_NL", "Alle Statistieken" }, new java.lang.String[] { "en_GB", "All Statistics" }, new java.lang.String[] { "en_ZA", "All Statistics" } }),
+	OnlyFinalStatistics(new java.lang.String[][] { new java.lang.String[] { "en_US", "Only Final Statistics" }, new java.lang.String[] { "nl_NL", "Alleen volledige statistieken" }, new java.lang.String[] { "en_GB", "Only Final Statistics" }, new java.lang.String[] { "en_ZA", "Only Final Statistics" } }),
+	NoStatistics(new java.lang.String[][] { new java.lang.String[] { "en_US", "No Statistics" }, new java.lang.String[] { "nl_NL", "Geen Statistieken" }, new java.lang.String[] { "en_GB", "No Statistics" }, new java.lang.String[] { "en_ZA", "No Statistics" } });
 
-	private java.util.Map<String,String> captions;
+	private java.util.Map<java.lang.String, java.lang.String> captions;
 
-	private StatisticsLevel(String[][] captionStrings)
+	private StatisticsLevel(java.lang.String[][] captionStrings)
 	{
-		this.captions = new java.util.HashMap<String,String>();
-		for (String[] captionString : captionStrings)
+		this.captions = new java.util.HashMap<java.lang.String, java.lang.String>();
+		for (java.lang.String[] captionString : captionStrings)
 			captions.put(captionString[0], captionString[1]);
 	}
 
-	public String getCaption(String languageCode)
+	public java.lang.String getCaption(java.lang.String languageCode)
 	{
 		if (captions.containsKey(languageCode))
 			return captions.get(languageCode);
 		return captions.get("en_US");
 	}
 
-	public String getCaption()
+	public java.lang.String getCaption()
 	{
 		return captions.get("en_US");
 	}

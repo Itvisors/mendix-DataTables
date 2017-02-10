@@ -115,7 +115,7 @@ public class Cookie
 	/**
 	 * @return value of Name
 	 */
-	public final String getName()
+	public final java.lang.String getName()
 	{
 		return getName(getContext());
 	}
@@ -124,16 +124,16 @@ public class Cookie
 	 * @param context
 	 * @return value of Name
 	 */
-	public final String getName(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getName(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.Name.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.Name.toString());
 	}
 
 	/**
 	 * Set value of Name
 	 * @param name
 	 */
-	public final void setName(String name)
+	public final void setName(java.lang.String name)
 	{
 		setName(getContext(), name);
 	}
@@ -143,7 +143,7 @@ public class Cookie
 	 * @param context
 	 * @param name
 	 */
-	public final void setName(com.mendix.systemwideinterfaces.core.IContext context, String name)
+	public final void setName(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String name)
 	{
 		getMendixObject().setValue(context, MemberNames.Name.toString(), name);
 	}
@@ -151,7 +151,7 @@ public class Cookie
 	/**
 	 * @return value of Value
 	 */
-	public final String getValue()
+	public final java.lang.String getValue()
 	{
 		return getValue(getContext());
 	}
@@ -160,16 +160,16 @@ public class Cookie
 	 * @param context
 	 * @return value of Value
 	 */
-	public final String getValue(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getValue(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.Value.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.Value.toString());
 	}
 
 	/**
 	 * Set value of Value
 	 * @param value
 	 */
-	public final void setValue(String value)
+	public final void setValue(java.lang.String value)
 	{
 		setValue(getContext(), value);
 	}
@@ -179,7 +179,7 @@ public class Cookie
 	 * @param context
 	 * @param value
 	 */
-	public final void setValue(com.mendix.systemwideinterfaces.core.IContext context, String value)
+	public final void setValue(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String value)
 	{
 		getMendixObject().setValue(context, MemberNames.Value.toString(), value);
 	}
@@ -187,7 +187,7 @@ public class Cookie
 	/**
 	 * @return value of MaxAgeSeconds
 	 */
-	public final Integer getMaxAgeSeconds()
+	public final java.lang.Integer getMaxAgeSeconds()
 	{
 		return getMaxAgeSeconds(getContext());
 	}
@@ -196,16 +196,16 @@ public class Cookie
 	 * @param context
 	 * @return value of MaxAgeSeconds
 	 */
-	public final Integer getMaxAgeSeconds(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Integer getMaxAgeSeconds(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (Integer) getMendixObject().getValue(context, MemberNames.MaxAgeSeconds.toString());
+		return (java.lang.Integer) getMendixObject().getValue(context, MemberNames.MaxAgeSeconds.toString());
 	}
 
 	/**
 	 * Set value of MaxAgeSeconds
 	 * @param maxageseconds
 	 */
-	public final void setMaxAgeSeconds(Integer maxageseconds)
+	public final void setMaxAgeSeconds(java.lang.Integer maxageseconds)
 	{
 		setMaxAgeSeconds(getContext(), maxageseconds);
 	}
@@ -215,7 +215,7 @@ public class Cookie
 	 * @param context
 	 * @param maxageseconds
 	 */
-	public final void setMaxAgeSeconds(com.mendix.systemwideinterfaces.core.IContext context, Integer maxageseconds)
+	public final void setMaxAgeSeconds(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Integer maxageseconds)
 	{
 		getMendixObject().setValue(context, MemberNames.MaxAgeSeconds.toString(), maxageseconds);
 	}
@@ -223,7 +223,7 @@ public class Cookie
 	/**
 	 * @return value of Path
 	 */
-	public final String getPath()
+	public final java.lang.String getPath()
 	{
 		return getPath(getContext());
 	}
@@ -232,16 +232,16 @@ public class Cookie
 	 * @param context
 	 * @return value of Path
 	 */
-	public final String getPath(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getPath(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.Path.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.Path.toString());
 	}
 
 	/**
 	 * Set value of Path
 	 * @param path
 	 */
-	public final void setPath(String path)
+	public final void setPath(java.lang.String path)
 	{
 		setPath(getContext(), path);
 	}
@@ -251,7 +251,7 @@ public class Cookie
 	 * @param context
 	 * @param path
 	 */
-	public final void setPath(com.mendix.systemwideinterfaces.core.IContext context, String path)
+	public final void setPath(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String path)
 	{
 		getMendixObject().setValue(context, MemberNames.Path.toString(), path);
 	}
@@ -259,7 +259,7 @@ public class Cookie
 	/**
 	 * @return value of Domain
 	 */
-	public final String getDomain()
+	public final java.lang.String getDomain()
 	{
 		return getDomain(getContext());
 	}
@@ -268,16 +268,16 @@ public class Cookie
 	 * @param context
 	 * @return value of Domain
 	 */
-	public final String getDomain(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getDomain(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.Domain.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.Domain.toString());
 	}
 
 	/**
 	 * Set value of Domain
 	 * @param domain
 	 */
-	public final void setDomain(String domain)
+	public final void setDomain(java.lang.String domain)
 	{
 		setDomain(getContext(), domain);
 	}
@@ -287,7 +287,7 @@ public class Cookie
 	 * @param context
 	 * @param domain
 	 */
-	public final void setDomain(com.mendix.systemwideinterfaces.core.IContext context, String domain)
+	public final void setDomain(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String domain)
 	{
 		getMendixObject().setValue(context, MemberNames.Domain.toString(), domain);
 	}
@@ -295,7 +295,7 @@ public class Cookie
 	/**
 	 * @return value of HttpOnly
 	 */
-	public final Boolean getHttpOnly()
+	public final java.lang.Boolean getHttpOnly()
 	{
 		return getHttpOnly(getContext());
 	}
@@ -304,16 +304,16 @@ public class Cookie
 	 * @param context
 	 * @return value of HttpOnly
 	 */
-	public final Boolean getHttpOnly(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Boolean getHttpOnly(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (Boolean) getMendixObject().getValue(context, MemberNames.HttpOnly.toString());
+		return (java.lang.Boolean) getMendixObject().getValue(context, MemberNames.HttpOnly.toString());
 	}
 
 	/**
 	 * Set value of HttpOnly
 	 * @param httponly
 	 */
-	public final void setHttpOnly(Boolean httponly)
+	public final void setHttpOnly(java.lang.Boolean httponly)
 	{
 		setHttpOnly(getContext(), httponly);
 	}
@@ -323,7 +323,7 @@ public class Cookie
 	 * @param context
 	 * @param httponly
 	 */
-	public final void setHttpOnly(com.mendix.systemwideinterfaces.core.IContext context, Boolean httponly)
+	public final void setHttpOnly(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Boolean httponly)
 	{
 		getMendixObject().setValue(context, MemberNames.HttpOnly.toString(), httponly);
 	}

@@ -16,11 +16,11 @@ import com.mendix.webui.CustomJavaAction;
 
 public class post extends CustomJavaAction<IMendixObject>
 {
-	private String collectionUrl;
+	private java.lang.String collectionUrl;
 	private IMendixObject requestData;
-	private Boolean submitAsFormData;
+	private java.lang.Boolean submitAsFormData;
 
-	public post(IContext context, String collectionUrl, IMendixObject requestData, Boolean submitAsFormData)
+	public post(IContext context, java.lang.String collectionUrl, IMendixObject requestData, java.lang.Boolean submitAsFormData)
 	{
 		super(context);
 		this.collectionUrl = collectionUrl;
@@ -40,7 +40,7 @@ public class post extends CustomJavaAction<IMendixObject>
 	 * Returns a string representation of this action
 	 */
 	@Override
-	public String toString()
+	public java.lang.String toString()
 	{
 		return "post";
 	}

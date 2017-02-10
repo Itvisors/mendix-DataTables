@@ -119,7 +119,7 @@ public class Module
 	/**
 	 * @return value of ModuleName
 	 */
-	public final String getModuleName()
+	public final java.lang.String getModuleName()
 	{
 		return getModuleName(getContext());
 	}
@@ -128,16 +128,16 @@ public class Module
 	 * @param context
 	 * @return value of ModuleName
 	 */
-	public final String getModuleName(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getModuleName(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.ModuleName.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.ModuleName.toString());
 	}
 
 	/**
 	 * Set value of ModuleName
 	 * @param modulename
 	 */
-	public final void setModuleName(String modulename)
+	public final void setModuleName(java.lang.String modulename)
 	{
 		setModuleName(getContext(), modulename);
 	}
@@ -147,7 +147,7 @@ public class Module
 	 * @param context
 	 * @param modulename
 	 */
-	public final void setModuleName(com.mendix.systemwideinterfaces.core.IContext context, String modulename)
+	public final void setModuleName(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String modulename)
 	{
 		getMendixObject().setValue(context, MemberNames.ModuleName.toString(), modulename);
 	}
@@ -155,7 +155,7 @@ public class Module
 	/**
 	 * @return value of SynchronizeObjectsWithinModule
 	 */
-	public final Boolean getSynchronizeObjectsWithinModule()
+	public final java.lang.Boolean getSynchronizeObjectsWithinModule()
 	{
 		return getSynchronizeObjectsWithinModule(getContext());
 	}
@@ -164,16 +164,16 @@ public class Module
 	 * @param context
 	 * @return value of SynchronizeObjectsWithinModule
 	 */
-	public final Boolean getSynchronizeObjectsWithinModule(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Boolean getSynchronizeObjectsWithinModule(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (Boolean) getMendixObject().getValue(context, MemberNames.SynchronizeObjectsWithinModule.toString());
+		return (java.lang.Boolean) getMendixObject().getValue(context, MemberNames.SynchronizeObjectsWithinModule.toString());
 	}
 
 	/**
 	 * Set value of SynchronizeObjectsWithinModule
 	 * @param synchronizeobjectswithinmodule
 	 */
-	public final void setSynchronizeObjectsWithinModule(Boolean synchronizeobjectswithinmodule)
+	public final void setSynchronizeObjectsWithinModule(java.lang.Boolean synchronizeobjectswithinmodule)
 	{
 		setSynchronizeObjectsWithinModule(getContext(), synchronizeobjectswithinmodule);
 	}
@@ -183,7 +183,7 @@ public class Module
 	 * @param context
 	 * @param synchronizeobjectswithinmodule
 	 */
-	public final void setSynchronizeObjectsWithinModule(com.mendix.systemwideinterfaces.core.IContext context, Boolean synchronizeobjectswithinmodule)
+	public final void setSynchronizeObjectsWithinModule(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Boolean synchronizeobjectswithinmodule)
 	{
 		getMendixObject().setValue(context, MemberNames.SynchronizeObjectsWithinModule.toString(), synchronizeobjectswithinmodule);
 	}

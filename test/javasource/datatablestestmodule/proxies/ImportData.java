@@ -111,7 +111,7 @@ public class ImportData
 	/**
 	 * @return value of JSON
 	 */
-	public final String getJSON()
+	public final java.lang.String getJSON()
 	{
 		return getJSON(getContext());
 	}
@@ -120,16 +120,16 @@ public class ImportData
 	 * @param context
 	 * @return value of JSON
 	 */
-	public final String getJSON(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getJSON(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.JSON.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.JSON.toString());
 	}
 
 	/**
 	 * Set value of JSON
 	 * @param json
 	 */
-	public final void setJSON(String json)
+	public final void setJSON(java.lang.String json)
 	{
 		setJSON(getContext(), json);
 	}
@@ -139,7 +139,7 @@ public class ImportData
 	 * @param context
 	 * @param json
 	 */
-	public final void setJSON(com.mendix.systemwideinterfaces.core.IContext context, String json)
+	public final void setJSON(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String json)
 	{
 		getMendixObject().setValue(context, MemberNames.JSON.toString(), json);
 	}

@@ -25,8 +25,10 @@ public class ExcelValueParser extends ValueParser {
 
 	private static HashMap<String, String> displayMaskMap = new HashMap<String, String>();
 	static {
+		displayMaskMap.put("m/d/yy", "MM/dd/yy");
 		displayMaskMap.put("m/d/yy\\ h:mm;@", "MM/dd/yy HH:mm");
-		displayMaskMap.put("m/d/yy\\ h:mm;@", "MM/dd/yy HH:mm");
+		displayMaskMap.put("m/d/yyyy", "MM/dd/yyyy");
+		displayMaskMap.put("m/d/yyyy\\ h:mm;@", "MM/dd/yyyy HH:mm");
 
 		displayMaskMap.put("dd\\-mmm\\-yy;@\\", "dd-MMMM-yy");
 		displayMaskMap.put("[$-409]dd\\-mmm\\-yy;@\\", "dd-MMMM-yy");

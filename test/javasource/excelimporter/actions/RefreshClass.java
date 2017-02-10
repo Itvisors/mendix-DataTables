@@ -13,18 +13,18 @@ import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.webui.CustomJavaAction;
 import com.mendix.webui.FeedbackHelper;
 
-public class RefreshClass extends CustomJavaAction<Boolean>
+public class RefreshClass extends CustomJavaAction<java.lang.Boolean>
 {
-	private String objectType;
+	private java.lang.String objectType;
 
-	public RefreshClass(IContext context, String objectType)
+	public RefreshClass(IContext context, java.lang.String objectType)
 	{
 		super(context);
 		this.objectType = objectType;
 	}
 
 	@Override
-	public Boolean executeAction() throws Exception
+	public java.lang.Boolean executeAction() throws Exception
 	{
 		// BEGIN USER CODE
 		FeedbackHelper.addRefreshClass(getContext(), this.objectType);
@@ -36,7 +36,7 @@ public class RefreshClass extends CustomJavaAction<Boolean>
 	 * Returns a string representation of this action
 	 */
 	@Override
-	public String toString()
+	public java.lang.String toString()
 	{
 		return "RefreshClass";
 	}

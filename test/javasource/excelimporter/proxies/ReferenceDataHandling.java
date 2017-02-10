@@ -6,26 +6,26 @@ package excelimporter.proxies;
 
 public enum ReferenceDataHandling
 {
-	Overwrite(new String[][] { new String[] { "en_US", "Overwrite" }, new String[] { "nl_NL", "Overschrijven" }, new String[] { "en_GB", "Overwrite" }, new String[] { "en_ZA", "Overwrite" } }),
-	Append(new String[][] { new String[] { "en_US", "Append" }, new String[] { "nl_NL", "Aanvullen" }, new String[] { "en_GB", "Append" }, new String[] { "en_ZA", "Append" } });
+	Overwrite(new java.lang.String[][] { new java.lang.String[] { "en_US", "Overwrite" }, new java.lang.String[] { "nl_NL", "Overschrijven" }, new java.lang.String[] { "en_GB", "Overwrite" }, new java.lang.String[] { "en_ZA", "Overwrite" } }),
+	Append(new java.lang.String[][] { new java.lang.String[] { "en_US", "Append" }, new java.lang.String[] { "nl_NL", "Aanvullen" }, new java.lang.String[] { "en_GB", "Append" }, new java.lang.String[] { "en_ZA", "Append" } });
 
-	private java.util.Map<String,String> captions;
+	private java.util.Map<java.lang.String, java.lang.String> captions;
 
-	private ReferenceDataHandling(String[][] captionStrings)
+	private ReferenceDataHandling(java.lang.String[][] captionStrings)
 	{
-		this.captions = new java.util.HashMap<String,String>();
-		for (String[] captionString : captionStrings)
+		this.captions = new java.util.HashMap<java.lang.String, java.lang.String>();
+		for (java.lang.String[] captionString : captionStrings)
 			captions.put(captionString[0], captionString[1]);
 	}
 
-	public String getCaption(String languageCode)
+	public java.lang.String getCaption(java.lang.String languageCode)
 	{
 		if (captions.containsKey(languageCode))
 			return captions.get(languageCode);
 		return captions.get("en_US");
 	}
 
-	public String getCaption()
+	public java.lang.String getCaption()
 	{
 		return captions.get("en_US");
 	}

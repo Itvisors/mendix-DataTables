@@ -122,7 +122,7 @@ public class DbSizeEstimate
 	/**
 	 * @return value of NrOfRecords
 	 */
-	public final Integer getNrOfRecords()
+	public final java.lang.Integer getNrOfRecords()
 	{
 		return getNrOfRecords(getContext());
 	}
@@ -131,16 +131,16 @@ public class DbSizeEstimate
 	 * @param context
 	 * @return value of NrOfRecords
 	 */
-	public final Integer getNrOfRecords(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Integer getNrOfRecords(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (Integer) getMendixObject().getValue(context, MemberNames.NrOfRecords.toString());
+		return (java.lang.Integer) getMendixObject().getValue(context, MemberNames.NrOfRecords.toString());
 	}
 
 	/**
 	 * Set value of NrOfRecords
 	 * @param nrofrecords
 	 */
-	public final void setNrOfRecords(Integer nrofrecords)
+	public final void setNrOfRecords(java.lang.Integer nrofrecords)
 	{
 		setNrOfRecords(getContext(), nrofrecords);
 	}
@@ -150,7 +150,7 @@ public class DbSizeEstimate
 	 * @param context
 	 * @param nrofrecords
 	 */
-	public final void setNrOfRecords(com.mendix.systemwideinterfaces.core.IContext context, Integer nrofrecords)
+	public final void setNrOfRecords(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Integer nrofrecords)
 	{
 		getMendixObject().setValue(context, MemberNames.NrOfRecords.toString(), nrofrecords);
 	}
@@ -158,7 +158,7 @@ public class DbSizeEstimate
 	/**
 	 * @return value of CalculatedSizeInBytes
 	 */
-	public final Long getCalculatedSizeInBytes()
+	public final java.lang.Long getCalculatedSizeInBytes()
 	{
 		return getCalculatedSizeInBytes(getContext());
 	}
@@ -167,16 +167,16 @@ public class DbSizeEstimate
 	 * @param context
 	 * @return value of CalculatedSizeInBytes
 	 */
-	public final Long getCalculatedSizeInBytes(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Long getCalculatedSizeInBytes(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (Long) getMendixObject().getValue(context, MemberNames.CalculatedSizeInBytes.toString());
+		return (java.lang.Long) getMendixObject().getValue(context, MemberNames.CalculatedSizeInBytes.toString());
 	}
 
 	/**
 	 * Set value of CalculatedSizeInBytes
 	 * @param calculatedsizeinbytes
 	 */
-	public final void setCalculatedSizeInBytes(Long calculatedsizeinbytes)
+	public final void setCalculatedSizeInBytes(java.lang.Long calculatedsizeinbytes)
 	{
 		setCalculatedSizeInBytes(getContext(), calculatedsizeinbytes);
 	}
@@ -186,7 +186,7 @@ public class DbSizeEstimate
 	 * @param context
 	 * @param calculatedsizeinbytes
 	 */
-	public final void setCalculatedSizeInBytes(com.mendix.systemwideinterfaces.core.IContext context, Long calculatedsizeinbytes)
+	public final void setCalculatedSizeInBytes(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Long calculatedsizeinbytes)
 	{
 		getMendixObject().setValue(context, MemberNames.CalculatedSizeInBytes.toString(), calculatedsizeinbytes);
 	}
@@ -194,7 +194,7 @@ public class DbSizeEstimate
 	/**
 	 * @return value of CalculatedSizeInKiloBytes
 	 */
-	public final Long getCalculatedSizeInKiloBytes()
+	public final java.lang.Long getCalculatedSizeInKiloBytes()
 	{
 		return getCalculatedSizeInKiloBytes(getContext());
 	}
@@ -203,16 +203,16 @@ public class DbSizeEstimate
 	 * @param context
 	 * @return value of CalculatedSizeInKiloBytes
 	 */
-	public final Long getCalculatedSizeInKiloBytes(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Long getCalculatedSizeInKiloBytes(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (Long) getMendixObject().getValue(context, MemberNames.CalculatedSizeInKiloBytes.toString());
+		return (java.lang.Long) getMendixObject().getValue(context, MemberNames.CalculatedSizeInKiloBytes.toString());
 	}
 
 	/**
 	 * Set value of CalculatedSizeInKiloBytes
 	 * @param calculatedsizeinkilobytes
 	 */
-	public final void setCalculatedSizeInKiloBytes(Long calculatedsizeinkilobytes)
+	public final void setCalculatedSizeInKiloBytes(java.lang.Long calculatedsizeinkilobytes)
 	{
 		setCalculatedSizeInKiloBytes(getContext(), calculatedsizeinkilobytes);
 	}
@@ -222,7 +222,7 @@ public class DbSizeEstimate
 	 * @param context
 	 * @param calculatedsizeinkilobytes
 	 */
-	public final void setCalculatedSizeInKiloBytes(com.mendix.systemwideinterfaces.core.IContext context, Long calculatedsizeinkilobytes)
+	public final void setCalculatedSizeInKiloBytes(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Long calculatedsizeinkilobytes)
 	{
 		getMendixObject().setValue(context, MemberNames.CalculatedSizeInKiloBytes.toString(), calculatedsizeinkilobytes);
 	}
@@ -230,7 +230,7 @@ public class DbSizeEstimate
 	/**
 	 * @return value of FindObjectType
 	 */
-	public final String getFindObjectType()
+	public final java.lang.String getFindObjectType()
 	{
 		return getFindObjectType(getContext());
 	}
@@ -239,16 +239,16 @@ public class DbSizeEstimate
 	 * @param context
 	 * @return value of FindObjectType
 	 */
-	public final String getFindObjectType(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getFindObjectType(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.FindObjectType.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.FindObjectType.toString());
 	}
 
 	/**
 	 * Set value of FindObjectType
 	 * @param findobjecttype
 	 */
-	public final void setFindObjectType(String findobjecttype)
+	public final void setFindObjectType(java.lang.String findobjecttype)
 	{
 		setFindObjectType(getContext(), findobjecttype);
 	}
@@ -258,7 +258,7 @@ public class DbSizeEstimate
 	 * @param context
 	 * @param findobjecttype
 	 */
-	public final void setFindObjectType(com.mendix.systemwideinterfaces.core.IContext context, String findobjecttype)
+	public final void setFindObjectType(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String findobjecttype)
 	{
 		getMendixObject().setValue(context, MemberNames.FindObjectType.toString(), findobjecttype);
 	}

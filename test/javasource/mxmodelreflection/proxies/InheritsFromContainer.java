@@ -110,7 +110,7 @@ public class InheritsFromContainer
 	/**
 	 * @return value of Summary
 	 */
-	public final String getSummary()
+	public final java.lang.String getSummary()
 	{
 		return getSummary(getContext());
 	}
@@ -119,16 +119,16 @@ public class InheritsFromContainer
 	 * @param context
 	 * @return value of Summary
 	 */
-	public final String getSummary(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getSummary(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.Summary.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.Summary.toString());
 	}
 
 	/**
 	 * Set value of Summary
 	 * @param summary
 	 */
-	public final void setSummary(String summary)
+	public final void setSummary(java.lang.String summary)
 	{
 		setSummary(getContext(), summary);
 	}
@@ -138,7 +138,7 @@ public class InheritsFromContainer
 	 * @param context
 	 * @param summary
 	 */
-	public final void setSummary(com.mendix.systemwideinterfaces.core.IContext context, String summary)
+	public final void setSummary(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String summary)
 	{
 		getMendixObject().setValue(context, MemberNames.Summary.toString(), summary);
 	}

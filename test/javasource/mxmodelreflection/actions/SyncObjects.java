@@ -25,7 +25,7 @@ import com.mendix.webui.FeedbackHelper;
  * 
  * (The return value from this action can be ignored)
  */
-public class SyncObjects extends CustomJavaAction<Boolean>
+public class SyncObjects extends CustomJavaAction<java.lang.Boolean>
 {
 	public SyncObjects(IContext context)
 	{
@@ -33,7 +33,7 @@ public class SyncObjects extends CustomJavaAction<Boolean>
 	}
 
 	@Override
-	public Boolean executeAction() throws Exception
+	public java.lang.Boolean executeAction() throws Exception
 	{
 		// BEGIN USER CODE
 		Builder builder = new Builder();
@@ -55,7 +55,7 @@ public class SyncObjects extends CustomJavaAction<Boolean>
 	 * Returns a string representation of this action
 	 */
 	@Override
-	public String toString()
+	public java.lang.String toString()
 	{
 		return "SyncObjects";
 	}

@@ -128,7 +128,7 @@ public class MxObjectReference
 	/**
 	 * @return value of CompleteName
 	 */
-	public final String getCompleteName()
+	public final java.lang.String getCompleteName()
 	{
 		return getCompleteName(getContext());
 	}
@@ -137,16 +137,16 @@ public class MxObjectReference
 	 * @param context
 	 * @return value of CompleteName
 	 */
-	public final String getCompleteName(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getCompleteName(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.CompleteName.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.CompleteName.toString());
 	}
 
 	/**
 	 * Set value of CompleteName
 	 * @param completename
 	 */
-	public final void setCompleteName(String completename)
+	public final void setCompleteName(java.lang.String completename)
 	{
 		setCompleteName(getContext(), completename);
 	}
@@ -156,7 +156,7 @@ public class MxObjectReference
 	 * @param context
 	 * @param completename
 	 */
-	public final void setCompleteName(com.mendix.systemwideinterfaces.core.IContext context, String completename)
+	public final void setCompleteName(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String completename)
 	{
 		getMendixObject().setValue(context, MemberNames.CompleteName.toString(), completename);
 	}
@@ -164,7 +164,7 @@ public class MxObjectReference
 	/**
 	 * @return value of Module
 	 */
-	public final String getModule()
+	public final java.lang.String getModule()
 	{
 		return getModule(getContext());
 	}
@@ -173,16 +173,16 @@ public class MxObjectReference
 	 * @param context
 	 * @return value of Module
 	 */
-	public final String getModule(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getModule(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.Module.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.Module.toString());
 	}
 
 	/**
 	 * Set value of Module
 	 * @param module
 	 */
-	public final void setModule(String module)
+	public final void setModule(java.lang.String module)
 	{
 		setModule(getContext(), module);
 	}
@@ -192,7 +192,7 @@ public class MxObjectReference
 	 * @param context
 	 * @param module
 	 */
-	public final void setModule(com.mendix.systemwideinterfaces.core.IContext context, String module)
+	public final void setModule(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String module)
 	{
 		getMendixObject().setValue(context, MemberNames.Module.toString(), module);
 	}
@@ -200,7 +200,7 @@ public class MxObjectReference
 	/**
 	 * @return value of Name
 	 */
-	public final String getName()
+	public final java.lang.String getName()
 	{
 		return getName(getContext());
 	}
@@ -209,16 +209,16 @@ public class MxObjectReference
 	 * @param context
 	 * @return value of Name
 	 */
-	public final String getName(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getName(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.Name.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.Name.toString());
 	}
 
 	/**
 	 * Set value of Name
 	 * @param name
 	 */
-	public final void setName(String name)
+	public final void setName(java.lang.String name)
 	{
 		setName(getContext(), name);
 	}
@@ -228,7 +228,7 @@ public class MxObjectReference
 	 * @param context
 	 * @param name
 	 */
-	public final void setName(com.mendix.systemwideinterfaces.core.IContext context, String name)
+	public final void setName(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String name)
 	{
 		getMendixObject().setValue(context, MemberNames.Name.toString(), name);
 	}
@@ -236,7 +236,7 @@ public class MxObjectReference
 	/**
 	 * @return value of ReadableName
 	 */
-	public final String getReadableName()
+	public final java.lang.String getReadableName()
 	{
 		return getReadableName(getContext());
 	}
@@ -245,16 +245,16 @@ public class MxObjectReference
 	 * @param context
 	 * @return value of ReadableName
 	 */
-	public final String getReadableName(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getReadableName(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.ReadableName.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.ReadableName.toString());
 	}
 
 	/**
 	 * Set value of ReadableName
 	 * @param readablename
 	 */
-	public final void setReadableName(String readablename)
+	public final void setReadableName(java.lang.String readablename)
 	{
 		setReadableName(getContext(), readablename);
 	}
@@ -264,7 +264,7 @@ public class MxObjectReference
 	 * @param context
 	 * @param readablename
 	 */
-	public final void setReadableName(com.mendix.systemwideinterfaces.core.IContext context, String readablename)
+	public final void setReadableName(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String readablename)
 	{
 		getMendixObject().setValue(context, MemberNames.ReadableName.toString(), readablename);
 	}
@@ -360,7 +360,7 @@ public class MxObjectReference
 	/**
 	 * @return value of ParentEntity
 	 */
-	public final String getParentEntity()
+	public final java.lang.String getParentEntity()
 	{
 		return getParentEntity(getContext());
 	}
@@ -369,16 +369,16 @@ public class MxObjectReference
 	 * @param context
 	 * @return value of ParentEntity
 	 */
-	public final String getParentEntity(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getParentEntity(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.ParentEntity.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.ParentEntity.toString());
 	}
 
 	/**
 	 * Set value of ParentEntity
 	 * @param parententity
 	 */
-	public final void setParentEntity(String parententity)
+	public final void setParentEntity(java.lang.String parententity)
 	{
 		setParentEntity(getContext(), parententity);
 	}
@@ -388,7 +388,7 @@ public class MxObjectReference
 	 * @param context
 	 * @param parententity
 	 */
-	public final void setParentEntity(com.mendix.systemwideinterfaces.core.IContext context, String parententity)
+	public final void setParentEntity(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String parententity)
 	{
 		getMendixObject().setValue(context, MemberNames.ParentEntity.toString(), parententity);
 	}

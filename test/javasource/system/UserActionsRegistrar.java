@@ -127,6 +127,7 @@ public class UserActionsRegistrar implements EventHandler
 			component.actionRegistry().registerUserAction(excelimporter.actions.StartImportByTemplate.class);
 			component.actionRegistry().registerUserAction(mxmodelreflection.actions.ReplaceToken.class);
 			component.actionRegistry().registerUserAction(mxmodelreflection.actions.SyncObjects.class);
+			component.actionRegistry().registerUserAction(mxmodelreflection.actions.TestThePattern.class);
 			component.actionRegistry().registerUserAction(mxmodelreflection.actions.ValidateTokensInMessage.class);
 			component.actionRegistry().registerUserAction(restservices.actions.addCookieToNextRequest.class);
 			component.actionRegistry().registerUserAction(restservices.actions.addCredentialsToNextRequest.class);

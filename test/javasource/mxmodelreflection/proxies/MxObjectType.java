@@ -124,7 +124,7 @@ public class MxObjectType
 	/**
 	 * @return value of CompleteName
 	 */
-	public final String getCompleteName()
+	public final java.lang.String getCompleteName()
 	{
 		return getCompleteName(getContext());
 	}
@@ -133,16 +133,16 @@ public class MxObjectType
 	 * @param context
 	 * @return value of CompleteName
 	 */
-	public final String getCompleteName(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getCompleteName(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.CompleteName.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.CompleteName.toString());
 	}
 
 	/**
 	 * Set value of CompleteName
 	 * @param completename
 	 */
-	public final void setCompleteName(String completename)
+	public final void setCompleteName(java.lang.String completename)
 	{
 		setCompleteName(getContext(), completename);
 	}
@@ -152,7 +152,7 @@ public class MxObjectType
 	 * @param context
 	 * @param completename
 	 */
-	public final void setCompleteName(com.mendix.systemwideinterfaces.core.IContext context, String completename)
+	public final void setCompleteName(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String completename)
 	{
 		getMendixObject().setValue(context, MemberNames.CompleteName.toString(), completename);
 	}
@@ -160,7 +160,7 @@ public class MxObjectType
 	/**
 	 * @return value of Name
 	 */
-	public final String getName()
+	public final java.lang.String getName()
 	{
 		return getName(getContext());
 	}
@@ -169,16 +169,16 @@ public class MxObjectType
 	 * @param context
 	 * @return value of Name
 	 */
-	public final String getName(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getName(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.Name.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.Name.toString());
 	}
 
 	/**
 	 * Set value of Name
 	 * @param name
 	 */
-	public final void setName(String name)
+	public final void setName(java.lang.String name)
 	{
 		setName(getContext(), name);
 	}
@@ -188,7 +188,7 @@ public class MxObjectType
 	 * @param context
 	 * @param name
 	 */
-	public final void setName(com.mendix.systemwideinterfaces.core.IContext context, String name)
+	public final void setName(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String name)
 	{
 		getMendixObject().setValue(context, MemberNames.Name.toString(), name);
 	}
@@ -196,7 +196,7 @@ public class MxObjectType
 	/**
 	 * @return value of Module
 	 */
-	public final String getModule()
+	public final java.lang.String getModule()
 	{
 		return getModule(getContext());
 	}
@@ -205,16 +205,16 @@ public class MxObjectType
 	 * @param context
 	 * @return value of Module
 	 */
-	public final String getModule(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getModule(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.Module.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.Module.toString());
 	}
 
 	/**
 	 * Set value of Module
 	 * @param module
 	 */
-	public final void setModule(String module)
+	public final void setModule(java.lang.String module)
 	{
 		setModule(getContext(), module);
 	}
@@ -224,7 +224,7 @@ public class MxObjectType
 	 * @param context
 	 * @param module
 	 */
-	public final void setModule(com.mendix.systemwideinterfaces.core.IContext context, String module)
+	public final void setModule(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String module)
 	{
 		getMendixObject().setValue(context, MemberNames.Module.toString(), module);
 	}
@@ -232,7 +232,7 @@ public class MxObjectType
 	/**
 	 * @return value of ReadableName
 	 */
-	public final String getReadableName()
+	public final java.lang.String getReadableName()
 	{
 		return getReadableName(getContext());
 	}
@@ -241,16 +241,16 @@ public class MxObjectType
 	 * @param context
 	 * @return value of ReadableName
 	 */
-	public final String getReadableName(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getReadableName(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.ReadableName.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.ReadableName.toString());
 	}
 
 	/**
 	 * Set value of ReadableName
 	 * @param readablename
 	 */
-	public final void setReadableName(String readablename)
+	public final void setReadableName(java.lang.String readablename)
 	{
 		setReadableName(getContext(), readablename);
 	}
@@ -260,7 +260,7 @@ public class MxObjectType
 	 * @param context
 	 * @param readablename
 	 */
-	public final void setReadableName(com.mendix.systemwideinterfaces.core.IContext context, String readablename)
+	public final void setReadableName(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String readablename)
 	{
 		getMendixObject().setValue(context, MemberNames.ReadableName.toString(), readablename);
 	}

@@ -6,37 +6,37 @@ package mxmodelreflection.proxies;
 
 public enum PrimitiveTypes
 {
-	AutoNumber(new String[][] { new String[] { "en_US", "Auto number" }, new String[] { "nl_NL", "Autonummer" }, new String[] { "en_GB", "Auto number" }, new String[] { "en_ZA", "Auto number" } }),
-	BooleanType(new String[][] { new String[] { "en_US", "Boolean" }, new String[] { "nl_NL", "Boolean" }, new String[] { "en_GB", "Boolean" }, new String[] { "en_ZA", "Boolean" } }),
-	Currency(new String[][] { new String[] { "en_US", "Currency" }, new String[] { "nl_NL", "Currency" }, new String[] { "en_GB", "Currency" }, new String[] { "en_ZA", "Currency" } }),
-	DateTime(new String[][] { new String[] { "en_US", "DateTime" }, new String[] { "nl_NL", "DateTime" }, new String[] { "en_GB", "DateTime" }, new String[] { "en_ZA", "DateTime" } }),
-	EnumType(new String[][] { new String[] { "en_US", "Enum" }, new String[] { "nl_NL", "Enum" }, new String[] { "en_GB", "Enum" }, new String[] { "en_ZA", "Enum" } }),
-	FloatType(new String[][] { new String[] { "en_US", "Float" }, new String[] { "nl_NL", "Float" }, new String[] { "en_GB", "Float" }, new String[] { "en_ZA", "Float" } }),
-	HashString(new String[][] { new String[] { "en_US", "Hash string (i.e. passwords)" }, new String[] { "nl_NL", "Hash string (bv. wachtwoorden)" }, new String[] { "en_GB", "Hash string (i.e. passwords)" }, new String[] { "en_ZA", "Hash string (i.e. passwords)" } }),
-	IntegerType(new String[][] { new String[] { "en_US", "Integer" }, new String[] { "nl_NL", "Integer" }, new String[] { "en_GB", "Integer" }, new String[] { "en_ZA", "Integer" } }),
-	LongType(new String[][] { new String[] { "en_US", "Long" }, new String[] { "nl_NL", "Long" }, new String[] { "en_GB", "Long" }, new String[] { "en_ZA", "Long" } }),
-	StringType(new String[][] { new String[] { "en_US", "String" }, new String[] { "nl_NL", "String" }, new String[] { "en_GB", "String" }, new String[] { "en_ZA", "String" } }),
-	ObjectType(new String[][] { new String[] { "en_US", "Object Type" }, new String[] { "en_GB", "Object Type" }, new String[] { "en_ZA", "Object Type" }, new String[] { "nl_NL", "Object Type" } }),
-	ObjectList(new String[][] { new String[] { "en_US", "Object List" }, new String[] { "en_GB", "Object List" }, new String[] { "en_ZA", "Object List" }, new String[] { "nl_NL", "Object Lijst" } }),
-	Decimal(new String[][] { new String[] { "en_US", "Decimal" }, new String[] { "nl_NL", "Decimal" }, new String[] { "en_GB", "Decimal" }, new String[] { "en_ZA", "Decimal" } });
+	AutoNumber(new java.lang.String[][] { new java.lang.String[] { "en_US", "Auto number" }, new java.lang.String[] { "nl_NL", "Autonummer" }, new java.lang.String[] { "en_GB", "Auto number" }, new java.lang.String[] { "en_ZA", "Auto number" } }),
+	BooleanType(new java.lang.String[][] { new java.lang.String[] { "en_US", "Boolean" }, new java.lang.String[] { "nl_NL", "Boolean" }, new java.lang.String[] { "en_GB", "Boolean" }, new java.lang.String[] { "en_ZA", "Boolean" } }),
+	Currency(new java.lang.String[][] { new java.lang.String[] { "en_US", "Currency" }, new java.lang.String[] { "nl_NL", "Currency" }, new java.lang.String[] { "en_GB", "Currency" }, new java.lang.String[] { "en_ZA", "Currency" } }),
+	DateTime(new java.lang.String[][] { new java.lang.String[] { "en_US", "DateTime" }, new java.lang.String[] { "nl_NL", "DateTime" }, new java.lang.String[] { "en_GB", "DateTime" }, new java.lang.String[] { "en_ZA", "DateTime" } }),
+	EnumType(new java.lang.String[][] { new java.lang.String[] { "en_US", "Enum" }, new java.lang.String[] { "nl_NL", "Enum" }, new java.lang.String[] { "en_GB", "Enum" }, new java.lang.String[] { "en_ZA", "Enum" } }),
+	FloatType(new java.lang.String[][] { new java.lang.String[] { "en_US", "Float" }, new java.lang.String[] { "nl_NL", "Float" }, new java.lang.String[] { "en_GB", "Float" }, new java.lang.String[] { "en_ZA", "Float" } }),
+	HashString(new java.lang.String[][] { new java.lang.String[] { "en_US", "Hash string (i.e. passwords)" }, new java.lang.String[] { "nl_NL", "Hash string (bv. wachtwoorden)" }, new java.lang.String[] { "en_GB", "Hash string (i.e. passwords)" }, new java.lang.String[] { "en_ZA", "Hash string (i.e. passwords)" } }),
+	IntegerType(new java.lang.String[][] { new java.lang.String[] { "en_US", "Integer" }, new java.lang.String[] { "nl_NL", "Integer" }, new java.lang.String[] { "en_GB", "Integer" }, new java.lang.String[] { "en_ZA", "Integer" } }),
+	LongType(new java.lang.String[][] { new java.lang.String[] { "en_US", "Long" }, new java.lang.String[] { "nl_NL", "Long" }, new java.lang.String[] { "en_GB", "Long" }, new java.lang.String[] { "en_ZA", "Long" } }),
+	StringType(new java.lang.String[][] { new java.lang.String[] { "en_US", "String" }, new java.lang.String[] { "nl_NL", "String" }, new java.lang.String[] { "en_GB", "String" }, new java.lang.String[] { "en_ZA", "String" } }),
+	ObjectType(new java.lang.String[][] { new java.lang.String[] { "en_US", "Object Type" }, new java.lang.String[] { "en_GB", "Object Type" }, new java.lang.String[] { "en_ZA", "Object Type" }, new java.lang.String[] { "nl_NL", "Object Type" } }),
+	ObjectList(new java.lang.String[][] { new java.lang.String[] { "en_US", "Object List" }, new java.lang.String[] { "en_GB", "Object List" }, new java.lang.String[] { "en_ZA", "Object List" }, new java.lang.String[] { "nl_NL", "Object Lijst" } }),
+	Decimal(new java.lang.String[][] { new java.lang.String[] { "en_US", "Decimal" }, new java.lang.String[] { "nl_NL", "Decimal" }, new java.lang.String[] { "en_GB", "Decimal" }, new java.lang.String[] { "en_ZA", "Decimal" } });
 
-	private java.util.Map<String,String> captions;
+	private java.util.Map<java.lang.String, java.lang.String> captions;
 
-	private PrimitiveTypes(String[][] captionStrings)
+	private PrimitiveTypes(java.lang.String[][] captionStrings)
 	{
-		this.captions = new java.util.HashMap<String,String>();
-		for (String[] captionString : captionStrings)
+		this.captions = new java.util.HashMap<java.lang.String, java.lang.String>();
+		for (java.lang.String[] captionString : captionStrings)
 			captions.put(captionString[0], captionString[1]);
 	}
 
-	public String getCaption(String languageCode)
+	public java.lang.String getCaption(java.lang.String languageCode)
 	{
 		if (captions.containsKey(languageCode))
 			return captions.get(languageCode);
 		return captions.get("en_US");
 	}
 
-	public String getCaption()
+	public java.lang.String getCaption()
 	{
 		return captions.get("en_US");
 	}

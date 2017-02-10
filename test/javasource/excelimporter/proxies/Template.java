@@ -134,7 +134,7 @@ public class Template
 	/**
 	 * @return value of Nr
 	 */
-	public final Long getNr()
+	public final java.lang.Long getNr()
 	{
 		return getNr(getContext());
 	}
@@ -143,16 +143,16 @@ public class Template
 	 * @param context
 	 * @return value of Nr
 	 */
-	public final Long getNr(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Long getNr(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (Long) getMendixObject().getValue(context, MemberNames.Nr.toString());
+		return (java.lang.Long) getMendixObject().getValue(context, MemberNames.Nr.toString());
 	}
 
 	/**
 	 * Set value of Nr
 	 * @param nr
 	 */
-	public final void setNr(Long nr)
+	public final void setNr(java.lang.Long nr)
 	{
 		setNr(getContext(), nr);
 	}
@@ -162,7 +162,7 @@ public class Template
 	 * @param context
 	 * @param nr
 	 */
-	public final void setNr(com.mendix.systemwideinterfaces.core.IContext context, Long nr)
+	public final void setNr(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Long nr)
 	{
 		getMendixObject().setValue(context, MemberNames.Nr.toString(), nr);
 	}
@@ -170,7 +170,7 @@ public class Template
 	/**
 	 * @return value of Title
 	 */
-	public final String getTitle()
+	public final java.lang.String getTitle()
 	{
 		return getTitle(getContext());
 	}
@@ -179,16 +179,16 @@ public class Template
 	 * @param context
 	 * @return value of Title
 	 */
-	public final String getTitle(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getTitle(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.Title.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.Title.toString());
 	}
 
 	/**
 	 * Set value of Title
 	 * @param title
 	 */
-	public final void setTitle(String title)
+	public final void setTitle(java.lang.String title)
 	{
 		setTitle(getContext(), title);
 	}
@@ -198,7 +198,7 @@ public class Template
 	 * @param context
 	 * @param title
 	 */
-	public final void setTitle(com.mendix.systemwideinterfaces.core.IContext context, String title)
+	public final void setTitle(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String title)
 	{
 		getMendixObject().setValue(context, MemberNames.Title.toString(), title);
 	}
@@ -206,7 +206,7 @@ public class Template
 	/**
 	 * @return value of Description
 	 */
-	public final String getDescription()
+	public final java.lang.String getDescription()
 	{
 		return getDescription(getContext());
 	}
@@ -215,16 +215,16 @@ public class Template
 	 * @param context
 	 * @return value of Description
 	 */
-	public final String getDescription(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getDescription(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.Description.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.Description.toString());
 	}
 
 	/**
 	 * Set value of Description
 	 * @param description
 	 */
-	public final void setDescription(String description)
+	public final void setDescription(java.lang.String description)
 	{
 		setDescription(getContext(), description);
 	}
@@ -234,7 +234,7 @@ public class Template
 	 * @param context
 	 * @param description
 	 */
-	public final void setDescription(com.mendix.systemwideinterfaces.core.IContext context, String description)
+	public final void setDescription(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String description)
 	{
 		getMendixObject().setValue(context, MemberNames.Description.toString(), description);
 	}
@@ -242,7 +242,7 @@ public class Template
 	/**
 	 * @return value of SheetIndex
 	 */
-	public final Integer getSheetIndex()
+	public final java.lang.Integer getSheetIndex()
 	{
 		return getSheetIndex(getContext());
 	}
@@ -251,16 +251,16 @@ public class Template
 	 * @param context
 	 * @return value of SheetIndex
 	 */
-	public final Integer getSheetIndex(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Integer getSheetIndex(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (Integer) getMendixObject().getValue(context, MemberNames.SheetIndex.toString());
+		return (java.lang.Integer) getMendixObject().getValue(context, MemberNames.SheetIndex.toString());
 	}
 
 	/**
 	 * Set value of SheetIndex
 	 * @param sheetindex
 	 */
-	public final void setSheetIndex(Integer sheetindex)
+	public final void setSheetIndex(java.lang.Integer sheetindex)
 	{
 		setSheetIndex(getContext(), sheetindex);
 	}
@@ -270,7 +270,7 @@ public class Template
 	 * @param context
 	 * @param sheetindex
 	 */
-	public final void setSheetIndex(com.mendix.systemwideinterfaces.core.IContext context, Integer sheetindex)
+	public final void setSheetIndex(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Integer sheetindex)
 	{
 		getMendixObject().setValue(context, MemberNames.SheetIndex.toString(), sheetindex);
 	}
@@ -278,7 +278,7 @@ public class Template
 	/**
 	 * @return value of HeaderRowNumber
 	 */
-	public final Integer getHeaderRowNumber()
+	public final java.lang.Integer getHeaderRowNumber()
 	{
 		return getHeaderRowNumber(getContext());
 	}
@@ -287,16 +287,16 @@ public class Template
 	 * @param context
 	 * @return value of HeaderRowNumber
 	 */
-	public final Integer getHeaderRowNumber(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Integer getHeaderRowNumber(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (Integer) getMendixObject().getValue(context, MemberNames.HeaderRowNumber.toString());
+		return (java.lang.Integer) getMendixObject().getValue(context, MemberNames.HeaderRowNumber.toString());
 	}
 
 	/**
 	 * Set value of HeaderRowNumber
 	 * @param headerrownumber
 	 */
-	public final void setHeaderRowNumber(Integer headerrownumber)
+	public final void setHeaderRowNumber(java.lang.Integer headerrownumber)
 	{
 		setHeaderRowNumber(getContext(), headerrownumber);
 	}
@@ -306,7 +306,7 @@ public class Template
 	 * @param context
 	 * @param headerrownumber
 	 */
-	public final void setHeaderRowNumber(com.mendix.systemwideinterfaces.core.IContext context, Integer headerrownumber)
+	public final void setHeaderRowNumber(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Integer headerrownumber)
 	{
 		getMendixObject().setValue(context, MemberNames.HeaderRowNumber.toString(), headerrownumber);
 	}
@@ -314,7 +314,7 @@ public class Template
 	/**
 	 * @return value of FirstDataRowNumber
 	 */
-	public final Integer getFirstDataRowNumber()
+	public final java.lang.Integer getFirstDataRowNumber()
 	{
 		return getFirstDataRowNumber(getContext());
 	}
@@ -323,16 +323,16 @@ public class Template
 	 * @param context
 	 * @return value of FirstDataRowNumber
 	 */
-	public final Integer getFirstDataRowNumber(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Integer getFirstDataRowNumber(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (Integer) getMendixObject().getValue(context, MemberNames.FirstDataRowNumber.toString());
+		return (java.lang.Integer) getMendixObject().getValue(context, MemberNames.FirstDataRowNumber.toString());
 	}
 
 	/**
 	 * Set value of FirstDataRowNumber
 	 * @param firstdatarownumber
 	 */
-	public final void setFirstDataRowNumber(Integer firstdatarownumber)
+	public final void setFirstDataRowNumber(java.lang.Integer firstdatarownumber)
 	{
 		setFirstDataRowNumber(getContext(), firstdatarownumber);
 	}
@@ -342,7 +342,7 @@ public class Template
 	 * @param context
 	 * @param firstdatarownumber
 	 */
-	public final void setFirstDataRowNumber(com.mendix.systemwideinterfaces.core.IContext context, Integer firstdatarownumber)
+	public final void setFirstDataRowNumber(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Integer firstdatarownumber)
 	{
 		getMendixObject().setValue(context, MemberNames.FirstDataRowNumber.toString(), firstdatarownumber);
 	}

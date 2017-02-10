@@ -22,7 +22,7 @@ import com.mendix.webui.CustomJavaAction;
  * 
  * The return value is irrelevant and will be always true
  */
-public class StartImportByTemplate extends CustomJavaAction<Boolean>
+public class StartImportByTemplate extends CustomJavaAction<java.lang.Boolean>
 {
 	private IMendixObject __TemplateObject;
 	private excelimporter.proxies.Template TemplateObject;
@@ -39,7 +39,7 @@ public class StartImportByTemplate extends CustomJavaAction<Boolean>
 	}
 
 	@Override
-	public Boolean executeAction() throws Exception
+	public java.lang.Boolean executeAction() throws Exception
 	{
 		this.TemplateObject = __TemplateObject == null ? null : excelimporter.proxies.Template.initialize(getContext(), __TemplateObject);
 
@@ -60,7 +60,7 @@ public class StartImportByTemplate extends CustomJavaAction<Boolean>
 	 * Returns a string representation of this action
 	 */
 	@Override
-	public String toString()
+	public java.lang.String toString()
 	{
 		return "StartImportByTemplate";
 	}
