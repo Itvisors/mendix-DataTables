@@ -76,6 +76,7 @@ public class DataTablesRequestHandler extends RequestHandler {
 							}
 						}
 					}
+					responseJSON.put("rowCount", dataTable.getRowCount());
 				}
 			}
 			
