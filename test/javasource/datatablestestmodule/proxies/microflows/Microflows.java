@@ -236,12 +236,12 @@ public class Microflows
 			throw new MendixRuntimeException(e);
 		}
 	}
-	public static boolean aSU_AfterStartup(IContext context)
+	public static boolean aSU_Demo(IContext context)
 	{
 		try
 		{
 			Map<java.lang.String, Object> params = new HashMap<java.lang.String, Object>();
-			return (java.lang.Boolean)Core.execute(context, "DataTablesTestModule.ASU_AfterStartup", params);
+			return (java.lang.Boolean)Core.execute(context, "DataTablesTestModule.ASU_Demo", params);
 		}
 		catch (CoreException e)
 		{

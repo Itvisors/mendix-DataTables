@@ -643,25 +643,20 @@ define([
             dojoOn(this._exportButton, "click", function () {
                 thisObj._contextObj.set(thisObj.exportConfigAttr, thisObj._createExportConfigData());
                 thisObj._contextObj.set(thisObj.exportXPathAttr, thisObj._createXPathConstraint());
-                mx.data.save({
-                    mxobj: thisObj._contextObj,
+                thisObj._showProgress();
+                mx.data.action({
+                    params : {
+                        applyto    : "selection",
+                        actionname : thisObj.exportMicroflow,
+                        guids      : [thisObj._contextObj.getGuid()]
+                    },
                     callback: function () {
-                        thisObj._showProgress();
-                        mx.data.action({
-                            params : {
-                                applyto    : "selection",
-                                actionname : thisObj.exportMicroflow,
-                                guids      : [thisObj._contextObj.getGuid()]
-                            },
-                            callback: function () {
-                                logger.debug("Export MF callback");
-                                thisObj._hideProgress();
-                            },
-                            error: function () {
-                                logger.error("Call to " + thisObj.exportMicroflow + " ended in error");
-                                thisObj._hideProgress();
-                            }
-                        });
+                        logger.debug("Export MF callback");
+                        thisObj._hideProgress();
+                    },
+                    error: function () {
+                        logger.error("Call to " + thisObj.exportMicroflow + " ended in error");
+                        thisObj._hideProgress();
                     }
                 });
             });
@@ -1209,12 +1204,6 @@ define([
                 if (this._table) {
                     if (this.refreshAttr && this._contextObj.get(this.refreshAttr)) {
                         this._contextObj.set(this.refreshAttr, false);
-                        mx.data.save({
-                            mxobj: this._contextObj,
-							callback: function () {
-								logger.debug("Object saved");
-							}
-                        });
                         if (this.refreshKeepScrollPosAttr) {
                             resetPaging = !this._contextObj.get(this.refreshKeepScrollPosAttr);
                         }

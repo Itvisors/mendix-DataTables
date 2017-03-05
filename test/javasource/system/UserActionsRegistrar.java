@@ -121,7 +121,8 @@ public class UserActionsRegistrar implements EventHandler
 			component.actionRegistry().registerUserAction(communitycommons.actions.waitForLock.class);
 			component.actionRegistry().registerUserAction(communitycommons.actions.XSSSanitize.class);
 			component.actionRegistry().registerUserAction(communitycommons.actions.YearsBetween.class);
-			component.actionRegistry().registerUserAction(datatablesexportdata.actions.ExportData.class);
+			component.actionRegistry().registerUserAction(datatablesutils.actions.ExportData.class);
+			component.actionRegistry().registerUserAction(datatablesutils.actions.InitDataTables.class);
 			component.actionRegistry().registerUserAction(excelimporter.actions.GetHeaderInformationFromExcelFile.class);
 			component.actionRegistry().registerUserAction(excelimporter.actions.RefreshClass.class);
 			component.actionRegistry().registerUserAction(excelimporter.actions.StartImportByTemplate.class);
