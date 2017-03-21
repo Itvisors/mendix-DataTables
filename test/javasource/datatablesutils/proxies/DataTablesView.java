@@ -23,9 +23,12 @@ public class DataTablesView
 		Name("Name"),
 		Description("Description"),
 		Active("Active"),
-		Query("Query"),
+		FromEntity("FromEntity"),
+		FromEntityAlias("FromEntityAlias"),
+		GroupByClause("GroupByClause"),
 		WhereClause("WhereClause"),
-		ValidateState("ValidateState");
+		ValidateState("ValidateState"),
+		DefaultSelectClause("DefaultSelectClause");
 
 		private java.lang.String metaName;
 
@@ -229,39 +232,111 @@ public class DataTablesView
 	}
 
 	/**
-	 * @return value of Query
+	 * @return value of FromEntity
 	 */
-	public final java.lang.String getQuery()
+	public final java.lang.String getFromEntity()
 	{
-		return getQuery(getContext());
+		return getFromEntity(getContext());
 	}
 
 	/**
 	 * @param context
-	 * @return value of Query
+	 * @return value of FromEntity
 	 */
-	public final java.lang.String getQuery(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getFromEntity(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (java.lang.String) getMendixObject().getValue(context, MemberNames.Query.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.FromEntity.toString());
 	}
 
 	/**
-	 * Set value of Query
-	 * @param query
+	 * Set value of FromEntity
+	 * @param fromentity
 	 */
-	public final void setQuery(java.lang.String query)
+	public final void setFromEntity(java.lang.String fromentity)
 	{
-		setQuery(getContext(), query);
+		setFromEntity(getContext(), fromentity);
 	}
 
 	/**
-	 * Set value of Query
+	 * Set value of FromEntity
 	 * @param context
-	 * @param query
+	 * @param fromentity
 	 */
-	public final void setQuery(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String query)
+	public final void setFromEntity(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String fromentity)
 	{
-		getMendixObject().setValue(context, MemberNames.Query.toString(), query);
+		getMendixObject().setValue(context, MemberNames.FromEntity.toString(), fromentity);
+	}
+
+	/**
+	 * @return value of FromEntityAlias
+	 */
+	public final java.lang.String getFromEntityAlias()
+	{
+		return getFromEntityAlias(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of FromEntityAlias
+	 */
+	public final java.lang.String getFromEntityAlias(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.FromEntityAlias.toString());
+	}
+
+	/**
+	 * Set value of FromEntityAlias
+	 * @param fromentityalias
+	 */
+	public final void setFromEntityAlias(java.lang.String fromentityalias)
+	{
+		setFromEntityAlias(getContext(), fromentityalias);
+	}
+
+	/**
+	 * Set value of FromEntityAlias
+	 * @param context
+	 * @param fromentityalias
+	 */
+	public final void setFromEntityAlias(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String fromentityalias)
+	{
+		getMendixObject().setValue(context, MemberNames.FromEntityAlias.toString(), fromentityalias);
+	}
+
+	/**
+	 * @return value of GroupByClause
+	 */
+	public final java.lang.String getGroupByClause()
+	{
+		return getGroupByClause(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of GroupByClause
+	 */
+	public final java.lang.String getGroupByClause(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.GroupByClause.toString());
+	}
+
+	/**
+	 * Set value of GroupByClause
+	 * @param groupbyclause
+	 */
+	public final void setGroupByClause(java.lang.String groupbyclause)
+	{
+		setGroupByClause(getContext(), groupbyclause);
+	}
+
+	/**
+	 * Set value of GroupByClause
+	 * @param context
+	 * @param groupbyclause
+	 */
+	public final void setGroupByClause(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String groupbyclause)
+	{
+		getMendixObject().setValue(context, MemberNames.GroupByClause.toString(), groupbyclause);
 	}
 
 	/**
@@ -342,6 +417,42 @@ public class DataTablesView
 			getMendixObject().setValue(context, MemberNames.ValidateState.toString(), validatestate.toString());
 		else
 			getMendixObject().setValue(context, MemberNames.ValidateState.toString(), null);
+	}
+
+	/**
+	 * @return value of DefaultSelectClause
+	 */
+	public final java.lang.String getDefaultSelectClause()
+	{
+		return getDefaultSelectClause(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of DefaultSelectClause
+	 */
+	public final java.lang.String getDefaultSelectClause(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.DefaultSelectClause.toString());
+	}
+
+	/**
+	 * Set value of DefaultSelectClause
+	 * @param defaultselectclause
+	 */
+	public final void setDefaultSelectClause(java.lang.String defaultselectclause)
+	{
+		setDefaultSelectClause(getContext(), defaultselectclause);
+	}
+
+	/**
+	 * Set value of DefaultSelectClause
+	 * @param context
+	 * @param defaultselectclause
+	 */
+	public final void setDefaultSelectClause(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String defaultselectclause)
+	{
+		getMendixObject().setValue(context, MemberNames.DefaultSelectClause.toString(), defaultselectclause);
 	}
 
 	/**

@@ -12,7 +12,6 @@ package datatablesutils.actions;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.webui.CustomJavaAction;
-
 import datatablesutils.DataTablesRequestHandler;
 
 public class InitDataTables extends CustomJavaAction<java.lang.Boolean>

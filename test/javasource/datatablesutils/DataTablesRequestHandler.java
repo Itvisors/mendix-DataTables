@@ -41,12 +41,13 @@ public class DataTablesRequestHandler extends RequestHandler {
 		ISession session = null;
 		IContext context  = null;
 		IDataTable dataTable = null;
+		boolean isDebugActive = logger.isDebugEnabled();
 		boolean isTraceActive = logger.isTraceEnabled();
 		
 		try {
 			// Pull the data from the request.
 			String viewName = getStringParameter(request, "view");
-			String search = getStringParameter(request, "view");
+			String search = getStringParameter(request, "search");
 			String columns = getStringParameter(request, "columns");
 			String sort = getStringParameter(request, "sort");
 			int offset = getIntParameter(request, "offset");
@@ -72,16 +73,25 @@ public class DataTablesRequestHandler extends RequestHandler {
 			// Still valid? 
 			if (responseStatus == IMxRuntimeResponse.OK) {
 				
-				//Process requested columns. The names are case sensitive but URL data is not.
+				// Process requested columns. The names are case sensitive.
 				List<String> columnNameList = Arrays.asList(columns.split(","));
 				for (String columnName : columnNameList) {
 					OqlDataColumn column = new OqlDataColumn();
 					column.setRequestedName(columnName);
 					column.setColumnIndex(-1);
-					columnMap.put(columnName.toLowerCase(), column);
+					// For the key, use the column name without any table ID.
+					final String columnNameLowerCase = columnName.toLowerCase();
+					String[] nameParts = columnNameLowerCase.split("\\.");
+					final String key;
+					if (nameParts.length > 1) {
+						key = nameParts[1];
+					} else {
+						key = columnNameLowerCase;
+					}
+					columnMap.put(key, column);
 				}
 				
-				// Get the sessopm
+				// Get the session
 				session = this.getSessionFromRequest(request);
 				if (session == null) {
 					responseStatus = IMxRuntimeResponse.UNAUTHORIZED;
@@ -105,8 +115,18 @@ public class DataTablesRequestHandler extends RequestHandler {
 			// Still valid? Get the data and check the requested columns.
 			if (responseStatus == IMxRuntimeResponse.OK) {
 				
+				StringBuilder query = new StringBuilder("SELECT ");
+				query.append(columns);
+				query.append(" FROM ");
+				query.append(view.getFromEntity());
+				query.append(" AS ");
+				query.append(view.getFromEntityAlias());
+				
 				// Get the data
-				dataTable = Core.retrieveOQLDataTable(context, view.getQuery(), limit, offset);
+				if (isDebugActive) {
+					logger.debug(query.toString());
+				}
+				dataTable = Core.retrieveOQLDataTable(context, query.toString(), limit, offset);
 				
 				// Find any requested columns and save the data set column index 
 				for (IDataColumnSchema dataColumnSchema : dataTable.getSchema().getColumnSchemas()) {
