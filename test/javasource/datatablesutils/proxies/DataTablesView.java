@@ -24,7 +24,6 @@ public class DataTablesView
 		Description("Description"),
 		Active("Active"),
 		FromEntity("FromEntity"),
-		FromEntityAlias("FromEntityAlias"),
 		GroupByClause("GroupByClause"),
 		WhereClause("WhereClause"),
 		ValidateState("ValidateState"),
@@ -265,42 +264,6 @@ public class DataTablesView
 	public final void setFromEntity(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String fromentity)
 	{
 		getMendixObject().setValue(context, MemberNames.FromEntity.toString(), fromentity);
-	}
-
-	/**
-	 * @return value of FromEntityAlias
-	 */
-	public final java.lang.String getFromEntityAlias()
-	{
-		return getFromEntityAlias(getContext());
-	}
-
-	/**
-	 * @param context
-	 * @return value of FromEntityAlias
-	 */
-	public final java.lang.String getFromEntityAlias(com.mendix.systemwideinterfaces.core.IContext context)
-	{
-		return (java.lang.String) getMendixObject().getValue(context, MemberNames.FromEntityAlias.toString());
-	}
-
-	/**
-	 * Set value of FromEntityAlias
-	 * @param fromentityalias
-	 */
-	public final void setFromEntityAlias(java.lang.String fromentityalias)
-	{
-		setFromEntityAlias(getContext(), fromentityalias);
-	}
-
-	/**
-	 * Set value of FromEntityAlias
-	 * @param context
-	 * @param fromentityalias
-	 */
-	public final void setFromEntityAlias(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String fromentityalias)
-	{
-		getMendixObject().setValue(context, MemberNames.FromEntityAlias.toString(), fromentityalias);
 	}
 
 	/**

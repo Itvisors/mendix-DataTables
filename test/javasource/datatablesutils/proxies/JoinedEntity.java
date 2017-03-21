@@ -24,7 +24,6 @@ public class JoinedEntity
 		EntityAlias("EntityAlias"),
 		Path("Path"),
 		JoinType("JoinType"),
-		JoinOn("JoinOn"),
 		JoinOrder("JoinOrder"),
 		JoinedEntity_DataTablesView("DataTablesUtils.JoinedEntity_DataTablesView");
 
@@ -271,42 +270,6 @@ public class JoinedEntity
 			getMendixObject().setValue(context, MemberNames.JoinType.toString(), jointype.toString());
 		else
 			getMendixObject().setValue(context, MemberNames.JoinType.toString(), null);
-	}
-
-	/**
-	 * @return value of JoinOn
-	 */
-	public final java.lang.String getJoinOn()
-	{
-		return getJoinOn(getContext());
-	}
-
-	/**
-	 * @param context
-	 * @return value of JoinOn
-	 */
-	public final java.lang.String getJoinOn(com.mendix.systemwideinterfaces.core.IContext context)
-	{
-		return (java.lang.String) getMendixObject().getValue(context, MemberNames.JoinOn.toString());
-	}
-
-	/**
-	 * Set value of JoinOn
-	 * @param joinon
-	 */
-	public final void setJoinOn(java.lang.String joinon)
-	{
-		setJoinOn(getContext(), joinon);
-	}
-
-	/**
-	 * Set value of JoinOn
-	 * @param context
-	 * @param joinon
-	 */
-	public final void setJoinOn(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String joinon)
-	{
-		getMendixObject().setValue(context, MemberNames.JoinOn.toString(), joinon);
 	}
 
 	/**
