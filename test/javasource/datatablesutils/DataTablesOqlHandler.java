@@ -1,20 +1,16 @@
 package datatablesutils;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.math.NumberUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.mendix.core.Core;
 import com.mendix.core.CoreException;
 import com.mendix.logging.ILogNode;
-import com.mendix.m2ee.api.IMxRuntimeRequest;
 import com.mendix.m2ee.api.IMxRuntimeResponse;
 import com.mendix.systemwideinterfaces.connectionbus.data.IDataRow;
 import com.mendix.systemwideinterfaces.connectionbus.data.IDataTable;
@@ -28,7 +24,6 @@ import datatablesutils.proxies.constants.Constants;
 
 public class DataTablesOqlHandler {
 
-	private static final int DEFAULT_LIMIT = 200;
 	private static ILogNode logger = Core.getLogger(Constants.getLOGNODE_DATATABLES_UTILS());
 
 	private JSONObject responseJSON = new JSONObject();
@@ -41,22 +36,10 @@ public class DataTablesOqlHandler {
 	private boolean isDebugActive = logger.isDebugEnabled();
 	private boolean isTraceActive = logger.isTraceEnabled();
 	
-	public void processRequest(IMxRuntimeRequest request, ISession session, IMxRuntimeResponse response) {
+	public JSONObject processRequest(String viewName, String search, String columns, String sort, int offset, int limit, ISession session) {
 		
 		
 		try {
-			
-			// Pull the data from the request.
-			String viewName = getStringParameter(request, "view");
-			String search = getStringParameter(request, "search");
-			String columns = getStringParameter(request, "columns");
-			String sort = getStringParameter(request, "sort");
-			int offset = getIntParameter(request, "offset");
-			int limit = getIntParameter(request, "limit");
-			if (limit == 0) {
-				limit = DEFAULT_LIMIT;
-			}
-			
 			// Check the session
 			if (session == null) {
 				responseStatus = IMxRuntimeResponse.UNAUTHORIZED;
@@ -71,10 +54,6 @@ public class DataTablesOqlHandler {
 				if (columns == null || columns.isEmpty()) {
 					responseStatus = IMxRuntimeResponse.BAD_REQUEST;
 					errorMessageArray.put("The columns parameter is required");
-				}
-				if (sort == null || sort.isEmpty()) {
-					responseStatus = IMxRuntimeResponse.BAD_REQUEST;
-					errorMessageArray.put("The sort parameter is required");
 				}
 			}
 			
@@ -125,7 +104,7 @@ public class DataTablesOqlHandler {
 					}
 					for (int columnIndex  = 0; columnIndex  < columnNameList.size(); columnIndex ++) {
 						final String columnName = columnNameList.get(columnIndex);
-						if (row.hasReadRights(columnIndex)) {
+						if (row.hasReadAccess(columnIndex)) {
 							final Object value = row.getValue(context, columnIndex);
 							if (isTraceActive) {
 								logger.trace("  " + columnName + "=" + value);
@@ -141,18 +120,14 @@ public class DataTablesOqlHandler {
 			if (errorMessageArray.length() > 0) {
 				responseJSON.put("errors", errorMessageArray);
 			}
-			response.getWriter().append(responseJSON.toString());
+			return responseJSON;
 			
 		} catch (Exception e) {
 			logger.error(e);
+			// Allow any exception here to escape. Caller will handle it.
 			responseStatus = IMxRuntimeResponse.INTERNAL_SERVER_ERROR;
-			try {
-				responseJSON.put("status", responseStatus);
-				response.getWriter().append(responseJSON.toString());
-			} catch (Exception e2) {
-				logger.error(e2);
-				response.setStatus(IMxRuntimeResponse.INTERNAL_SERVER_ERROR);
-			}
+			responseJSON.put("status", responseStatus);
+			return responseJSON;
 		}
 	}
 	
@@ -187,29 +162,5 @@ public class DataTablesOqlHandler {
 			logger.debug(query.toString());
 		}
 		return query.toString();
-	}
-	
-	private String getStringParameter(IMxRuntimeRequest request, String parameterName) throws UnsupportedEncodingException {
-		String value = request.getParameter(parameterName);
-		if (value == null) {
-			return null;
-		}
-		String decodedValue = URLDecoder.decode(value, "UTF-8");
-		if (decodedValue.trim().isEmpty()) {
-			return "";
-		}
-		return decodedValue;
-	}
-	
-	private int getIntParameter(IMxRuntimeRequest request, String parameterName) throws UnsupportedEncodingException {
-		String value = getStringParameter(request, parameterName);
-		if (value == null || value.trim().isEmpty()) {
-			return 0;
-		}
-		int result = 0;
-		if (NumberUtils.isDigits(value)) {
-			result = Integer.parseInt(value);
-		}
-		return result;
 	}
 }

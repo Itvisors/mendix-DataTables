@@ -123,6 +123,7 @@ public class UserActionsRegistrar implements EventHandler
 			component.actionRegistry().registerUserAction(communitycommons.actions.YearsBetween.class);
 			component.actionRegistry().registerUserAction(datatablesutils.actions.ExportData.class);
 			component.actionRegistry().registerUserAction(datatablesutils.actions.InitDataTables.class);
+			component.actionRegistry().registerUserAction(datatablesutils.actions.ValidateView.class);
 			component.actionRegistry().registerUserAction(excelimporter.actions.GetHeaderInformationFromExcelFile.class);
 			component.actionRegistry().registerUserAction(excelimporter.actions.RefreshClass.class);
 			component.actionRegistry().registerUserAction(excelimporter.actions.StartImportByTemplate.class);

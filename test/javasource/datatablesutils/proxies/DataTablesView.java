@@ -27,7 +27,8 @@ public class DataTablesView
 		GroupByClause("GroupByClause"),
 		WhereClause("WhereClause"),
 		ValidateState("ValidateState"),
-		DefaultSelectClause("DefaultSelectClause");
+		DefaultSelectClause("DefaultSelectClause"),
+		ValidationErrorDetails("ValidationErrorDetails");
 
 		private java.lang.String metaName;
 
@@ -416,6 +417,42 @@ public class DataTablesView
 	public final void setDefaultSelectClause(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String defaultselectclause)
 	{
 		getMendixObject().setValue(context, MemberNames.DefaultSelectClause.toString(), defaultselectclause);
+	}
+
+	/**
+	 * @return value of ValidationErrorDetails
+	 */
+	public final java.lang.String getValidationErrorDetails()
+	{
+		return getValidationErrorDetails(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of ValidationErrorDetails
+	 */
+	public final java.lang.String getValidationErrorDetails(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.ValidationErrorDetails.toString());
+	}
+
+	/**
+	 * Set value of ValidationErrorDetails
+	 * @param validationerrordetails
+	 */
+	public final void setValidationErrorDetails(java.lang.String validationerrordetails)
+	{
+		setValidationErrorDetails(getContext(), validationerrordetails);
+	}
+
+	/**
+	 * Set value of ValidationErrorDetails
+	 * @param context
+	 * @param validationerrordetails
+	 */
+	public final void setValidationErrorDetails(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String validationerrordetails)
+	{
+		getMendixObject().setValue(context, MemberNames.ValidationErrorDetails.toString(), validationerrordetails);
 	}
 
 	/**
