@@ -1066,7 +1066,7 @@ define([
                                 // For boolean and enum, include internal value in the data object as well.
                                 if (attrType === "Boolean" || attrType === "Enum") {
                                     referenceColumnNameInternal = referenceColumnName + "-internal";
-                                    data[referenceColumnName] = refObj.get(column.attrName);
+                                    data[referenceColumnNameInternal] = refObj.get(column.attrName);
                                 }
                             }
                         }
