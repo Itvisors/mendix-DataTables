@@ -1187,7 +1187,12 @@ define([
                     if (resetPaging) {
                         this._scrollerPage = null;
                     } else {
-                        this._scrollerPage = this._table.scroller.page();
+                        // Scroller can be null first time the table is displayed when there is no data.
+                        if (this._table.scroller) {
+                            this._scrollerPage = this._table.scroller.page();
+                        } else {
+                            this._scrollerPage = null;
+                        }
                     }
                 }
                 this._table.ajax.reload(null, resetPaging);
