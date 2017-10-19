@@ -44,19 +44,30 @@ public class ValidateView extends CustomJavaAction<java.lang.Boolean>
 
 		boolean result = true;
 		ILogNode logger = Core.getLogger(Constants.getLOGNODE_DATATABLES_UTILS());
+		
 		try {
-			final DataTablesOqlHandler dataTablesOqlHandler = new DataTablesOqlHandler();
-			JSONObject responseJSON = dataTablesOqlHandler.processRequest(view.getName(), null, view.getDefaultSelectClause(), null, 0, 1, getContext().getSession());
-			if (responseJSON.getInt("status") == IMxRuntimeResponse.OK) {
-				view.setValidateState(ValidateState.OK);
-				view.setValidationErrorDetails(null);
-				if (logger.isDebugEnabled()) {
-					logger.debug("Validation succesful for view " + view.getName() + "\n" + responseJSON.toString());
+			switch (view.getViewType()) {
+			case OQL:
+				final DataTablesOqlHandler dataTablesOqlHandler = new DataTablesOqlHandler();
+				JSONObject responseJSON = dataTablesOqlHandler.processRequest(view.getName(), null, view.getDefaultSelectClause(), null, 0, 1, getContext().getSession());
+				if (responseJSON.getInt("status") == IMxRuntimeResponse.OK) {
+					view.setValidateState(ValidateState.OK);
+					view.setValidationErrorDetails(null);
+					if (logger.isDebugEnabled()) {
+						logger.debug("Validation succesful for view " + view.getName() + "\n" + responseJSON.toString());
+					}
+				} else {
+					view.setValidateState(ValidateState.Failed);
+					view.setValidationErrorDetails(responseJSON.toString());
+					result = false;
 				}
-			} else {
-				view.setValidateState(ValidateState.Failed);
-				view.setValidationErrorDetails(responseJSON.toString());
-				result = false;
+				break;
+
+			case XPath:
+				//@TODO
+				
+				break;
+
 			}
 		} catch (Exception e2) {
 			logger.error("Validation of view " + view.getName() + " resulted in an exception");

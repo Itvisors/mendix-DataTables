@@ -27,6 +27,32 @@ public class Microflows
 			throw new MendixRuntimeException(e);
 		}
 	}
+	public static void aCT_DataTablesView_NewXpathSubView(IContext context, datatablesutils.proxies.DataTablesView _dataTablesView)
+	{
+		try
+		{
+			Map<java.lang.String, Object> params = new HashMap<java.lang.String, Object>();
+			params.put("DataTablesView", _dataTablesView == null ? null : _dataTablesView.getMendixObject());
+			Core.execute(context, "DataTablesUtils.ACT_DataTablesView_NewXpathSubView", params);
+		}
+		catch (CoreException e)
+		{
+			throw new MendixRuntimeException(e);
+		}
+	}
+	public static void aCT_DataTablesView_SaveNew(IContext context, datatablesutils.proxies.DataTablesView _dataTablesView)
+	{
+		try
+		{
+			Map<java.lang.String, Object> params = new HashMap<java.lang.String, Object>();
+			params.put("DataTablesView", _dataTablesView == null ? null : _dataTablesView.getMendixObject());
+			Core.execute(context, "DataTablesUtils.ACT_DataTablesView_SaveNew", params);
+		}
+		catch (CoreException e)
+		{
+			throw new MendixRuntimeException(e);
+		}
+	}
 	public static void aCT_DataTablesView_Validate(IContext context, datatablesutils.proxies.DataTablesView _view)
 	{
 		try
@@ -34,6 +60,19 @@ public class Microflows
 			Map<java.lang.String, Object> params = new HashMap<java.lang.String, Object>();
 			params.put("View", _view == null ? null : _view.getMendixObject());
 			Core.execute(context, "DataTablesUtils.ACT_DataTablesView_Validate", params);
+		}
+		catch (CoreException e)
+		{
+			throw new MendixRuntimeException(e);
+		}
+	}
+	public static void aCT_XpathSubView_Save(IContext context, datatablesutils.proxies.XpathSubView _xpathSubView)
+	{
+		try
+		{
+			Map<java.lang.String, Object> params = new HashMap<java.lang.String, Object>();
+			params.put("XpathSubView", _xpathSubView == null ? null : _xpathSubView.getMendixObject());
+			Core.execute(context, "DataTablesUtils.ACT_XpathSubView_Save", params);
 		}
 		catch (CoreException e)
 		{
@@ -64,6 +103,32 @@ public class Microflows
 			throw new MendixRuntimeException(e);
 		}
 	}
+	public static void oCh_DataTablesView_MxObjectType(IContext context, datatablesutils.proxies.DataTablesView _dataTablesView)
+	{
+		try
+		{
+			Map<java.lang.String, Object> params = new HashMap<java.lang.String, Object>();
+			params.put("DataTablesView", _dataTablesView == null ? null : _dataTablesView.getMendixObject());
+			Core.execute(context, "DataTablesUtils.OCh_DataTablesView_MxObjectType", params);
+		}
+		catch (CoreException e)
+		{
+			throw new MendixRuntimeException(e);
+		}
+	}
+	public static void oCh_XpathReference_MxObjectReference(IContext context, datatablesutils.proxies.XpathReference _xpathReference)
+	{
+		try
+		{
+			Map<java.lang.String, Object> params = new HashMap<java.lang.String, Object>();
+			params.put("XpathReference", _xpathReference == null ? null : _xpathReference.getMendixObject());
+			Core.execute(context, "DataTablesUtils.OCh_XpathReference_MxObjectReference", params);
+		}
+		catch (CoreException e)
+		{
+			throw new MendixRuntimeException(e);
+		}
+	}
 	public static void sUB_DataTablesView_Validate(IContext context, datatablesutils.proxies.DataTablesView _view)
 	{
 		try
@@ -71,6 +136,33 @@ public class Microflows
 			Map<java.lang.String, Object> params = new HashMap<java.lang.String, Object>();
 			params.put("View", _view == null ? null : _view.getMendixObject());
 			Core.execute(context, "DataTablesUtils.SUB_DataTablesView_Validate", params);
+		}
+		catch (CoreException e)
+		{
+			throw new MendixRuntimeException(e);
+		}
+	}
+	public static boolean sUB_XpathReference_Validate(IContext context, datatablesutils.proxies.XpathReference _xpathReference)
+	{
+		try
+		{
+			Map<java.lang.String, Object> params = new HashMap<java.lang.String, Object>();
+			params.put("XpathReference", _xpathReference == null ? null : _xpathReference.getMendixObject());
+			return (java.lang.Boolean)Core.execute(context, "DataTablesUtils.SUB_XpathReference_Validate", params);
+		}
+		catch (CoreException e)
+		{
+			throw new MendixRuntimeException(e);
+		}
+	}
+	public static boolean sUB_XpathSubView_Validate(IContext context, datatablesutils.proxies.XpathSubView _xpathSubView, datatablesutils.proxies.XpathReference _xpathReference)
+	{
+		try
+		{
+			Map<java.lang.String, Object> params = new HashMap<java.lang.String, Object>();
+			params.put("XpathSubView", _xpathSubView == null ? null : _xpathSubView.getMendixObject());
+			params.put("XpathReference", _xpathReference == null ? null : _xpathReference.getMendixObject());
+			return (java.lang.Boolean)Core.execute(context, "DataTablesUtils.SUB_XpathSubView_Validate", params);
 		}
 		catch (CoreException e)
 		{

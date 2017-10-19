@@ -23,12 +23,14 @@ public class DataTablesView
 		Name("Name"),
 		Description("Description"),
 		Active("Active"),
+		ViewType("ViewType"),
 		FromEntity("FromEntity"),
 		GroupByClause("GroupByClause"),
 		WhereClause("WhereClause"),
 		ValidateState("ValidateState"),
 		DefaultSelectClause("DefaultSelectClause"),
-		ValidationErrorDetails("ValidationErrorDetails");
+		ValidationErrorDetails("ValidationErrorDetails"),
+		DataTablesView_MxObjectType("DataTablesUtils.DataTablesView_MxObjectType");
 
 		private java.lang.String metaName;
 
@@ -229,6 +231,50 @@ public class DataTablesView
 	public final void setActive(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Boolean active)
 	{
 		getMendixObject().setValue(context, MemberNames.Active.toString(), active);
+	}
+
+	/**
+	 * Set value of ViewType
+	 * @param viewtype
+	 */
+	public final datatablesutils.proxies.ViewType getViewType()
+	{
+		return getViewType(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of ViewType
+	 */
+	public final datatablesutils.proxies.ViewType getViewType(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		Object obj = getMendixObject().getValue(context, MemberNames.ViewType.toString());
+		if (obj == null)
+			return null;
+
+		return datatablesutils.proxies.ViewType.valueOf((java.lang.String) obj);
+	}
+
+	/**
+	 * Set value of ViewType
+	 * @param viewtype
+	 */
+	public final void setViewType(datatablesutils.proxies.ViewType viewtype)
+	{
+		setViewType(getContext(), viewtype);
+	}
+
+	/**
+	 * Set value of ViewType
+	 * @param context
+	 * @param viewtype
+	 */
+	public final void setViewType(com.mendix.systemwideinterfaces.core.IContext context, datatablesutils.proxies.ViewType viewtype)
+	{
+		if (viewtype != null)
+			getMendixObject().setValue(context, MemberNames.ViewType.toString(), viewtype.toString());
+		else
+			getMendixObject().setValue(context, MemberNames.ViewType.toString(), null);
 	}
 
 	/**
@@ -453,6 +499,49 @@ public class DataTablesView
 	public final void setValidationErrorDetails(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String validationerrordetails)
 	{
 		getMendixObject().setValue(context, MemberNames.ValidationErrorDetails.toString(), validationerrordetails);
+	}
+
+	/**
+	 * @return value of DataTablesView_MxObjectType
+	 */
+	public final mxmodelreflection.proxies.MxObjectType getDataTablesView_MxObjectType() throws com.mendix.core.CoreException
+	{
+		return getDataTablesView_MxObjectType(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of DataTablesView_MxObjectType
+	 */
+	public final mxmodelreflection.proxies.MxObjectType getDataTablesView_MxObjectType(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
+	{
+		mxmodelreflection.proxies.MxObjectType result = null;
+		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.DataTablesView_MxObjectType.toString());
+		if (identifier != null)
+			result = mxmodelreflection.proxies.MxObjectType.load(context, identifier);
+		return result;
+	}
+
+	/**
+	 * Set value of DataTablesView_MxObjectType
+	 * @param datatablesview_mxobjecttype
+	 */
+	public final void setDataTablesView_MxObjectType(mxmodelreflection.proxies.MxObjectType datatablesview_mxobjecttype)
+	{
+		setDataTablesView_MxObjectType(getContext(), datatablesview_mxobjecttype);
+	}
+
+	/**
+	 * Set value of DataTablesView_MxObjectType
+	 * @param context
+	 * @param datatablesview_mxobjecttype
+	 */
+	public final void setDataTablesView_MxObjectType(com.mendix.systemwideinterfaces.core.IContext context, mxmodelreflection.proxies.MxObjectType datatablesview_mxobjecttype)
+	{
+		if (datatablesview_mxobjecttype == null)
+			getMendixObject().setValue(context, MemberNames.DataTablesView_MxObjectType.toString(), null);
+		else
+			getMendixObject().setValue(context, MemberNames.DataTablesView_MxObjectType.toString(), datatablesview_mxobjecttype.getMendixObject().getId());
 	}
 
 	/**
