@@ -71,8 +71,8 @@ public class FileDocument
 	 */
 	public static system.proxies.FileDocument initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
-		if (com.mendix.core.Core.isSubClassOf("DataTablesUtils.DataTablesExportDocument", mendixObject.getType()))
-			return datatablesutils.proxies.DataTablesExportDocument.initialize(context, mendixObject);
+		if (com.mendix.core.Core.isSubClassOf("DataTablesExportData.DataTablesExportDocument", mendixObject.getType()))
+			return datatablesexportdata.proxies.DataTablesExportDocument.initialize(context, mendixObject);
 
 		if (com.mendix.core.Core.isSubClassOf("System.Image", mendixObject.getType()))
 			return system.proxies.Image.initialize(context, mendixObject);
