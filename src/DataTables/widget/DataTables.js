@@ -40,6 +40,14 @@ define([
     
     // DataTables modules. When updating to a new version, do not forget to update the module names in the DataTables module sources because the default does not work in a custom widget.
     "DataTables/lib/jquery.dataTables",
+    "DataTables/lib/dataTables.responsive",
+    "DataTables/lib/responsive.bootstrap",
+    "DataTables/lib/dataTables.colReorder",
+    "DataTables/lib/dataTables.buttons",
+    "DataTables/lib/buttons.bootstrap",
+    "DataTables/lib/buttons.colVis",
+    "DataTables/lib/dataTables.scroller",
+    "DataTables/lib/dataTables.select",
     "DataTables/lib/dataTables.bootstrap"
 ], function (declare, _WidgetBase, _TemplatedMixin, dom, dojoClass, dojoStyle, dojoConstruct, dojoOn, dojoQuery, dojoArray, dojoLang, dojoEvent, dojoKernel, _jQuery, widgetTemplate) {
     "use strict";
@@ -131,43 +139,11 @@ define([
         postCreate: function () {
             logger.debug(this.id + ".postCreate");
             
-            var moduleList = [],
-                thisObj = this;
+            var thisObj = this;
             
             this._entityMetaData = mx.meta.getEntity(this.tableEntity);
             this._updateRendering();
             this._setupEvents();
-            
-            // Optional DataTables modules.
-            // When updating to a new version, do not forget to update the module names in the DataTables module sources because the default does not work in a custom widget.  
-            if (this.isResponsive) {
-                moduleList.push("DataTables/lib/dataTables.responsive");
-                moduleList.push("DataTables/lib/responsive.bootstrap");
-            }
-            if (this.allowColumnReorder) {
-                moduleList.push("DataTables/lib/dataTables.colReorder");
-            }
-            // The buttons extension consists of multiple modules. First include the common module then the necessary specific ones.
-            if (this.allowColumnVisibility) {
-                moduleList.push("DataTables/lib/dataTables.buttons");
-                moduleList.push("DataTables/lib/buttons.bootstrap");
-            }
-            if (this.allowColumnVisibility) {
-                moduleList.push("DataTables/lib/buttons.colVis");
-            }
-            if (this.infiniteScroll) {
-                moduleList.push("DataTables/lib/dataTables.scroller");
-            }
-            if (this.selectionType !== "none") {
-                moduleList.push("DataTables/lib/dataTables.select");
-            }
-            
-            // Require all necessary modules
-            if (moduleList.length) {
-                require(moduleList, function () {
-                    logger.debug(thisObj.id + ".postCreate require additional modules done.");
-                });
-            }
         },
             
         // mxui.widget._WidgetBase.update is called when context is changed or initialized. Implement to re-render and / or fetch data.
