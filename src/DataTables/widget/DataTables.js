@@ -773,14 +773,16 @@ define([
         },
 
         /**
-         * Show progress indicator, depends on Mendix version
+         * Show progress indicator
          */
         _showProgress: function () {
-            this._progressDialogId = mx.ui.showProgress();
+            if (this._progressDialogId === null) {
+                this._progressDialogId = mx.ui.showProgress();
+            }
         },
 
         /**
-         * Hide progress indicator, depends on Mendix version
+         * Hide progress indicator
          */
         _hideProgress: function () {
             mx.ui.hideProgress(this._progressDialogId);
