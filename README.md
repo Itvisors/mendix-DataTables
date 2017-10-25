@@ -44,7 +44,7 @@ All features can be seen in action in the test/demo project.
 
 ## Backlog
 
-- Currently only XPath can be used to get the grid data. Datasource microflows will be supported in a future release.
+- Currently only XPath can be used to get the grid data.
 
 ## Configuration
 
@@ -131,6 +131,7 @@ The widget does not display search filter inputs. To provide search filters, def
 __Filtering on booleans.__ Filtering on booleans is a little tricky because there is no way to tell the difference between off/false or no selection made. To overcome this, the widget expects an enumeration as attribute on your context entity. The modeler does not allow the value _true_ for an enumeration. For the true value, use enumeration value ___t___. For the false value, anything else, but ___f___ would be a good one. The caption can be any value.
 
 - _Context entity attribute_ - The attribute on the context entity to get the filter value.
+- _Reference name_ - Optional. Reference name (module.refname) to search on an attribute in a referenced entity, can be multiple levels deep.
 - _Attribute name_ - Attribute name to filter on, this is case sensitive.
 - _Operator_ - Operator to use. For booleans and enumerations, only _Equals_ makes sense.
 
@@ -243,3 +244,4 @@ Please be sure to turn on the apply entity access setting on your export microfl
 ### Advanced
 
 - _Placement delay_ - Delay (ms) before placing or moving buttons. Depending on complexity of the page, browsers may need more time to properly render the buttons.
+- _Scroll multiplier_ - Scroll buffer multiplier. This value determines how much data is pre-fetched when infinite scroll is used. Lower values cause less data to be requested from the server but will require more server calls when the user keeps scrolling.

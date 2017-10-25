@@ -210,6 +210,11 @@
                         <enumerationValue key="gt">Greater than</enumerationValue>
                     </enumerationValues>
                 </property>
+                <property key="refName" type="string" required="false">
+                    <caption>Reference name</caption>
+                    <category>Search</category>
+                    <description>Optional. Reference name (module.refname) to search on an attribute in a referenced entity, can be multiple levels deep.</description>
+                </property>
             </properties>
         </property>
         <property key="refSearchFilterList" type="object" isList="true" required="false">
@@ -551,6 +556,12 @@
             <caption>Placement delay</caption>
             <category>Advanced</category>
             <description>Delay (ms) before placing or moving buttons. Depending on complexity of the page, browsers may need more time to properly render the buttons.</description>
+        </property>
+        
+        <property key="scrollBufferMultiplier" type="integer" defaultValue="9">
+            <caption>Scroll multiplier</caption>
+            <category>Advanced</category>
+            <description>Scroll buffer multiplier. This value determines how much data is pre-fetched when infinite scroll is used. Lower values cause less data to be requested from the server but will require more server calls when the user keeps scrolling.</description>
         </property>
         
     </properties>

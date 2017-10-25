@@ -35,6 +35,7 @@ public class DataTableContextEntity
 		DateValue("DateValue"),
 		DecimalValue("DecimalValue"),
 		BooleanFilter("BooleanFilter"),
+		CountryCode("CountryCode"),
 		ExportConfig("ExportConfig"),
 		ExportXPath("ExportXPath"),
 		DataTableContextEntity_Person_Current("DataTablesTestModule.DataTableContextEntity_Person_Current"),
@@ -572,6 +573,42 @@ public class DataTableContextEntity
 			getMendixObject().setValue(context, MemberNames.BooleanFilter.toString(), booleanfilter.toString());
 		else
 			getMendixObject().setValue(context, MemberNames.BooleanFilter.toString(), null);
+	}
+
+	/**
+	 * @return value of CountryCode
+	 */
+	public final java.lang.String getCountryCode()
+	{
+		return getCountryCode(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of CountryCode
+	 */
+	public final java.lang.String getCountryCode(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.CountryCode.toString());
+	}
+
+	/**
+	 * Set value of CountryCode
+	 * @param countrycode
+	 */
+	public final void setCountryCode(java.lang.String countrycode)
+	{
+		setCountryCode(getContext(), countrycode);
+	}
+
+	/**
+	 * Set value of CountryCode
+	 * @param context
+	 * @param countrycode
+	 */
+	public final void setCountryCode(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String countrycode)
+	{
+		getMendixObject().setValue(context, MemberNames.CountryCode.toString(), countrycode);
 	}
 
 	/**

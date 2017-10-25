@@ -93,6 +93,7 @@ define([
         refSearchFilterList: null,
         buttonDefinitionList: null,
         buttonPlacementDelay: 0,
+        scrollBufferMultiplier: 9,
         allowExport: false,
         exportButtonCaption: "",
         exportVisibleColumnsOnly: true,
@@ -387,6 +388,8 @@ define([
                 // Override so start position and search data are not saved.
                 dataTablesOptions.stateSaveParams = function (settings, data) {
                     data.start = 0;
+                    data.iScroller = 0;
+                    data.iScrollerTopRow = 0;
                     data.search.search = "";
                 };
 
@@ -403,7 +406,8 @@ define([
             if (this.infiniteScroll) {
                 // for normal paging, show the page length drop down.
                 dataTablesOptions.scroller = {
-                    loadingIndicator: true
+                    loadingIndicator: true,
+                    displayBuffer: this.scrollBufferMultiplier
                 };
             }
             
@@ -892,7 +896,7 @@ define([
             }
             
             dojoArray.forEach(this.attrSearchFilterList, function (searchFilter, i) {
-                var constraintValue = this._getConstraintValue(searchFilter.contextEntityAttr, searchFilter.attrName);
+                var constraintValue = this._getConstraintValue(searchFilter.contextEntityAttr, searchFilter.attrName, searchFilter.refName);
                 if (constraintValue) {
                     if (hasConstraint) {
                         xpath += " and ";
@@ -900,6 +904,9 @@ define([
                         xpath += "[";
                     }
                     hasConstraint = true;
+                    if (searchFilter.refName) {
+                        xpath += searchFilter.refName + "[";
+                    }
                     switch (searchFilter.operatorType) {
                     case "st":
                         xpath += "starts-with(" + searchFilter.attrName + ", " + constraintValue + ")";
@@ -927,6 +934,9 @@ define([
                             
                     default:
                         xpath += searchFilter.attrName + " = " + constraintValue;
+                    }
+                    if (searchFilter.refName) {
+                        xpath += "]";
                     }
                 }
             }, this);
@@ -1099,23 +1109,36 @@ define([
         /**
          * Get the attribute value for use as constraint value
          *
-         * @param attrName      The attribute name
-         * @returns {string}    The value
          */
-        _getConstraintValue : function (contextEntityAttr, attrName) {
+        _getConstraintValue : function (contextEntityAttr, attrName, refName) {
 
             var attrType,
                 attrValue,
                 dateFormat,
+                refEntity,
+                refMetaData,
                 result;
 
             if (!this._contextObjMetaData.has(contextEntityAttr)) {
                 logger.error(this._contextObj.getEntity() + " does not have attribute " + contextEntityAttr);
                 return null;
             }
-            if (!this._entityMetaData.has(attrName)) {
-                logger.error(this._contextObj.getEntity() + " does not have attribute " + attrName);
-                return null;
+            if (refName) {
+                refEntity = refName.substring(refName.lastIndexOf("/") + 1);
+                refMetaData = mx.meta.getEntity(refEntity);
+                if (!refMetaData) {
+                    logger.error("No meta data found for entity " + refEntity);
+                    return null;
+                }
+                if (!refMetaData.has(attrName)) {
+                    logger.error(refEntity + " does not have attribute " + attrName);
+                    return null;
+                }
+            } else {
+                if (!this._entityMetaData.has(attrName)) {
+                    logger.error(this.tableEntity + " does not have attribute " + attrName);
+                    return null;
+                }
             }
             
             attrValue = this._contextObj.get(contextEntityAttr);
@@ -1125,7 +1148,11 @@ define([
             }
 
             // Use the type of the grid entity attribute. Important for boolean because the context entity attribute will be an enum.
-            attrType = this._entityMetaData.getAttributeType(attrName);
+            if (refName) {
+                attrType = refMetaData.getAttributeType(attrName);
+            } else {
+                attrType = this._entityMetaData.getAttributeType(attrName);
+            }
             
             switch (attrType) {
             case "String":
