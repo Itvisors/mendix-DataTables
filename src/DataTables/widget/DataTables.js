@@ -539,7 +539,7 @@ define([
                     }
                     dojoOn(button, "click", function () {
                         var guids = thisObj._getSelectedRows();
-                        thisObj._callButtonMicroflow(buttonDefinition, guids);
+                        thisObj._handleButtonClick(buttonDefinition, guids);
                     });
                     thisObj._buttonList.push(button);
                 }, thisObj);
@@ -548,7 +548,7 @@ define([
                 // Add click handler for default button
                 if (thisObj._defaultButtonDefinition) {
                     $(tableNodeList).on("dblclick", "tr", function () {
-                        thisObj._callButtonMicroflow(thisObj._defaultButtonDefinition, [this.getAttribute("data-guid")]);
+                        thisObj._handleButtonClick(thisObj._defaultButtonDefinition, [this.getAttribute("data-guid")]);
                     });
                 }
                 
@@ -634,8 +634,9 @@ define([
                         logger.debug("Export MF callback");
                         thisObj._hideProgress();
                     },
-                    error: function () {
+                    error: function (error) {
                         logger.error("Call to " + thisObj.exportMicroflow + " ended in error");
+                        console.dir(error);
                         thisObj._hideProgress();
                     }
                 });
@@ -722,7 +723,7 @@ define([
         },
         
         // call button microflow
-        _callButtonMicroflow: function (buttonDefinition, guids) {
+        _handleButtonClick: function (buttonDefinition, guids) {
             var thisObj = this;
             if (buttonDefinition.askConfirmation) {
                 mx.ui.confirmation({
@@ -730,18 +731,40 @@ define([
                     proceed: buttonDefinition.proceedCaption,
                     cancel: buttonDefinition.cancelCaption,
                     handler: function () {
-                        thisObj._clearSelection();
-                        mx.data.action({
-                            params : {
-                                applyto : "selection",
-                                actionname : buttonDefinition.buttonMicroflowName,
-                                guids : guids
-                            }
-                        });
+                        thisObj._callButtonMicroflow(buttonDefinition, guids);
                     }
                 });
             } else {
-                this._clearSelection();
+                this._callButtonMicroflow(buttonDefinition, guids);
+            }
+        },
+        
+        // call button microflow
+        _callButtonMicroflow: function (buttonDefinition, guids) {
+            var thisObj = this;
+            
+            this._clearSelection();
+            if (buttonDefinition.showProgress) {
+                this._showProgress();
+                mx.data.action({
+                    params : {
+                        applyto : "selection",
+                        actionname : buttonDefinition.buttonMicroflowName,
+                        guids : guids
+                    },
+                    callback: function () {
+                        thisObj._hideProgress();
+                    },
+                    error: function (error) {
+                        logger.error("Call to " + buttonDefinition.buttonMicroflowName + " ended in error");
+                        console.dir(error);
+                        thisObj._hideProgress();
+                    },
+                    onValidation: function () {
+                        thisObj._hideProgress();
+                    }
+                });
+            } else {
                 mx.data.action({
                     params : {
                         applyto : "selection",

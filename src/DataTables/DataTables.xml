@@ -404,6 +404,11 @@
                     <description>The microflow that is called when the button is clicked</description>
                     <returnType type="Void"></returnType>
                 </property-->
+                <property key="showProgress" type="boolean" defaultValue="false">
+                    <caption>Show progress</caption>
+                    <category>Button</category>
+                    <description>Show progress bar</description>
+                </property>
                 <property key="askConfirmation" type="boolean" defaultValue="false">
                     <caption>Ask confirmation</caption>
                     <category>Confirmation</category>

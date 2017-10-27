@@ -223,6 +223,19 @@ public class Microflows
 			throw new MendixRuntimeException(e);
 		}
 	}
+	public static void aCT_TestDataTypes_Edit_Popup_LongRunning(IContext context, datatablestestmodule.proxies.TestDataTypes _testDataTypes)
+	{
+		try
+		{
+			Map<java.lang.String, Object> params = new HashMap<java.lang.String, Object>();
+			params.put("TestDataTypes", _testDataTypes == null ? null : _testDataTypes.getMendixObject());
+			Core.execute(context, "DataTablesTestModule.ACT_TestDataTypes_Edit_Popup_LongRunning", params);
+		}
+		catch (CoreException e)
+		{
+			throw new MendixRuntimeException(e);
+		}
+	}
 	public static void aCT_TestDataTypes_Save(IContext context, datatablestestmodule.proxies.TestDataTypes _testDataTypes)
 	{
 		try

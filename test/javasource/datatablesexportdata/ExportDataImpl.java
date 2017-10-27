@@ -201,6 +201,11 @@ public class ExportDataImpl {
 		if (logger.isTraceEnabled()) {
 			logger.trace(logPrefix + "start");
 		}		
+
+		String customHeader = Constants.getCSV_EXPORT_HEADER();
+		if (customHeader != null && !customHeader.trim().isEmpty()) {
+			tempFileWriter.write(customHeader + "\r\n");
+		}
 		
 		boolean firstColumnHeader = true;
 		for (ExportDataColumn exportDataColumn : columnList) {

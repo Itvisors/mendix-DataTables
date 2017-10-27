@@ -10,6 +10,14 @@ public class Constants
 {
 	// These are the constants for the DataTablesExportData module
 
+	/**
+	* Custom header to include in exported CSV data. Do not include a newline character.
+	*/
+	public static java.lang.String getCSV_EXPORT_HEADER()
+	{
+		return (java.lang.String)Core.getConfiguration().getConstantValue("DataTablesExportData.CSV_EXPORT_HEADER");
+	}
+
 	public static java.lang.String getLOGNODE_DATATABLES_EXPORT()
 	{
 		return (java.lang.String)Core.getConfiguration().getConstantValue("DataTablesExportData.LOGNODE_DATATABLES_EXPORT");

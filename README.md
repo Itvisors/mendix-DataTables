@@ -203,6 +203,7 @@ Make sure that the default button is always allowed.
 - _Class_ - Optional. Specify class(es) to be put on the button
 - _Glyphicon classes_ - Optional. Glyphicon classes, like __glyphicon glyphicon-edit__
 - _Button microflow_ - The name of the microflow (Module.Microflow) that is called when the button is clicked
+- _Show progress_ - Show progress bar
 
 #### Confirmation
 
