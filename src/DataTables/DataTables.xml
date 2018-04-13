@@ -69,6 +69,11 @@
                     <category>Common</category>
                     <description>Column caption, translatable</description>
                 </property>
+                <property key="headerTooltip" type="translatableString" required="false">
+                    <caption>Header tooltip</caption>
+                    <category>Common</category>
+                    <description>Optional. Column header tooltip, translatable</description>
+                </property>
                 <property key="refName" type="string" required="false">
                     <caption>Reference name</caption>
                     <category>Common</category>

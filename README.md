@@ -101,7 +101,8 @@ For each column, add an item to the list
 
 - _Attribute name_ - The name of the attribute to be displayed in the column. This is case sensitive
 - _Reference name_ - For one level deep references, this is the reference name, case sensitive
-- _Caption_ - The column caption, translatable.
+- _Caption_ - The column caption, translatable. 
+- _Header tooltip_ - Optional. Column header tooltip, translatable
 - _Allow sort_ - By default all columns are visible. Turn this off for calculated attributes.
 
 ##### Date values

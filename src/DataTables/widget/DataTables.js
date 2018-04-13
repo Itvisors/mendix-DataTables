@@ -6,7 +6,7 @@
     ========================
 
     @file      : DataTables.js
-    @version   : 1.0
+    @version   : 1.5.4
     @author    : Marcel Groeneweg
     @date      : Sat, 12 Mar 2016 13:19:22 GMT
     @copyright : 
@@ -14,10 +14,10 @@
 
     Documentation
     ========================
-    Describe your widget here.
+    Datatables widget.
 */
 
-// Required module list. Remove unnecessary modules, you can always get them back from the boilerplate.
+// Required module list. 
 define([
     "dojo/_base/declare",
     "mxui/widget/_WidgetBase",
@@ -299,6 +299,17 @@ define([
             dataTablesOptions.order = [[ sortIndex, "asc" ]];
             
             dataTablesOptions.drawCallback = function (settings) {
+                dojoArray.forEach(thisObj.columnList, function (column, arrayIndex) {
+                    var columnIndex = arrayIndex;
+                    // Add one to the index when we have a dummy column to match the column definition index with the table column index.
+                    if (thisObj._hasDummyColumn) {
+                        columnIndex++;
+                    }
+                    if (column.headerTooltip) {
+                        thisObj._table.column(columnIndex).header().title = column.headerTooltip;
+                    }
+                });
+
                 thisObj._table.rows().every(function (rowIdx, tableLoop, rowLoop) {
                     var rowData = this.data(),
                         trNode = this.node();
@@ -1079,6 +1090,11 @@ define([
                                     referenceColumnNameInternal = referenceColumnName + "-internal";
                                     data[referenceColumnNameInternal] = refObj.get(column.attrName);
                                 }
+                            } else {
+                                // When the referenced object was not found, the user is not authorized to it.
+                                // Just clear the GUID in that case.
+                                data[referenceColumnName] = null;
+                                data[referenceColumnNameInternal] = null;
                             }
                         }
                     }
