@@ -8,3 +8,8 @@ test/.project
 .idea/
 *DS_Store*
 test/theme/.sass-cache/
+
+node_modules/
+.editorconfig
+.vscode/
+*.bak
