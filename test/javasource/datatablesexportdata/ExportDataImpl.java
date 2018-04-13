@@ -22,6 +22,7 @@ import org.json.JSONObject;
 
 import com.mendix.core.Core;
 import com.mendix.core.CoreException;
+import com.mendix.core.objectmanagement.SecurityRuntimeException;
 import com.mendix.logging.ILogNode;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
@@ -201,7 +202,7 @@ public class ExportDataImpl {
 		if (logger.isTraceEnabled()) {
 			logger.trace(logPrefix + "start");
 		}		
-
+		
 		String customHeader = Constants.getCSV_EXPORT_HEADER();
 		if (customHeader != null && !customHeader.trim().isEmpty()) {
 			tempFileWriter.write(customHeader + "\r\n");
@@ -268,14 +269,26 @@ public class ExportDataImpl {
 				List<IMendixObject> retrieveByAssociationList = Core.retrieveByPath(context, object, exportDataColumn.getRefName());
 				if (retrieveByAssociationList != null && !retrieveByAssociationList.isEmpty()) {
 					IMendixObject referencedObject = retrieveByAssociationList.get(0);
-					objectValue = referencedObject.getValue(context, exportDataColumn.getAttrName());
+					try {
+						objectValue = referencedObject.getValue(context, exportDataColumn.getAttrName());
+					} catch (SecurityRuntimeException e) {
+						if (logger.isTraceEnabled()) {
+							logger.trace(logPrefix + "Not authorized to reference " + exportDataColumn.getFullRefName() + "/" + exportDataColumn.getAttrName());
+						}		
+					}
 					metaPrimitive = referencedObject.getMetaObject().getMetaPrimitive(exportDataColumn.getAttrName());
 				}
 			} else {
 				if (logger.isTraceEnabled()) {
 					logger.trace(logPrefix + "Attribute: " + exportDataColumn.getAttrName());
 				}		
-				objectValue = object.getValue(context, exportDataColumn.getAttrName());
+				try {
+					objectValue = object.getValue(context, exportDataColumn.getAttrName());
+				} catch (SecurityRuntimeException e) {
+					if (logger.isTraceEnabled()) {
+						logger.trace(logPrefix + "Not authorized to attribute " + exportDataColumn.getAttrName());
+					}		
+				}
 				metaPrimitive = object.getMetaObject().getMetaPrimitive(exportDataColumn.getAttrName());
 			}
 			String stringValue;
