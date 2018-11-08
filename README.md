@@ -75,7 +75,7 @@ Mendix hides this little easter egg for the default DataGrid, for multiple selec
 
 ## Custom row and cell styling
 
-The widget allows row and cell styling based on attribute values. To use a value for styling, turn on its TR data attribute flag. The value will then be included as data- attribute on the table row. Using CSS selection, you can apply custom styling. 
+The widget allows row and cell styling based on attribute values. To use a value for styling, turn on its TR data attribute flag. The value will then be included as data- attribute on the table row. Using CSS selection, you can apply custom styling.
 
 It is also possible to apply the styling to a single cell. In addition to the TR data flag for the value attribute, turn on the TD data attribute for the column you want to style.
 
@@ -92,6 +92,7 @@ For the class properties, multiple classes can be entered, separated by a single
 - _Keep scroll pos attribute_ - Used together with the refresh attribute. Set it to true to keep the page or scroll position after a refresh. If this attribute is not used, the scroll position will always be reset for each full refresh.
 - _XPath constraint_ - Optional. Set the attribute value to an XPath constraint, without the surrounding [ and ]
 - _Allow multi column sort_ - Allow multiple column sort, default no. If yes, end user can use shift-click to sort on multiple columns.
+- _Show progress getting data_ - Show progress bar while getting data. Usually not necessary but if your XPath is complex it can be useful.
 
 #### Column definitions
 
@@ -101,7 +102,7 @@ For each column, add an item to the list
 
 - _Attribute name_ - The name of the attribute to be displayed in the column. This is case sensitive
 - _Reference name_ - For one level deep references, this is the reference name, case sensitive
-- _Caption_ - The column caption, translatable. 
+- _Caption_ - The column caption, translatable.
 - _Header tooltip_ - Optional. Column header tooltip, translatable
 - _Allow sort_ - By default all columns are visible. Turn this off for calculated attributes.
 
@@ -221,13 +222,13 @@ Make sure that the default button is always allowed.
 #### Enabled
 
 - _Enabled attribute name_ - Optional. Direct attribute of the grid entity to control button disabled status.
-- _Enabled value_ - Optional. The value for which the button is enabled. 
+- _Enabled value_ - Optional. The value for which the button is enabled.
 
 ### Export
 
-The export cannot be done on the client because the client only has a subset of the data. Therefore, the export is run on the server. The widget sets two values on the context object for the backend to use. For this to work, add two unlimited string attributes (configuration and XPath constraint) to your context entity and choose those in the widget properties. 
+The export cannot be done on the client because the client only has a subset of the data. Therefore, the export is run on the server. The widget sets two values on the context object for the backend to use. For this to work, add two unlimited string attributes (configuration and XPath constraint) to your context entity and choose those in the widget properties.
 
-The demo project has a generic implementation to create data exports. 
+The demo project has a generic implementation to create data exports.
 
 Please be sure to turn on the apply entity access setting on your export microflow where necessary.
 

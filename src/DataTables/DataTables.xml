@@ -2,13 +2,13 @@
 <widget id="DataTables.widget.DataTables" needsEntityContext="true" xmlns="http://www.mendix.com/widget/1.0/">
     <name>DataTables</name>
     <description>DataTables widget</description>
-    <icon>iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAb1JREFUeNqck8tKw1AQhv/E1LTe0KWISlNqS1vFCyK4bXXnSnwE8QXcFt/EF3Enoqh47YViaUVUXBU3oq3NSZyZNullJR045D8n55/55iRH2zs62gEwjcHiA7vZ7IE7YLDXcJTSXEq1fQPQmj8cx5Hh8rN73n5/lZ4Ee3WllM4bOLYimjwzVkenSafDrr/uafaw11C2rSlJoOGk4sIy6tTZt1TOhKjihwON3rN2fE1mdwLsNWzb7iFw3n5wmJiS+fXTE9YXFkSfFwrYTCZFnz48EMEc2NtFACFIm8BdtSr9jgaDuCyVpOexUAhnuZxoDvb4BIo2dwiA1Py8zO8rFaxGoy0aSrSRSIi+yOfBHiGQBH0E+ZcXIQiZJm7LZak6wjTFYg9BK0Gz6bfgEcRnZ2Wef37GUiQi+o7OYy0eb9FQIklA3p5D9AhKr69CYA4P45Ha4KpBorlpn4f3GdmrUxZd9f0H0ZkZxIii8fuLZDiMlGWh3mhgmb7ISizWaYG8RqNeH+onKL+/CwFHgdrwqt5TG90E7DU+azUzEAjgOPbVvh/mv+4We9irjS8u7lM1a5CrqOt6VfOQBo0/AQYADu2BHPVXcUgAAAAASUVORK5CYII=   
+    <icon>iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAb1JREFUeNqck8tKw1AQhv/E1LTe0KWISlNqS1vFCyK4bXXnSnwE8QXcFt/EF3Enoqh47YViaUVUXBU3oq3NSZyZNullJR045D8n55/55iRH2zs62gEwjcHiA7vZ7IE7YLDXcJTSXEq1fQPQmj8cx5Hh8rN73n5/lZ4Ee3WllM4bOLYimjwzVkenSafDrr/uafaw11C2rSlJoOGk4sIy6tTZt1TOhKjihwON3rN2fE1mdwLsNWzb7iFw3n5wmJiS+fXTE9YXFkSfFwrYTCZFnz48EMEc2NtFACFIm8BdtSr9jgaDuCyVpOexUAhnuZxoDvb4BIo2dwiA1Py8zO8rFaxGoy0aSrSRSIi+yOfBHiGQBH0E+ZcXIQiZJm7LZak6wjTFYg9BK0Gz6bfgEcRnZ2Wef37GUiQi+o7OYy0eb9FQIklA3p5D9AhKr69CYA4P45Ha4KpBorlpn4f3GdmrUxZd9f0H0ZkZxIii8fuLZDiMlGWh3mhgmb7ISizWaYG8RqNeH+onKL+/CwFHgdrwqt5TG90E7DU+azUzEAjgOPbVvh/mv+4We9irjS8u7lM1a5CrqOt6VfOQBo0/AQYADu2BHPVXcUgAAAAASUVORK5CYII=
     </icon>
 
     <properties>
-        
+
         <!--    Data source    -->
-        
+
         <property key="tableEntity" type="entity">
             <caption>Table entity</caption>
             <category>Datasource</category>
@@ -136,17 +136,17 @@
                     <caption>Column width</caption>
                     <category>Layout</category>
                     <description>Optional. Specify width, value is used exactly as you enter it: 20%, 150px, 5em, etc</description>
-                </property>                
+                </property>
                 <property key="headerClass" type="string" required="false">
                     <caption>Header class</caption>
                     <category>Layout</category>
                     <description>Optional. Specify class(es) to be put on the header</description>
-                </property>                
+                </property>
                 <property key="cellClass" type="string" required="false">
                     <caption>Cell class</caption>
                     <category>Layout</category>
                     <description>Optional. Specify class(es) to be put on each cell in the column</description>
-                </property>                
+                </property>
                 <property key="groupDigits" type="boolean" defaultValue="false">
                     <caption>Group digits</caption>
                     <category>Layout</category>
@@ -174,9 +174,14 @@
             <category>Datasource</category>
             <description>Allow multiple column sort, default no. If yes, end user can use shift-click to sort on multiple columns.</description>
         </property>
-        
+        <property key="showProgressGetData" type="boolean" defaultValue="false">
+            <caption>Show progress getting data</caption>
+            <category>Datasource</category>
+            <description>Show progress bar while getting data.</description>
+        </property>
+
         <!--    Search filters    -->
-        
+
         <property key="attrSearchFilterList" type="object" isList="true" required="false">
             <caption>Attr search filters</caption>
             <category>Search</category>
@@ -239,9 +244,9 @@
                 </property>
             </properties>
         </property>
-        
+
         <!--    Layout    -->
-        
+
         <property key="isResponsive" type="boolean" defaultValue="false">
             <caption>Is responsive</caption>
             <category>Layout</category>
@@ -296,7 +301,7 @@
             <caption>Table class</caption>
             <category>Layout</category>
             <description>Specify class(es) to be put on the table</description>
-        </property>                
+        </property>
         <property key="showTableInformation" type="boolean" defaultValue="true">
             <caption>Show table information</caption>
             <category>Layout</category>
@@ -321,10 +326,10 @@
             <caption>State save name</caption>
             <category>Layout</category>
             <description>Optional. When specified, grid layout state is saved to and loaded from browser local storage using the specied name. Make sure this name is unique across your application!</description>
-        </property>                
+        </property>
 
         <!--    Selection    -->
-        
+
         <property key="selectionType" type="enumeration" defaultValue="single">
             <caption>Selection</caption>
             <category>Selection</category>
@@ -353,7 +358,7 @@
         </property>
 
         <!--    Buttons    -->
-        
+
         <property key="buttonDefinitionList" type="object" isList="true" required="false">
             <caption>Buttons</caption>
             <category>Selection</category>
@@ -517,7 +522,7 @@
             <category>Export</category>
             <description>The microflow that does the actual export, receives the context object.</description>
             <returnType type="Void"></returnType>
-        </property>        
+        </property>
         <property key="exportButtonType" type="enumeration" defaultValue="default">
             <caption>Export button type</caption>
             <category>Export</category>
@@ -558,22 +563,22 @@
                 <enumerationValue key="last">Last child of the other node</enumerationValue>
             </enumerationValues>
         </property>
-        
+
 
         <!--    Advanced    -->
-        
+
         <property key="buttonPlacementDelay" type="integer" defaultValue="100">
             <caption>Placement delay</caption>
             <category>Advanced</category>
             <description>Delay (ms) before placing or moving buttons. Depending on complexity of the page, browsers may need more time to properly render the buttons.</description>
         </property>
-        
+
         <property key="scrollBufferMultiplier" type="integer" defaultValue="9">
             <caption>Scroll multiplier</caption>
             <category>Advanced</category>
             <description>Scroll buffer multiplier. This value determines how much data is pre-fetched when infinite scroll is used. Lower values cause less data to be requested from the server but will require more server calls when the user keeps scrolling.</description>
         </property>
-        
+
     </properties>
 </widget>
 

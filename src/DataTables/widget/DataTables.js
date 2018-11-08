@@ -9,7 +9,7 @@
     @version   : 1.5.4
     @author    : Marcel Groeneweg
     @date      : Sat, 12 Mar 2016 13:19:22 GMT
-    @copyright : 
+    @copyright :
     @license   : Apache 2
 
     Documentation
@@ -17,7 +17,7 @@
     Datatables widget.
 */
 
-// Required module list. 
+// Required module list.
 define([
     "dojo/_base/declare",
     "mxui/widget/_WidgetBase",
@@ -37,7 +37,7 @@ define([
 
     "DataTables/lib/jquery",
     "dojo/text!DataTables/widget/template/DataTables.html",
-    
+
     // DataTables modules. When updating to a new version, do not forget to update the module names in the DataTables module sources because the default does not work in a custom widget.
     "DataTables/lib/jquery.dataTables",
     "DataTables/lib/dataTables.responsive",
@@ -70,6 +70,7 @@ define([
         refreshKeepScrollPosAttr: null,
         xpathConstraintAttr: "",
         allowMultiColumnSort: false,
+        showProgressGetData: false,
         isResponsive: false,
         autoColumnWidth: true,
         allowColumnReorder: true,
@@ -104,7 +105,7 @@ define([
         exportButtonGlyphiconClass: "",
         exportButtonPlaceRefCssSelector: "",
         exportButtonPlaceRefPos: "",
-        
+
         // Internal variables. Non-primitives created in the prototype are shared between all widget instances.
         _handles: null,
         _progressDialogId: null,
@@ -124,7 +125,7 @@ define([
         _exportButton: null,
         _scrollerPage: null,
         _previousSelection: null,
-        
+
         // I18N file names object at the end, out of sight!
 
         // dojo.declare.constructor is called to construct the widget instance. Implement to initialize non-primitive properties.
@@ -139,14 +140,14 @@ define([
         // dijit._WidgetBase.postCreate is called after constructing the widget. Implement to do extra setup work.
         postCreate: function () {
             logger.debug(this.id + ".postCreate");
-            
+
             var thisObj = this;
-            
+
             this._entityMetaData = mx.meta.getEntity(this.tableEntity);
             this._updateRendering();
             this._setupEvents();
         },
-            
+
         // mxui.widget._WidgetBase.update is called when context is changed or initialized. Implement to re-render and / or fetch data.
         update: function (obj, callback) {
             logger.debug(this.id + ".update");
@@ -195,7 +196,7 @@ define([
         _setupEvents: function () {
             logger.debug(this.id + "._setupEvents");
         },
-        
+
         // Create the DataTables object
         _createTableObject: function () {
             logger.debug(this.id + "._createTableObject");
@@ -215,7 +216,7 @@ define([
                 table,
                 tableNodeList,
                 thisObj = this;
-            
+
             // Add dummy column when column visibility is turned on, to prevent rendering issues.
             // When the first column is hidden, column reorder shows the dragging line at the wrong position.
             this._hasDummyColumn = false;
@@ -274,7 +275,7 @@ define([
                 }
                 dataTablesColumns.push(dataTablesColumn);
             }, this);
-            
+
             // searching is handled in the widget and XPath, not in DataTables because the search field triggers a search with every key press.
             dataTablesOptions = {
                 serverSide: true,
@@ -284,7 +285,7 @@ define([
                 ajax: dojoLang.hitch(this, this._getData),
                 columns: dataTablesColumns
             };
-            
+
             // Search for the first orderable column
             sortIndex = -1;
             dojoArray.forEach(dataTablesColumns, function (dataTablesColumn, i) {
@@ -297,7 +298,7 @@ define([
                 sortIndex = 0;
             }
             dataTablesOptions.order = [[ sortIndex, "asc" ]];
-            
+
             dataTablesOptions.drawCallback = function (settings) {
                 dojoArray.forEach(thisObj.columnList, function (column, arrayIndex) {
                     var columnIndex = arrayIndex;
@@ -363,7 +364,7 @@ define([
             if (this.isResponsive) {
                 dataTablesOptions.responsive = true;
             }
-            
+
             // Column reorder
             if (this.allowColumnReorder) {
                 dataTablesOptions.colReorder = { realtime: true };
@@ -371,7 +372,7 @@ define([
                     dataTablesOptions.colReorder.fixedColumnsLeft = 1;
                 }
             }
-            
+
             // The buttons extension consists of multiple modules. First include the common option then configure it.
             if (this.allowColumnVisibility) {
                 dataTablesOptions.buttons = [];
@@ -421,17 +422,17 @@ define([
                     displayBuffer: this.scrollBufferMultiplier
                 };
             }
-            
+
             // Horizontal scrolling
             if (this.scrollX) {
                 dataTablesOptions.scrollX = true;
             }
-            
+
             // Vertical scrolling
             if (this.scrollY) {
                 dataTablesOptions.scrollY = this.scrollY;
             }
-            
+
             // Selection
             if (this.selectionType !== "none") {
                 dataTablesOptions.select = {
@@ -460,7 +461,7 @@ define([
                 // for normal paging, show the paging buttons.
                 dataTablesOptions.dom += "p";
             }
-            
+
             // Create DataTables object
             this.tableToConvert.id = this.domNode.id + "_tableToConvert";
             tableNodeList = $("#" + this.tableToConvert.id);
@@ -485,18 +486,18 @@ define([
                         thisObj._callSelectionMicroflow();
                     }
                 });
-            
+
             // Set additional column header classes on the generated table.
             dojoArray.forEach(this.columnList, function (column, i) {
                 if (column.headerClass) {
                     $(this._table.column(i).header()).addClass(column.headerClass);
                 }
             }, this);
-            
-            
+
+
             // Buttons, use a timeout to make sure that Mendix has created the page before we attempt to show buttons in another container.
             setTimeout(function () {
-            
+
                 // Place (move) the column visibility button if desired.
                 if (thisObj.allowColumnVisibility) {
                     colVisButtonNodeList = dojoQuery(".buttons-colvis", thisObj.domNode);
@@ -510,7 +511,7 @@ define([
                         colVisButtonNodeList.addClass(thisObj.colVisButtonClass);
                     }
                 }
-                
+
                 thisObj._buttonList = [];
                 dojoArray.forEach(thisObj.buttonDefinitionList, function (buttonDefinition, i) {
                     var buttonHtml,
@@ -562,7 +563,7 @@ define([
                         thisObj._handleButtonClick(thisObj._defaultButtonDefinition, [this.getAttribute("data-guid")]);
                     });
                 }
-                
+
                 // Export button
                 if (thisObj.allowExport && thisObj._checkExportConfiguration()) {
                     thisObj._createExportButton();
@@ -575,30 +576,30 @@ define([
             }, thisObj.buttonPlacementDelay);
 
         },
-        
+
         // Check export configuration
         _checkExportConfiguration: function () {
             logger.debug(this.id + "._checkExportConfiguration");
             var result = true;
-            
+
             if (!this.exportConfigAttr) {
                 logger.error(this.id + "._checkExportConfiguration: Export configuration attribute not set");
                 result = false;
             }
-            
+
             if (!this.exportXPathAttr) {
                 logger.error(this.id + "._checkExportConfiguration: Export XPath constraint attribute not set");
                 result = false;
             }
-            
+
             if (!this.exportMicroflow) {
                 logger.error(this.id + "._checkExportConfiguration: Export microflow not set");
                 result = false;
             }
-            
+
             return result;
         },
-            
+
         _createExportButton: function () {
             logger.debug(this.id + "._createExportButton");
             var buttonHtml,
@@ -653,12 +654,12 @@ define([
                 });
             });
         },
-        
+
         _createExportConfigData: function () {
-            
+
             var configData,
                 thisObj = this;
-            
+
             configData = {
                 tableEntity : this.tableEntity,
                 exportVisibleColumnsOnly : this.exportVisibleColumnsOnly,
@@ -698,7 +699,7 @@ define([
             }, this);
             return JSON.stringify(configData);
         },
-        
+
         _createExportConfigColumn: function (column) {
             var configColumn,
                 columnName,
@@ -710,14 +711,14 @@ define([
             } else {
                 columnName = column.attrName;
             }
-            
+
             dataTablesColumn = this._table.column(columnName + ":name");
             visible = dataTablesColumn.visible();
-            
+
             if (this.exportVisibleColumnsOnly && !visible) {
                 return null;
             }
-            
+
             configColumn = {
                 caption: column.caption,
                 attrName: column.attrName,
@@ -732,7 +733,7 @@ define([
             };
             return configColumn;
         },
-        
+
         // call button microflow
         _handleButtonClick: function (buttonDefinition, guids) {
             var thisObj = this;
@@ -749,11 +750,11 @@ define([
                 this._callButtonMicroflow(buttonDefinition, guids);
             }
         },
-        
+
         // call button microflow
         _callButtonMicroflow: function (buttonDefinition, guids) {
             var thisObj = this;
-            
+
             this._clearSelection();
             if (buttonDefinition.showProgress) {
                 this._showProgress();
@@ -763,6 +764,7 @@ define([
                         actionname : buttonDefinition.buttonMicroflowName,
                         guids : guids
                     },
+                    origin: this.mxform,
                     callback: function () {
                         thisObj._hideProgress();
                     },
@@ -781,7 +783,8 @@ define([
                         applyto : "selection",
                         actionname : buttonDefinition.buttonMicroflowName,
                         guids : guids
-                    }
+                    },
+                    origin: this.mxform
                 });
             }
         },
@@ -799,10 +802,12 @@ define([
          * Hide progress indicator
          */
         _hideProgress: function () {
-            mx.ui.hideProgress(this._progressDialogId);
-            this._progressDialogId = null;
+            if (this._progressDialogId) {
+                mx.ui.hideProgress(this._progressDialogId);
+                this._progressDialogId = null;
+            }
         },
-        
+
         // Call selection microflow
         _callSelectionMicroflow: function () {
             var guids = this._getSelectedRows();
@@ -814,7 +819,7 @@ define([
                 }
             });
         },
-        
+
         // Get selected rows
         _getSelectedRows: function () {
             var guids = [],
@@ -824,7 +829,7 @@ define([
             });
             return guids;
         },
-        
+
         _resetRowObjectSubscriptions: function () {
             if (this._rowObjectHandles) {
                 dojoArray.forEach(this._rowObjectHandles, function (handle) {
@@ -840,20 +845,24 @@ define([
             return column.refName.replace(".", "$") + "_" + column.attrName;
         },
 
-        // Get data 
+        // Get data
         _getData: function (data, dataTablesCallback, settings) {
             logger.debug(this.id + "._getData");
-            
+
             var dataArray,
                 thisObj = this,
                 xpath;
-            
+
+            if (this.showProgressGetData) {
+                this._showProgress();
+            }
+
             this._resetRowObjectSubscriptions();
-            
+
             xpath = this._createXPathConstraint();
-            
+
             this._sortData = [];
-                        
+
             dojoArray.forEach(data.order, function (orderItem) {
                 var referenceColumnDef,
                     sortColumnIndex = orderItem.column,
@@ -867,7 +876,7 @@ define([
                 }
                 this._sortData.push([sortName, orderItem.dir]);
             }, this);
-            
+
             mx.data.get({
                 xpath: xpath,
                 noCache: true,
@@ -889,17 +898,24 @@ define([
                             count: false,
                             callback: function (refObjs) {
                                 thisObj._includeReferencedObjData(dataArray, refObjs);
+                                thisObj._hideProgress();
                                 dataTablesCallback({
                                     draw: data.draw,
                                     data: dataArray,
                                     recordsTotal: extra.count,
                                     recordsFiltered: extra.count
                                 });
+                            },
+                            error: function (error) {
+                                logger.error("Get referenced data failed");
+                                console.dir(error);
+                                thisObj._hideProgress();
                             }
                         });
-                        
+
                     } else {
                         // No referenced objects, just return the data.
+                        thisObj._hideProgress();
                         dataTablesCallback({
                             draw: data.draw,
                             data: dataArray,
@@ -907,19 +923,24 @@ define([
                             recordsFiltered: extra.count
                         });
                     }
+                },
+                error: function (error) {
+                    logger.error("Get grid data failed");
+                    console.dir(error);
+                    thisObj._hideProgress();
                 }
             });
         },
-        
+
         // Create XPath constraint
         _createXPathConstraint: function () {
             logger.debug(this.id + "._createXPathConstraint");
-            
+
             var hasConstraint = false,
                 thisObj = this,
                 xpath,
                 xpathAttrValue;
-            
+
             xpath = "//" + this.tableEntity;
             if (this.xpathConstraintAttr) {
                 xpathAttrValue = this._contextObj.get(this.xpathConstraintAttr);
@@ -928,7 +949,7 @@ define([
                     hasConstraint = true;
                 }
             }
-            
+
             dojoArray.forEach(this.attrSearchFilterList, function (searchFilter, i) {
                 var constraintValue = this._getConstraintValue(searchFilter.contextEntityAttr, searchFilter.attrName, searchFilter.refName);
                 if (constraintValue) {
@@ -965,7 +986,7 @@ define([
                     case "gt":
                         xpath += searchFilter.attrName + " > " + constraintValue;
                         break;
-                            
+
                     default:
                         xpath += searchFilter.attrName + " = " + constraintValue;
                     }
@@ -988,13 +1009,13 @@ define([
                     xpath += searchFilter.refName + " = " + constraintValue;
                 }
             }, this);
-            
+
             if (hasConstraint) {
                 xpath += "]";
             }
-            
+
             logger.debug(this.id + "._createXPathConstraint XPath: " + xpath);
-            
+
             return xpath;
         },
 
@@ -1004,7 +1025,7 @@ define([
             var dataArray = [],
                 dataObj,
                 referencePropertyName;
-            
+
             dojoArray.forEach(objs, function (obj) {
                 dataObj = { guid: obj.getGuid(), colVisDummy: ""};
                 dojoArray.forEach(this.columnList, function (column) {
@@ -1031,7 +1052,7 @@ define([
                     })
                 });
                 this._rowObjectHandles.push(objectHandle);
-                
+
             }, this);
             return dataArray;
         },
@@ -1052,7 +1073,7 @@ define([
                     }
                 }
             }, this);
-            
+
             for (guid in guidMap) {
                 if (guidMap.hasOwnProperty(guid)) {
                     guidArray.push(guid);
@@ -1137,7 +1158,7 @@ define([
             case "Long":
                 result = mx.parser.formatAttribute(obj, attrName, { groups: column.groupDigits });
                 break;
-                    
+
             default:
                 result = mx.parser.formatAttribute(obj, attrName);
             }
@@ -1179,9 +1200,9 @@ define([
                     return null;
                 }
             }
-            
+
             attrValue = this._contextObj.get(contextEntityAttr);
-            
+
             if (!attrValue || (attrType === "String" && attrValue.trim().length === 0)) {
                 return null;
             }
@@ -1192,7 +1213,7 @@ define([
             } else {
                 attrType = this._entityMetaData.getAttributeType(attrName);
             }
-            
+
             switch (attrType) {
             case "String":
                 // Return the string value between quotes and replace any single or double quotes in the value
@@ -1216,14 +1237,14 @@ define([
             case "Decimal":
                 result = attrValue.toString();
                 break;
-                    
+
             default:
                 result = attrValue;
             }
 
             return result;
         },
-        
+
         _reloadTableData: function (resetPaging) {
             if (this._table) {
                 // For infinite scrolling, save the current scroller page position.
@@ -1242,7 +1263,7 @@ define([
                 this._table.ajax.reload(null, resetPaging);
             }
         },
-        
+
         // Rerender the interface.
         _updateRendering: function () {
             logger.debug(this.id + "._updateRendering");
@@ -1277,14 +1298,14 @@ define([
             }
             this._resetRowObjectSubscriptions();
         },
-        
+
         // Clear selection
         _clearSelection: function () {
             logger.debug(this.id + "._clearSelection");
             this._table.rows({selected: true}).deselect();
             this._setButtonEnabledStatus();
         },
-        
+
         // Enable/Disable buttons when selection changes
         _setButtonEnabledStatus: function (eventName) {
             logger.debug(this.id + "._setButtonEnabledStatus");
@@ -1358,9 +1379,9 @@ define([
         // Reset subscriptions.
         _resetSubscriptions: function () {
             logger.debug(this.id + "._resetSubscriptions");
-            
+
             var objectHandle;
-            
+
             // Release handles on previous object, if any.
             if (this._handles) {
                 dojoArray.forEach(this._handles, function (handle) {
