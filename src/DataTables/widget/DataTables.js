@@ -125,6 +125,7 @@ define([
         _exportButton: null,
         _scrollerPage: null,
         _previousSelection: null,
+        _uninitializeCalled: false,
 
         // I18N file names object at the end, out of sight!
 
@@ -178,6 +179,8 @@ define([
         uninitialize: function () {
             logger.debug(this.id + ".uninitialize");
             // Clean up listeners, helper objects, etc. There is no need to remove listeners added with this.connect / this.subscribe / this.own.
+            // A callback could be triggered while the page is destroyed. Turn on a flag which allows callbacks to know they should just quit.
+            this._uninitializeCalled = true;
             this._clearTableData();
             this._table = null;
             this._buttonList = null;
@@ -300,6 +303,10 @@ define([
             dataTablesOptions.order = [[ sortIndex, "asc" ]];
 
             dataTablesOptions.drawCallback = function (settings) {
+                if (thisObj._uninitializeCalled) {
+                    console.log(thisObj.id + "DataTables drawCallback called but widget is being destroyed.");
+                    return;
+                }
                 dojoArray.forEach(thisObj.columnList, function (column, arrayIndex) {
                     var columnIndex = arrayIndex;
                     // Add one to the index when we have a dummy column to match the column definition index with the table column index.
@@ -853,6 +860,11 @@ define([
                 thisObj = this,
                 xpath;
 
+            if (this._uninitializeCalled) {
+                console.log(this.id + "._getData called but widget is being destroyed.");
+                return;
+            }
+
             if (this.showProgressGetData) {
                 this._showProgress();
             }
@@ -888,6 +900,11 @@ define([
                 },
                 callback: function (objs, extra) {
                     var refGuids;
+
+                    if (thisObj._uninitializeCalled) {
+                        console.log(thisObj.id + "._getData called but upon mx.data.get for xpath callback widget is being destroyed.");
+                        return;
+                    }
                     dataArray = thisObj._convertMendixObjectArrayToDataArray(objs);
                     if (thisObj._hasReferenceColumns) {
                         // Get referenced objects first and supplement the data objects.
@@ -897,6 +914,10 @@ define([
                             noCache: false,
                             count: false,
                             callback: function (refObjs) {
+                                if (thisObj._uninitializeCalled) {
+                                    console.log(thisObj.id + "._getData called but upon mx.data.get for referenced guids callback widget is being destroyed.");
+                                    return;
+                                }
                                 thisObj._includeReferencedObjData(dataArray, refObjs);
                                 thisObj._hideProgress();
                                 dataTablesCallback({
