@@ -1,7 +1,9 @@
 package restservices.consume;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -33,9 +35,10 @@ import org.apache.commons.httpclient.methods.multipart.Part;
 import org.apache.commons.httpclient.methods.multipart.StringPart;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.commons.io.IOUtils;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.json.JSONTokener;
+
+import com.mendix.thirdparty.org.json.JSONArray;
+import com.mendix.thirdparty.org.json.JSONObject;
+import com.mendix.thirdparty.org.json.JSONTokener;
 
 import restservices.RestServices;
 import restservices.proxies.Cookie;
@@ -68,9 +71,10 @@ import communitycommons.StringUtils;
 public class RestConsumer {
 	private static ThreadLocal<HttpResponseData> lastConsumeError = new ThreadLocal<HttpResponseData>();
 	
+    private static IdleConnectionMonitorThread idleConnectionMonitorThread = null;
 	private static MultiThreadedHttpConnectionManager connectionManager = new MultiThreadedHttpConnectionManager();
     static HttpClient client = new HttpClient(connectionManager);
-
+    
 	static {
 		connectionManager.getParams().setMaxConnectionsPerHost(HostConfiguration.ANY_HOST_CONFIGURATION, 10);
 	}
@@ -315,7 +319,7 @@ public class RestConsumer {
 
 			@Override
 			public boolean apply(InputStream stream) {
-				JSONTokener x = new JSONTokener(stream);
+				JSONTokener x = new JSONTokener(new BufferedReader(new InputStreamReader(stream)));
 				//Based on: https://github.com/douglascrockford/JSON-java/blob/master/JSONArray.java
 				if (x.nextClean() != '[') 
 		            throw x.syntaxError("A JSONArray text must start with '['");
@@ -736,5 +740,16 @@ public class RestConsumer {
 			return null;
 		lastConsumeError.set(null);
 		return res.asRequestResult(context);
+	}
+
+	public static boolean startIdleConnectionMonitor(long interval, long maxIdleTime)
+	{
+		if (idleConnectionMonitorThread != null)
+			return false;
+		
+		idleConnectionMonitorThread = new IdleConnectionMonitorThread(connectionManager, interval, maxIdleTime);
+		idleConnectionMonitorThread.start();
+		
+		return true;
 	}
 }

@@ -74,6 +74,7 @@ define([
         isResponsive: false,
         autoColumnWidth: true,
         allowColumnReorder: true,
+        visibleColumnsAttr: "",
         allowColumnVisibility: false,
         colVisButtonText: "",
         colVisPlaceRefCssSelector: "",
@@ -126,6 +127,8 @@ define([
         _scrollerPage: null,
         _previousSelection: null,
         _uninitializeCalled: false,
+        _visibleColumnIndexArray: null,
+        _previousVisibleColumnsValue: "",
 
         // I18N file names object at the end, out of sight!
 
@@ -136,6 +139,7 @@ define([
             logger.debug(this.id + ".constructor");
             this._rowObjectHandles = [];
             this._handles = [];
+            this._visibleColumnIndexArray = [];
         },
 
         // dijit._WidgetBase.postCreate is called after constructing the widget. Implement to do extra setup work.
@@ -158,16 +162,6 @@ define([
             this._updateRendering();
 
             callback();
-        },
-
-        // mxui.widget._WidgetBase.enable is called when the widget should enable editing. Implement to enable editing if widget is input widget.
-        enable: function () {
-            logger.debug(this.id + ".enable");
-        },
-
-        // mxui.widget._WidgetBase.enable is called when the widget should disable editing. Implement to disable editing if widget is input widget.
-        disable: function () {
-            logger.debug(this.id + ".disable");
         },
 
         // mxui.widget._WidgetBase.resize is called when the page's layout is recalculated. Implement to do sizing calculations. Prefer using CSS instead.
@@ -210,15 +204,15 @@ define([
                 dataTablesOptions,
                 dataTablesColumns = [],
                 dataTablesColumn,
-                jQueryClosureObj = _jQuery,
                 locale,
                 language,
                 languageFilename = null,
-                referencePropertyName,
                 sortIndex,
                 table,
                 tableNodeList,
                 thisObj = this;
+
+            this._loadVisibleColumnIndexArray();
 
             // Add dummy column when column visibility is turned on, to prevent rendering issues.
             // When the first column is hidden, column reorder shows the dragging line at the wrong position.
@@ -243,12 +237,19 @@ define([
             this._hasReferenceColumns = false;
             this._trDataAttrNames = [];
             this._tdDataAttrNames = [];
-            dojoArray.forEach(this.columnList, function (column) {
+            dojoArray.forEach(this.columnList, function (column, i) {
+                var referencePropertyName,
+                    visible = column.initiallyVisible;
+
+                if (this._visibleColumnIndexArray.length > 0) {
+                    visible = (this._visibleColumnIndexArray.indexOf(i) >= 0);
+                }
+
                 dataTablesColumn = {
                     title: column.caption,
                     data: column.attrName,
                     name: column.attrName,
-                    visible: column.initiallyVisible
+                    visible: visible
                 };
                 dataTablesColumn.orderable = column.allowSort;
                 if (this.isResponsive) {
@@ -581,6 +582,65 @@ define([
                     dojoStyle.set(thisObj.controlbar, "display", "block");
                 }
             }, thisObj.buttonPlacementDelay);
+
+        },
+
+        _loadVisibleColumnIndexArray: function () {
+            logger.debug(this.id + "._loadVisibleColumnIndexArray");
+            var inputArray,
+                visibleColumns;
+
+            this._visibleColumnIndexArray = [];
+
+            // No action when user may select visible columns
+            if (!this.visibleColumnsAttr || this.allowColumnVisibility) {
+                return;
+            }
+
+            visibleColumns = this._contextObj.get(this.visibleColumnsAttr);
+            this._previousVisibleColumnsValue = visibleColumns;
+
+            if (visibleColumns === null || visibleColumns.trim() === "") {
+                return;
+            }
+            // Split the value across comma's.
+            inputArray = visibleColumns.split(",");
+            dojoArray.forEach(inputArray, function (element) {
+                // Skip empty elements
+                if (element) {
+                    if (isNaN(element)) {
+                        console.error(this.id + "._loadVisibleColumnIndexArray: value [" + element + "] is not a number");
+                    } else {
+                        this._visibleColumnIndexArray.push(Number(element));
+                    }
+                }
+            }, this);
+        },
+
+        _setVisibleColumns: function () {
+            logger.debug(this.id + "._setVisibleColumns");
+            var thisObj = this;
+
+            // No action when user may select visible columns
+            if (this.allowColumnVisibility) {
+                return;
+            }
+
+            if (this._table) {
+                // For each column check whether it should be visible.
+                this._table.columns().every( function (i) {
+                    // Context object (this) is the column!
+                    if (thisObj._visibleColumnIndexArray.length === 0) {
+                        // No elements in array so show all columns.
+                        this.visible(true, false);
+                    } else {
+                        // Array has elements, show column if its index is in the array.
+                        this.visible(thisObj._visibleColumnIndexArray.indexOf(i) >= 0, false);
+                    }
+                });
+                // Now redraw the columns
+                this._table.columns.adjust().draw();
+            }
 
         },
 
@@ -1281,6 +1341,8 @@ define([
                         }
                     }
                 }
+                this._loadVisibleColumnIndexArray();
+                this._setVisibleColumns();
                 this._table.ajax.reload(null, resetPaging);
             }
         },
@@ -1299,6 +1361,13 @@ define([
                             resetPaging = !this._contextObj.get(this.refreshKeepScrollPosAttr);
                         }
                         this._reloadTableData(resetPaging);
+                    } else {
+                        if (this.visibleColumnsAttr) {
+                            if (this._contextObj.get(this.visibleColumnsAttr) !== this._previousVisibleColumnsValue) {
+                                this._loadVisibleColumnIndexArray();
+                                this._setVisibleColumns();
+                            }
+                        }
                     }
                 } else {
                     this._createTableObject();

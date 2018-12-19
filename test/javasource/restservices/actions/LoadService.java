@@ -31,7 +31,7 @@ public class LoadService extends CustomJavaAction<java.lang.Boolean>
 		this.def = __def == null ? null : restservices.proxies.DataServiceDefinition.initialize(getContext(), __def);
 
 		// BEGIN USER CODE
-		RestServiceHandler.loadConfig(def, true);
+		RestServiceHandler.loadConfig(def, true, getContext());
 		return true;
 		// END USER CODE
 	}

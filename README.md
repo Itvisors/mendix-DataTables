@@ -42,6 +42,18 @@ All features can be seen in action in the test/demo project.
 - References can be used one level deep.
 - Due to limitations in the custom widget definition, the attributes and references need to be entered as text rather than selected from a list.
 
+## Atlas UI styling
+The *show xx entries* dropdown may look a little squeezed together vertically.
+
+Adding this to your CSS may help, it probably needs a little adaption to your theme.
+
+``` CSS
+div.datatables div.dataTables_wrapper div.dataTables_length select {
+    height: 34px;
+    padding: 0px 5px;
+}
+```
+
 ## Backlog
 
 - Currently only XPath can be used to get the grid data.
@@ -158,6 +170,7 @@ The widget does not display search filter inputs. To provide search filters, def
 
 #### Column visibility
 
+- _Visible columns_ - Optional, ignored if Allow column visibility is turned on. If specified, only the columns for which the index is listed here will be shown. Separate values using a comma. The first column has index 0.
 - _Allow column visibility_ - When turned on, the user can choose which columns to display
 - _Columns button caption_ - Caption of the columns button, translatable
 - _Button class_ - Optional. Additional classes to put on the button. When placing the button together with other buttons, be sure to put at least mx-button on it.

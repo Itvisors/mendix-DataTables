@@ -10,7 +10,12 @@ import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFRichTextString;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
+import org.xml.sax.SAXNotRecognizedException;
+import org.xml.sax.SAXNotSupportedException;
+import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
+
+import com.mendix.core.Core;
 
 import replication.ValueParser;
 import replication.ValueParser.ParseException;
@@ -350,6 +355,17 @@ public abstract class ExcelXLSXReader {
 		protected String getCurrentColumnStr() {
 			return this.colString;
 		}
+	}
+	
+	/**
+	 * Sets sensible defaults for the XML parser used to read excel XLSX files.
+	 */
+	static void setXMLReaderProperties(XMLReader parser) throws SAXNotRecognizedException, SAXNotSupportedException {
+		boolean isExternalEntitiesEnabled = Boolean.valueOf("true").equals(Core.getConfiguration().getConstantValue("ExcelImporter.EnableExternalEntities"));
+		
+		parser.setFeature("http://xml.org/sax/features/external-general-entities", isExternalEntitiesEnabled);
+		parser.setFeature("http://xml.org/sax/features/external-parameter-entities", isExternalEntitiesEnabled);
+		parser.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", isExternalEntitiesEnabled);
 	}
 
 	protected enum ExcelType {

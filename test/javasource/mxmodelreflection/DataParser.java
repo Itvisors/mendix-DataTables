@@ -79,6 +79,7 @@ public class DataParser
 			
 			if( pattern != null && !"".equals(pattern) ) {
 				SimpleDateFormat df = new SimpleDateFormat(pattern, Core.getLocale(context) );
+				df.setTimeZone(getSessionTimeZone(context));
 				
 				return df.format( (Date) value );
 			}

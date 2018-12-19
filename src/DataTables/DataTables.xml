@@ -262,6 +262,17 @@
             <category>Layout</category>
             <description>When turned on, the user can drag and drop columns to reorder them</description>
         </property>
+
+        <!--    Column visibility    -->
+
+        <property key="visibleColumnsAttr" type="attribute" required="false">
+            <caption>Visible columns</caption>
+            <category>Column visibility</category>
+            <description>Optional, ignored if Allow column visibility is turned on. If specified, only the columns for which the index is listed here will be shown. Separate values using a comma. The first column has index 0.</description>
+            <attributeTypes>
+                <attributeType name="String"/>
+            </attributeTypes>
+        </property>
         <property key="allowColumnVisibility" type="boolean" defaultValue="false">
             <caption>Allow column visibility</caption>
             <category>Column visibility</category>

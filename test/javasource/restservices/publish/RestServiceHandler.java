@@ -19,8 +19,8 @@ import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.mendix.thirdparty.org.json.JSONException;
+import com.mendix.thirdparty.org.json.JSONObject;
 
 import restservices.RestServices;
 import restservices.consume.RestConsumeException;
@@ -62,7 +62,13 @@ public class RestServiceHandler extends RequestHandler{
 			this.roleOrMicroflow = roleOrMicroflow;
 			this.handler = handler;
 		}
-		
+
+		public boolean accepts(String method, RestServiceRequest rsr) {
+			return this.method.equals(method) ||
+				(HttpMethod.GET.toString().equals(method) &&
+				 rsr.getRequestParameter(RestServices.PARAM_ABOUT, null) == "");
+		}
+
 		@Override
 		public String toString() {
 			return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
@@ -148,11 +154,11 @@ public class RestServiceHandler extends RequestHandler{
 
 	private static void loadConfig(IContext context) throws CoreException {
 		for (DataServiceDefinition def : XPath.create(context, DataServiceDefinition.class).all()) {
-			loadConfig(def, false);
+			loadConfig(def, false, context);
 		}
 	}
 
-	public static void loadConfig(DataServiceDefinition def, boolean throwOnFailure) {
+	public static void loadConfig(DataServiceDefinition def, boolean throwOnFailure, IContext context) {
 		if (!started)
 			return;
 
@@ -178,7 +184,7 @@ public class RestServiceHandler extends RequestHandler{
 			}
 			
 			RestServices.LOGPUBLISH.info("Reloading definition of service '" + def.getName() + "'");
-			service = new DataService(def);
+			service = new DataService(def, context);
 			service.register();
 			
 			RestServices.LOGPUBLISH.info("Loading service " + def.getName()+ "... DONE");
@@ -211,7 +217,7 @@ public class RestServiceHandler extends RequestHandler{
 		final Map<String, String> params = Maps.newHashMap();
 		for (final HandlerRegistration reg : services) {
 			if (reg.template.match(relpath, params)) {
-				if (reg.method.equals(method)) {
+				if (reg.accepts(method, rsr)) {
 					// Mixin query parameters
 					requestParamsToJsonMap(rsr, params);
 
@@ -247,7 +253,7 @@ public class RestServiceHandler extends RequestHandler{
 
 	@Override
 	public void processRequest(IMxRuntimeRequest req, IMxRuntimeResponse resp,
-			String _) {
+			String var3) {
 
 		long start = System.currentTimeMillis();
 		

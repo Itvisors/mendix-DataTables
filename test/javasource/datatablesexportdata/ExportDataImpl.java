@@ -17,9 +17,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import com.mendix.core.Core;
 import com.mendix.core.CoreException;
 import com.mendix.core.objectmanagement.SecurityRuntimeException;
@@ -30,6 +27,8 @@ import com.mendix.systemwideinterfaces.core.meta.IMetaEnumValue;
 import com.mendix.systemwideinterfaces.core.meta.IMetaEnumeration;
 import com.mendix.systemwideinterfaces.core.meta.IMetaPrimitive;
 import com.mendix.systemwideinterfaces.core.meta.IMetaPrimitive.PrimitiveType;
+import com.mendix.thirdparty.org.json.JSONArray;
+import com.mendix.thirdparty.org.json.JSONObject;
 
 import communitycommons.StringUtils;
 import datatablesexportdata.proxies.DataTablesExportDocument;

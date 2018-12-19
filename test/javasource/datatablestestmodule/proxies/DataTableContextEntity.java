@@ -38,6 +38,7 @@ public class DataTableContextEntity
 		CountryCode("CountryCode"),
 		ExportConfig("ExportConfig"),
 		ExportXPath("ExportXPath"),
+		VisibleColumnIDs("VisibleColumnIDs"),
 		DataTableContextEntity_Person_Current("DataTablesTestModule.DataTableContextEntity_Person_Current"),
 		DataTableContextEntity_Country("DataTablesTestModule.DataTableContextEntity_Country"),
 		DataTableContextEntity_Language("DataTablesTestModule.DataTableContextEntity_Language");
@@ -83,7 +84,7 @@ public class DataTableContextEntity
 
 	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
-	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.getSudoContext() can be used to obtain sudo access).
+	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
 	 */
 	public static datatablestestmodule.proxies.DataTableContextEntity initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
@@ -681,6 +682,42 @@ public class DataTableContextEntity
 	public final void setExportXPath(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String exportxpath)
 	{
 		getMendixObject().setValue(context, MemberNames.ExportXPath.toString(), exportxpath);
+	}
+
+	/**
+	 * @return value of VisibleColumnIDs
+	 */
+	public final java.lang.String getVisibleColumnIDs()
+	{
+		return getVisibleColumnIDs(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of VisibleColumnIDs
+	 */
+	public final java.lang.String getVisibleColumnIDs(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.VisibleColumnIDs.toString());
+	}
+
+	/**
+	 * Set value of VisibleColumnIDs
+	 * @param visiblecolumnids
+	 */
+	public final void setVisibleColumnIDs(java.lang.String visiblecolumnids)
+	{
+		setVisibleColumnIDs(getContext(), visiblecolumnids);
+	}
+
+	/**
+	 * Set value of VisibleColumnIDs
+	 * @param context
+	 * @param visiblecolumnids
+	 */
+	public final void setVisibleColumnIDs(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String visiblecolumnids)
+	{
+		getMendixObject().setValue(context, MemberNames.VisibleColumnIDs.toString(), visiblecolumnids);
 	}
 
 	/**

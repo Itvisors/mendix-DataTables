@@ -34,7 +34,7 @@ public class RebuildServiceIndex extends CustomJavaAction<java.lang.Boolean>
 		if (dataServiceDefinition == null)
 			throw new IllegalArgumentException();
 		
-		DataService.getServiceByDefinition(dataServiceDefinition).getChangeLogManager().rebuildChangeLog();
+		DataService.getServiceByDefinition(dataServiceDefinition).getChangeLogManager().rebuildChangeLog(getContext());
 		return true;
 		// END USER CODE
 	}

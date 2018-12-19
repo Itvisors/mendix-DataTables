@@ -136,6 +136,7 @@ public class ReadOnlySharedStringsTable extends DefaultHandler {
         try {
            SAXParser saxParser = saxFactory.newSAXParser();
            XMLReader sheetParser = saxParser.getXMLReader();
+           ExcelXLSXReader.setXMLReaderProperties(sheetParser);
            sheetParser.setContentHandler(this);
            sheetParser.parse(sheetSource);
         } catch(ParserConfigurationException e) {
