@@ -898,9 +898,10 @@ define([
         },
 
         _resetRowObjectSubscriptions: function () {
+            var thisObj = this;
             if (this._rowObjectHandles) {
                 dojoArray.forEach(this._rowObjectHandles, function (handle) {
-                    mx.data.unsubscribe(handle);
+                    thisObj.unsubscribe(handle);
                 });
                 this._rowObjectHandles = [];
             }
@@ -1470,12 +1471,13 @@ define([
         _resetSubscriptions: function () {
             logger.debug(this.id + "._resetSubscriptions");
 
-            var objectHandle;
+            var objectHandle,
+                thisObj = this;
 
             // Release handles on previous object, if any.
             if (this._handles) {
                 dojoArray.forEach(this._handles, function (handle) {
-                    mx.data.unsubscribe(handle);
+                    thisObj.unsubscribe(handle);
                 });
                 this._handles = [];
             }
