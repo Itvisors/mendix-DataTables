@@ -1,15 +1,15 @@
-/*! ColReorder 1.3.2
- * ©2010-2015 SpryMedia Ltd - datatables.net/license
+/*! ColReorder 1.5.0
+ * ©2010-2018 SpryMedia Ltd - datatables.net/license
  */
 
 /**
  * @summary     ColReorder
  * @description Provide the ability to reorder columns in a DataTable
- * @version     1.3.2
+ * @version     1.5.0
  * @file        dataTables.colReorder.js
  * @author      SpryMedia Ltd (www.sprymedia.co.uk)
  * @contact     www.sprymedia.co.uk/contact
- * @copyright   Copyright 2010-2014 SpryMedia Ltd.
+ * @copyright   Copyright 2010-2018 SpryMedia Ltd.
  *
  * This source file is free software, available under the following license:
  *   MIT license - http://datatables.net/license/mit
@@ -23,7 +23,7 @@
 (function( factory ){
 	if ( typeof define === 'function' && define.amd ) {
 		// AMD
-        /* Marcel Groeneweg ITvisors: adjust module names to use the modules supplied with the Mendix widget */        
+        /* Marcel Groeneweg ITvisors: adjust module names to use the modules supplied with the Mendix widget */
 		define( ['DataTables/lib/jquery', 'DataTables/lib/jquery.dataTables'], function ( $ ) {
 			return factory( $, window, document );
 		} );
@@ -342,7 +342,7 @@ $.fn.dataTableExt.oApi.fnColReorder = function ( oSettings, iFrom, iTo, drop, in
 	/* Sort listener */
 	for ( i=0, iLen=iCols ; i<iLen ; i++ )
 	{
-		$(oSettings.aoColumns[i].nTh).off('click.DT');
+		$(oSettings.aoColumns[i].nTh).off('.DT');
 		this.oApi._fnSortAttachListener( oSettings, oSettings.aoColumns[i].nTh, i );
 	}
 
@@ -405,6 +405,14 @@ var ColReorder = function( dt, opts )
 		 *  @default  null
 		 */
 		"dt": null,
+
+		/**
+		 * Enable flag
+		 *  @property dt
+		 *  @type     Object
+		 *  @default  null
+		 */
+		"enable": null,
 
 		/**
 		 * Initialisation object used for this instance
@@ -485,8 +493,8 @@ var ColReorder = function( dt, opts )
 		"pointer": null
 	};
 
-
 	/* Constructor logic */
+	this.s.enable = this.s.init.bEnable;
 	this.s.dt = settings;
 	this.s.dt._colReorder = this;
 	this._fnConstruct();
@@ -500,6 +508,26 @@ $.extend( ColReorder.prototype, {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	 * Public methods
 	 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+	/**
+	 * Enable / disable end user interaction
+	 */
+	fnEnable: function ( flag )
+	{
+		if ( flag === false ) {
+			return fnDisable();
+		}
+
+		this.s.enable = true;
+	},
+
+	/**
+	 * Disable end user interaction
+	 */
+	fnDisable: function ()
+	{
+		this.s.enable = false;
+	},
 
 	/**
 	 * Reset the column ordering to the original ordering that was detected on
@@ -741,9 +769,9 @@ $.extend( ColReorder.prototype, {
 		// Destroy clean up
 		$(table).on( 'destroy.dt.colReorder', function () {
 			$(table).off( 'destroy.dt.colReorder draw.dt.colReorder' );
-			$(that.s.dt.nTHead).find( '*' ).off( '.ColReorder' );
 
 			$.each( that.s.dt.aoColumns, function (i, column) {
+				$(column.nTh).off('.ColReorder');
 				$(column.nTh).removeAttr('data-column-index');
 			} );
 
@@ -786,14 +814,14 @@ $.extend( ColReorder.prototype, {
 			}
 		}
 
-		$.fn.dataTable.Api( this.s.dt ).rows().invalidate();
-
 		this._fnSetColumnIndexes();
 
 		// Has anything actually changed? If not, then nothing else to do
 		if ( ! changed ) {
 			return;
 		}
+
+		$.fn.dataTable.Api( this.s.dt ).rows().invalidate();
 
 		/* When scrolling we need to recalculate the column sizes to allow for the shift */
 		if ( this.s.dt.oScroll.sX !== "" || this.s.dt.oScroll.sY !== "" )
@@ -888,10 +916,17 @@ $.extend( ColReorder.prototype, {
 	"_fnMouseListener": function ( i, nTh )
 	{
 		var that = this;
-		$(nTh).on( 'mousedown.ColReorder', function (e) {
-			e.preventDefault();
-			that._fnMouseDown.call( that, e, nTh );
-		} );
+		$(nTh)
+			.on( 'mousedown.ColReorder', function (e) {
+				if ( that.s.enable ) {
+					that._fnMouseDown.call( that, e, nTh );
+				}
+			} )
+			.on( 'touchstart.ColReorder', function (e) {
+				if ( that.s.enable ) {
+					that._fnMouseDown.call( that, e, nTh );
+				}
+			} );
 	},
 
 
@@ -916,10 +951,10 @@ $.extend( ColReorder.prototype, {
 			return;
 		}
 
-		this.s.mouse.startX = e.pageX;
-		this.s.mouse.startY = e.pageY;
-		this.s.mouse.offsetX = e.pageX - offset.left;
-		this.s.mouse.offsetY = e.pageY - offset.top;
+		this.s.mouse.startX = this._fnCursorPosition( e, 'pageX' );
+		this.s.mouse.startY = this._fnCursorPosition( e, 'pageY' );
+		this.s.mouse.offsetX = this._fnCursorPosition( e, 'pageX' ) - offset.left;
+		this.s.mouse.offsetY = this._fnCursorPosition( e, 'pageY' ) - offset.top;
 		this.s.mouse.target = this.s.dt.aoColumns[ idx ].nTh;//target[0];
 		this.s.mouse.targetIndex = idx;
 		this.s.mouse.fromIndex = idx;
@@ -928,10 +963,10 @@ $.extend( ColReorder.prototype, {
 
 		/* Add event handlers to the document */
 		$(document)
-			.on( 'mousemove.ColReorder', function (e) {
+			.on( 'mousemove.ColReorder touchmove.ColReorder', function (e) {
 				that._fnMouseMove.call( that, e );
 			} )
-			.on( 'mouseup.ColReorder', function (e) {
+			.on( 'mouseup.ColReorder touchend.ColReorder', function (e) {
 				that._fnMouseUp.call( that, e );
 			} );
 	},
@@ -955,8 +990,8 @@ $.extend( ColReorder.prototype, {
 			 * possibly confusing drag element showing up
 			 */
 			if ( Math.pow(
-				Math.pow(e.pageX - this.s.mouse.startX, 2) +
-				Math.pow(e.pageY - this.s.mouse.startY, 2), 0.5 ) < 5 )
+				Math.pow(this._fnCursorPosition( e, 'pageX') - this.s.mouse.startX, 2) +
+				Math.pow(this._fnCursorPosition( e, 'pageY') - this.s.mouse.startY, 2), 0.5 ) < 5 )
 			{
 				return;
 			}
@@ -965,8 +1000,8 @@ $.extend( ColReorder.prototype, {
 
 		/* Position the element - we respect where in the element the click occured */
 		this.dom.drag.css( {
-			left: e.pageX - this.s.mouse.offsetX,
-			top: e.pageY - this.s.mouse.offsetY
+			left: this._fnCursorPosition( e, 'pageX' ) - this.s.mouse.offsetX,
+			top: this._fnCursorPosition( e, 'pageY' ) - this.s.mouse.offsetY
 		} );
 
 		/* Based on the current mouse position, calculate where the insert should go */
@@ -975,7 +1010,7 @@ $.extend( ColReorder.prototype, {
 
 		for ( var i=1, iLen=this.s.aoTargets.length ; i<iLen ; i++ )
 		{
-			if ( e.pageX < this.s.aoTargets[i-1].x + ((this.s.aoTargets[i].x-this.s.aoTargets[i-1].x)/2) )
+			if ( this._fnCursorPosition(e, 'pageX') < this.s.aoTargets[i-1].x + ((this.s.aoTargets[i].x-this.s.aoTargets[i-1].x)/2) )
 			{
 				this.dom.pointer.css( 'left', this.s.aoTargets[i-1].x );
 				this.s.mouse.toIndex = this.s.aoTargets[i-1].to;
@@ -994,8 +1029,15 @@ $.extend( ColReorder.prototype, {
 
 		// Perform reordering if realtime updating is on and the column has moved
 		if ( this.s.init.bRealtime && lastToIndex !== this.s.mouse.toIndex ) {
-			this.s.dt.oInstance.fnColReorder( this.s.mouse.fromIndex, this.s.mouse.toIndex, false );
+			this.s.dt.oInstance.fnColReorder( this.s.mouse.fromIndex, this.s.mouse.toIndex );
 			this.s.mouse.fromIndex = this.s.mouse.toIndex;
+
+			// Not great for performance, but required to keep everything in alignment
+			if ( this.s.dt.oScroll.sX !== "" || this.s.dt.oScroll.sY !== "" )
+			{
+				this.s.dt.oInstance.fnAdjustColumnSizing( false );
+			}
+
 			this._fnRegions();
 		}
 	},
@@ -1012,7 +1054,7 @@ $.extend( ColReorder.prototype, {
 	{
 		var that = this;
 
-		$(document).off( 'mousemove.ColReorder mouseup.ColReorder' );
+		$(document).off( '.ColReorder' );
 
 		if ( this.dom.drag !== null )
 		{
@@ -1164,6 +1206,20 @@ $.extend( ColReorder.prototype, {
 		$.each( this.s.dt.aoColumns, function (i, column) {
 			$(column.nTh).attr('data-column-index', i);
 		} );
+	},
+
+
+	/**
+	 * Get cursor position regardless of mouse or touch input
+	 * @param  {Event}  e    jQuery Event
+	 * @param  {string} prop Property to get
+	 * @return {number}      Value
+	 */
+	_fnCursorPosition: function ( e, prop ) {
+		if ( e.type.indexOf('touch') !== -1 ) {
+			return e.originalEvent.touches[0][ prop ];
+		}
+		return e[ prop ];
 	}
 } );
 
@@ -1191,6 +1247,14 @@ ColReorder.defaults = {
 	 *  @static
 	 */
 	aiOrder: null,
+
+	/**
+	 * ColReorder enable on initialisation
+	 *  @type boolean
+	 *  @default true
+	 *  @static
+	 */
+	bEnable: true,
 
 	/**
 	 * Redraw the table's column ordering as the end user draws the column
@@ -1243,7 +1307,7 @@ ColReorder.defaults = {
  *  @type      String
  *  @default   As code
  */
-ColReorder.version = "1.3.2";
+ColReorder.version = "1.5.0";
 
 
 
@@ -1329,6 +1393,29 @@ $.fn.dataTable.Api.register( 'colReorder.transpose()', function ( idx, dir ) {
 	return this.context.length && this.context[0]._colReorder ?
 		this.context[0]._colReorder.fnTranspose( idx, dir ) :
 		idx;
+} );
+
+$.fn.dataTable.Api.register( 'colReorder.move()', function( from, to, drop, invalidateRows ) {
+	if (this.context.length) {
+		this.context[0]._colReorder.s.dt.oInstance.fnColReorder( from, to, drop, invalidateRows );
+	}
+	return this;
+} );
+
+$.fn.dataTable.Api.register( 'colReorder.enable()', function( flag ) {
+	return this.iterator( 'table', function ( ctx ) {
+		if ( ctx._colReorder ) {
+			ctx._colReorder.fnEnable( flag );
+		}
+	} );
+} );
+
+$.fn.dataTable.Api.register( 'colReorder.disable()', function() {
+	return this.iterator( 'table', function ( ctx ) {
+		if ( ctx._colReorder ) {
+			ctx._colReorder.fnDisable();
+		}
+	} );
 } );
 
 

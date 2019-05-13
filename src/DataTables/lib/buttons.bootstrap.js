@@ -1,5 +1,5 @@
 /*! Bootstrap integration for DataTables' Buttons
- * ©2015 SpryMedia Ltd - datatables.net/license
+ * ©2016 SpryMedia Ltd - datatables.net/license
  */
 
 (function( factory ){
@@ -50,7 +50,9 @@ $.extend( true, DataTable.Buttons.defaults, {
 			className: 'dt-button-collection dropdown-menu',
 			button: {
 				tag: 'li',
-				className: 'dt-button'
+				className: 'dt-button',
+				active: 'active',
+				disabled: 'disabled'
 			},
 			buttonLiner: {
 				tag: 'a',
