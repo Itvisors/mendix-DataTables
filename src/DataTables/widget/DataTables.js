@@ -150,6 +150,7 @@ define([
 
             this._entityMetaData = mx.meta.getEntity(this.tableEntity);
             this._updateRendering();
+            this._setupEvents();
         },
 
         // mxui.widget._WidgetBase.update is called when context is changed or initialized. Implement to re-render and / or fetch data.
@@ -186,6 +187,11 @@ define([
             if (typeof document.ontouchstart !== "undefined") {
                 dojoEvent.stop(e);
             }
+        },
+
+        // Attach events to HTML dom elements
+        _setupEvents: function () {
+            logger.debug(this.id + "._setupEvents");
         },
 
         // Create the DataTables object
@@ -336,7 +342,7 @@ define([
                         }
                         cellNode = thisObj._table.cell({row : rowIdx, column : colIdx}).node();
                         cellNode.setAttribute("data-columnName", tdData.name);
-                    });
+                    }, this);
                     // Select the first row, unless there is already a selection. The draw callback can be called multiple times.
                     if (thisObj.selectFirst && rowLoop === 0 && !thisObj._table.rows({selected: true}).any()) {
                         this.select();

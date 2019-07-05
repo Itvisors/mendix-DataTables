@@ -1,0 +1,15 @@
+/*
+
+DataTables CSS. The shipped CSS files are renamed to SCSS files and prefixed with _
+This SCSS imports them all into one CSS for faster loading.
+
+*/
+
+@import "dataTables.bootstrap";
+@import "responsive.bootstrap";
+@import "colReorder.bootstrap";
+@import "buttons.bootstrap";
+@import "scroller.bootstrap";
+@import "select.bootstrap";
+
+@import "custom";
