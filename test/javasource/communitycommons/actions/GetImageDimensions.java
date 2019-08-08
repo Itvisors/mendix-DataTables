@@ -16,36 +16,40 @@ import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.webui.CustomJavaAction;
 import communitycommons.proxies.ImageDimensions;
+import java.io.InputStream;
 
 public class GetImageDimensions extends CustomJavaAction<IMendixObject>
 {
-	private IMendixObject __ImageParameter1;
-	private system.proxies.Image ImageParameter1;
+	private IMendixObject __ImageParameter;
+	private system.proxies.Image ImageParameter;
 
-	public GetImageDimensions(IContext context, IMendixObject ImageParameter1)
+	public GetImageDimensions(IContext context, IMendixObject ImageParameter)
 	{
 		super(context);
-		this.__ImageParameter1 = ImageParameter1;
+		this.__ImageParameter = ImageParameter;
 	}
 
-	@Override
+	@java.lang.Override
 	public IMendixObject executeAction() throws Exception
 	{
-		this.ImageParameter1 = __ImageParameter1 == null ? null : system.proxies.Image.initialize(getContext(), __ImageParameter1);
+		this.ImageParameter = __ImageParameter == null ? null : system.proxies.Image.initialize(getContext(), __ImageParameter);
 
 		// BEGIN USER CODE
-		BufferedImage bimg = ImageIO.read(Core.getImage(getContext(), this.ImageParameter1.getMendixObject(), false));
-		ImageDimensions imageDimentions = new ImageDimensions(getContext());
-		imageDimentions.setHeight(bimg.getHeight());
-	    imageDimentions.setWidth(bimg.getWidth());
-		return imageDimentions.getMendixObject();
+		ImageDimensions imageDimensions = new ImageDimensions(getContext());
+		try (InputStream inputStream = Core.getImage(getContext(), this.ImageParameter.getMendixObject(), false)) {
+			BufferedImage bimg = ImageIO.read(inputStream);
+			imageDimensions.setHeight(bimg.getHeight());
+			imageDimensions.setWidth(bimg.getWidth());
+		}
+
+		return imageDimensions.getMendixObject();
 		// END USER CODE
 	}
 
 	/**
 	 * Returns a string representation of this action
 	 */
-	@Override
+	@java.lang.Override
 	public java.lang.String toString()
 	{
 		return "GetImageDimensions";

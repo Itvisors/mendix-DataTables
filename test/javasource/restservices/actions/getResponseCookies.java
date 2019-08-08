@@ -26,7 +26,7 @@ public class getResponseCookies extends CustomJavaAction<java.util.List<IMendixO
 		this.__requestResult = requestResult;
 	}
 
-	@Override
+	@java.lang.Override
 	public java.util.List<IMendixObject> executeAction() throws Exception
 	{
 		this.requestResult = __requestResult == null ? null : restservices.proxies.RequestResult.initialize(getContext(), __requestResult);
@@ -39,7 +39,7 @@ public class getResponseCookies extends CustomJavaAction<java.util.List<IMendixO
 	/**
 	 * Returns a string representation of this action
 	 */
-	@Override
+	@java.lang.Override
 	public java.lang.String toString()
 	{
 		return "getResponseCookies";

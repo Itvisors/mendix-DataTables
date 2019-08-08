@@ -26,7 +26,7 @@ public class ReferableObject extends restservices.proxies.AnyObject
 			metaName = s;
 		}
 
-		@Override
+		@java.lang.Override
 		public java.lang.String toString()
 		{
 			return metaName;
@@ -48,7 +48,7 @@ public class ReferableObject extends restservices.proxies.AnyObject
 	/**
 	 * @deprecated Use 'ReferableObject.load(IContext, IMendixIdentifier)' instead.
 	 */
-	@Deprecated
+	@java.lang.Deprecated
 	public static restservices.proxies.ReferableObject initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixIdentifier mendixIdentifier) throws com.mendix.core.CoreException
 	{
 		return restservices.proxies.ReferableObject.load(context, mendixIdentifier);
@@ -141,7 +141,7 @@ public class ReferableObject extends restservices.proxies.AnyObject
 		getMendixObject().setValue(context, MemberNames.ETag.toString(), etag);
 	}
 
-	@Override
+	@java.lang.Override
 	public boolean equals(Object obj)
 	{
 		if (obj == this)
@@ -155,7 +155,7 @@ public class ReferableObject extends restservices.proxies.AnyObject
 		return false;
 	}
 
-	@Override
+	@java.lang.Override
 	public int hashCode()
 	{
 		return getMendixObject().hashCode();
@@ -173,8 +173,8 @@ public class ReferableObject extends restservices.proxies.AnyObject
 	 * @return String GUID from this object, format: ID_0000000000
 	 * @deprecated Use getMendixObject().getId().toLong() to get a unique identifier for this object.
 	 */
-	@Override
-	@Deprecated
+	@java.lang.Override
+	@java.lang.Deprecated
 	public java.lang.String getGUID()
 	{
 		return "ID_" + getMendixObject().getId().toLong();

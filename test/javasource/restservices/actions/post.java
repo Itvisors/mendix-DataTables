@@ -28,7 +28,7 @@ public class post extends CustomJavaAction<IMendixObject>
 		this.submitAsFormData = submitAsFormData;
 	}
 
-	@Override
+	@java.lang.Override
 	public IMendixObject executeAction() throws Exception
 	{
 		// BEGIN USER CODE
@@ -39,7 +39,7 @@ public class post extends CustomJavaAction<IMendixObject>
 	/**
 	 * Returns a string representation of this action
 	 */
-	@Override
+	@java.lang.Override
 	public java.lang.String toString()
 	{
 		return "post";

@@ -26,7 +26,7 @@ public class GetNrOfIncomingConnections extends CustomJavaAction<java.lang.Long>
 		this.__index = index;
 	}
 
-	@Override
+	@java.lang.Override
 	public java.lang.Long executeAction() throws Exception
 	{
 		this.index = __index == null ? null : restservices.proxies.ChangeLog.initialize(getContext(), __index);
@@ -54,7 +54,7 @@ public class GetNrOfIncomingConnections extends CustomJavaAction<java.lang.Long>
 	/**
 	 * Returns a string representation of this action
 	 */
-	@Override
+	@java.lang.Override
 	public java.lang.String toString()
 	{
 		return "GetNrOfIncomingConnections";

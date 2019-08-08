@@ -33,7 +33,7 @@ public class ReplaceToken extends CustomJavaAction<java.lang.String>
 		this.TextToReplace = TextToReplace;
 	}
 
-	@Override
+	@java.lang.Override
 	public java.lang.String executeAction() throws Exception
 	{
 		this.TokenObject = __TokenObject == null ? null : mxmodelreflection.proxies.Token.initialize(getContext(), __TokenObject);
@@ -46,7 +46,7 @@ public class ReplaceToken extends CustomJavaAction<java.lang.String>
 	/**
 	 * Returns a string representation of this action
 	 */
-	@Override
+	@java.lang.Override
 	public java.lang.String toString()
 	{
 		return "ReplaceToken";

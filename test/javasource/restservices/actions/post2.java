@@ -31,7 +31,7 @@ public class post2 extends CustomJavaAction<IMendixObject>
 		this.responseData = responseData;
 	}
 
-	@Override
+	@java.lang.Override
 	public IMendixObject executeAction() throws Exception
 	{
 		// BEGIN USER CODE
@@ -42,7 +42,7 @@ public class post2 extends CustomJavaAction<IMendixObject>
 	/**
 	 * Returns a string representation of this action
 	 */
-	@Override
+	@java.lang.Override
 	public java.lang.String toString()
 	{
 		return "post2";

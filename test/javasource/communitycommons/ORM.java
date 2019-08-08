@@ -5,12 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
 import com.mendix.core.Core;
 import com.mendix.core.CoreException;
@@ -180,8 +176,11 @@ public class ORM
 					throw new IllegalArgumentException("It is not possible to clone reverse referencesets: '" + fullAssocName + "'");
 				}
 				
-				List<IMendixObject> objs = Core.retrieveXPathQueryEscaped(ctx, "//%s[%s='%s']", 
-				        relationParent.getName(), assocname, String.valueOf(src.getId().toLong()));
+				List<IMendixObject> objs = Core.createXPathQuery("//$relationParent[$assocname=$value]")
+					.setVariable("relationParent", relationParent.getName())
+					.setVariable("assocname", assocname)
+					.setVariable("value", String.valueOf(src.getId().toLong()))
+					.execute(ctx);
 				
 				for(IMendixObject obj : objs) {
 				    @SuppressWarnings("unused") // object is unused on purpose

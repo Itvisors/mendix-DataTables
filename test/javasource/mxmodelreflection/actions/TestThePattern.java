@@ -10,6 +10,7 @@
 package mxmodelreflection.actions;
 
 import mxmodelreflection.DataParser;
+import mxmodelreflection.proxies.AttributeTypes;
 import mxmodelreflection.proxies.TestPattern;
 import mxmodelreflection.proxies.Token;
 import com.mendix.systemwideinterfaces.core.IContext;
@@ -17,6 +18,7 @@ import com.mendix.systemwideinterfaces.core.IMendixObjectMember;
 import com.mendix.webui.CustomJavaAction;
 import com.mendix.webui.FeedbackHelper;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
+import java.util.Optional;
 
 public class TestThePattern extends CustomJavaAction<java.lang.Boolean>
 {
@@ -29,42 +31,48 @@ public class TestThePattern extends CustomJavaAction<java.lang.Boolean>
 		this.__TestPatternObj = TestPatternObj;
 	}
 
-	@Override
+	@java.lang.Override
 	public java.lang.Boolean executeAction() throws Exception
 	{
 		this.TestPatternObj = __TestPatternObj == null ? null : mxmodelreflection.proxies.TestPattern.initialize(getContext(), __TestPatternObj);
 
 		// BEGIN USER CODE
-		
+
 		IMendixObjectMember<?> member = null;
-		switch (this.TestPatternObj.getAttributeTypeEnum(getContext())) {
-		case AutoNumber:
-		case LongType:
-			member = this.TestPatternObj.getMendixObject().getMember(getContext(), TestPattern.MemberNames.LongAttribute.toString());
-			break;
-		case BooleanType:
-			member = this.TestPatternObj.getMendixObject().getMember(getContext(), TestPattern.MemberNames.BooleanAttribute.toString());
-			break;
-		case Currency:
-		case FloatType:
-			member = this.TestPatternObj.getMendixObject().getMember(getContext(), TestPattern.MemberNames.FloatAttribute.toString());
-			break;
-		case Decimal:
-			member = this.TestPatternObj.getMendixObject().getMember(getContext(), TestPattern.MemberNames.DecimalAttribute.toString());
-			break;
-		case EnumType:
-		case StringType:
-		case HashString:
-			member = this.TestPatternObj.getMendixObject().getMember(getContext(), TestPattern.MemberNames.StringAttribute.toString());
-			break;
-		case DateTime:
-			member = this.TestPatternObj.getMendixObject().getMember(getContext(), TestPattern.MemberNames.DateTimeAttribute.toString());
-			break;
-		case IntegerType:
-			member = this.TestPatternObj.getMendixObject().getMember(getContext(), TestPattern.MemberNames.IntegerAttribute.toString());
-			break;
+		AttributeTypes attributeType = TestPatternObj.getAttributeTypeEnum(getContext());
+
+		if (attributeType != null) {
+			TestPattern.MemberNames memberName = null;
+
+			switch (attributeType) {
+				case AutoNumber:
+				case LongType:
+					memberName = TestPattern.MemberNames.LongAttribute;
+					break;
+				case BooleanType:
+					memberName = TestPattern.MemberNames.BooleanAttribute;
+					break;
+				case Decimal:
+					memberName = TestPattern.MemberNames.DecimalAttribute;
+					break;
+				case EnumType:
+				case StringType:
+				case HashString:
+					memberName = TestPattern.MemberNames.StringAttribute;
+					break;
+				case DateTime:
+					memberName = TestPattern.MemberNames.DateTimeAttribute;
+					break;
+				case IntegerType:
+					memberName = TestPattern.MemberNames.IntegerAttribute;
+					break;
+			}
+
+			if (memberName != null) {
+				member = TestPatternObj.getMendixObject().getMember(getContext(), memberName.toString());
+			}
 		}
-		
+
 		String replacementValue = DataParser.getStringValue(member, this.TestPatternObj.getDisplayPattern(), getContext());
 		
 		this.TestPatternObj.setResult( replacementValue );
@@ -77,7 +85,7 @@ public class TestThePattern extends CustomJavaAction<java.lang.Boolean>
 	/**
 	 * Returns a string representation of this action
 	 */
-	@Override
+	@java.lang.Override
 	public java.lang.String toString()
 	{
 		return "TestThePattern";

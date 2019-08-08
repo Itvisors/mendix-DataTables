@@ -6,7 +6,7 @@
     ========================
 
     @file      : DataTables.js
-    @version   : 1.5.4
+    @version   : 1.6.2
     @author    : Marcel Groeneweg
     @date      : Sat, 12 Mar 2016 13:19:22 GMT
     @copyright :
@@ -82,6 +82,7 @@ define([
         colVisButtonClass: "",
         tableClass: "",
         stateSaveName: null,
+        stateDuration: 0,
         showTableInformation: true,
         infiniteScroll: false,
         scrollX: false,
@@ -407,6 +408,9 @@ define([
 
                 // Override so start position and search data are not saved.
                 dataTablesOptions.stateSaveParams = function (settings, data) {
+                    if (thisObj.stateDuration >= 0) {
+                        data.stateDuration = thisObj.stateDuration;
+                    }
                     data.start = 0;
                     data.iScroller = 0;
                     data.iScrollerTopRow = 0;

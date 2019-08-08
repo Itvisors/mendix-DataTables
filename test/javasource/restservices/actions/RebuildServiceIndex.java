@@ -25,7 +25,7 @@ public class RebuildServiceIndex extends CustomJavaAction<java.lang.Boolean>
 		this.__dataServiceDefinition = dataServiceDefinition;
 	}
 
-	@Override
+	@java.lang.Override
 	public java.lang.Boolean executeAction() throws Exception
 	{
 		this.dataServiceDefinition = __dataServiceDefinition == null ? null : restservices.proxies.DataServiceDefinition.initialize(getContext(), __dataServiceDefinition);
@@ -42,7 +42,7 @@ public class RebuildServiceIndex extends CustomJavaAction<java.lang.Boolean>
 	/**
 	 * Returns a string representation of this action
 	 */
-	@Override
+	@java.lang.Override
 	public java.lang.String toString()
 	{
 		return "RebuildServiceIndex";

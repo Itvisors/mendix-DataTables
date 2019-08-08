@@ -25,7 +25,7 @@ public class addCredentialsToNextRequest extends CustomJavaAction<java.lang.Bool
 		this.password = password;
 	}
 
-	@Override
+	@java.lang.Override
 	public java.lang.Boolean executeAction() throws Exception
 	{
 		// BEGIN USER CODE
@@ -37,7 +37,7 @@ public class addCredentialsToNextRequest extends CustomJavaAction<java.lang.Bool
 	/**
 	 * Returns a string representation of this action
 	 */
-	@Override
+	@java.lang.Override
 	public java.lang.String toString()
 	{
 		return "addCredentialsToNextRequest";

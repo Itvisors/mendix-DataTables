@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import mxmodelreflection.MxTypeConverter;
 import mxmodelreflection.proxies.Module;
 import mxmodelreflection.proxies.MxObjectType;
 import mxmodelreflection.proxies.Parameter;
@@ -27,6 +28,7 @@ public class Builder {
 	protected List<String> activeModule = new ArrayList<String>();
 	protected boolean allNewModules = false;
 	private ILogNode _logNode = Core.getLogger("MxModelReflection");
+	private MxTypeConverter typeConverter = new MxTypeConverter();
 
 	protected IMendixIdentifier getTypeId(IContext context, IDataType dataType) throws CoreException {
 		String valueTypeName = dataType.getDSLType();
@@ -52,99 +54,12 @@ public class Builder {
 	}
 
 	protected PrimitiveTypes getPrimitiveTypesFromPrimitiveType(PrimitiveType primitiveType) {
-		PrimitiveTypes type = null;
-		
-		switch(primitiveType) {
-		case String:
-			type = PrimitiveTypes.StringType;
-			break;
-		case AutoNumber:
-			type = PrimitiveTypes.AutoNumber;
-			break;
-		case Boolean:
-			type = PrimitiveTypes.BooleanType;
-			break;
-		case Currency:
-			type = PrimitiveTypes.Currency;
-			break;
-		case Decimal:
-			type = PrimitiveTypes.Decimal;
-			break;
-		case DateTime:
-			type = PrimitiveTypes.DateTime;
-			break;
-		case Enum:
-			type = PrimitiveTypes.EnumType;
-			break;
-		case Float:
-			type = PrimitiveTypes.FloatType;
-			break;
-		case HashString:
-			type = PrimitiveTypes.HashString;
-			break;
-		case Integer:
-			type = PrimitiveTypes.IntegerType;
-			break;
-		case Long:
-			type = PrimitiveTypes.LongType;
-			break;
-		case Binary:
-			type = null;
-			break;
-		}
-		
-		return type;
+		return typeConverter.fromPrimitiveType(primitiveType);
 	}
-	
+
+
 	protected PrimitiveTypes getPrimitiveTypesFromDatatype(IDataType dataType) {
-		PrimitiveTypes type = null;
-		switch (dataType.getType()) {
-		case String:
-			type = PrimitiveTypes.StringType;
-			break;
-		case AutoNumber:
-			type = PrimitiveTypes.AutoNumber;
-			break;
-		case Boolean:
-			type = PrimitiveTypes.BooleanType;
-			break;
-		case Currency:
-			type = PrimitiveTypes.Currency;
-			break;
-		case Datetime:
-			type = PrimitiveTypes.DateTime;
-			break;
-		case Enumeration:
-			type = PrimitiveTypes.EnumType;
-			break;
-		case Float:
-			type = PrimitiveTypes.FloatType;
-			break;
-		case HashString:
-			type = PrimitiveTypes.HashString;
-			break;
-		case Integer:
-			type = PrimitiveTypes.IntegerType;
-			break;
-		case Long:
-			type = PrimitiveTypes.LongType;
-			break;
-		case Decimal:
-			type = PrimitiveTypes.Decimal;
-			break;
-		case Object:
-		case Binary:
-		case Nothing:
-		case Unknown:
-			break;
-		}
-		
-		if (dataType.isList())
-			type = PrimitiveTypes.ObjectList;
-		else if (dataType.isMendixObject())
-			type = PrimitiveTypes.ObjectType;
-		
-		return type;
+		return typeConverter.fromDatatype(dataType);
 	}
 	
 	protected IMendixIdentifier getObjectTypeId(IContext context, IDataType dataType) throws CoreException {

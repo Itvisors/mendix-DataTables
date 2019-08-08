@@ -25,7 +25,7 @@ public class ServiceConsistencyCheck extends CustomJavaAction<java.lang.String>
 		this.__def = def;
 	}
 
-	@Override
+	@java.lang.Override
 	public java.lang.String executeAction() throws Exception
 	{
 		this.def = __def == null ? null : restservices.proxies.DataServiceDefinition.initialize(getContext(), __def);
@@ -41,7 +41,7 @@ public class ServiceConsistencyCheck extends CustomJavaAction<java.lang.String>
 	/**
 	 * Returns a string representation of this action
 	 */
-	@Override
+	@java.lang.Override
 	public java.lang.String toString()
 	{
 		return "ServiceConsistencyCheck";

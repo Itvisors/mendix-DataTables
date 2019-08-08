@@ -34,7 +34,7 @@ public class FileDocument
 			metaName = s;
 		}
 
-		@Override
+		@java.lang.Override
 		public java.lang.String toString()
 		{
 			return metaName;
@@ -60,7 +60,7 @@ public class FileDocument
 	/**
 	 * @deprecated Use 'FileDocument.load(IContext, IMendixIdentifier)' instead.
 	 */
-	@Deprecated
+	@java.lang.Deprecated
 	public static system.proxies.FileDocument initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixIdentifier mendixIdentifier) throws com.mendix.core.CoreException
 	{
 		return system.proxies.FileDocument.load(context, mendixIdentifier);
@@ -77,15 +77,6 @@ public class FileDocument
 
 		if (com.mendix.core.Core.isSubClassOf("System.Image", mendixObject.getType()))
 			return system.proxies.Image.initialize(context, mendixObject);
-
-		if (com.mendix.core.Core.isSubClassOf("Encryption.PGPCertificate", mendixObject.getType()))
-			return encryption.proxies.PGPCertificate.initialize(context, mendixObject);
-
-		if (com.mendix.core.Core.isSubClassOf("ExcelImporter.TemplateDocument", mendixObject.getType()))
-			return excelimporter.proxies.TemplateDocument.initialize(context, mendixObject);
-
-		if (com.mendix.core.Core.isSubClassOf("ExcelImporter.XMLDocumentTemplate", mendixObject.getType()))
-			return excelimporter.proxies.XMLDocumentTemplate.initialize(context, mendixObject);
 
 		return new system.proxies.FileDocument(context, mendixObject);
 	}
@@ -362,7 +353,7 @@ public class FileDocument
 		return context;
 	}
 
-	@Override
+	@java.lang.Override
 	public boolean equals(Object obj)
 	{
 		if (obj == this)
@@ -376,7 +367,7 @@ public class FileDocument
 		return false;
 	}
 
-	@Override
+	@java.lang.Override
 	public int hashCode()
 	{
 		return getMendixObject().hashCode();
@@ -394,7 +385,7 @@ public class FileDocument
 	 * @return String GUID from this object, format: ID_0000000000
 	 * @deprecated Use getMendixObject().getId().toLong() to get a unique identifier for this object.
 	 */
-	@Deprecated
+	@java.lang.Deprecated
 	public java.lang.String getGUID()
 	{
 		return "ID_" + getMendixObject().getId().toLong();

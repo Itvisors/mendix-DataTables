@@ -167,6 +167,7 @@ The widget does not display search filter inputs. To provide search filters, def
 - _Horizontal scrolling_ - When true, horizontal scrolling is used. Set nowrap on the table class!
 - _Vertical scrolling_ - Optional, any CSS unit, default 200px. When specified, vertical scrolling is used and height of the rows is constrained to the specified height
 - _State save name_ - Optional. When specified, grid layout state is saved to and loaded from browser local storage using the specied name. Make sure this name is unique across your application! It is also advisable to put your project name first in each statesaving name, to prevent issues where multiple apps have an order overview grid.
+- _State duration_ - When state saving is enabled, this parameter determines how long the state will be saved. The value is in seconds. A zero value means no time limit
 
 #### Column visibility
 

@@ -30,7 +30,7 @@ public class startIdleConnectionMonitor extends CustomJavaAction<java.lang.Boole
 		this.maxIdleTime = maxIdleTime;
 	}
 
-	@Override
+	@java.lang.Override
 	public java.lang.Boolean executeAction() throws Exception
 	{
 		// BEGIN USER CODE
@@ -41,7 +41,7 @@ public class startIdleConnectionMonitor extends CustomJavaAction<java.lang.Boole
 	/**
 	 * Returns a string representation of this action
 	 */
-	@Override
+	@java.lang.Override
 	public java.lang.String toString()
 	{
 		return "startIdleConnectionMonitor";

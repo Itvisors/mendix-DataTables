@@ -22,7 +22,7 @@ public class getRequestCookies extends CustomJavaAction<java.util.List<IMendixOb
 		super(context);
 	}
 
-	@Override
+	@java.lang.Override
 	public java.util.List<IMendixObject> executeAction() throws Exception
 	{
 		// BEGIN USER CODE
@@ -33,7 +33,7 @@ public class getRequestCookies extends CustomJavaAction<java.util.List<IMendixOb
 	/**
 	 * Returns a string representation of this action
 	 */
-	@Override
+	@java.lang.Override
 	public java.lang.String toString()
 	{
 		return "getRequestCookies";

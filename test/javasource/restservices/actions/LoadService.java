@@ -25,7 +25,7 @@ public class LoadService extends CustomJavaAction<java.lang.Boolean>
 		this.__def = def;
 	}
 
-	@Override
+	@java.lang.Override
 	public java.lang.Boolean executeAction() throws Exception
 	{
 		this.def = __def == null ? null : restservices.proxies.DataServiceDefinition.initialize(getContext(), __def);
@@ -39,7 +39,7 @@ public class LoadService extends CustomJavaAction<java.lang.Boolean>
 	/**
 	 * Returns a string representation of this action
 	 */
-	@Override
+	@java.lang.Override
 	public java.lang.String toString()
 	{
 		return "LoadService";

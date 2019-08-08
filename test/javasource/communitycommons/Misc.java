@@ -38,15 +38,15 @@ import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.ISession;
 import com.mendix.systemwideinterfaces.core.IUser;
+import communitycommons.proxies.LogNodes;
 
 import static communitycommons.proxies.constants.Constants.getMergeMultiplePdfs_MaxAtOnce;
 import java.util.ArrayList;
 
 public class Misc {
 
+    private static final ILogNode LOG = Core.getLogger(LogNodes.CommunityCommons.name());
 
-	static final ILogNode LOG = Core.getLogger("communitycommons");
-	
     public abstract static class IterateCallback<T1, T2> {
 
         boolean start = false;
@@ -264,10 +264,9 @@ public class Misc {
             throw new RuntimeException("Assertion: No username provided");
         }
 
-        // Session does not have a user when it's a scheduled event.
-        if (context.getSession().getUser() != null && username.equals(context.getSession().getUser().getName())) {
+        if (username.equals(context.getSession().getUserName())) {
             return context;
-        } else {
+        } else { // when it is a scheduled event, then get the right session.
             ISession session = getSessionFor(context, username);
 
             IContext c = session.createContext();
@@ -458,7 +457,7 @@ public class Misc {
     }
 
     public static Boolean executeMicroflowInBatches(String xpath, final String microflow, int batchsize, boolean waitUntilFinished, boolean asc) throws CoreException, InterruptedException {
-        Core.getLogger("communitycommons").debug("[ExecuteInBatches] Starting microflow batch '" + microflow + "...");
+        LOG.debug("[ExecuteInBatches] Starting microflow batch '" + microflow + "...");
 
         return executeInBatches(xpath, new BatchState(new IBatchItemHandler() {
 
@@ -670,4 +669,24 @@ public class Misc {
         LOG.trace("Overlay PDF end");
         return true;
     }
+
+	/**
+	 * Get the Cloud Foundry Instance Index (0 for leader and >0 for slave)
+	 * @return CF_INSTANCE_INDEX environment variable if available, otherwise -1
+	 */
+	public static long getCFInstanceIndex() {
+		long cfInstanceIndex = -1L;
+		
+		try {
+			cfInstanceIndex = Long.parseLong(System.getenv("CF_INSTANCE_INDEX"));
+		} catch(SecurityException securityException) {
+			LOG.info("GetCFInstanceIndex: Could not access environment variable CF_INSTANCE_INDEX, permission denied. Value of -1 is returned.");
+		} catch(NumberFormatException numberFormatException) {
+			LOG.info("GetCFInstanceIndex: Could not parse value of environment variable CF_INSTANCE_INDEX as Long. Value of -1 is returned.");
+		} catch(NullPointerException nullPointerException) {
+			LOG.info("GetCFInstanceIndex: Could not find value for environment variable CF_INSTANCE_INDEX. This could indicate a local deployment is running. Value of -1 is returned.");
+		}
+		
+		return cfInstanceIndex;
+	}
 }

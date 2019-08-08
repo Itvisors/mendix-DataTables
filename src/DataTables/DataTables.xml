@@ -338,6 +338,11 @@
             <category>Layout</category>
             <description>Optional. When specified, grid layout state is saved to and loaded from browser local storage using the specied name. Make sure this name is unique across your application!</description>
         </property>
+        <property key="stateDuration" type="integer" required="true" defaultValue="0">
+            <caption>State duration</caption>
+            <category>Layout</category>
+            <description>When state saving is enabled, this parameter determines how long the state will be saved. The value is in seconds. A zero value means no time limit.</description>
+        </property>
 
         <!--    Selection    -->
 

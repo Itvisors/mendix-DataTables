@@ -45,7 +45,7 @@ public class followChanges extends CustomJavaAction<java.lang.Boolean>
 		this.timeout = timeout;
 	}
 
-	@Override
+	@java.lang.Override
 	public java.lang.Boolean executeAction() throws Exception
 	{
 		// BEGIN USER CODE
@@ -57,7 +57,7 @@ public class followChanges extends CustomJavaAction<java.lang.Boolean>
 	/**
 	 * Returns a string representation of this action
 	 */
-	@Override
+	@java.lang.Override
 	public java.lang.String toString()
 	{
 		return "followChanges";

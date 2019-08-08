@@ -9,10 +9,13 @@
 
 package communitycommons.actions;
 
-import java.util.Date;
-import communitycommons.DateTime;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.webui.CustomJavaAction;
+import communitycommons.DateTime;
+import communitycommons.Logging;
+import communitycommons.proxies.LogLevel;
+import communitycommons.proxies.LogNodes;
+import java.util.Date;
 
 /**
  * Calculates the number of years between two dates. 
@@ -31,13 +34,15 @@ public class YearsBetween extends CustomJavaAction<java.lang.Long>
 		this.compareDate = compareDate;
 	}
 
-	@Override
+	@java.lang.Override
 	public java.lang.Long executeAction() throws Exception
 	{
 		// BEGIN USER CODE
 		try {
-			return DateTime.yearsBetween(this.dateTime, compareDate == null ? new Date() : compareDate);
+			return Long.valueOf(DateTime.periodBetween(this.dateTime, compareDate == null ? new Date() : compareDate)
+				.getYears());
 		} catch (Exception e) {
+			Logging.log(LogNodes.CommunityCommons.name(), LogLevel.Warning, "DateTime calculation error, returning -1", e);
 			return -1L;
 		}
 		// END USER CODE
@@ -46,13 +51,12 @@ public class YearsBetween extends CustomJavaAction<java.lang.Long>
 	/**
 	 * Returns a string representation of this action
 	 */
-	@Override
+	@java.lang.Override
 	public java.lang.String toString()
 	{
 		return "YearsBetween";
 	}
 
 	// BEGIN EXTRA CODE
-
 	// END EXTRA CODE
 }

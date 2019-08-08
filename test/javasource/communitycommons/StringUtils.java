@@ -5,10 +5,12 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.security.DigestException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.Normalizer;
 import java.util.Random;
 import java.util.UUID;
 import java.util.regex.MatchResult;
@@ -79,21 +81,19 @@ public class StringUtils
 	    if(hex.length() == 1) hexString.append('0');
 	        hexString.append(hex);
 	    }
-	    
+
 	    return hexString.toString();
 	}
 
-	public static String regexReplaceAll(String haystack, String needleRegex,
+        /** 
+         * @deprecated Use the replaceAll function in a microflow expression instead.
+         */
+	@Deprecated public static String regexReplaceAll(String haystack, String needleRegex,
 			String replacement)
 	{
 		Pattern pattern = Pattern.compile(needleRegex);
 		Matcher matcher = pattern.matcher(haystack);
 		return matcher.replaceAll(replacement);
-	}
-
-	public static boolean regexTest(String value, String regex)
-	{
-		return Pattern.matches(regex, value);
 	}
 
 	public static String leftPad(String value, Long amount, String fillCharacter)
@@ -181,7 +181,7 @@ public class StringUtils
 			throw new IllegalArgumentException("Source data is null");
 
 		byte [] decoded = Base64.getDecoder().decode(encoded.getBytes());
-		
+
 		try  (
 			ByteArrayInputStream bais = new ByteArrayInputStream(decoded);
 		) {
@@ -202,7 +202,7 @@ public class StringUtils
 			throw new IllegalArgumentException("Source file is null");
 		if (!file.getHasContents())
 			throw new IllegalArgumentException("Source file has no contents!");
-		
+
 		try (
 			InputStream f = Core.getFileDocumentContent(context, file.getMendixObject())
 		) {
@@ -212,24 +212,34 @@ public class StringUtils
 
 	public static String stringFromFile(IContext context, FileDocument source) throws IOException
 	{
+		return stringFromFile(context, source, StandardCharsets.UTF_8);
+	}
+	
+	public static String stringFromFile(IContext context, FileDocument source, Charset charset) throws IOException
+	{
 		if (source == null)
 			return null;
 		try (
 			InputStream f = Core.getFileDocumentContent(context, source.getMendixObject());
 		) {
-			return IOUtils.toString(f, StandardCharsets.UTF_8);
+			return IOUtils.toString(f, charset);
 		}
 	}
 
 	public static void stringToFile(IContext context, String value, FileDocument destination) throws IOException
 	{
+		stringToFile(context, value, destination, StandardCharsets.UTF_8);
+	}
+	
+	public static void stringToFile(IContext context, String value, FileDocument destination, Charset charset) throws IOException
+	{
 		if (destination == null)
 			throw new IllegalArgumentException("Destination file is null");
 		if (value == null)
 			throw new IllegalArgumentException("Value to write is null");
-		
+
 		try (
-			InputStream is = IOUtils.toInputStream(value, StandardCharsets.UTF_8)
+			InputStream is = IOUtils.toInputStream(value, charset)
 		) {
 			Core.storeFileDocumentContent(context, destination.getMendixObject(), is);
 		}
@@ -408,7 +418,7 @@ public class StringUtils
 
 	public static String sanitizeHTML(String html, List<SanitizerPolicy> policyParams) {
 		PolicyFactory policyFactory = null;
-		
+
 		for (SanitizerPolicy param : policyParams) {
 			policyFactory = (policyFactory == null) ? SANITIZER_POLICIES.get(param.name()) : policyFactory.and(SANITIZER_POLICIES.get(param.name()));
 		}
@@ -418,5 +428,14 @@ public class StringUtils
 
 	public static String sanitizeHTML(String html, PolicyFactory policyFactory) {
 		return policyFactory.sanitize(html);
+	}
+
+	public static String stringSimplify(String value) {
+		String normalized = Normalizer.normalize(value, Normalizer.Form.NFD);
+		return normalized.replaceAll("\\p{M}", ""); // removes all characters in Unicode Mark category
+	}
+
+	public static Boolean isStringSimplified(String value) {
+		return Normalizer.isNormalized(value, Normalizer.Form.NFD);
 	}
 }

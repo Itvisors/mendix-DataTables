@@ -25,7 +25,7 @@ public class GetTrackingState extends CustomJavaAction<java.lang.String>
 		this.__feed = feed;
 	}
 
-	@Override
+	@java.lang.Override
 	public java.lang.String executeAction() throws Exception
 	{
 		this.feed = __feed == null ? null : restservices.proxies.DataSyncState.initialize(getContext(), __feed);
@@ -41,7 +41,7 @@ public class GetTrackingState extends CustomJavaAction<java.lang.String>
 	/**
 	 * Returns a string representation of this action
 	 */
-	@Override
+	@java.lang.Override
 	public java.lang.String toString()
 	{
 		return "GetTrackingState";

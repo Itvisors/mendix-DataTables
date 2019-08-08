@@ -30,7 +30,7 @@ public class ValidateTokensInMessage extends CustomJavaAction<java.util.List<IMe
 		this.__TokenList = TokenList;
 	}
 
-	@Override
+	@java.lang.Override
 	public java.util.List<IMendixObject> executeAction() throws Exception
 	{
 		this.TokenList = new java.util.ArrayList<mxmodelreflection.proxies.Token>();
@@ -47,7 +47,7 @@ public class ValidateTokensInMessage extends CustomJavaAction<java.util.List<IMe
 	/**
 	 * Returns a string representation of this action
 	 */
-	@Override
+	@java.lang.Override
 	public java.lang.String toString()
 	{
 		return "ValidateTokensInMessage";

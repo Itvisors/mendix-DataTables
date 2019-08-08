@@ -1,14 +1,9 @@
 package system;
 
-import aQute.bnd.annotation.component.Component;
-import aQute.bnd.annotation.component.Reference;
-
 import com.mendix.core.actionmanagement.IActionRegistrator;
 
-@Component(immediate = true)
 public class UserActionsRegistrar
 {
-  @Reference
   public void registerActions(IActionRegistrator registrator)
   {
     registrator.bundleComponentLoaded();
@@ -46,6 +41,7 @@ public class UserActionsRegistrar
     registrator.registerUserAction(communitycommons.actions.FileFromFileDocument.class);
     registrator.registerUserAction(communitycommons.actions.GenerateHMAC_SHA256_hash.class);
     registrator.registerUserAction(communitycommons.actions.GetApplicationUrl.class);
+    registrator.registerUserAction(communitycommons.actions.GetCFInstanceIndex.class);
     registrator.registerUserAction(communitycommons.actions.getCreatedByUser.class);
     registrator.registerUserAction(communitycommons.actions.GetDefaultLanguage.class);
     registrator.registerUserAction(communitycommons.actions.GetFileContentsFromResource.class);
@@ -61,7 +57,7 @@ public class UserActionsRegistrar
     registrator.registerUserAction(communitycommons.actions.HTMLEncode.class);
     registrator.registerUserAction(communitycommons.actions.HTMLToPlainText.class);
     registrator.registerUserAction(communitycommons.actions.IsInDevelopment.class);
-    registrator.registerUserAction(communitycommons.actions.Log.class);
+    registrator.registerUserAction(communitycommons.actions.IsStringSimplified.class);
     registrator.registerUserAction(communitycommons.actions.LongToDateTime.class);
     registrator.registerUserAction(communitycommons.actions.memberHasChanged.class);
     registrator.registerUserAction(communitycommons.actions.MergeMultiplePdfs.class);
@@ -78,16 +74,14 @@ public class UserActionsRegistrar
     registrator.registerUserAction(communitycommons.actions.refreshClassByObject.class);
     registrator.registerUserAction(communitycommons.actions.RegexQuote.class);
     registrator.registerUserAction(communitycommons.actions.RegexReplaceAll.class);
-    registrator.registerUserAction(communitycommons.actions.RegexTest.class);
     registrator.registerUserAction(communitycommons.actions.retrieveURL.class);
     registrator.registerUserAction(communitycommons.actions.RunMicroflowAsyncInQueue.class);
-    registrator.registerUserAction(communitycommons.actions.SimpleLog.class);
     registrator.registerUserAction(communitycommons.actions.StartTransaction.class);
     registrator.registerUserAction(communitycommons.actions.storeURLToFileDocument.class);
     registrator.registerUserAction(communitycommons.actions.StringFromFile.class);
     registrator.registerUserAction(communitycommons.actions.StringLeftPad.class);
-    registrator.registerUserAction(communitycommons.actions.StringLength.class);
     registrator.registerUserAction(communitycommons.actions.StringRightPad.class);
+    registrator.registerUserAction(communitycommons.actions.StringSimplify.class);
     registrator.registerUserAction(communitycommons.actions.StringSplit.class);
     registrator.registerUserAction(communitycommons.actions.StringToFile.class);
     registrator.registerUserAction(communitycommons.actions.StringTrim.class);
@@ -104,15 +98,6 @@ public class UserActionsRegistrar
     registrator.registerUserAction(communitycommons.actions.XSSSanitize.class);
     registrator.registerUserAction(communitycommons.actions.YearsBetween.class);
     registrator.registerUserAction(datatablesexportdata.actions.ExportData.class);
-    registrator.registerUserAction(encryption.actions.DecryptString.class);
-    registrator.registerUserAction(encryption.actions.EncryptString.class);
-    registrator.registerUserAction(encryption.actions.GeneratePGPKeyRing.class);
-    registrator.registerUserAction(encryption.actions.PGPDecryptDocument.class);
-    registrator.registerUserAction(encryption.actions.PGPEncryptDocument.class);
-    registrator.registerUserAction(encryption.actions.ValidatePrivateKeyRing.class);
-    registrator.registerUserAction(excelimporter.actions.GetHeaderInformationFromExcelFile.class);
-    registrator.registerUserAction(excelimporter.actions.RefreshClass.class);
-    registrator.registerUserAction(excelimporter.actions.StartImportByTemplate.class);
     registrator.registerUserAction(mxmodelreflection.actions.ReplaceToken.class);
     registrator.registerUserAction(mxmodelreflection.actions.SyncObjects.class);
     registrator.registerUserAction(mxmodelreflection.actions.TestThePattern.class);
