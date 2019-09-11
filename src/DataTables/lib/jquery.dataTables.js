@@ -6322,11 +6322,13 @@
 		/* Reject old data */
 		var duration = settings.iStateDuration;
 		if ( duration > 0 && state.time < +new Date() - (duration*1000) ) {
+			console.log("MG DataTables log: state too old: " + state.time);
 			return;
 		}
 	
 		// Number of columns have changed - all bets are off, no restore of settings
 		if ( columns.length !== state.columns.length ) {
+			console.log("MG DataTables log: Rejected because column counts don't match, table: " + columns.length + ", state: " + state.columns.length);
 			return;
 		}
 	

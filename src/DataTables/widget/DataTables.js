@@ -417,6 +417,15 @@ define([
                     data.search.search = "";
                 };
 
+                // Override to force keeping the state actual.
+                dataTablesOptions.stateLoadParams = function (settings, data) {
+                    if (thisObj.stateDuration === 0) {
+                        var stateDate = new Date();
+                        stateDate.setFullYear(stateDate.getFullYear() + 1);
+                        data.time = +stateDate;
+                    }
+                };                
+
                 // Override save and load functions because Mendix widgets do not have a fixed HTML tag ID.
                 dataTablesOptions.stateSaveCallback = function (settings, data) {
                     localStorage.setItem("MxDataTables_" + thisObj.stateSaveName, JSON.stringify(data));
