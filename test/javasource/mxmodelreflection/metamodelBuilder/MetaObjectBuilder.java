@@ -286,7 +286,20 @@ public class MetaObjectBuilder
 			valueIds.add(enumValue.getId());
 			valueObjs.add(enumValue);
 		}
-		
+
+		// delete enum values that are removed from the model
+		for(IMendixObject cachedEnumValue : curEnumValues.values()) {
+			IMendixIdentifier cachedValueId = cachedEnumValue.getId();
+
+			// try to find the id in the value ids of the model
+			boolean found = valueIds.stream().anyMatch(valueId -> cachedValueId.equals(valueId));
+
+			// if not found then delete from the mxmodelreflectionmodel
+			if (!found) {
+				Core.delete(context, cachedEnumValue);
+			}
+		}
+
 		enumObject.setValue(context, MxObjectEnum.MemberNames.Values.toString(), valueIds);
 		enumObject.setValue(context, MxObjectMember.MemberNames.AttributeName.toString(), enumPrimitive.getName());
 		enumObject.setValue(context, MxObjectMember.MemberNames.AttributeType.toString(), enumPrimitive.getType().toString());

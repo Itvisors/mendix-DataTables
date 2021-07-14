@@ -141,7 +141,7 @@ public class ExportDataImpl {
 			logger.trace(logPrefix + "start");
 		}		
 
-		languageCode = context.getSession().getLanguage().getCode();
+		languageCode = context.getSession().getUser(context).getLanguage().getCode();
 		locale = Locale.forLanguageTag(languageCode.substring(0,2));
 		decimalFormat = new DecimalFormat();
 		decimalFormat.setDecimalFormatSymbols(new DecimalFormatSymbols(locale));
@@ -324,12 +324,6 @@ public class ExportDataImpl {
 				case String:
 					stringValue = "\"" + objectValue.toString() + "\"";
 					break;
-
-				case Float:
-				case Currency:
-					Double doubleValue = (Double) objectValue;
-					stringValue = String.format(locale, "%+1." + exportDataColumn.getDecimalPositions() + "f", doubleValue);
-					break;					
 
 				case Decimal:
 					BigDecimal decimal = (BigDecimal) objectValue;

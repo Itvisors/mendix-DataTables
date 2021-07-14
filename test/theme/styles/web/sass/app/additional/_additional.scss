@@ -1,0 +1,40 @@
+/*********************************************************************
+
+Additional styling
+
+*********************************************************************/
+
+.DataTypesRowStyling {
+    tr[data-devicetype=Phone] td {
+        background-color: lighten($brand-success, 40);
+    }
+    tr[data-devicetype=Tablet] td {
+        background-color: lighten($brand-info, 20);
+    }
+    tr[data-devicetype=Desktop] td[data-columnname=DeviceType] {
+        background-color: lighten($brand-info, 20);
+    }
+}
+
+.mx-name-dataTablesTestCalcAttr {
+    tr[data-calcattr=Green] td {
+        background-color: lighten($brand-success, 40);
+    }
+    tr[data-calcattr=Yellow] td {
+        background-color: lighten($brand-warning, 20);
+    }
+    tr[data-calcattr=Red] td {
+        background-color: lighten($brand-danger, 40);
+    }
+}
+
+button.btn.mx-button[disabled] {
+    border-color: $brand-default;
+    background-color: white;
+    color: $brand-default;
+}
+
+div.datatables div.dataTables_wrapper div.dataTables_length select {
+    height: 34px;
+    padding: 0px 5px;
+}
